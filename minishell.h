@@ -81,6 +81,8 @@ typedef struct s_cmd
 
 typedef struct s_ast
 {
+	//struct s_ast *parent;
+	//struct s_ast *subtree;
 	struct s_ast	*left;
 	t_node_type		type;
 	t_cmd			*cmd;
