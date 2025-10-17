@@ -76,7 +76,8 @@ typedef struct s_redir
 typedef struct s_cmd
 {
 	char			**argv;
-	t_redir			*redir;
+	t_redir			*redir_in;
+	t_redir			*redir_out;
 }					t_cmd;
 
 typedef struct s_ast
