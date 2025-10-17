@@ -103,6 +103,5 @@ typedef struct s_result
 t_token				*lexer(const char *input);
 t_ast				*parser(t_token *tokens);
 t_result			*executor(t_ast *ast);
-void				output_manager(t_result *res);
 
 #endif
