@@ -36,11 +36,14 @@ typedef enum e_token_type
 	TK_AND_IF,
 	TK_OR_IF,
 	TK_LPAREN,
-	TK_RPAREN
+	TK_RPAREN,
+	TK_HEAD
 }					t_token_type;
 
 typedef struct s_token
 {
+	size_t size; // for dummy head to keep the len of the list.
+	struct s_token	*prev;
 	t_token_type	type;
 	bool			in_squote;
 	bool			in_dquote;
@@ -82,6 +85,8 @@ typedef struct s_cmd
 
 typedef struct s_ast
 {
+	struct s_ast	*parent;
+	struct s_ast	*subtree;
 	struct s_ast	*left;
 	t_node_type		type;
 	t_cmd			*cmd;
