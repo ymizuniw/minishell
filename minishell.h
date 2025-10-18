@@ -102,6 +102,6 @@ typedef struct s_result
 // main.c
 t_token				*lexer(const char *input);
 t_ast				*parser(t_token *tokens);
-t_result			*executor(t_ast *ast);
+t_result			*executor(t_ast *ast, char **env);
 
 #endif
