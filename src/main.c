@@ -43,15 +43,15 @@ int	shell_loop(char **envp)
 			add_history(line);
 		tokens = lexer(line); // format analysis.
 		ast = parser(tokens); // abstract structure tree.
-		// t_result *res = executor(ast, env);  // Commented out since executor not implemented
+		t_result *res = executor(ast, env);  // Commented out since executor not implemented
 		free(line);
-		// Free tokens and ast
 		if (tokens)
 			free_token_list(tokens);
 		if (ast)
 			free_ast_tree(ast);
+		if (res)
+			free_result(res);
 	}
-	// Free environment copy
 	if (env)
 		free_double_array(env);
 	return (0);

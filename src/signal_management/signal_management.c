@@ -1,38 +1,63 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 #include <readline/readline.h>
 #include <readline/history.h>
 
-void	sig_int_event(int signum)
-{
-    (void)signum;  // Suppress unused parameter warning
-	printf("\n");
-	rl_on_new_line();
-	rl_redisplay();
-}
+volatile sig_atomic_t g_recept_signal = 0;
 
-void	sig_term_event(int signum)
-{
-    (void)signum;  // Suppress unused parameter warning
-	printf("\nTerminating...\n");
-	clear_history();
-	exit(0);
-}
-
-void	signal_handler(int signum)
+static void signal_handler(int signum)
 {
 	if (signum == SIGINT)
-		signal(signum, sig_int_event);
-	else if (signum == SIGTERM)
-		signal(signum, sig_term_event);
+	{
+		g_recept_signal = SIGINT;
+		write(STDOUT_FILENO, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();		
+	}
 }
 
-void	signal_initializer(int *g_set)
+int	signal_initializer(int *g_set)
 {
-	sigemptyset(g_set);
-	sigaddset(g_set, SIGINT);
+	struct sigaction sa;
+
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_RESTART;
+	sa.sa_handler = sigint_event;
+	if (sigaction(SIGINT, &sa, NULL))
+	{
+		perror("minishell: sigaction");
+		return (-1);
+	}
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sa.sa_handler = SIG_IGN;
+	if (sigaction(SIGQUIT, &sa, NULL))
+	{
+		perror("minishell: sigaction");
+		return (-1);
+	}
+	return (1);
 }
 
-
+int handle_child(int *last_exit_status, pid_t pid)
+{
+	int local_status = 0;
+	if (waitpid(pid, &local_status, 0)==-1)
+	{
+		perror("waitpid");
+		*last_exit_status = 1;
+		return -1;
+	}
+	if (WIFEXITED(local_status))
+		*last_exit_status = WEXITSTATUS(local_status);
+	else if (WIFSIGNALED(local_status))
+	{
+		*last_exit_status  = 128 + WTERMSIG(local_status);
+		if (WTERMSIG(local_status)==SIGQUIT)
+			write(2, "Quit (core dumped)\n", 19);
+	}
+	return 0;
+}
 
 //Reference for child signal exit value.
 // void		status_child(void)

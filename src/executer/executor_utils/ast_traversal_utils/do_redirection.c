@@ -3,7 +3,7 @@
 char	*get_unique_filename(void)
 {
 	// TODO: Implement unique filename generation for heredoc
-	return (NULL);
+	return (ft_mkstmp("XXXXXX"));
 }
 
 int	do_redirection(t_ast *node)
@@ -13,7 +13,7 @@ int	do_redirection(t_ast *node)
 
 	if (!node || !node->cmd)
 		return (0);
-	cur = node->cmd->redir_in;
+	cur = node->cmd->redir;
 	while (cur != NULL)
 	{
 		if (cur->type == REDIR_IN)
@@ -26,22 +26,15 @@ int	do_redirection(t_ast *node)
 		}
 		else if (cur->type == REDIR_HEREDOC)
 		{
-			// TODO: Implement heredoc handling
-			cur->filename = get_unique_filename();
-			if (!cur->filename)
-				return (-1);
-			fd = open(cur->filename, O_WRONLY | O_APPEND | O_EXCL);
+			void *stash_addr = (void *)&fd;
+			unsigned int *cast_addr = (unsigned int *)stash_addr;
+			fd = ft_mkstmpfd("/tmp/heredoc_tmp_XXXXX", *cast_addr);
 			if (fd < 0)
 				return (-1);
 			dup2(fd, STDIN_FILENO);
 			close(fd);
 		}
-		cur = cur->next;
-	}
-	cur = node->cmd->redir_out;
-	while (cur != NULL)
-	{
-		if (cur->type == REDIR_OUT)
+		else if (cur->type == REDIR_OUT)
 		{
 			fd = open(cur->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			if (fd < 0)
@@ -61,3 +54,10 @@ int	do_redirection(t_ast *node)
 	}
 	return (0);
 }
+
+//   if ((temp->rflags & REDIR_VARASSIGN) && error < 0)
+//     filename = allocname = savestring (temp->redirector.filename->word);
+//   else if ((temp->rflags & REDIR_VARASSIGN) == 0 && temp->redirector.dest < 0)
+//     /* This can happen when read_token_word encounters overflow, like in
+//        exec 4294967297>x */
+//     filename = _("file descriptor out of range");

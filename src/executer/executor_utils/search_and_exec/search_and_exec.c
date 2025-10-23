@@ -1,6 +1,6 @@
 #include "../../../../includes/minishell.h"
 
-int search_and_exec(char *cmd)
+int search_and_exec(char *cmd, char **env)
 {
     /*Shell function is not required, maybe.
         if no slash cmd name comes,attempts to locale it.
@@ -38,17 +38,17 @@ int search_and_exec(char *cmd)
     */
     else
     {
-        exec_path();
+        return (exec_path());
     }
-    /*Ambiguous Point.
+    /*
         If this execution fails bacause the file is not in executable format, and the file is not a directory,
         it is assumed to be a shell script, a file containing shell commands, and the shell executes it as described
         in Shell Scripts.
     */
-    /* Ambiguous point.
+    /*
         If the command was not begun asynchronously, the shell waits for the command to complete and collects its exit status.
     */
-    /*$$ is no environment variable, so it should not be implemented.
+    /*
         Various process IDs, including those of background jobs (see Lists of Commands), the value of $$, and the value of $PPID.
     */
 }
