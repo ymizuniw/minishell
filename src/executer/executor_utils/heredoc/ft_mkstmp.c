@@ -1,54 +1,62 @@
 #include "../../../../includes/minishell.h"
 
-int ft_rand(void)
+// generate a random num
+unsigned int ft_rand(unsigned int *seed)
 {
-    int a = 1003;
-    int m = 2147483647;
-    int seed = (a * seed) % m;
-    int random = seed / m;
-    return (random);
+	*seed = (*seed * 1103515245u + 12345u) & 0x7fffffff;
+	return (*seed);
 }
 
-int ft_mkstmpfd(char *template, int pid)
+char	*ft_mkstmp(char *template)
 {
-    size_t try_limit = 1000;
-    if (template==NULL)
-        return (-1);
-    while (1)
-    {
-        char *name = ft_mkstmp(template, pid);
-        int fd = open(name, O_CREAT|O_WRONLY|O_EXCL);
-        if (fd>=0)
-            return (fd);
-        free(name);
-        try_limit--;
-        if (try_limit==0)
-            return -1;
-    }
-    return (-1);
+	static const char	charset[] = "ABCDEFGHIJKLMNOPQRSTUVWYZabcdefghijklmnopqrstuvwxyz0123456789";
+	char				*p;
+	size_t				len;
+	unsigned int		num;
+	void				*ptr;
+	unsigned int		num_keep;
+	char				*name;
+	unsigned int		random;
+	unsigned int		idx;
+
+	len = strlen(template);
+	ptr = &num;
+	num = (unsigned long)ptr;
+	num_keep = num;
+	name = strdup(template);
+	if (!name)
+		return (NULL);
+	p = name + len - 1;
+	while (strchr(name, 'X') != NULL)
+	{
+		random = ft_rand(&num);
+		if (random == 0)
+			random = 1;
+		idx = (num / random) % (unsigned int)(sizeof(charset) - 1);
+		*p = charset[idx];
+		num /= 10;
+		if (num == 0)
+			num = num_keep;
+		p = strchr(name, 'X');
+	}
+	return (name);
 }
 
-//template = "/tmp/heredoc_tmp_XXXXX".
-char *ft_mkstmp(char *template, unsigned int num)
+int	ft_mkstmpfd(char *template, char **filename)
 {
-    static const char charset[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    char *p;
-    size_t len = strlen(template);
-    unsigned int num_keep = num;
+	size_t	try_limit;
+	int		fd;
 
-    char *name  = strdup(template);
-    if (!name)
-        return (NULL);
-    
-    p = name + len - 1;
-    while (strchr(name, 'X')!=NULL)
-    {
-        int random = ft_rand();
-        int idx = num / random % (int)(sizeof(charset)-1);
-        *p = charset[idx];
-        num/=10;
-        if (num==0)
-            num = num_keep;
-    }
-    return (name);
+	try_limit = 5000;
+	if (template == NULL)
+		return (-1);
+	while (try_limit > 0)
+	{
+		*filename = ft_mkstmp(template);
+		fd = open(*filename, O_CREAT | O_WRONLY | O_EXCL, 0600);
+		if (fd >= 0)
+			return (fd);
+		try_limit--;
+	}
+	return (-1);
 }

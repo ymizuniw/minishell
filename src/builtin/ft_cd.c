@@ -1,0 +1,38 @@
+#include "../../includes/minishell.h"
+
+void	ft_cd(char **cmd, t_shell *shell, int fd)
+{
+	char	*target_dir;
+	char	*new_pwd;
+	t_env	*home_var;
+
+	if (count_token(cmd) > 2)
+	{
+		write(fd, "cd: too many arguments\n", 23);
+		return ;
+	}
+	target_dir = cmd[1];
+	if (!target_dir)
+	{
+		home_var = find_env(shell->env_list, "HOME");
+		if (!home_var)
+		{
+			write(fd, "cd: HOME not set\n", 17);
+			return ;
+		}
+		target_dir = home_var->value;
+	}
+	if (chdir(target_dir) == -1)
+	{
+		perror("cd");
+		return ;
+	}
+	set_variable(shell, "OLDPWD", shell->pwd, 1);
+	new_pwd = get_pwd();
+	if (new_pwd)
+	{
+		set_variable(shell, "PWD", new_pwd, 1);
+		xfree(shell->pwd);
+		shell->pwd = new_pwd;
+	}
+}

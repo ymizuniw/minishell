@@ -1,18 +1,12 @@
 #include "../../../../includes/minishell.h"
 
-char	*get_unique_filename(void)
-{
-	// TODO: Implement unique filename generation for heredoc
-	return (ft_mkstmp("XXXXXX"));
-}
-
 int	do_redirection(t_ast *node)
 {
 	t_redir	*cur;
 	int		fd;
 
 	if (!node || !node->cmd)
-		return (0);
+		return (-1);
 	cur = node->cmd->redir;
 	while (cur != NULL)
 	{
@@ -26,9 +20,7 @@ int	do_redirection(t_ast *node)
 		}
 		else if (cur->type == REDIR_HEREDOC)
 		{
-			void *stash_addr = (void *)&fd;
-			unsigned int *cast_addr = (unsigned int *)stash_addr;
-			fd = ft_mkstmpfd("/tmp/heredoc_tmp_XXXXX", *cast_addr);
+			fd = make_heredoc(cur);
 			if (fd < 0)
 				return (-1);
 			dup2(fd, STDIN_FILENO);
@@ -52,12 +44,5 @@ int	do_redirection(t_ast *node)
 		}
 		cur = cur->next;
 	}
-	return (0);
+	return (1);
 }
-
-//   if ((temp->rflags & REDIR_VARASSIGN) && error < 0)
-//     filename = allocname = savestring (temp->redirector.filename->word);
-//   else if ((temp->rflags & REDIR_VARASSIGN) == 0 && temp->redirector.dest < 0)
-//     /* This can happen when read_token_word encounters overflow, like in
-//        exec 4294967297>x */
-//     filename = _("file descriptor out of range");

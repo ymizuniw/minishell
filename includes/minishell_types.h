@@ -1,28 +1,57 @@
 #ifndef MINISHELL_TYPES_H
-#define MINISHELL_TYPES_H
+# define MINISHELL_TYPES_H
 
+# ifndef _POSIX_C_SOURCE
+#  define _POSIX_C_SOURCE 200809L
+# endif
+# include <ctype.h> //isspace()->rem
+# include <dirent.h>
+# include <fcntl.h> //open()
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <stdio.h>//printf()
-# include <stdlib.h>//malloc()
-# include <string.h>//strlcpy()->rem
-# include <unistd.h>//write()
+# include <signal.h>
 # include <stdbool.h>
-# include <ctype.h>//isspace()->rem
-# include <fcntl.h>//open()
+# include <stdio.h>   //printf()
+# include <stdlib.h>  //malloc()
+# include <string.h>  //strncpy()->rem
+# include <strings.h> //bzero()
+# include <sys/wait.h>
+# include <unistd.h> //write()
 
-#define SYNTAX_ERR_TEMPLATE "minishell: syntax error near unexpected token `"
-#define SYNTAX_ERR_TEMPLATE_LEN 47
-#define TOKEN_VALUE_NEWLINE "newline"
-#define TOKEN_VALUE_PIPE "|"
-#define TOKEN_VALUE_AND_IF "&&"
-#define TOKEN_VALUE_OR_IF "||"
-#define TOKEN_VALUE_LPAREN "("
-#define TOKEN_VALUE_RPAREN ")"
-#define TOKEN_VALUE_REDIRECT_IN "<"
-#define TOKEN_VALUE_REDIRECT_OUT ">"
-#define TOKEN_VALUE_HEREDOC "<<"
-#define TOKEN_VALUE_APPEND ">>"
+// heredoc pipe capacity from system default size.
+# define HERE_PIPE_SIZE 4096
+// HEREDOC TMPFILE'S TEMPLATE
+# define HERE_TEMPLATE "/tmp/heredoc_tmp_XXXXX"
+
+# define SYNTAX_ERR_TEMPLATE "minishell: syntax error near unexpected token `"
+# define SYNTAX_ERR_TEMPLATE_LEN 47
+# define TOKEN_VALUE_NEWLINE "newline"
+# define TOKEN_VALUE_PIPE "|"
+# define TOKEN_VALUE_AND_IF "&&"
+# define TOKEN_VALUE_OR_IF "||"
+# define TOKEN_VALUE_LPAREN "("
+# define TOKEN_VALUE_RPAREN ")"
+# define TOKEN_VALUE_REDIRECT_IN "<"
+# define TOKEN_VALUE_REDIRECT_OUT ">"
+# define TOKEN_VALUE_HEREDOC "<<"
+# define TOKEN_VALUE_APPEND ">>"
+
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	int				exported;
+	struct s_env	*next;
+}					t_env;
+
+typedef struct s_shell
+{
+	bool			interactive;
+	int				last_exit_status;
+	t_env			*env_list;
+	// t_command_hash *cmd_hash;
+	char			*pwd;
+}					t_shell;
 
 typedef enum e_metachar
 {
@@ -41,6 +70,7 @@ typedef enum e_metachar
 // token_type classifies which type the token belongs to.
 typedef enum e_token_type
 {
+	TK_HEAD,
 	TK_NEWLINE,
 	TK_WORD,
 	TK_PIPE,
@@ -54,13 +84,13 @@ typedef enum e_token_type
 	TK_LPAREN,
 	TK_RPAREN,
 	TK_DOLLER,
-	TK_EOF,
-	TK_HEAD
+	TK_EOF
 }					t_token_type;
 
 typedef struct s_token
 {
 	size_t size; // for dummy head to keep the len of the list.
+	size_t count_newline;
 	struct s_token	*prev;
 	t_token_type	type;
 	bool			in_squote;
@@ -83,7 +113,8 @@ typedef enum e_redir_type
 	REDIR_IN,
 	REDIR_OUT,
 	REDIR_APPEND,
-	REDIR_HEREDOC
+	REDIR_HEREDOC,
+	REDIR_OTHER
 }					t_redir_type;
 
 typedef struct s_redir
@@ -100,21 +131,12 @@ typedef struct s_cmd
 	t_redir			*redir;
 }					t_cmd;
 
-typedef struct s_pipeline
-{
-	bool	in_pipeline;
-	int in_fd;
-	int out_fd;
-	int err_fd;
-} t_pipeline;
-
 typedef struct s_ast
 {
 	struct s_ast	*parent;
 	struct s_ast	*subtree;
 	struct s_ast	*left;
 	t_node_type		type;
-	t_pipeline		*pipeline;
 	t_cmd			*cmd;
 	struct s_ast	*right;
 }					t_ast;

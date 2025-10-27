@@ -1,11 +1,9 @@
 #ifndef SIGNAL_MANAGE_H
-#define SIGNAL_MANAGE_H
+# define SIGNAL_MANAGE_H
 
-#include <signal.h>
+# include "minishell_types.h"
 
-void sig_int_event(int signum);
-void sig_term_event(int signum);
-void signal_initializer(int *g_set);
-void signal_handler(int signum);
+int	signal_initializer(bool interactive);
+int	handle_child(int *last_exit_status, pid_t pid);
 
 #endif

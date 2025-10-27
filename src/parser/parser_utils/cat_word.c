@@ -9,7 +9,7 @@ void	cat_word(char **word, char *entry, size_t entry_len)
 	word_len = 0;
 	if (word && *word)
 		word_len = strlen(*word);
-	new = malloc(sizeof(char) * (word_len + entry_len + 1));
+	new = xmalloc(sizeof(char) * (word_len + entry_len + 1));
 	if (new == NULL)
 	{
 		perror("malloc :");
@@ -17,11 +17,11 @@ void	cat_word(char **word, char *entry, size_t entry_len)
 	}
 	if (*word)
 	{
-		strlcpy(new, *word, word_len + 1);
-		free(*word);
+		strncpy(new, *word, word_len + 1);
+		xfree(*word);
 	}
 	else
 		new[0] = '\0';
-	strlcpy(new + word_len, entry, entry_len + 1);
+	strcpy(new + word_len, entry);
 	*word = new;
 }
