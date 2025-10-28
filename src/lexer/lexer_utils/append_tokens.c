@@ -1,7 +1,7 @@
 #include "../../../includes/minishell.h"
 
 // head is a dummy head. append new at the tail (FIFO)
-void	append_tokens(t_token *head, t_token *new)
+void	prepend_tokens(t_token *head, t_token *new)
 {
 	if (!head || !new)
 		return;

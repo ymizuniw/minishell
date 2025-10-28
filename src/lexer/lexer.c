@@ -33,7 +33,7 @@ int handle_newline(t_token *token_head, const char *input, size_t *idx)
 	new->value = strdup("\n");
 	if (!new->value)
 		return (-1);
-	append_tokens(token_head, new);
+	prepend_tokens(token_head, new);
 	*idx++;
 	return (1);
 }
@@ -46,7 +46,7 @@ int handle_meta_char(t_token *token_head, const char *input, size_t *idx)
 		return (-1);
 	memset(new, 0, sizeof(t_token));
 	new->type = get_token_type((char *)input, idx);
-	append_tokens(token_head, new);
+	prepend_tokens(token_head, new);
 	return (1);
 }
 
@@ -61,7 +61,7 @@ int handle_doller(t_token *token_head, char const *input, size_t *idx)
 	new->value = strdup("$");
 	if (!new->value)
 		return (-1);
-	append_tokens(token_head, new);
+	prepend_tokens(token_head, new);
 	*idx++;
 	return (1);
 }
@@ -90,7 +90,7 @@ int handle_word(t_token *token_head, char const *input, size_t input_len, size_t
 	new->type = TK_WORD;
 	new->value = word;
 	new->next = NULL;
-	append_tokens(token_head, new);	//prepend_tokens is better naming, maybe.
+	prepend_tokens(token_head, new);	//prepend_tokens is better naming, maybe.
 	return (1);
 }
 
