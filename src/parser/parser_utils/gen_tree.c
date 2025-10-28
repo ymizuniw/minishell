@@ -48,9 +48,8 @@ void set_node_type(t_ast *node, t_token_type token_type)
 		node->type = NODE_CMD;
 }
 
-t_ast *sort_by_logical_precedence(t_ast *parent)
+t_ast *sort_by_logical_precedence(t_ast *parent, t_ast *node)
 {
-	t_ast	*node;
 	t_ast	*root;
 
 	root = parent;
@@ -81,7 +80,7 @@ t_ast  *sort_and_gen_node(t_ast *parent, t_token **cur_token, t_token *next_toke
 	if (init_node(&node, parent, token->type)<0)
 		return (NULL);
 	if (token->type == TK_AND_IF || token->type == TK_OR_IF)
-		node = sort_by_logical_precedence(parent);
+		node = sort_by_logical_precedence(parent, node);
 	else
 		node = swap_and_set_right_node(node, parent);
 	if (token && token->next)
@@ -137,7 +136,6 @@ t_ast *subshell_close(t_ast *parent, t_token **cur_token, int subshell)
 	}
 }
 
-
 //parse_command_list
 //
 
@@ -146,7 +144,7 @@ int init_redir(t_redir **redir, t_redir_type redir_type)
 	*redir = alloc_redir();
 	if (*redir==NULL)
 		return (-1);
-	memset(redir, 0, sizeof(t_redir));
+	memset(redir,sizeof(t_redir), 0);
 	(*redir)->type = redir_type;
 	return (1);
 }
@@ -157,7 +155,7 @@ int parse_redirection(t_ast *node, t_token **cur_token, t_redir_type redir_type)
 
 	if (!syntax_check(*cur_token))
 		return (-1);
-	if (init_redir(redir, redir_type)<0)
+	if (init_redir(&redir, redir_type)<0)
 		return (-1);
 	if ((*cur_token)->prev)
 		redir->filename = strdup((*cur_token)->prev->value);
@@ -204,7 +202,7 @@ int parse_redir_and_command(t_ast *node, t_token *cur, t_token **cur_token, size
 		}
 		if (cur->type == TK_WORD || cur->type == TK_DOLLER)
 		{
-			parse_simple_command(node, cur, i);
+			parse_simple_command(node, &cur, i);
 			continue ;
 		}
 		cur = cur->prev;

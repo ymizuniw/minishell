@@ -109,3 +109,13 @@ int	expand_wildcard(char const *str, t_shell *shell)
 // documents includes Makefile src tests
 // bash-3.2$ echo $arg
 
+// bash-3.2$ (echo $arg) 
+// documents includes Makefile src tests
+// bash-3.2$ (echo $arg) && echo $arg
+// documents includes Makefile src tests
+// documents includes Makefile src tests
+// bash-3.2$ (export arg="tempo"; echo $arg) && echo $arg
+// tempo
+// documents includes Makefile src tests
+// bash-3.2$ 
+

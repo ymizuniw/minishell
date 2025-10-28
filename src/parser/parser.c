@@ -19,6 +19,5 @@ t_ast	*parser(t_token *dummy_head)
 	}
 	while (token && token->type == TK_NEWLINE)
 		token = token->next;
-	dummy_head= token;
 	return (root);
 }

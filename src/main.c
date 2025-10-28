@@ -14,6 +14,36 @@ char	*ft_readline(char const *prompt, bool interactive)
 	return (line);
 }
 
+
+int parse_and_exec(char const*line, t_token *token_list, t_shell *shell)
+{
+	t_ast **ast_list = NULL;
+	t_ast *ast= NULL;
+	t_result *res = NULL;
+	size_t ast_count = 0;
+	t_token *cur = token_list;
+
+	while (cur && cur->type != TK_EOF)
+	{
+		ast = parser(&cur);
+		if (!ast)
+			continue;
+		ast_list = realloc(ast_list, sizeof(t_ast *) * (ast_count + 1));
+		ast_list[ast_count++] = ast;
+		while (cur && cur->type == TK_NEWLINE)
+			cur = cur->next;
+	}
+	size_t i = 0;
+	while (i < cur->count_newline)
+	{
+		res = executor(ast_list[i], shell);
+		free_ast_tree(ast_list[i]);
+		free_result(res);
+		i++;
+	}
+	xfree(ast_list);
+}
+
 int	shell_loop(t_shell *shell)
 {
 	char		*line;
@@ -34,34 +64,11 @@ int	shell_loop(t_shell *shell)
 		}
 		if (shell->interactive && *line)
 			add_history(line);
-
 		token_list = lexer(line);
-
-		t_ast **ast_list = NULL;
-		size_t ast_count = 0;
-		t_token *cur = token_list;
-		while (cur && cur->type != TK_EOF)
-		{
-			ast = parser(&cur);
-			if (!ast)
-				continue;
-			ast_list = realloc(ast_list, sizeof(t_ast *) * (ast_count + 1));
-			ast_list[ast_count++] = ast;
-			while (cur && cur->type == TK_NEWLINE)
-				cur = cur->next;
-		}
-		size_t i = 0;
-		while (i < cur->count_newline)
-		{
-			res = executor(ast_list[i], shell);
-			free_ast_tree(ast_list[i]);
-			free_result(res);
-			i++;
-		}
+		parse_and_exec(line, token_list, shell);
 		xfree(line);
 		if (token_list)
 			free_token_list(token_list);
-		xfree(ast_list);
 	}
 	return (0);
 }

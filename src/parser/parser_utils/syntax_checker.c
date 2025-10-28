@@ -8,6 +8,40 @@ static int	is_operator(t_token_type type)
 	return (0);
 }
 
+		int check_lparen(t_token *token)
+		{
+			if (token->prev && (token->prev->type == TK_WORD || token->prev->type == TK_DOLLER))
+			{
+				syntax_error(token->type);
+				return (0);
+			}
+			return (1);
+		}
+
+		int check_redirection(t_token *token)
+		{
+			if (token->prev != NULL && (token->prev->type != TK_WORD && token->prev->type != TK_DOLLER))
+			{
+				syntax_error(token->type);
+				return (0);
+			}
+			return (1);
+		}
+
+int check_operator(t_token *token)
+{
+	//operator permits
+	// word && word
+	// word && redirection
+	// word && l_paren
+	// r_paren && word
+	// r_paren && redirection
+	// r_paren && l_paren
+	if ((token->next && token->next->type != TK_WORD && token->next->type != TK_RPAREN) || (token->prev && token->prev->type != TK_WORD && token->prev->type != TK_REDIRECT_IN && token->prev->type != TK_REDIRECT_OUT && token->prev->type != TK_HEREDOC && token->prev->type != TK_APPEND && token->prev->type != TK_LPAREN))
+		return (0);
+	return (1);
+}
+
 // check the syntax of given token is correct.
 int	syntax_check(t_token *token)
 {
@@ -16,68 +50,13 @@ int	syntax_check(t_token *token)
 	if (!token || !token->prev)
 		return (0);
 	token_type = token->type;
-
-	// ( left parenthesis
 	if (token_type == TK_LPAREN)
-	{
-		if (token->prev && (token->prev->type == TK_WORD || token->prev->type == TK_DOLLER))
-		{
-			syntax_error(token->type);
-			return (0);
-		}
-		return (1);
-	}
-	// ) right parenthesis
+		return (check_lparen(token));
 	if (token_type == TK_RPAREN)
 		return (check_parenthesis(token));
-
-	// <
-	if (token_type == TK_REDIRECT_IN)
-	{
-		if (token->prev->type == TK_NEWLINE)
-		{
-			syntax_error(TK_NEWLINE);
-			return (0);
-		}
-		if (!token->next || token->next->type == TK_EOF
-			|| is_operator(token->next->type))
-		{
-			syntax_error(token->type);
-			return (0);
-		}
-	}
-	if (token_type == TK_HEREDOC)
-	{
-		if (token->prev->type != TK_WORD && token->prev->type != TK_NEWLINE
-			&& token->prev->type != TK_EOF && token->prev->type != TK_AND_IF
-			&& token->prev->type != TK_OR_IF && token->prev->type != TK_PIPE)
-		{
-			syntax_error(token->prev->type);
-			return (0);
-		}
-		if (!token->next || token->next->type == TK_EOF
-			|| is_operator(token->next->type))
-		{
-			syntax_error(token->type);
-			return (0);
-		}
-	}
-	// >, >>, <>
-	if (token_type == TK_REDIRECT_OUT || token_type == TK_APPEND)
-	{
-		if (token->prev->type != TK_WORD && token->prev->type != TK_NEWLINE
-			&& token->prev->type != TK_EOF && token->prev->type != TK_AND_IF
-			&& token->prev->type != TK_OR_IF && token->prev->type != TK_PIPE)
-		{
-			syntax_error(token->prev->type);
-			return (0);
-		}
-		if (!token->next || token->next->type == TK_EOF
-			|| is_operator(token->next->type))
-		{
-			syntax_error(token->type);
-			return (0);
-		}
-	}
+	if (token_type == TK_REDIRECT_IN || token_type == TK_HEREDOC || token_type == TK_REDIRECT_OUT || token_type == TK_APPEND)
+		return (check_redirection(token));
+	if (is_operator(token->type))
+		return (check_operator(token));
 	return (1);
 }
