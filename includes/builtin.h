@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 02:05:22 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/10/31 16:41:13 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/10/31 18:39:29 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_env				*find_env(t_env *env_list, const char *key);
 
 void				exec_builtin(t_shell *shell, char **cmd);
 void				run_builtin(t_shell *shell, char **cmd);
-int					ft_echo(char **cmd, int fd);
+int					ft_echo(char **cmd);
 int					ft_cd(char **cmd, t_shell *shell, int fd);
 int					ft_pwd(t_shell *shell, int fd);
 int					ft_export(t_shell *shell, char **cmd, int fd);
