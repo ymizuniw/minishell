@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 17:44:05 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/10/31 16:29:48 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/10/31 19:36:29 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../../../includes/minishell.h"
 
 static void	exec_with_slash(t_shell *shell, char **cmd_args, char **env)
 {

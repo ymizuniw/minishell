@@ -38,6 +38,8 @@
 # define TOKEN_VALUE_HEREDOC "<<"
 # define TOKEN_VALUE_APPEND ">>"
 
+void rl_replace_line (const char *text, int clear_undo);
+
 typedef struct s_env
 {
 	char			*key;

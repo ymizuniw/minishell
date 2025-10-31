@@ -49,10 +49,11 @@ int	parse_and_exec(t_token *token_list, t_shell *shell)
 	cur = token_list;
 	while (cur && cur->type != TK_EOF)
 	{
-		// Skip HEAD and NEWLINE tokens
 		if (cur->type == TK_HEAD || cur->type == TK_NEWLINE)
 		{
 			cur = cur->next;
+			if (cur->type == TK_EOF)
+				return (1);
 			continue ;
 		}
 		// Parse one command, advancing cur to next unconsumed token

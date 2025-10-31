@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-int	ft_cd(char **cmd, t_shell *shell, int fd)
+int	ft_cd(char **cmd, t_shell *shell)
 {
 	char	*target_dir;
 	char	*new_pwd;
@@ -8,7 +8,7 @@ int	ft_cd(char **cmd, t_shell *shell, int fd)
 
 	if (count_token(cmd) > 2)
 	{
-		write(fd, "cd: too many arguments\n", 23);
+		write(STDOUT_FILENO, "cd: too many arguments\n", 23);
 		return (1);
 	}
 	target_dir = cmd[1];
@@ -17,7 +17,7 @@ int	ft_cd(char **cmd, t_shell *shell, int fd)
 		home_var = find_env(shell->env_list, "HOME");
 		if (!home_var)
 		{
-			write(fd, "cd: HOME not set\n", 17);
+			write(STDOUT_FILENO, "cd: HOME not set\n", 17);
 			return (1);
 		}
 		target_dir = home_var->value;

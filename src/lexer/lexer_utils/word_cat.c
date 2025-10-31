@@ -3,49 +3,37 @@
 // if the token type is TK_WORD, concatenate it if it is a unit of word,
 // in quotation, not delimited by metachar.
 
-int	handle_quotation(char **word, size_t word_len, char const *input,
-		size_t *idx, size_t *consumed_len, char quote_open)
+int handle_quotation(char **word, size_t word_len, char const*input, size_t *idx, size_t *consumed_len, char quote_open)
 {
-	size_t	add_len;
-	char	*quote_close;
-
-	quote_close = strchr(&input[*idx + 1], quote_open);
+	size_t			add_len;
+	char *quote_close = strchr(&input[*idx+1], quote_open);
 	if (!quote_close)
 	{
-		// syntax_error.
+		//syntax_error.
 		return (-1);
 	}
-	if (input[*idx] == input[*idx + 1])
-	{
-		//"" case.
-		*idx += 2;
-		return (1);
-	}
-	add_len = quote_close - &input[*idx] - 1; //"a"
+	add_len = quote_close - &input[*idx];
 	*word = realloc(*word, sizeof(char) * (word_len + add_len + 1));
 	if (!*word)
 		return (0);
-	strncpy(*word + word_len, &input[*idx + 1], add_len);
-	(*word)[word_len + add_len] = '\0';
-	*idx += add_len + 2; // right to apply ptr move quantity to *idx.
-	*consumed_len = add_len + 2;
+	strncpy(*word + word_len, &input[*idx], add_len);
+	(*word)[add_len]='\0';
+	*idx += add_len;//right to apply ptr move quantity to *idx.
+	*consumed_len = add_len;
 	return (1);
 }
 
-// idx is of input[*idx], and consumed_len is for *word's add_len?
-int	handle_plain(char **word, size_t word_len, char const *input,
-		size_t input_len, size_t *idx, size_t *consumed_len)
+//idx is of input[*idx], and consumed_len is for *word's add_len?
+int handle_plain(char **word, size_t word_len, char const *input, size_t input_len, size_t *idx, size_t *consumed_len)
 {
-	size_t		add_len;
-	const char	*tmp_ptr;
+	size_t add_len = 0;
+	const char *tmp_ptr;
 
-	add_len = 0;
 	tmp_ptr = &input[*idx];
 	while (*idx < input_len && !isspace((int)input[*idx])
 		&& is_meta_char(input[*idx]) == MT_OTHER && !is_quote(input[*idx]))
-		(*idx)++; // here idx is proceeded, so consumed_len is no need, is it?
+		(*idx)++;//here idx is proceeded, so consumed_len is no need, is it?
 	// (*idx)--;
-	// printf("input next: %s\n", &input[*idx]);
 	add_len = &input[*idx] - tmp_ptr;
 	if (add_len == 0)
 		return (-1);
@@ -54,14 +42,14 @@ int	handle_plain(char **word, size_t word_len, char const *input,
 		return (-1);
 	strncpy(*word + word_len, tmp_ptr, add_len);
 	(*word)[word_len + add_len] = '\0';
-	*consumed_len = add_len; // next increment is done elsewhere?
+	*consumed_len = add_len;//next increment is done elsewhere?
 	return (1);
 }
 
-int	cat_after_quotation(char **word, size_t word_len, char const *input,
-		size_t input_len, size_t *idx, size_t *consumed_len)
+int cat_after_quotation(char **word, size_t word_len, char const *input, size_t input_len, size_t *idx, size_t *consumed_len)
 {
 	// size_t additional = 0;
+
 	// additional = word_cat(word, word_len + *consumed_len, input, input_len,
 	// 		idx);
 	// if (additional == 0)
@@ -71,8 +59,8 @@ int	cat_after_quotation(char **word, size_t word_len, char const *input,
 	return (1);
 }
 
-size_t	word_cat(char **word, size_t word_len, char const *input,
-		size_t input_len, size_t *idx)
+size_t	word_cat(char **word, size_t word_len, char const*input, size_t input_len,
+		size_t *idx)
 {
 	size_t			consumed_len;
 	unsigned char	quote_open;
@@ -81,22 +69,19 @@ size_t	word_cat(char **word, size_t word_len, char const *input,
 	quote_open = is_quote(input[*idx]);
 	if (quote_open)
 	{
-		if (handle_quotation(word, word_len, input, idx, &consumed_len,
-				quote_open) < 0)
+		if (handle_quotation(word, word_len, input, idx, &consumed_len, quote_open)<0)
 			return (0);
 	}
 	else
 	{
-		if (handle_plain(word, word_len, input, input_len, idx,
-				&consumed_len) < 0)
+		if (handle_plain(word, word_len, input, input_len, idx, &consumed_len)<0)
 			return (0);
 	}
 	if (*idx < input_len && (is_quote(input[*idx])
 			|| (is_meta_char(input[*idx]) == MT_OTHER
 				&& !isspace((int)input[*idx]))))
 	{
-		if (cat_after_quotation(word, word_len, input, input_len, idx,
-				&consumed_len) < 0)
+		if (cat_after_quotation(word, word_len, input, input_len, idx, &consumed_len)<0)
 			return (0);
 	}
 	return (consumed_len);

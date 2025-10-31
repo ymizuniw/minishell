@@ -10,9 +10,9 @@ void	exec_builtin(t_shell *shell, char **cmd)
 	if (!cmd || !shell)
 		exit(1);
 	if (strcmp(cmd[0], "echo") == 0)
-		ret = ft_echo(cmd, fd);
+		ret = ft_echo(cmd);
 	else if (strcmp(cmd[0], "cd") == 0)
-		ret = ft_cd(cmd, shell, fd);
+		ret = ft_cd(cmd, shell);
 	else if (strcmp(cmd[0], "pwd") == 0)
 		ret = ft_pwd(shell, fd);
 	else if (strcmp(cmd[0], "export") == 0)

@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 21:00:12 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/10/31 14:30:21 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/10/31 19:37:09 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../../../includes/minishell.h"
 
 static void	free_envp(char **envp)
 {

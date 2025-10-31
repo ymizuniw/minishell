@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 02:05:22 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/10/31 18:39:29 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/10/31 19:02:53 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,6 @@
 # define BUILTIN_H
 
 # include "minishell_types.h"
-
-/* Types are defined in minishell_types.h; avoid redefining here.
-typedef struct s_env
-{
-	char			*key;
-	char			*value;
-	int				exported;
-	struct s_env	*next;
-}					t_env;
-*/
-
-/*
-typedef struct s_shell
-{
-	t_env			*env_list;
-	char			*pwd;
-	int				fd;
-	int				last_exit_status;
-}					t_shell;
-*/
 
 char				*get_pwd(void);
 int					count_token(char **tokens);
@@ -48,7 +28,7 @@ t_env				*find_env(t_env *env_list, const char *key);
 void				exec_builtin(t_shell *shell, char **cmd);
 void				run_builtin(t_shell *shell, char **cmd);
 int					ft_echo(char **cmd);
-int					ft_cd(char **cmd, t_shell *shell, int fd);
+int					ft_cd(char **cmd, t_shell *shell);
 int					ft_pwd(t_shell *shell, int fd);
 int					ft_export(t_shell *shell, char **cmd, int fd);
 int					ft_unset(t_shell *shell, char **cmd);
