@@ -16,7 +16,7 @@ int	is_valid_varname(const char *var)
 	return (1);
 }
 
-static void	handle_export_arg(t_shell *shell, char *arg)
+static int	handle_export_arg(t_shell *shell, char *arg)
 {
 	char	*key;
 	char	*value;
@@ -24,14 +24,14 @@ static void	handle_export_arg(t_shell *shell, char *arg)
 
 	key = extract_key(arg);
 	if (!key)
-		return ;
+		return (0);
 	if (!is_valid_varname(key))
 	{
 		write(2, "export: `", 9);
 		write(2, arg, strlen(arg));
 		write(2, "': not a valid identifier\n", 26);
 		xfree(key);
-		return ;
+		return (1);
 	}
 	value = extract_value(arg);
 	if (value)
@@ -48,6 +48,7 @@ static void	handle_export_arg(t_shell *shell, char *arg)
 			set_variable(shell, key, "", 1);
 	}
 	xfree(key);
+	return (0);
 }
 
 static void	sort_env_array(t_env **arr, int count)
@@ -147,19 +148,23 @@ static void	print_exported_vars(t_env *env_list, int fd)
 	xfree(sorted);
 }
 
-void	ft_export(t_shell *shell, char **cmd, int fd)
+int	ft_export(t_shell *shell, char **cmd, int fd)
 {
 	int	i;
+	int	ret;
 
+	ret = 0;
 	if (!cmd[1])
 	{
 		print_exported_vars(shell->env_list, fd);
-		return ;
+		return (0);
 	}
 	i = 1;
 	while (cmd[i])
 	{
-		handle_export_arg(shell, cmd[i]);
+		if (handle_export_arg(shell, cmd[i]) != 0)
+			ret = 1;
 		i++;
 	}
+	return (ret);
 }

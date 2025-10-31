@@ -1,9 +1,9 @@
 #include "../../../../includes/minishell.h"
 
 // generate a random num
-unsigned int ft_rand(unsigned int *seed)
+unsigned int	ft_rand(unsigned int *seed)
 {
-	*seed = (*seed * 1103515245u + 12345u) & 0x7fffffff;
+	*seed = (*seed % INT_MAX);
 	return (*seed);
 }
 
@@ -27,7 +27,8 @@ char	*ft_mkstmp(char *template)
 	if (!name)
 		return (NULL);
 	p = name + len - 1;
-	while (strchr(name, 'X') != NULL)
+	p = strchr(name, 'X');
+	while (p != NULL)
 	{
 		random = ft_rand(&num);
 		if (random == 0)
@@ -47,7 +48,7 @@ int	ft_mkstmpfd(char *template, char **filename)
 	size_t	try_limit;
 	int		fd;
 
-	try_limit = 5000;
+	try_limit = 10000;
 	if (template == NULL)
 		return (-1);
 	while (try_limit > 0)

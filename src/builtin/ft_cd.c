@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-void	ft_cd(char **cmd, t_shell *shell, int fd)
+int	ft_cd(char **cmd, t_shell *shell, int fd)
 {
 	char	*target_dir;
 	char	*new_pwd;
@@ -9,7 +9,7 @@ void	ft_cd(char **cmd, t_shell *shell, int fd)
 	if (count_token(cmd) > 2)
 	{
 		write(fd, "cd: too many arguments\n", 23);
-		return ;
+		return (1);
 	}
 	target_dir = cmd[1];
 	if (!target_dir)
@@ -18,14 +18,14 @@ void	ft_cd(char **cmd, t_shell *shell, int fd)
 		if (!home_var)
 		{
 			write(fd, "cd: HOME not set\n", 17);
-			return ;
+			return (1);
 		}
 		target_dir = home_var->value;
 	}
 	if (chdir(target_dir) == -1)
 	{
 		perror("cd");
-		return ;
+		return (1);
 	}
 	set_variable(shell, "OLDPWD", shell->pwd, 1);
 	new_pwd = get_pwd();
@@ -35,4 +35,5 @@ void	ft_cd(char **cmd, t_shell *shell, int fd)
 		xfree(shell->pwd);
 		shell->pwd = new_pwd;
 	}
+	return (0);
 }

@@ -3,69 +3,92 @@
 char	*ft_readline(char const *prompt, bool interactive)
 {
 	char	*line;
+	size_t	len;
+	ssize_t	nread;
 
 	line = NULL;
+	len = 0;
 	if (interactive == true)
 	{
 		line = readline(prompt);
 		return (line);
 	}
-	// line = get_next_line(0);
+	nread = getline(&line, &len, stdin);
+	if (nread == -1)
+	{
+		free(line);
+		return (NULL);
+	}
+	if (nread > 0 && line[nread - 1] == '\n')
+		line[nread - 1] = '\0';
 	return (line);
 }
 
-
-int parse_and_exec(char const*line, t_token *token_list, t_shell *shell)
+static void	exec_one_ast(t_ast *ast, t_shell *shell)
 {
-	t_ast **ast_list = NULL;
-	t_ast *ast= NULL;
-	t_result *res = NULL;
-	size_t ast_count = 0;
-	t_token *cur = token_list;
+	t_result	*res;
 
+	if (!ast)
+		return ;
+	res = executor(ast, shell);
+	if (res)
+	{
+		shell->last_exit_status = res->exit_code;
+		free_result(res);
+	}
+	free_ast_tree(ast);
+}
+
+int	parse_and_exec(t_token *token_list, t_shell *shell)
+{
+	t_token	*cur;
+	t_ast	*ast;
+
+	if (!token_list || !shell)
+		return (0);
+	cur = token_list;
 	while (cur && cur->type != TK_EOF)
 	{
-		ast = parser(&cur);
-		if (!ast)
-			continue;
-		ast_list = realloc(ast_list, sizeof(t_ast *) * (ast_count + 1));
-		ast_list[ast_count++] = ast;
-		while (cur && cur->type == TK_NEWLINE)
+		// Skip HEAD and NEWLINE tokens
+		if (cur->type == TK_HEAD || cur->type == TK_NEWLINE)
+		{
 			cur = cur->next;
+			continue ;
+		}
+		// Parse one command, advancing cur to next unconsumed token
+		ast = parser(&cur);
+		if (ast)
+			exec_one_ast(ast, shell);
+		// cur now points to NEWLINE or EOF after parser advanced it
 	}
-	size_t i = 0;
-	while (i < cur->count_newline)
-	{
-		res = executor(ast_list[i], shell);
-		free_ast_tree(ast_list[i]);
-		free_result(res);
-		i++;
-	}
-	xfree(ast_list);
+	return (1);
 }
 
 int	shell_loop(t_shell *shell)
 {
-	char		*line;
-	t_token		*token_list;
-	t_ast		*ast;
-	t_result	*res;
+	char	*line;
+	t_token	*token_list;
 
 	line = NULL;
 	token_list = NULL;
-	ast = NULL;
 	while (1)
 	{
 		line = ft_readline("minishell$ ", shell->interactive);
+		if (g_signum == SIGINT)
+		{
+			shell->last_exit_status = 130;
+			g_signum = 0;
+		}
 		if (!line)
 		{
-			printf("exit\n");
+			if (shell->interactive)
+				printf("exit\n");
 			break ;
 		}
 		if (shell->interactive && *line)
 			add_history(line);
 		token_list = lexer(line);
-		parse_and_exec(line, token_list, shell);
+		parse_and_exec(token_list, shell);
 		xfree(line);
 		if (token_list)
 			free_token_list(token_list);
@@ -76,6 +99,7 @@ int	shell_loop(t_shell *shell)
 int	main(int argc, char **argv, char **env)
 {
 	t_shell	shell;
+	char	*pwd;
 
 	(void)argc;
 	(void)argv;
@@ -84,7 +108,18 @@ int	main(int argc, char **argv, char **env)
 		shell.interactive = true;
 	signal_initializer(shell.interactive);
 	init_env_from_envp(&shell, env);
+	pwd = getcwd(NULL, 0);
+	if (pwd)
+	{
+		shell.pwd = pwd;
+		set_variable(&shell, "PWD", pwd, 1);
+	}
+	shell.last_exit_status = 0;
+	// Initialize _ to empty or to the shell path
+	set_variable(&shell, "_", "/usr/bin/minishell", 1);
 	shell_loop(&shell);
+	if (shell.pwd)
+		free(shell.pwd);
 	free_env_list(shell.env_list);
-	return (0);
+	return (shell.last_exit_status);
 }

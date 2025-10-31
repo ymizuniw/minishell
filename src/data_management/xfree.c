@@ -4,4 +4,5 @@ void	xfree(void *p)
 {
 	if (p != NULL)
 		free(p);
+	p = NULL;
 }

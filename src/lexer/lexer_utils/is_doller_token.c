@@ -9,7 +9,7 @@ return : 1 if it is doller token, 0 in other cases.
 */
 bool	is_doller_token(const char *p)
 {
-	if (p[0]!='$')
+	if (p[0] != '$')
 		return (false);
 	if (p[1] == '\0')
 		return (true);

@@ -7,14 +7,15 @@ static void	signal_handler(int signum)
 	if (signum == SIGINT)
 	{
 		g_signum = SIGINT;
+		write(STDOUT_FILENO, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
 
-//just before execve, rest it default sigaction.
-static int	set_sig_dfl(void)
+// just before execve, reset it to default sigaction.
+int	set_sig_dfl(void)
 {
 	struct sigaction	sact;
 
@@ -65,11 +66,22 @@ int	handle_child(int *last_exit_status, pid_t pid)
 	}
 	if (WIFSIGNALED(local_status))
 	{
-		*last_exit_status = WEXITSTATUS(local_status);
+		// Signal terminated: exit code = 128 + signal number
+		*last_exit_status = 128 + WTERMSIG(local_status);
 		if (WTERMSIG(local_status) == SIGQUIT)
 			write(STDERR_FILENO, "Quit (core dumped)\n", 19);
 		else if (WTERMSIG(local_status) == SIGINT)
 			write(STDOUT_FILENO, "\n", 1);
+	}
+	else if (WIFEXITED(local_status))
+	{
+		// Normal exit: get actual exit code
+		*last_exit_status = WEXITSTATUS(local_status);
+	}
+	else
+	{
+		// Stopped or other status
+		*last_exit_status = 1;
 	}
 	return (0);
 }

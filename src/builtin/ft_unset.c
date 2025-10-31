@@ -27,11 +27,13 @@ static void	remove_env_var(t_env **env_list, const char *key)
 	}
 }
 
-void	ft_unset(t_shell *shell, char **cmd)
+int	ft_unset(t_shell *shell, char **cmd)
 {
 	int	i;
+	int	ret;
 
 	i = 1;
+	ret = 0;
 	while (cmd[i])
 	{
 		if (!is_valid_varname(cmd[i]))
@@ -39,9 +41,11 @@ void	ft_unset(t_shell *shell, char **cmd)
 			write(2, "unset: `", 8);
 			write(2, cmd[i], strlen(cmd[i]));
 			write(2, "': not a valid identifier\n", 26);
+			ret = 1;
 		}
 		else
 			remove_env_var(&shell->env_list, cmd[i]);
 		i++;
 	}
+	return (ret);
 }

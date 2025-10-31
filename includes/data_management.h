@@ -12,6 +12,7 @@ t_token		*alloc_token(void);
 t_cmd		*alloc_cmd(void);
 t_ast		*alloc_node(void);
 t_redir		*alloc_redir(void);
+t_argv		*alloc_argv(void);
 t_result	*alloc_result(void);
 
 // free application

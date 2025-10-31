@@ -21,6 +21,11 @@ t_redir	*alloc_redir(void)
 	return ((t_redir *)xmalloc(sizeof(t_redir)));
 }
 
+t_argv	*alloc_argv(void)
+{
+	return ((t_argv *)xmalloc(sizeof(t_argv)));
+}
+
 t_result	*alloc_result(void)
 {
 	return ((t_result *)xmalloc(sizeof(t_result)));

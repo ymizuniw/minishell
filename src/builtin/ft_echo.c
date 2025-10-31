@@ -18,11 +18,12 @@ static bool	is_n_option(const char *arg)
 	return (true);
 }
 
-void	ft_echo(char **cmd)
+int	ft_echo(char **cmd, int fd)
 {
 	bool	newline;
 	int		i;
 
+	(void)fd;
 	i = 1;
 	newline = true;
 	while (cmd[i] && is_n_option(cmd[i]))
@@ -30,14 +31,14 @@ void	ft_echo(char **cmd)
 		newline = false;
 		i++;
 	}
-	// chenge ft_printf
 	while (cmd[i])
 	{
-		printf("%s", cmd[i]);
+		printf(fd, "%s", cmd[i]);
 		if (cmd[i + 1])
-			printf(" ");
+			printf(fd, " ");
 		i++;
 	}
 	if (newline)
-		printf("\n");
+		printf(fd, "\n");
+	return (0);
 }

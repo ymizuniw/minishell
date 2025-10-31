@@ -7,6 +7,7 @@
 # include <ctype.h> //isspace()->rem
 # include <dirent.h>
 # include <fcntl.h> //open()
+# include <limits.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
@@ -15,6 +16,7 @@
 # include <stdlib.h>  //malloc()
 # include <string.h>  //strncpy()->rem
 # include <strings.h> //bzero()
+# include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h> //write()
 
@@ -90,7 +92,7 @@ typedef enum e_token_type
 typedef struct s_token
 {
 	size_t size; // for dummy head to keep the len of the list.
-	size_t count_newline;
+	size_t			count_newline;
 	struct s_token	*prev;
 	t_token_type	type;
 	bool			in_squote;
@@ -125,8 +127,16 @@ typedef struct s_redir
 	struct s_redir	*next;
 }					t_redir;
 
+typedef struct s_argv
+{
+	char			*word;
+	bool			to_expand;
+	struct s_argv	*next;
+}					t_argv;
+
 typedef struct s_cmd
 {
+	t_argv			*argv_list;
 	char			**argv;
 	t_redir			*redir;
 }					t_cmd;
