@@ -1,0 +1,8 @@
+readlineの結果がNULL時の、condition1 インタラクティブモード
+に加えて、SIGNUMが0を記述。
+if (!line)
+{
+    if (shell->interactive && g_signum == 0)
+        write(STDERR_FILENO, "exit\n", 5);
+    exit(shell->last_exit_status);
+}
