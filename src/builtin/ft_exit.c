@@ -45,7 +45,7 @@ void	ft_exit(char **cmd, int last_exit_status)
 		if (!is_numeric(cmd[1]))
 		{
 			print_err_num(cmd);
-			exit(2);
+			exit(255);
 		}
 		if (cmd[2])
 		{

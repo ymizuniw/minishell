@@ -38,7 +38,7 @@
 # define TOKEN_VALUE_HEREDOC "<<"
 # define TOKEN_VALUE_APPEND ">>"
 
-void rl_replace_line (const char *text, int clear_undo);
+void				rl_replace_line(const char *text, int clear_undo);
 
 typedef struct s_env
 {
@@ -133,6 +133,7 @@ typedef struct s_argv
 {
 	char			*word;
 	bool			to_expand;
+	bool to_wildcard_expand; // has_quote.
 	struct s_argv	*next;
 }					t_argv;
 

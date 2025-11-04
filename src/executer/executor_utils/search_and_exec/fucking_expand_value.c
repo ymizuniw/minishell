@@ -107,13 +107,57 @@ char	*expand_word(char *word, t_shell *shell)
 	return (expanded ? expanded : strdup(""));
 }
 
+size_t	count_wild(t_wildcard *wild)
+{
+	size_t	i;
+
+	i = 0;
+	while (wild)
+	{
+		if (wild->expeand)
+		{
+			i++;
+		}
+		wild = wild->next;
+	}
+	return (i);
+}
+
+size_t	has_wildcard(t_argv *argv_list)
+{
+	t_argv		*cur;
+	size_t		total;
+	t_wildcard	*wild;
+
+	total = 0;
+	cur = argv_list;
+	while (cur)
+	{
+		if (strchr(cur->word, '*'))
+		{
+			wild = expand_wildcard(cur->word, "."); // shell->pwdから取ったほうがいい？
+			if (wild)
+			{
+				total += count_wild(wild);
+				free_wildcard_list(wild);
+			}
+		}
+		cur = cur->next;
+	}
+	return (total);
+}
+
 char	**gen_argv(t_argv *argv_list, t_shell *shell)
 {
-	t_argv	*cur_argv;
-	size_t	argv_idx;
-	size_t	list_len;
-	char	**argv;
+	t_argv		*cur_argv;
+	size_t		argv_idx;
+	size_t		list_len;
+	char		**argv;
+	size_t		i;
+	t_wildcard	*wild;
+	char		*expanded;
 
+	i = 0;
 	argv_idx = 0;
 	argv = NULL;
 	if (argv_list == NULL)
@@ -125,18 +169,37 @@ char	**gen_argv(t_argv *argv_list, t_shell *shell)
 		list_len++;
 		cur_argv = cur_argv->next;
 	}
+	if (i = has_wildcard(argv_list))
+		list_len = list_len + i;
 	argv = malloc(sizeof(char *) * (list_len + 1));
 	if (!argv)
 		return (NULL);
 	cur_argv = argv_list;
 	argv_idx = list_len;
+	// wild = expand_wildcard(cur_argv->word, shell->pwd);
 	while (cur_argv != NULL)
 	{
 		argv_idx--;
+		expanded = NULL;
 		if (cur_argv->to_expand == true)
-			argv[argv_idx] = expand_word(cur_argv->word, shell);
+			expanded = expand_word(cur_argv->word, shell);
 		else
-			argv[argv_idx] = strdup(cur_argv->word);
+			expanded = strdup(cur_argv->word);
+		if (strchr(expanded, '*') && cur_argv->to_wildcard_expand == true)
+		{
+			wild = expand_wildcard(expanded, shell->pwd);
+			for (t_wildcard *cur = wild; cur; cur = cur->next)
+			{
+				if (cur->expand)
+					argv[argv_idx++] = strdup(cur->name);
+			}
+			free_wildcard_list(wild);
+			free(expanded);
+		}
+		else
+		{
+			argv[argv_idx++] = expanded;
+		}
 		cur_argv = cur_argv->next;
 	}
 	argv[list_len] = NULL;
