@@ -2,7 +2,7 @@
 
 bool	is_numeric(const char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (!str)
@@ -35,29 +35,36 @@ void	print_err_args(void)
 	write(2, msg, strlen(msg));
 }
 
-void	ft_exit(char **cmd)
+static void	exit_with_error(t_shell *shell, int code, bool print_num_err,
+		char **cmd)
+{
+	if (shell->interactive)
+	{
+		if (print_num_err)
+			print_err_num(cmd);
+		else
+			print_err_args();
+	}
+	free_shell(shell);
+	exit(code);
+}
+
+void	ft_exit(char **cmd, int last_exit_status, t_shell *shell)
 {
 	int	exit_code;
 
-	exit_code = 0;
-	printf("exit\n");
-	if (cmd[1])
+	if (shell->interactive)
+		printf("exit\n");
+	if (cmd && cmd[1] && cmd[1][0] != '\0')
 	{
-		// cmd[1] が数値かどうか確認
 		if (!is_numeric(cmd[1]))
-		{
-			print_err_num(cmd); // "exit: <arg>: numeric argument required"
-			exit(2);            // 数字でない場合は 2 で終了
-		}
-		// cmd[2] があれば、複数引数と見なしてエラー
+			exit_with_error(shell, 2, true, cmd);
 		if (cmd[2])
-		{
-			print_err_args(); // "exit: too many arguments"
-			exit(2);          // 複数引数の場合は 2 で終了
-		}
-		// 数字が一つだけ来た場合、そのまま返す（256で割った余り）
+			exit_with_error(shell, 2, false, cmd);
 		exit_code = atoi(cmd[1]);
+		free_shell(shell);
 		exit(exit_code % 256);
 	}
-	exit(0);
+	free_shell(shell);
+	exit(last_exit_status);
 }

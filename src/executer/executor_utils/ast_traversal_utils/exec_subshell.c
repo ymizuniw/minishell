@@ -1,26 +1,25 @@
 #include "../../../../includes/minishell.h"
 
-// fork() and call ast_traversal for subtree. is execute flag is false,
-// call ast_traversal with execute flag is false.
-int	exec_subshell(t_ast *node, t_shell *shell, bool execute)
+int	exec_subshell(t_ast *node, t_shell *shell)
 {
-	int		status;
 	pid_t	pid;
 
-	status = 0;
 	pid = fork();
 	if (pid < 0)
 	{
 		perror("fork");
+		shell->last_exit_status = 1;
 		return (1);
 	}
 	if (pid == 0)
 	{
+		set_sig_dfl();
+		if (node->cmd && node->cmd->redir)
+			do_redirection(node, shell);
 		if (node && node->subtree)
-			return (ast_traversal(node->subtree, shell, execute));
-		else
-			return (0);
+			ast_traversal(node->subtree, shell);
+		exit(shell->last_exit_status);
 	}
-	handle_child(&status, pid);
+	handle_child(&shell->last_exit_status, pid);
 	return (0);
 }

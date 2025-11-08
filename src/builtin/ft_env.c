@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-void	ft_env(t_shell *shell, char **cmd)
+int	ft_env(t_shell *shell, char **cmd)
 {
 	t_env	*current;
 
@@ -9,7 +9,7 @@ void	ft_env(t_shell *shell, char **cmd)
 		write(2, "env: '", 6);
 		write(2, cmd[1], strlen(cmd[1]));
 		write(2, "': No such file or directory\n", 30);
-		exit(127);
+		return (127);
 	}
 	current = shell->env_list;
 	while (current)
@@ -23,4 +23,5 @@ void	ft_env(t_shell *shell, char **cmd)
 		}
 		current = current->next;
 	}
+	return (0);
 }

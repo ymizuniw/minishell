@@ -1,32 +1,24 @@
 #include "../../includes/minishell.h"
 
-void	ft_cd(char **cmd, t_shell *shell, int fd)
+static char	*get_target_dir(char **cmd, t_shell *shell)
 {
-	char	*target_dir;
-	char	*new_pwd;
 	t_env	*home_var;
 
-	if (count_token(cmd) > 2)
+	if (cmd[1])
+		return (cmd[1]);
+	home_var = find_env(shell->env_list, "HOME");
+	if (!home_var)
 	{
-		write(fd, "cd: too many arguments\n", 23);
-		return ;
+		write(STDOUT_FILENO, "cd: HOME not set\n", 17);
+		return (NULL);
 	}
-	target_dir = cmd[1];
-	if (!target_dir)
-	{
-		home_var = find_env(shell->env_list, "HOME");
-		if (!home_var)
-		{
-			write(fd, "cd: HOME not set\n", 17);
-			return ;
-		}
-		target_dir = home_var->value;
-	}
-	if (chdir(target_dir) == -1)
-	{
-		perror("cd");
-		return ;
-	}
+	return (home_var->value);
+}
+
+static void	update_pwd(t_shell *shell)
+{
+	char	*new_pwd;
+
 	set_variable(shell, "OLDPWD", shell->pwd, 1);
 	new_pwd = get_pwd();
 	if (new_pwd)
@@ -35,4 +27,25 @@ void	ft_cd(char **cmd, t_shell *shell, int fd)
 		xfree(shell->pwd);
 		shell->pwd = new_pwd;
 	}
+}
+
+int	ft_cd(char **cmd, t_shell *shell)
+{
+	char	*target_dir;
+
+	if (count_token(cmd) > 2)
+	{
+		write(STDOUT_FILENO, "cd: too many arguments\n", 23);
+		return (1);
+	}
+	target_dir = get_target_dir(cmd, shell);
+	if (!target_dir)
+		return (1);
+	if (chdir(target_dir) == -1)
+	{
+		perror("cd");
+		return (1);
+	}
+	update_pwd(shell);
+	return (0);
 }

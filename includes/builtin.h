@@ -1,18 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/16 02:05:22 by kemotoha          #+#    #+#             */
+/*   Updated: 2025/11/04 22:44:46 by ymizuniw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
 # include "minishell_types.h"
 
-bool	is_builtin(const char *cmd);
 char	*get_pwd(void);
+int		count_token(char **tokens);
+int		is_valid_varname(const char *var);
+char	*extract_key(const char *str);
+char	*extract_value(const char *str);
 
-void	ft_builtin(t_shell *shell, char **cmd);
-void	ft_echo(char **cmd);
-void	ft_cd(char **cmd, t_shell *shell, int fd);
-void	ft_pwd(t_shell *shell, int fd);
-void	ft_export(t_shell *shell, char **cmd, int fd);
-void	ft_unset(t_shell *shell, char **cmd);
-void	ft_env(t_shell *shell, char **cmd);
-void	ft_exit(char **cmd);
+void	set_variable(t_shell *shell, char *key, char *value, int exported);
+t_env	*find_env(t_env *env_list, const char *key);
+
+void	exec_builtin(t_shell *shell, char **cmd);
+void	run_builtin(t_shell *shell, char **cmd);
+int		ft_echo(char **cmd);
+int		ft_cd(char **cmd, t_shell *shell);
+int		ft_pwd(t_shell *shell, int fd);
+int		ft_export(t_shell *shell, char **cmd, int fd);
+int		ft_unset(t_shell *shell, char **cmd);
+int		ft_env(t_shell *shell, char **cmd);
+void	ft_exit(char **cmd, int last_exit_status, t_shell *shell);
+
+size_t	ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
+int		ft_strcmp(const char *s1, const char *s2);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+char	**ft_split(char const *s, char c);
+
+char	*find_command_path(t_shell *shell, char *cmd);
+// void				run_external_cmd(t_shell *shell, char **cmd_args);
+char	*get_env_value(t_env *env_list, const char *key);
+void	search_in_path_and_exec(t_shell *shell, char **cmd_args);
+void	search_and_exec(t_shell *shell, char **cmd_args);
+char	**generate_envp(t_env *env_list);
+bool	is_builtin(const char *cmd);
 
 #endif

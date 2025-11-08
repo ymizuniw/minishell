@@ -7,21 +7,32 @@
 # include <ctype.h> //isspace()->rem
 # include <dirent.h>
 # include <fcntl.h> //open()
-# include <readline/history.h>
-# include <readline/readline.h>
+# include <limits.h>
+// # include <readline/history.h>
+// # include <readline/readline.h>
 # include <signal.h>
 # include <stdbool.h>
 # include <stdio.h>   //printf()
 # include <stdlib.h>  //malloc()
 # include <string.h>  //strncpy()->rem
 # include <strings.h> //bzero()
+# include <sys/ioctl.h>
+# include <sys/stat.h>
+# include <sys/types.h>
 # include <sys/wait.h>
+# include <termios.h>
 # include <unistd.h> //write()
 
 // heredoc pipe capacity from system default size.
 # define HERE_PIPE_SIZE 4096
 // HEREDOC TMPFILE'S TEMPLATE
-# define HERE_TEMPLATE "/tmp/heredoc_tmp_XXXXX"
+// # define HERE_TEMPLATE "/tmp/heredoc_tmp_XXXXX"
+# define HIST_MAX 1000
+
+// ECHOCTL value is depending on executing evironment.
+# ifndef ECHOCTL
+#  define ECHOCTL 0001000
+# endif
 
 # define SYNTAX_ERR_TEMPLATE "minishell: syntax error near unexpected token `"
 # define SYNTAX_ERR_TEMPLATE_LEN 47
@@ -36,6 +47,15 @@
 # define TOKEN_VALUE_HEREDOC "<<"
 # define TOKEN_VALUE_APPEND ">>"
 
+void				rl_replace_line(const char *text, int clear_undo);
+
+typedef struct s_hist
+{
+	size_t			idx;
+	size_t			size;
+	char			*hist[HIST_MAX];
+}					t_hist;
+
 typedef struct s_env
 {
 	char			*key;
@@ -43,15 +63,6 @@ typedef struct s_env
 	int				exported;
 	struct s_env	*next;
 }					t_env;
-
-typedef struct s_shell
-{
-	bool			interactive;
-	int				last_exit_status;
-	t_env			*env_list;
-	// t_command_hash *cmd_hash;
-	char			*pwd;
-}					t_shell;
 
 typedef enum e_metachar
 {
@@ -76,7 +87,6 @@ typedef enum e_token_type
 	TK_PIPE,
 	TK_REDIRECT_IN,
 	TK_REDIRECT_OUT,
-	TK_REDIRECT_IN_AND_OUT,
 	TK_HEREDOC,
 	TK_APPEND,
 	TK_AND_IF,
@@ -107,7 +117,6 @@ typedef enum e_node_type
 	NODE_OR,
 	NODE_SUBSHELL
 }					t_node_type;
-
 typedef enum e_redir_type
 {
 	REDIR_IN,
@@ -116,7 +125,6 @@ typedef enum e_redir_type
 	REDIR_HEREDOC,
 	REDIR_OTHER
 }					t_redir_type;
-
 typedef struct s_redir
 {
 	t_redir_type	type;
@@ -134,10 +142,18 @@ typedef struct s_argv
 
 typedef struct s_cmd
 {
+	t_argv			*argv_list;
 	char			**argv;
-	// t_argv *argv_list;
 	t_redir			*redir;
 }					t_cmd;
+
+typedef struct s_fd
+{
+	int				stdin_backup;
+	int				stdout_backup;
+	int				pipe_write;
+	int				pipe_read;
+}					t_fd;
 
 typedef struct s_ast
 {
@@ -146,13 +162,47 @@ typedef struct s_ast
 	struct s_ast	*left;
 	t_node_type		type;
 	t_cmd			*cmd;
+	t_fd			open_fds;
 	struct s_ast	*right;
 }					t_ast;
+
+typedef struct s_save_fd
+{
+	int				stdin_fileno;
+	int				stdout_fileno;
+}					t_save_fd;
+
+typedef struct s_shell
+{
+	bool			interactive;
+	bool			in_pipe_child;
+	int				last_exit_status;
+	t_env			*env_list;
+	// t_command_hash *cmd_hash;
+	t_save_fd		fds;
+	char			*pwd;
+	t_ast			*root;
+	t_token			*token_list;
+	char			*line_ptr;
+}					t_shell;
 
 typedef struct s_result
 {
 	t_ast			*root;
 	int				exit_code;
 }					t_result;
+
+typedef struct s_heredoc_ctx
+{
+	size_t			i;
+	t_shell			*shell;
+}					t_heredoc_ctx;
+
+typedef struct s_heredoc_params
+{
+	char			*delim;
+	bool			delim_quoted;
+	t_shell			*shell;
+}					t_heredoc_params;
 
 #endif

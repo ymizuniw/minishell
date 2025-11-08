@@ -52,30 +52,58 @@ char	*extract_value(const char *str)
 	return (strdup(equal_sign + 1));
 }
 
+static int	update_existing_var(t_env *current, char *value, int exported)
+{
+	char	*dup;
+
+	dup = strdup(value);
+	if (!dup)
+		return (0);
+	xfree(current->value);
+	current->value = dup;
+	if (exported)
+		current->exported = 1;
+	return (1);
+}
+
+static t_env	*create_new_env(char *key, char *value, int exported)
+{
+	t_env	*new;
+
+	new = xmalloc(sizeof(t_env));
+	if (!new)
+		return (NULL);
+	new->key = strdup(key);
+	if (!new->key)
+		return (xfree(new), NULL);
+	new->value = strdup(value);
+	if (!new->value)
+		return (xfree(new->key), xfree(new), NULL);
+	new->exported = exported;
+	new->next = NULL;
+	return (new);
+}
+
 void	set_variable(t_shell *shell, char *key, char *value, int exported)
 {
 	t_env	*current;
 	t_env	*new;
 
+	if (!shell || !key || !value)
+		return ;
 	current = shell->env_list;
 	while (current)
 	{
 		if (strncmp(current->key, key, strlen(key) + 1) == 0)
 		{
-			xfree(current->value);
-			current->value = strdup(value);
-			if (exported)
-				current->exported = 1;
+			update_existing_var(current, value, exported);
 			return ;
 		}
 		current = current->next;
 	}
-	new = xmalloc(sizeof(t_env));
+	new = create_new_env(key, value, exported);
 	if (!new)
 		return ;
-	new->key = strdup(key);
-	new->value = strdup(value);
-	new->exported = exported;
 	new->next = shell->env_list;
 	shell->env_list = new;
 }

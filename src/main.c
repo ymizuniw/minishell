@@ -1,81 +1,153 @@
 #include "../includes/minishell.h"
 
-char	*ft_readline(char const *prompt, bool interactive)
+static void	exec_one_ast(t_ast *ast, t_shell *shell)
 {
-	char	*line;
+	t_result	*res;
 
-	line = NULL;
-	if (interactive == true)
+	if (!ast)
+		return ;
+	shell->root = ast;
+	res = executor(ast, shell);
+	if (res)
 	{
-		line = readline(prompt);
-		return (line);
+		shell->last_exit_status = res->exit_code;
+		free_result(res);
 	}
-	// line = get_next_line(0);
-	return (line);
+	free_ast_tree(ast);
+	shell->root = NULL;
 }
 
-
-int parse_and_exec(char const*line, t_token *token_list, t_shell *shell)
+static int	check_syntax_errors(t_token *token_list, t_shell *shell)
 {
-	t_ast **ast_list = NULL;
-	t_ast *ast= NULL;
-	t_result *res = NULL;
-	size_t ast_count = 0;
-	t_token *cur = token_list;
+	t_token	*cur;
 
+	cur = token_list->next;
 	while (cur && cur->type != TK_EOF)
 	{
-		ast = parser(&cur);
-		if (!ast)
-			continue;
-		ast_list = realloc(ast_list, sizeof(t_ast *) * (ast_count + 1));
-		ast_list[ast_count++] = ast;
-		while (cur && cur->type == TK_NEWLINE)
-			cur = cur->next;
+		if (token_is_operator(cur->type) || token_is_redirection(cur->type))
+		{
+			if (!syntax_check(cur))
+			{
+				syntax_error(cur->type);
+				shell->last_exit_status = 2;
+				return (0);
+			}
+		}
+		cur = cur->next;
 	}
-	size_t i = 0;
-	while (i < cur->count_newline)
+	return (1);
+}
+
+static t_token	*skip_to_command(t_token *token_list)
+{
+	t_token	*cur;
+
+	cur = token_list;
+	while (cur->type == TK_HEAD || cur->type == TK_NEWLINE)
 	{
-		res = executor(ast_list[i], shell);
-		free_ast_tree(ast_list[i]);
-		free_result(res);
-		i++;
+		cur = cur->next;
+		if (cur->type == TK_EOF)
+			return (NULL);
 	}
-	xfree(ast_list);
+	return (cur);
+}
+
+int	parse_and_exec(t_token *token_list, t_shell *shell)
+{
+	t_token	*cur;
+	t_ast	*ast;
+	int		paren_check;
+
+	if (!token_list || !shell)
+		return (0);
+	paren_check = check_parenthesis_balance(token_list);
+	if (paren_check > 0)
+		return (write(2,
+				"minishell: syntax error: unexpected EOF while looking for matching ')'\n",
+				72), shell->last_exit_status = 2, 0);
+	if (paren_check < 0)
+		return (write(2, "minishell: syntax error near unexpected token ')'\n",
+				50), shell->last_exit_status = 2, 0);
+	if (!check_syntax_errors(token_list, shell))
+		return (0);
+	cur = skip_to_command(token_list);
+	if (!cur)
+		return (1);
+	ast = parser(&cur);
+	if (!ast)
+		return (shell->last_exit_status = 2, 0);
+	exec_one_ast(ast, shell);
+	return (1);
+}
+
+static void	process_line(char *line, t_shell *shell, t_hist *hist)
+{
+	t_token	*token_list;
+
+	if (shell->interactive)
+		add_history(line, hist);
+	token_list = lexer(line);
+	shell->line_ptr = line;
+	shell->token_list = token_list;
+	parse_and_exec(token_list, shell);
+	if (g_signum == SIGINT)
+		write(1, "\n", 1);
+	if (shell->token_list)
+	{
+		free_token_list(shell->token_list);
+		shell->token_list = NULL;
+	}
 }
 
 int	shell_loop(t_shell *shell)
 {
-	char		*line;
-	t_token		*token_list;
-	t_ast		*ast;
-	t_result	*res;
+	char			*line;
+	char const		*prompt;
+	static t_hist	hist;
 
-	line = NULL;
-	token_list = NULL;
-	ast = NULL;
+	prompt = "minishell$ ";
 	while (1)
 	{
-		line = ft_readline("minishell$ ", shell->interactive);
+		g_signum = 0;
+		line = ft_readline(prompt, &hist);
+		if (g_signum == SIGINT)
+		{
+			shell->last_exit_status = 130;
+			g_signum = 0;
+			continue ;
+		}
 		if (!line)
 		{
-			printf("exit\n");
+			if (shell->interactive)
+				printf("exit\n");
 			break ;
 		}
-		if (shell->interactive && *line)
-			add_history(line);
-		token_list = lexer(line);
-		parse_and_exec(line, token_list, shell);
+		if (line && *line == '\0')
+		{
+			xfree(line);
+			continue ;
+		}
+		process_line(line, shell, &hist);
 		xfree(line);
-		if (token_list)
-			free_token_list(token_list);
+		shell->line_ptr = NULL;
 	}
 	return (0);
+}
+
+void	disable_echoctl(void)
+{
+	struct termios	term;
+
+	if (tcgetattr(STDIN_FILENO, &term) == -1)
+		return ;
+	term.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
 int	main(int argc, char **argv, char **env)
 {
 	t_shell	shell;
+	char	*pwd;
 
 	(void)argc;
 	(void)argv;
@@ -84,7 +156,15 @@ int	main(int argc, char **argv, char **env)
 		shell.interactive = true;
 	signal_initializer(shell.interactive);
 	init_env_from_envp(&shell, env);
+	pwd = getcwd(NULL, 0);
+	if (pwd)
+	{
+		shell.pwd = pwd;
+		set_variable(&shell, "PWD", pwd, 1);
+	}
+	shell.last_exit_status = 0;
+	set_variable(&shell, "_", "/usr/bin/minishell", 1);
 	shell_loop(&shell);
-	free_env_list(shell.env_list);
-	return (0);
+	free_shell(&shell);
+	return (shell.last_exit_status);
 }

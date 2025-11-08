@@ -4,7 +4,11 @@ void	free_ast_tree(t_ast *p)
 {
 	t_ast	*cur;
 
+	if (!p)
+		return ;
 	cur = p;
+	if (cur->left == p || cur->right == p || cur->subtree == p)
+		return ;
 	if (cur->left != NULL)
 		free_ast_tree(cur->left);
 	if (cur->right != NULL)
@@ -23,63 +27,70 @@ void	free_subshell_tree(t_ast *p)
 
 void	free_token_list(t_token *p)
 {
-	if (p->next != NULL)
-		free_token_list(p->next);
-	if (p->type != TK_WORD)
-		xfree(p->value);
+	if (p == NULL)
+		return ;
+	free_token_list(p->next);
+	xfree(p->value);
 	xfree(p);
 }
 
-void	free_double_array_contents(char **p, char *p_content)
+void	free_double_array(char **p)
 {
-	int	i;
+	size_t	i;
 
-	if (!p)
+	if (p == NULL)
 		return ;
-	if (p_content)
-	{
-		// If entries point into a single contiguous block, free it once
-		xfree(p_content);
-		for (i = 0; p[i] != NULL; i++)
-			p[i] = NULL;
-		return ;
-	}
 	i = 0;
 	while (p[i] != NULL)
 	{
 		xfree(p[i]);
 		i++;
 	}
-}
-
-void	free_double_array(char **p)
-{
-	if (p != NULL)
-	{
-		free_double_array_contents(p, NULL);
-		xfree(p);
-	}
+	xfree(p);
 }
 
 void	free_redir_list(t_redir *p)
 {
-	if (p->next != NULL)
-		free_redir_list(p->next);
-	if (p->filename != NULL)
-		xfree(p->filename);
+	if (p == NULL)
+		return ;
+	free_redir_list(p->next);
+	xfree(p->filename);
 	xfree(p);
 }
 
 void	free_cmd_structure(t_cmd *p)
 {
-	if (p->argv != NULL)
-		free_double_array(p->argv);
+	free_double_array(p->argv);
 	if (p->redir != NULL)
 		free_redir_list(p->redir);
+	if (p->argv_list != NULL)
+		free_argv_list(p->argv_list);
 	xfree(p);
+}
+
+void	free_argv_list(t_argv *p)
+{
+	t_argv	*argv;
+
+	if (p == NULL)
+		return ;
+	argv = p;
+	if (argv->next)
+		free_argv_list(argv->next);
+	xfree(argv->word);
+	xfree(argv);
 }
 
 void	free_result(t_result *p)
 {
 	xfree(p);
+}
+
+void	free_shell(t_shell *shell)
+{
+	free_env_list(shell->env_list);
+	free_ast_tree(shell->root);
+	free_token_list(shell->token_list);
+	xfree(shell->line_ptr);
+	xfree(shell->pwd);
 }

@@ -9,10 +9,13 @@
 # include "minishell_types.h"
 # include "parser.h"
 # include "signal_management.h"
+//static definition needed.
 
 // main.c
+char *ft_readline(const char *prompt, t_hist *hist);
+void add_history(char *line, t_hist *hist);
+
 t_token		*lexer(const char *input);
-t_ast		*parser(t_token **tokens);
 t_result	*executor(t_ast *ast, t_shell *shell);
 
 #endif
