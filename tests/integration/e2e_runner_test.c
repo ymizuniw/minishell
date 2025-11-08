@@ -37,11 +37,12 @@ static void	destroy_shell(t_shell *shell)
 static char	*read_all_fd(int fd)
 {
 	char	buf[4096];
-	size_t	cap = 4096, len;
+	size_t	cap;
 	char	*out;
 	ssize_t	r;
 	char	*tmp;
 
+	cap = 4096, len;
 	cap = 4096, len = 0;
 	out = xmalloc(cap);
 	if (!out)
@@ -181,10 +182,11 @@ static int	assert_by_mode(cmp_t mode, const char *actual, const char *exp)
 
 static int	run_case(t_shell *sh, const test_case_t *tc)
 {
-	char	*out = NULL, *err;
+	char	*out;
 	int		rc;
 	int		ok;
 
+	out = NULL, *err;
 	out = NULL, err = NULL;
 	rc = -1;
 	run_line_once(sh, tc->line, &out, &err, &rc);
@@ -209,41 +211,44 @@ static int	run_case(t_shell *sh, const test_case_t *tc)
 	return (ok);
 }
 
-#define TC(name, line, sm, se, em, ee, st) \
+#define TC(name, line, sm, se, em, ee, st)
 
-	(test_case_t)                          \
-	{                                      \
-		name, line, sm, se, em, ee, st     \
-	}
+(test_case_t)
+{
+	name, line, sm, se, em, ee, st
+}
 
 int	main(void)
 {
 	char		tmpdir[] = "/tmp/ms_integ_XXXXXX";
-		char path[256];
+	char		path[256];
 	int			fd;
-	int			pass = 0, total;
-		t_shell sh;
-		t_shell sh;
-		t_shell sh;
-	char		*out = NULL, *err;
-			int rc;
+	int			pass;
+	t_shell		sh;
+	t_shell		sh;
+	t_shell		sh;
+	char		*out;
+	int			rc;
 	test_case_t	check;
 	int			ok;
-	char		*out = NULL, *err;
-			int rc;
+	char		*out;
+	int			rc;
 	int			ok;
-		t_shell sh;
-		t_shell sh;
-		char path[256];
+	t_shell		sh;
+	t_shell		sh;
+	char		path[256];
 	int			fd;
-			char buf[64];
+	char		buf[64];
 	ssize_t		r;
 	int			ok;
-		t_shell sh;
-			char line[64];
-			char exp[64];
+	t_shell		sh;
+	char		line[64];
+	char		exp[64];
 	test_case_t	t;
 
+	pass = 0, total;
+	out = NULL, *err;
+	out = NULL, *err;
 	// Prepare temp files
 	assert(mkdtemp(tmpdir) != NULL);
 	{
@@ -384,7 +389,7 @@ int	main(void)
 		destroy_shell(&sh);
 	}
 	// Simple repetition to reach ~100 patterns: echo variations, heredoc,
-		pipelines
+	pipelines
 	{
 		init_shell(&sh);
 		for (int i = 1; i <= 20; ++i)
