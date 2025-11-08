@@ -14,8 +14,9 @@
 // main.c
 char *ft_readline(const char *prompt, t_hist *hist);
 void add_history(char *line, t_hist *hist);
+void	free_hist_box(char *hist_box[HIST_MAX]);
 
 t_token		*lexer(const char *input);
-t_result	*executor(t_ast *ast, t_shell *shell);
+t_result	executor(t_ast *ast, t_shell *shell);
 
 #endif

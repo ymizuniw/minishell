@@ -7,8 +7,13 @@ void	exec_builtin(t_shell *shell, char **cmd)
 
 	fd = 1;
 	ret = 0;
-	if (!cmd || !shell)
+	if (!cmd && shell)
 		ft_exit(cmd, shell->last_exit_status, shell);
+	else if (!shell)
+	{
+		write(2, "fatal\n", 6);
+		exit(1);
+	}
 	if (strcmp(cmd[0], "echo") == 0)
 		ret = ft_echo(cmd);
 	else if (strcmp(cmd[0], "cd") == 0)

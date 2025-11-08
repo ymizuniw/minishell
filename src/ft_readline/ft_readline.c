@@ -124,24 +124,15 @@ char	*ft_readline(const char *prompt, t_hist *hist)
 /* --- history --- */
 void	add_history(char *line, t_hist *hist)
 {
-	char	**hist_box;
-	size_t	idx;
-	size_t	size;
-
-	hist_box = hist->hist;
-	idx = hist->idx;
-	size = hist->size;
-	if (hist_box[idx] != NULL)
-		free(hist_box[idx]);
-	hist_box[idx] = strdup(line);
-	idx = (idx + 1) % HIST_MAX;
-	if (size < HIST_MAX)
-		size++;
-	hist->idx = idx;
-	hist->size = size;
+	if (hist->hist_box[hist->idx] != NULL)
+		free(hist->hist_box[hist->idx]);
+	hist->hist_box[hist->idx] = strdup(line);
+	hist->idx = (hist->idx + 1) % HIST_MAX;
+	if (hist->size < HIST_MAX)
+		hist->size++;
 }
 
-void	free_hist(char *hist_box[HIST_MAX])
+void	free_hist_box(char *hist_box[HIST_MAX])
 {
 	size_t	i;
 

@@ -53,7 +53,7 @@ typedef struct s_hist
 {
 	size_t			idx;
 	size_t			size;
-	char			*hist[HIST_MAX];
+	char			*hist_box[HIST_MAX];
 }					t_hist;
 
 typedef struct s_env
@@ -172,6 +172,12 @@ typedef struct s_save_fd
 	int				stdout_fileno;
 }					t_save_fd;
 
+typedef struct s_result
+{
+	t_ast			*root;
+	int				exit_code;
+}					t_result;
+
 typedef struct s_shell
 {
 	bool			interactive;
@@ -179,18 +185,15 @@ typedef struct s_shell
 	int				last_exit_status;
 	t_env			*env_list;
 	// t_command_hash *cmd_hash;
-	t_save_fd		fds;
 	char			*pwd;
 	t_ast			*root;
 	t_token			*token_list;
 	char			*line_ptr;
+	t_hist 			*hist;
+	t_result		res;
 }					t_shell;
 
-typedef struct s_result
-{
-	t_ast			*root;
-	int				exit_code;
-}					t_result;
+
 
 typedef struct s_heredoc_ctx
 {

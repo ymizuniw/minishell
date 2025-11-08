@@ -10,9 +10,7 @@ int	handle_quotation(char **word, size_t word_len, char const *input,
 	if (input[*idx + 1])
 		quote_close = strchr(&input[*idx + 1], quote_open);
 	if (!quote_close)
-	{
 		return (0);
-	}
 	add_len = quote_close - &input[*idx] - 1;
 	*word = realloc(*word, sizeof(char) * (word_len + add_len + 1));
 	if (!*word)

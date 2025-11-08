@@ -2,17 +2,19 @@
 
 static void	exec_one_ast(t_ast *ast, t_shell *shell)
 {
-	t_result	*res;
+	t_result	res;
 
 	if (!ast)
 		return ;
+	memset(&res, 0, sizeof(t_result));
 	shell->root = ast;
 	res = executor(ast, shell);
-	if (res)
-	{
-		shell->last_exit_status = res->exit_code;
-		free_result(res);
-	}
+	// if (res)
+	// {
+	// 	shell->last_exit_status = res->exit_code;
+	// 	free_result(res);
+	// }
+	shell->last_exit_status = res.exit_code;
 	free_ast_tree(ast);
 	shell->root = NULL;
 }
@@ -105,6 +107,7 @@ int	shell_loop(t_shell *shell)
 	char const		*prompt;
 	static t_hist	hist;
 
+	shell->hist = &hist;
 	prompt = "minishell$ ";
 	while (1)
 	{
@@ -114,6 +117,7 @@ int	shell_loop(t_shell *shell)
 		{
 			shell->last_exit_status = 130;
 			g_signum = 0;
+			xfree(line);
 			continue ;
 		}
 		if (!line)

@@ -7,8 +7,8 @@ void	free_ast_tree(t_ast *p)
 	if (!p)
 		return ;
 	cur = p;
-	if (cur->left == p || cur->right == p || cur->subtree == p)
-		return ;
+	// if (cur->left == p || cur->right == p || cur->subtree == p)
+	// 	return ;
 	if (cur->left != NULL)
 		free_ast_tree(cur->left);
 	if (cur->right != NULL)
@@ -88,9 +88,20 @@ void	free_result(t_result *p)
 
 void	free_shell(t_shell *shell)
 {
+	free_hist_box(shell->hist->hist_box);
 	free_env_list(shell->env_list);
 	free_ast_tree(shell->root);
 	free_token_list(shell->token_list);
 	xfree(shell->line_ptr);
 	xfree(shell->pwd);
+}
+
+void	free_env_list(t_env *env_list)
+{
+	if (env_list == NULL)
+		return ;
+	free_env_list(env_list->next);
+	xfree(env_list->key);
+	xfree(env_list->value);
+	xfree(env_list);
 }
