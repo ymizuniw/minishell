@@ -303,10 +303,7 @@ void	fgen_tree(t_ast **parent, t_token **cur_token)
 		*parent = op_node;
 	}
 	else
-	{
-		// No operator, just return the node
 		*parent = node;
-	}
 }
 
 t_ast	*parse(t_token *token_head)
