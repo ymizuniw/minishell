@@ -8,10 +8,12 @@ static void	restore_stdio(int stdin_keep, int stdout_keep)
 	close(stdout_keep);
 }
 
-static int	handle_redirection_error(t_ast *node, int stdin_k, int stdout_k)
+static int	handle_redirection_error(t_ast *node, int stdin_k, int stdout_k,
+		t_shell *shell)
 {
 	if (node->cmd->redir && node->cmd->redir->filename)
 		perror(node->cmd->redir->filename);
+	shell->last_exit_status = 1;
 	restore_stdio(stdin_k, stdout_k);
 	return (1);
 }
@@ -56,7 +58,7 @@ int	exec_command(t_ast *node, t_shell *shell)
 		return (-1);
 	redir_ret = do_redirection(node, shell);
 	if (redir_ret < 0)
-		return (handle_redirection_error(node, fds[0], fds[1]));
+		return (handle_redirection_error(node, fds[0], fds[1], shell));
 	process_command(node, shell, fds);
 	restore_stdio(fds[0], fds[1]);
 	return (0);

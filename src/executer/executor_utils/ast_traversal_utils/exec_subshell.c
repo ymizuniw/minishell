@@ -15,7 +15,10 @@ int	exec_subshell(t_ast *node, t_shell *shell)
 	{
 		set_sig_dfl();
 		if (node->cmd && node->cmd->redir)
-			do_redirection(node, shell);
+		{
+			if (do_redirection(node, shell) < 0)
+				exit(shell->last_exit_status);
+		}
 		if (node && node->subtree)
 			ast_traversal(node->subtree, shell);
 		exit(shell->last_exit_status);

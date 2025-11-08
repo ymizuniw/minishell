@@ -11,13 +11,13 @@ static int	check_lparen(t_token *token)
 static int	check_redirection(t_token *token)
 {
 	t_token	*prev;
-	// t_token	*next;
 
+	// t_token	*next;
 	if (token->prev)
 		prev = token->prev;
 	else
 		return (0);
-	if (!token_is_command(prev->type))//token_is_word.
+	if (!token_is_command(prev->type)) // token_is_word.
 		return (0);
 	/* Check if next token (filename) exists and is valid ->SUSPECIOUS**/
 	// if (!token->next)
@@ -28,7 +28,7 @@ static int	check_redirection(t_token *token)
 	/* Reject special characters as filenames ->SUSPECIOUS*/
 	// if (next->value && (strcmp(next->value, "&") == 0 || strcmp(next->value,
 	// 			"|") == 0 || strcmp(next->value, ";") == 0))
-		// return (0);
+	// return (0);
 	return (1);
 }
 
@@ -44,9 +44,10 @@ static int	check_operator(t_token *token)
 	}
 	else
 		return (0);
-	//word or ) && word or (
-	if ((token_is_command(prev->type) || token_is_redirection(prev->type) || prev->type == TK_LPAREN)
-		&& (token_is_command(next->type) || token_is_redirection(next->type) || next->type == TK_RPAREN))
+	// word or ) && word or (
+	if ((token_is_command(prev->type) || token_is_redirection(prev->type)
+			|| prev->type == TK_LPAREN) && (token_is_command(next->type)
+			|| token_is_redirection(next->type) || next->type == TK_RPAREN))
 		return (1);
 	return (0);
 }

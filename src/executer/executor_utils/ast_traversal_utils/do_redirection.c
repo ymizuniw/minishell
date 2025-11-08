@@ -50,18 +50,18 @@ int	do_redirection(t_ast *node, t_shell *shell)
 	t_redir	*cur;
 
 	if (!node || !node->cmd)
-		return (-1);
+		return (shell->last_exit_status = 1, -1);
 	cur = node->cmd->redir;
 	while (cur != NULL)
 	{
 		if (cur->type == REDIR_IN && handle_redir_in(cur) < 0)
-			return (-1);
+			return (shell->last_exit_status = 1, -1);
 		else if (cur->type == REDIR_HEREDOC && do_redirect_heredoc(cur,
 				shell) < 0)
-			return (-1);
+			return (shell->last_exit_status = 1, -1);
 		else if ((cur->type == REDIR_OUT || cur->type == REDIR_APPEND)
 			&& handle_redir_out(cur) < 0)
-			return (-1);
+			return (shell->last_exit_status = 1, -1);
 		cur = cur->next;
 	}
 	return (0);
