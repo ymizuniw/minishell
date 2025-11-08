@@ -178,3 +178,9 @@ tests: $(TEST_BINS)
 
 smoketests: $(SMOKE_BINS)
 	@echo "Built $(words $(SMOKE_BINS)) smoke test binaries into $(TEST_BIN_DIR)"
+
+# Integration tests (non-interactive harness)
+.PHONY: integration-tests
+integration-tests: $(NAME)
+	@echo "Running integration tests (Bash harness)"
+	@bash tests/integration/integration_tests.sh || exit 1
