@@ -58,27 +58,28 @@ void	free_redir_list(t_redir *p)
 	xfree(p);
 }
 
-void	free_cmd_structure(t_cmd *p)
+void	free_word_list(t_word *p)
 {
-	free_double_array(p->argv);
-	if (p->redir != NULL)
-		free_redir_list(p->redir);
-	if (p->argv_list != NULL)
-		free_argv_list(p->argv_list);
-	xfree(p);
-}
-
-void	free_argv_list(t_argv *p)
-{
-	t_argv	*argv;
+	t_word	*argv;
 
 	if (p == NULL)
 		return ;
 	argv = p;
 	if (argv->next)
-		free_argv_list(argv->next);
+		free_word_list(argv->next);
 	xfree(argv->word);
 	xfree(argv);
+}
+
+// implement free_word_lsit(t_word *word);
+void	free_cmd_structure(t_cmd *p)
+{
+	free_double_array(p->argv);
+	if (p->redir != NULL)
+		free_redir_list(p->redir);
+	if (p->word_list != NULL)
+		free_word_list(p->word_list);
+	xfree(p);
 }
 
 void	free_result(t_result *p)

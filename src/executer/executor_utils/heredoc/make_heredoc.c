@@ -1,39 +1,21 @@
 #include "../../../../includes/minishell.h"
 
-char	*ext_unit(char *src, size_t start, size_t end)
-{
-	char	*unit;
-	size_t	len;
-
-	len = end - start;
-	unit = xmalloc(sizeof(char) * (len + 1));
-	if (unit == NULL)
-		return (NULL);
-	strncpy(unit, &src[start], len);
-	unit[len] = '\0';
-	return (unit);
-}
-
-int	join_value(char **res, const char *value, size_t size1, size_t size2)
-{
-	*res = realloc(*res, sizeof(char) * (size1 + size2 + 1));
-	if (*res == NULL)
-		return (0);
-	strncpy(*res + size1, value, size2);
-	(*res)[size1 + size2] = '\0';
-	return (1);
-}
-
 static char	*expand_exit_status(char **res, t_shell *shell, size_t *i)
 {
 	char	*s;
 
 	s = ft_itoa(shell->last_exit_status);
 	if (!s)
-		return (free(*res), NULL);
-	if (!join_value(res, s, strlen(*res), strlen(s)))
-		return (free(s), free(*res), NULL);
-	free(s);
+		return (xfree(*res), NULL);
+	size_t res_len=0;
+	size_t s_len = 0;
+	if (*res)
+		res_len = strlen(*res);
+	if (s)
+		s_len = strlen(s);
+	if (!join_value(res, s, res_len, s_len))
+		return (xfree(s), xfree(*res), NULL);
+	xfree(s);
 	*i += 2;
 	return (*res);
 }
@@ -52,12 +34,18 @@ static char	*expand_variable(char **res, const char *line, size_t len,
 		ctx->i++;
 	varname = ext_unit((char *)line, start, ctx->i);
 	if (!varname)
-		return (free(*res), NULL);
+		return (xfree(*res), NULL);
 	env_entry = find_env(ctx->shell->env_list, varname);
 	val = env_entry && env_entry->value ? env_entry->value : "";
-	if (!join_value(res, val, strlen(*res), strlen(val)))
-		return (free(varname), free(*res), NULL);
-	return (free(varname), *res);
+	size_t res_len = 0;
+	size_t val_len = 0;
+	if (res)
+		res_len = strlen(*res);
+	if (val)
+		val_len = strlen(val);
+	if (!join_value(res, val,res_len, val_len))
+		return (xfree(varname), xfree(*res), NULL);
+	return (xfree(varname), *res);
 }
 
 static char	*heredoc_value_expansion(const char *line, bool in_quote,
@@ -88,8 +76,11 @@ static char	*heredoc_value_expansion(const char *line, bool in_quote,
 		{
 			tmp[0] = line[ctx.i++];
 			tmp[1] = '\0';
-			if (!join_value(&res, tmp, strlen(res), 1))
-				return (free(res), NULL);
+			size_t res_len = 0;
+			if (res)
+				res_len = strlen(res);
+			if (!join_value(&res, tmp, res_len, 1))
+				return (xfree(res), NULL);
 		}
 	}
 	return (res);
@@ -98,13 +89,21 @@ static char	*heredoc_value_expansion(const char *line, bool in_quote,
 static int	process_heredoc_line(char **document, size_t *document_len,
 		char *line, t_heredoc_params *params)
 {
-	char	*value;
+	char	*value=NULL;
 
-	value = heredoc_value_expansion(line, params->delim_quoted, strlen(line),
+	size_t line_len = 0;
+	size_t value_len = 0;
+	if (line)
+		line_len = strlen(line);
+	if (value)
+		value_len = strlen(value);
+	value = heredoc_value_expansion(line, params->delim_quoted, line_len,
 			params->shell);
-	if (!value || !join_value(document, value, *document_len, strlen(value)))
+	if (!value || !join_value(document, value, *document_len, value_len))
 		return (xfree(line), xfree(value), -1);
-	*document_len += strlen(value);
+	if (value)
+		value_len = strlen(value);
+	*document_len += value_len;
 	if (!join_value(document, "\n", *document_len, 1))
 		return (xfree(line), xfree(value), -1);
 	*document_len += 1;
@@ -125,7 +124,7 @@ int	get_document(t_redir *hd, char **document, size_t *document_len,
 		if (!line)
 			break ;
 		if (strcmp(line, params.delim) == 0)
-			return (free(line), 1);
+			return (xfree(line), 1);
 		if (process_heredoc_line(document, document_len, line, &params) < 0)
 			return (-1);
 	}
@@ -138,10 +137,10 @@ static int	make_pipe_heredoc(char *document, size_t document_len)
 	ssize_t	wb;
 
 	if (pipe(herepipe) < 0)
-		return (perror("pipe"), free(document), -1);
+		return (perror("pipe"), xfree(document), -1);
 	wb = write(herepipe[1], document, document_len);
 	close(herepipe[1]);
-	free(document);
+	xfree(document);
 	if (wb != (ssize_t)document_len)
 		return (close(herepipe[0]), -1);
 	return (herepipe[0]);
@@ -155,12 +154,12 @@ static int	make_file_heredoc(char *document)
 
 	filename = NULL;
 	tmp_fd = ft_mkstmpfd("tmp/", &filename);
-	free(document);
+	xfree(document);
 	if (tmp_fd < 0)
 		return (-1);
 	close(tmp_fd);
 	fd = open(filename, O_RDONLY);
-	free(filename);
+	xfree(filename);
 	return (fd);
 }
 

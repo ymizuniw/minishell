@@ -1,0 +1,33 @@
+{
+    "files.associations": {
+        "*.h": "c",
+        "backup": "c",
+        "array": "c",
+        "atomic": "c",
+        "concepts": "c",
+        "cstddef": "c",
+        "cstdio": "c",
+        "cwchar": "c",
+        "vector": "c",
+        "functional": "c",
+        "memory": "c",
+        "memory_resource": "c",
+        "optional": "c",
+        "string_view": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "random": "c",
+        "initializer_list": "c",
+        "new": "c",
+        "ranges": "c",
+        "span": "c",
+        "stdexcept": "c",
+        "string": "c",
+        "system_error": "c",
+        "typeinfo": "c",
+        "utility": "c",
+        "deque": "c",
+        "bit": "c",
+        "ostream": "c"
+    }
+}

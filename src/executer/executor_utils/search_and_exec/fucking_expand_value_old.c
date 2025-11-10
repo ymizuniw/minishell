@@ -55,7 +55,8 @@ int	doller_cat(char **doller, char **expanded_word, size_t expanded_word_len,
 		value = env_entry ? env_entry->value : (char *)"";
 	}
 	free(key);
-	value_len = strlen(value);
+	if (value)
+		value_len = strlen(value);
 	tmp = realloc(*expanded_word, expanded_word_len + value_len + 1);
 	if (!tmp)
 	{

@@ -31,14 +31,18 @@ static int	handle_export_arg(t_shell *shell, char *arg)
 {
 	char	*key;
 	char	*value;
+	size_t	len;
 
+	len = 0;
 	key = extract_key(arg);
 	if (!key)
 		return (0);
 	if (!is_valid_varname(key))
 	{
+		if (arg)
+			len = strlen(arg);
 		write(2, "export: `", 9);
-		write(2, arg, strlen(arg));
+		write(2, arg, len);
 		write(2, "': not a valid identifier\n", 26);
 		return (xfree(key), 1);
 	}

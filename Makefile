@@ -40,10 +40,12 @@ BUILTIN_SRC = $(BUILTIN_DIR)/exec_builtin.c \
               $(BUILTIN_DIR)/ft_exit.c \
               $(BUILTIN_DIR)/ft_export.c \
               $(BUILTIN_DIR)/ft_pwd.c \
-              $(BUILTIN_DIR)/ft_unset.c
+              $(BUILTIN_DIR)/ft_unset.c \
+              $(BUILTIN_DIR)/expand_wildcard.c
 
 BUILTIN_UTILS_SRC = $(BUILTIN_UTILS_DIR)/get_pwd.c \
-                    $(BUILTIN_UTILS_DIR)/is_builtin.c
+                    $(BUILTIN_UTILS_DIR)/is_builtin.c \
+                    $(BUILTIN_UTILS_DIR)/wildcard_utils.c
 
 DATA_MANAGEMENT_SRC = $(DATA_MANAGEMENT_DIR)/alloc_t.c \
                       $(DATA_MANAGEMENT_DIR)/free_t.c \
@@ -81,7 +83,7 @@ LEXER_UTILS_SRC = $(LEXER_UTILS_DIR)/prepend_tokens.c \
                   $(LEXER_UTILS_DIR)/set_quote_flag.c \
                   $(LEXER_UTILS_DIR)/set_token_type.c \
                   $(LEXER_UTILS_DIR)/word_cat.c \
-                  $(LEXER_UTILS_DIR)/check_unclosed_quotes.c
+                  $(LEXER_UTILS_DIR)/gen_word.c
 
 PARSER_SRC = $(PARSER_DIR)/fucking_gen_tree.c \
              $(PARSER_DIR)/gen_command_node.c \

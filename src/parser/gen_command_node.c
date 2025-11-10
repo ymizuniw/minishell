@@ -51,25 +51,20 @@ int	parse_redirection(t_redir **redir_head, t_token_type token_type,
 	return (1);
 }
 
-int	parse_simple_command(t_argv **argv_head, t_token *command_token)
-{
-	t_argv	*new_argv;
 
-	if (!argv_head || !command_token)
+//generate command's word_list from command_token.
+int	parse_simple_command(t_word **word_list, t_token *command_token)
+{
+	t_word	*new_argv;
+
+	if (!word_list || !command_token)
 		return (-1);
-	new_argv = alloc_argv();
-	if (!new_argv)
-		return (-1);
-	memset(new_argv, 0, sizeof(t_argv));
-	new_argv->word = strdup(command_token->value);
-	if (!new_argv->word)
-		return (free(new_argv), -1);
-	if (command_token->in_squote == false && strchr(command_token->value, '$'))
-		new_argv->to_expand = true;
-	else
-		new_argv->to_expand = false;
-	new_argv->next = *argv_head;
-	*argv_head = new_argv;
+	size_t addition = 0;
+	size_t value_len = 0;
+	if (command_token->value)
+		value_len = strlen(command_token->value);
+	new_argv = gen_word(command_token->value, value_len, &addition);
+	*word_list = new_argv;
 	return (1);
 }
 
@@ -102,7 +97,7 @@ static int	process_token(t_cmd *cmd, t_token *tmp)
 	if (token_is_redirection(tmp->type))
 		return (handle_redirection_parse(cmd, tmp));
 	else
-		return (parse_simple_command(&cmd->argv_list, tmp));
+		return (parse_simple_command(&cmd->word_list, tmp));
 }
 
 int	parse_command_list(t_cmd *cmd, t_token **cur_token)
@@ -145,15 +140,15 @@ t_ast	*gen_command_node(t_ast *parent, t_token **cur_token)
 	node->cmd = alloc_cmd();
 	if (!node->cmd)
 	{
-		free(node);
+		xfree(node);
 		return (NULL);
 	}
 	memset(node->cmd, 0, sizeof(t_cmd));
 	result = parse_command_list(node->cmd, cur_token);
 	if (result == -1)
 	{
-		free(node->cmd);
-		free(node);
+		xfree(node->cmd);
+		xfree(node);
 		return (NULL);
 	}
 	return (node);

@@ -11,8 +11,8 @@ void	exec_builtin(t_shell *shell, char **cmd)
 		ft_exit(cmd, shell->last_exit_status, shell);
 	else if (!shell)
 	{
-		write(2, "fatal\n", 6);
-		exit(1);
+		write(2, "fatal shell variable is NULL\n", 29);
+		exit(EXIT_FAILURE);
 	}
 	if (strcmp(cmd[0], "echo") == 0)
 		ret = ft_echo(cmd);

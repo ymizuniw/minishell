@@ -1,18 +1,5 @@
-#include "../../../../includes/minishell.h"
 
-int	before_doller_cat(char **expanded_word, size_t expanded_word_len,
-		char *value, size_t value_len)
-{
-	char	*tmp;
-
-	tmp = realloc(*expanded_word, expanded_word_len + value_len + 1);
-	if (!tmp)
-		return (-1);
-	*expanded_word = tmp;
-	memcpy(*expanded_word + expanded_word_len, value, value_len);
-	(*expanded_word)[expanded_word_len + value_len] = '\0';
-	return (1);
-}
+#include "minishell.h"
 
 static char	*get_var_value(char *key, t_shell *shell, bool *need_free)
 {
@@ -37,10 +24,9 @@ static int	append_var_value(char **expanded_word, size_t expanded_word_len,
 		char *value, bool need_free)
 {
 	char	*tmp;
-	size_t	value_len=0;
+	size_t	value_len;
 
-	if (value)
-		value_len = strlen(value);
+	value_len = strlen(value);
 	tmp = realloc(*expanded_word, expanded_word_len + value_len + 1);
 	if (!tmp)
 	{
@@ -87,6 +73,20 @@ int	doller_cat(char **doller, char **expanded_word, size_t expanded_word_len,
 	return (1);
 }
 
+int	before_doller_cat(char **expanded_word, size_t expanded_word_len,
+		char *value, size_t value_len)
+{
+	char	*tmp;
+
+	tmp = realloc(*expanded_word, expanded_word_len + value_len + 1);
+	if (!tmp)
+		return (-1);
+	*expanded_word = tmp;
+	memcpy(*expanded_word + expanded_word_len, value, value_len);
+	(*expanded_word)[expanded_word_len + value_len] = '\0';
+	return (1);
+}
+
 static int	expand_dollars(char **expanded, char **word, size_t *exp_len,
 		t_shell *shell)
 {
@@ -103,8 +103,7 @@ static int	expand_dollars(char **expanded, char **word, size_t *exp_len,
 		*exp_len += plain_len;
 		if (doller_cat(&d, expanded, *exp_len, shell) < 0)
 			return (-1);
-		if (*expanded)
-			*exp_len = strlen(*expanded);
+		*exp_len = strlen(*expanded);
 		*word = d;
 		d = strchr(*word, '$');
 	}
@@ -115,7 +114,7 @@ char	*expand_word(char *word, t_shell *shell)
 {
 	char	*expanded;
 	size_t	exp_len;
-	size_t	tail_len=0;
+	size_t	tail_len;
 
 	if (!word)
 		return (strdup(""));
@@ -125,8 +124,7 @@ char	*expand_word(char *word, t_shell *shell)
 		return (NULL);
 	if (word && *word)
 	{
-		if (word)
-			tail_len = strlen(word);
+		tail_len = strlen(word);
 		if (before_doller_cat(&expanded, exp_len, word, tail_len) < 0)
 			return (NULL);
 	}
@@ -135,52 +133,7 @@ char	*expand_word(char *word, t_shell *shell)
 	return (strdup(""));
 }
 
-// static size_t	count_argv_list(t_argv *argv_list)
+// char	*expand_word(char *word, t_shell *shell)
 // {
-// 	t_argv	*cur;
-// 	size_t	count;
-
-// 	count = 0;
-// 	cur = argv_list;
-// 	while (cur)
-// 	{
-// 		count++;
-// 		cur = cur->next;
-// 	}
-// 	return (count);
-// }
-
-// static void	fill_argv_array(char **argv, t_argv *argv_list, size_t list_len,
-// 		t_shell *shell)
-// {
-// 	t_argv	*cur_argv;
-// 	size_t	argv_idx;
-
-// 	cur_argv = argv_list;
-// 	argv_idx = list_len;
-// 	while (cur_argv != NULL)
-// 	{
-// 		argv_idx--;
-// 		if (cur_argv->to_expand == true)
-// 			argv[argv_idx] = expand_word(cur_argv->word, shell);
-// 		else
-// 			argv[argv_idx] = strdup(cur_argv->word);
-// 		cur_argv = cur_argv->next;
-// 	}
-// 	argv[list_len] = NULL;
-// }
-
-// char	**gen_argv(t_argv *argv_list, t_shell *shell)
-// {
-// 	size_t	list_len;
-// 	char	**argv;
-
-// 	if (argv_list == NULL)
-// 		return (NULL);
-// 	list_len = count_argv_list(argv_list);
-// 	argv = xmalloc(sizeof(char *) * (list_len + 1));
-// 	if (!argv)
-// 		return (NULL);
-// 	fill_argv_array(argv, argv_list, list_len, shell);
-// 	return (argv);
+// 	return(NULL);
 // }

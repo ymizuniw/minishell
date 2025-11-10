@@ -117,6 +117,7 @@ typedef enum e_node_type
 	NODE_OR,
 	NODE_SUBSHELL
 }					t_node_type;
+
 typedef enum e_redir_type
 {
 	REDIR_IN,
@@ -125,6 +126,7 @@ typedef enum e_redir_type
 	REDIR_HEREDOC,
 	REDIR_OTHER
 }					t_redir_type;
+
 typedef struct s_redir
 {
 	t_redir_type	type;
@@ -133,27 +135,16 @@ typedef struct s_redir
 	struct s_redir	*next;
 }					t_redir;
 
-typedef enum s_word_type
+typedef struct s_argv
 {
-    WD_LITERAL,
-    WD_DOLLER,
-    WD_OTHER,
-} t_word_type;
-
-//if in command token, then t_word *word_list will be used for args. one word_list corresponds to one set of char **argv;
-//if in redirect token, then t_word *will be used just for filename or delimiter, if you use this for redirectoin parsing.
-typedef struct s_word
-{
-    char            *word;
-    t_word_type     type;
-    bool            to_expand_doller;
-    bool            to_expand_wildcard;
-    struct s_word   *next;
-} t_word;
+	char			*word;
+	bool			to_expand;
+	struct s_argv	*next;
+}					t_argv;
 
 typedef struct s_cmd
 {
-	t_word			*word_list;
+	t_argv			*argv_list;
 	char			**argv;
 	t_redir			*redir;
 }					t_cmd;
@@ -177,6 +168,12 @@ typedef struct s_ast
 	struct s_ast	*right;
 }					t_ast;
 
+typedef struct s_save_fd
+{
+	int				stdin_fileno;
+	int				stdout_fileno;
+}					t_save_fd;
+
 typedef struct s_result
 {
 	t_ast			*root;
@@ -189,6 +186,7 @@ typedef struct s_shell
 	bool			in_pipe_child;
 	int				last_exit_status;
 	t_env			*env_list;
+	// t_command_hash *cmd_hash;
 	char			*pwd;
 	t_ast			*root;
 	t_token			*token_list;
@@ -196,6 +194,24 @@ typedef struct s_shell
 	t_hist 			*hist;
 	t_result		res;
 }					t_shell;
+
+typedef enum s_word_type
+{
+    WD_LITERAL,
+    WD_DOLLER,
+    WD_OTHER,
+} t_word_type;
+
+//if in command token, then t_word *word_list will be used for args. one word_list corresponds to one set of char **argv;
+//if in redirect token, then t_word *will be used just for filename or delimiter, if you use this for redirectoin parsing.
+typedef struct s_word
+{
+    char            *word;
+    t_word_type     type;
+    bool            to_expand_doller;
+    bool            to_expand_wildcard;
+    struct t_word   *next;
+} t_word;
 
 typedef struct s_heredoc_ctx
 {
@@ -211,3 +227,7 @@ typedef struct s_heredoc_params
 }					t_heredoc_params;
 
 #endif
+
+
+
+

@@ -15,11 +15,14 @@ int	count_token(char **envp)
 t_env	*find_env(t_env *env_list, const char *key)
 {
 	t_env	*current;
+	size_t key_len = 0;
 
 	current = env_list;
 	while (current)
 	{
-		if (strncmp(current->key, key, strlen(key) + 1) == 0)
+		if (key)
+			key_len = strlen(key);
+		if (strncmp(current->key, key, key_len + 1) == 0)
 			return (current);
 		current = current->next;
 	}
@@ -88,13 +91,16 @@ void	set_variable(t_shell *shell, char *key, char *value, int exported)
 {
 	t_env	*current;
 	t_env	*new;
+	size_t key_len = 0;
 
 	if (!shell || !key || !value)
 		return ;
 	current = shell->env_list;
 	while (current)
 	{
-		if (strncmp(current->key, key, strlen(key) + 1) == 0)
+		if (key)
+			key_len = strlen(key);
+		if (strncmp(current->key, key, key_len + 1) == 0)
 		{
 			update_existing_var(current, value, exported);
 			return ;
