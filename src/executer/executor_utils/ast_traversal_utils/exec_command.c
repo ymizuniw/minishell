@@ -33,15 +33,18 @@ static void	free_expanded_argv(char **expanded_argv)
 	xfree(expanded_argv);
 }
 
-static int	process_command(t_ast *node, t_shell *shell, int *fds)
+static int	process_command(t_ast *node, t_shell *shell)
 {
 	char	**expanded_argv;
 
 	if (!node->cmd || !node->cmd->word_list || !node->cmd->word_list->word)
-		return (restore_stdio(fds[0], fds[1]), 0);
+		return (0);
 	expanded_argv = ft_expand_word(node->cmd->word_list, shell);
 	if (!expanded_argv || !expanded_argv[0])
-		return (xfree(expanded_argv), 0);
+	{
+		xfree(expanded_argv);
+		return (0);
+	}
 	search_and_exec(shell, expanded_argv);
 	free_expanded_argv(expanded_argv);
 	return (0);
@@ -55,11 +58,14 @@ int	exec_command(t_ast *node, t_shell *shell)
 	fds[0] = dup(STDIN_FILENO);
 	fds[1] = dup(STDOUT_FILENO);
 	if (!node || !node->cmd)
+	{
+		restore_stdio(fds[0], fds[1]);
 		return (-1);
+	}
 	redir_ret = do_redirection(node, shell);
 	if (redir_ret < 0)
 		return (handle_redirection_error(node, fds[0], fds[1], shell));
-	process_command(node, shell, fds);
+	process_command(node, shell);
 	restore_stdio(fds[0], fds[1]);
 	return (0);
 }

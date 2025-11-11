@@ -7,7 +7,7 @@ char			**expand_wildcard(const char *pattern, const char *path,
 t_word			*append_node(t_word *head, t_word *new);
 size_t			quote_close_place(char quote, char *value, size_t i);
 
-// inclibmimnishell
+// Extract a substring from src between start and end indices
 char	*ext_unit(char *src, size_t start, size_t end)
 {
 	char	*unit;
@@ -22,7 +22,7 @@ char	*ext_unit(char *src, size_t start, size_t end)
 	return (unit);
 }
 
-// inc libminishell
+// Join two strings by reallocating and concatenating
 int	join_value(char **res, const char *value, size_t size1, size_t size2)
 {
 	*res = realloc(*res, sizeof(char) * (size1 + size2 + 1));
@@ -46,7 +46,7 @@ static size_t	count_word_list(t_word *word)
 	return (size);
 }
 
-// maybe the return value of this function shall not be free()ed not in the scope for free() the env_list.
+// Return value should not be freed separately
 char	*expand_doller(t_word *word, t_shell *shell)
 {
 	char	*env_value;
@@ -81,6 +81,7 @@ char	**ft_expand_word(t_word *wd_list, t_shell *shell)
 	char	**res;
 	size_t	word_list_count;
 	size_t	i;
+			char **new_res;
 
 	word = wd_list;
 	plain_expand = NULL;
@@ -112,10 +113,12 @@ char	**ft_expand_word(t_word *wd_list, t_shell *shell)
 			wildcard_arr = expand_wildcard(word->word, "./", &wildcard_count);
 			if (!wildcard_arr)
 				return (free_double_array(res), NULL);
-			res = realloc(res, sizeof(char *) * (word_list_count
+			new_res = realloc(res, sizeof(char *) * (word_list_count
 						+ wildcard_count + 1));
-			if (!res)
-				return (free_double_array(wildcard_arr), NULL);
+			if (!new_res)
+				return (free_double_array(res), free_double_array(wildcard_arr),
+					NULL);
+			res = new_res;
 			wildcard_idx = 0;
 			while (wildcard_idx < wildcard_count)
 			{
@@ -145,115 +148,16 @@ char	**ft_expand_word(t_word *wd_list, t_shell *shell)
 	return (res);
 }
 
-// //argv=ft_expand_word();
-// char  **ft_expand_word(t_word *wd_list, t_env *env_list)
-// {
-//     t_word *word = wd_list;
-//     char *plain_expand = NULL;
-//     char *env_expand = NULL;
-//     char **wildcard_arr = NULL;
-//     size_t wildcard_count=0;
-//     size_t wildcard_idx = 0;
-//     char **res = NULL;
-//     size_t word_list_count = 0;
-//     size_t i = 0;
-
-//     word_list_count = count_word_list(wd_list);
-//     res = (char **)xcalloc(sizeof(char *)*(word_list_count+1));
-//     if (res==NULL)
-//         return (NULL);
-//     while (i<word_list_count)
-//     {
-//         if (word->to_expand_doller || word->to_expand_wildcard)
-//         {
-//             if (word->to_expand_doller)
-//             {
-//                 env_expand = expand_doller(word, env_list);
-//                 res[i] = env_expand;
-//                 i++;
-//             }
-//             else if (word->to_expand_wildcard)
-//             {
-//                 wildcard_arr = expand_wildcard(word->word, "./",
-// &wildcard_count);
-//                 if (wildcard_arr==NULL)
-//                     return(NULL);
-//                 word_list_count += wildcard_count;
-//                 //loop till the wildcard_arr element null.
-//
-// count size here or delegate ptr of size_t wildcard_arr_size and internally count it. eff.
-//                 res = realloc(res, word_list_count + 1);
-//                 if (res==NULL)
-//                 {
-//                     free_double_array(wildcard_arr);
-//                     return(NULL);
-//                 }
-//                 while(wildcard_idx<wildcard_count)
-//                 {
-//                     size_t res_i_len=0;
-
-//                     if (res[i])
-//                     {
-//                         // if (i<3)
-//                             // printf("res[%zu]: %s\n", i, res[i]);
-//                         // printf("i: %zu\n res address:%p\n res[%zu]: %s\n",
-// i, res[i], i , res[i]);
-//                         // printf("%zu\n", i);
-//                         res_i_len = strlen(res[i]);
-//                     }
-//                     size_t value_len=0;
-//                     if (wildcard_arr[wildcard_idx])
-//                         value_len = strlen(wildcard_arr[wildcard_idx]);
-//                     if (!join_value(&res[i], wildcard_arr[wildcard_idx],
-// res_i_len, value_len))
-//                     {
-//                         free_double_array(res);
-//                         free_double_array(wildcard_arr);
-//                         return (NULL);
-//                     }
-//                     i++;
-//                     wildcard_idx++;
-//                 }
-//             }
-//         }
-//         else
-//         {
-//             size_t res_i_len=0;
-//             size_t plain_expand_len = 0;
-
-//             assert(word->word!=NULL);
-//             plain_expand = strdup(word->word);//this shall be free() ed,
-// but expand_env() result shall not be, then flag is needed?
-//             if (plain_expand==NULL)
-//                 return (xfree(res), NULL);
-//             if (res[i])
-//                 res_i_len = strlen(res[i]);
-//             if (plain_expand)
-//                 plain_expand_len = strlen(plain_expand);
-//             if (join_value(&res[i], plain_expand, res_i_len,
-// plain_expand_len)<0)
-//             {
-//                 free_double_array(res);
-//                 xfree(plain_expand);
-//                 return (NULL);
-//             }
-//             xfree(plain_expand);
-//             i++;
-//         }
-//         word = word->next;
-//     }
-//     free_double_array(wildcard_arr);
-//     return (res);
-// }
-
+// Append a word node to the list
 t_word	*append_node(t_word *head, t_word *new)
 {
-	if (head == NULL)
+	t_word	*original_head;
+
+	original_head = head;
+	word_add_back(&head, new);
+	if (original_head == NULL)
 		return (new);
-	while (head->next)
-		head = head->next;
-	head->next = new;
-	return (head);
+	return (original_head);
 }
 
 size_t	quote_close_place(char quote, char *value, size_t i)
@@ -269,7 +173,7 @@ size_t	quote_close_place(char quote, char *value, size_t i)
 	return (0);
 }
 
-// after split by metachar?
+// Generate word tokens from value string
 t_word	*gen_word(char *value, size_t value_len, size_t *addition)
 {
 	size_t	i;
@@ -288,13 +192,7 @@ t_word	*gen_word(char *value, size_t value_len, size_t *addition)
 		word = (t_word *)xcalloc(sizeof(t_word));
 		if (word == NULL)
 			return (NULL);
-		word->word = strdup("");
-		if (word->word == NULL)
-		{
-			free_word_list(head);
-			xfree(word);
-			return (NULL);
-		}
+		word->word = NULL;
 		close_place = 0;
 		if (quote != '\0')
 			close_place = quote_close_place(quote, value, ++i);

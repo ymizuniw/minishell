@@ -1,7 +1,6 @@
 #include "../../../includes/minishell.h"
 
-// head is a dummy head. prepend new at the head (LIFO)
-// NOTE: This creates reverse order! Parser compensates by iterating backwards.
+// Prepend new token at head (LIFO)
 void	prepend_tokens(t_token *head, t_token *new)
 {
 	t_token	*cur_first;

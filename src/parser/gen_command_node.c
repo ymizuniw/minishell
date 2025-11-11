@@ -14,17 +14,7 @@ static void	set_redir_type(t_redir *new_redir, t_token_type token_type)
 
 static void	append_redir(t_redir **redir_head, t_redir *new_redir)
 {
-	t_redir	*redir;
-
-	if (*redir_head == NULL)
-		*redir_head = new_redir;
-	else
-	{
-		redir = *redir_head;
-		while (redir->next)
-			redir = redir->next;
-		redir->next = new_redir;
-	}
+	redir_add_back(redir_head, new_redir);
 }
 
 int	parse_redirection(t_redir **redir_head, t_token_type token_type,
@@ -55,7 +45,6 @@ int	parse_redirection(t_redir **redir_head, t_token_type token_type,
 int	parse_simple_command(t_word **word_list, t_token *command_token)
 {
 	t_word	*new_argv;
-	t_word	*tail;
 	size_t	addition;
 	size_t	value_len;
 	t_word	*w;
@@ -78,15 +67,7 @@ int	parse_simple_command(t_word **word_list, t_token *command_token)
 		}
 	}
 	// Append to the end of the word list instead of overwriting
-	if (*word_list == NULL)
-		*word_list = new_argv;
-	else
-	{
-		tail = *word_list;
-		while (tail->next)
-			tail = tail->next;
-		tail->next = new_argv;
-	}
+	word_add_back(word_list, new_argv);
 	return (1);
 }
 

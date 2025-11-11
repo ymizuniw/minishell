@@ -56,9 +56,7 @@ int	check_parenthesis_balance(t_token *token_list)
 	if (!token_list)
 		return (0);
 	balance = 0;
-	cur = token_list;
-	while (cur && cur->next)
-		cur = cur->next;
+	cur = token_last(token_list);
 	while (cur && cur->type != TK_HEAD)
 	{
 		if (cur->type == TK_LPAREN)

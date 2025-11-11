@@ -22,8 +22,9 @@ void	print_err_num(char **cmd)
 {
 	const char	*prefix = "exit: ";
 	const char	*suffix = ": numeric argument required\n";
-	size_t		len = 0;
+	size_t		len;
 
+	len = 0;
 	write(2, prefix, strlen(prefix));
 	if (cmd[1])
 	{

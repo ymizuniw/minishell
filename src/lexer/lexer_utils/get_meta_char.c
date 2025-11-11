@@ -1,6 +1,6 @@
 #include "../../../includes/minishell.h"
 
-// it c is meta char, return the specific type, or return other.
+// Check if character is a metacharacter and return its type
 t_metachar	is_meta_char(int c)
 {
 	if (c == '&')

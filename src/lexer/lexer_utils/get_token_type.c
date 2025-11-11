@@ -56,11 +56,9 @@ static t_token_type	andif_or_word(char *input, size_t *idx)
 	}
 }
 
-// get the token_type begin with the current idx of input.
+// Get the token type beginning at current index of input
 t_token_type	get_token_type(char *input, size_t *idx)
 {
-	// printf("\n\nget_token_type is called\n\n");
-	// printf("input[*idx]: %c\n", input[*idx]);
 	if (input[*idx])
 	{
 		if (input[(*idx)] == '\n')

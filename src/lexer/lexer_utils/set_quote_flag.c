@@ -1,9 +1,9 @@
 #include "../../../includes/minishell.h"
 
-// set either double/single quotation flag to token.
+// Set either double or single quotation flag to token
 void	set_quote_flag(t_token *token, char *input, char const quote_open)
 {
-	(void)input; // Suppress unused parameter warning
+	(void)input;
 	if (!token)
 		return ;
 	if (quote_open == '\"')

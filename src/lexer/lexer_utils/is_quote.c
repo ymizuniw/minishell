@@ -1,6 +1,6 @@
 #include "../../../includes/minishell.h"
 
-// return either of double/single quotation, or '\0'.
+// Check if character is a quote and return the quote type
 unsigned char	is_quote(int c)
 {
 	unsigned char	uc;

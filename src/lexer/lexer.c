@@ -12,7 +12,7 @@ int	init_token(t_token **token_head)
 	return (1);
 }
 
-// handle the newline token
+// Handle the newline token
 int	handle_newline(t_token *token_head, const char *input, size_t *idx)
 {
 	t_token	*new;
@@ -40,7 +40,7 @@ int	handle_newline(t_token *token_head, const char *input, size_t *idx)
 	return (1);
 }
 
-// handle meta_char token.
+// Handle meta character tokens
 int	handle_meta_char(t_token *token_head, const char *input, size_t *idx)
 {
 	t_token	*new;
@@ -52,7 +52,6 @@ int	handle_meta_char(t_token *token_head, const char *input, size_t *idx)
 	memset(new, 0, sizeof(t_token));
 	start_idx = *idx;
 	new->type = get_token_type((char *)input, idx);
-	/* Set value for the token (length is idx - start_idx) */
 	new->value = strndup(&input[start_idx], *idx - start_idx);
 	if (!new->value)
 	{
@@ -141,10 +140,7 @@ int	handle_eof(t_token *token_head)
 	new->type = TK_EOF;
 	new->value = strdup("");
 	new->next = NULL;
-	while (token_head->next)
-		token_head = token_head->next;
-	token_head->next = new;
-	new->prev = token_head;
+	token_add_back(&token_head, new);
 	return (1);
 }
 

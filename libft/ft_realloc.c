@@ -19,7 +19,7 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 	if (old_size > 0)
 	{
 		if (old_size < new_size)
-			copy_size = oid_size;
+			copy_size = old_size;
 		else
 			copy_size = new_size;
 		ft_memcpy(new_ptr, ptr, copy_size);
