@@ -8,8 +8,8 @@ static void		disable_raw_mode(const struct termios *orig);
 static ssize_t	read_key(char *c);
 static void		handle_backspace(char *buf, size_t *len);
 static void		handle_printable(char *buf, size_t *len, char c);
-static void		handle_arrow_up(t_hist *);
-static void		handle_arrow_down(t_hist *);
+// static void		handle_arrow_up(t_hist *);
+// static void		handle_arrow_down(t_hist *);
 
 static void	enable_raw_mode(struct termios *orig)
 {
@@ -17,7 +17,7 @@ static void	enable_raw_mode(struct termios *orig)
 
 	tcgetattr(STDIN_FILENO, orig);
 	raw = *orig;
-	raw.c_lflag &= ~(ICANON | ECHO | ECHOCTL);
+	raw.c_lflag &= ~(ICANON | ECHO);
 	raw.c_cc[VMIN] = 1;
 	raw.c_cc[VTIME] = 0;
 	tcsetattr(STDIN_FILENO, TCSANOW, &raw);
@@ -52,27 +52,59 @@ void	handle_printable(char *buf, size_t *len, char c)
 	write(STDOUT_FILENO, &c, 1);
 }
 
-void	handle_arrow_up(t_hist *hist)
+void	handle_arrow_up(t_hist *hist, char *buf, size_t *len)
 {
-	(void)hist;
-	printf("\n %s\n", "up");
+	if (hist->size == 0)
+		return ;
+	if (hist->hist_box[hist->cur] == NULL)
+		return ;
+	if (hist->cur == -1)
+		hist->cur = (hist->idx + HIST_MAX - 1) % HIST_MAX;
+	else
+		hist->cur = (hist->cur + HIST_MAX - 1) % HIST_MAX;
+	strncpy(buf, hist->hist_box[hist->cur], 1023);
+	buf[1023] = '\0';
+	*len = strlen(buf);
+	printf("\r");
+	printf("\x1b[2K");
+	printf("minishell$ %s", buf);
+	fflush(stdout);
 }
 
-void	handle_arrow_down(t_hist *hist)
+void	handle_arrow_down(t_hist *hist, char *buf, size_t *len)
 {
-	(void)hist;
-	printf("\n %s\n", "down");
+	if (hist->size == 0 || hist->cur == -1)
+		return ;
+	if (hist->hist_box[hist->cur] == NULL)
+		return ;
+	hist->cur = (hist->cur + 1) % HIST_MAX;
+	if ((size_t)hist->cur == hist->idx)
+	{
+		buf[0] = '\0';
+		*len = 0;
+		hist->cur = -1;
+	}
+	else if (hist->hist_box[hist->cur])
+	{
+		strncpy(buf, hist->hist_box[hist->cur], 1023);
+		buf[1023] = '\0';
+		*len = strlen(buf);
+	}
+	printf("\r");
+	printf("\x1b[2K");
+	printf("minishell$ %s", buf);
+	fflush(stdout);
 }
 
-/* --- main readline-like function --- */
-static void	handle_escape_sequence(char *seq, t_hist *hist)
+static void	handle_escape_sequence(char *seq, t_hist *hist, char *buf,
+		size_t *len)
 {
 	if (seq[0] == '[')
 	{
 		if (seq[1] == 'A')
-			handle_arrow_up(hist);
+			handle_arrow_up(hist, buf, len);
 		else if (seq[1] == 'B')
-			handle_arrow_down(hist);
+			handle_arrow_down(hist, buf, len);
 	}
 }
 
@@ -90,11 +122,54 @@ static int	process_key(char c, char *buf, size_t *len, t_hist *hist)
 			return (1);
 		if (read_key(&seq[1]) == 0)
 			return (1);
-		handle_escape_sequence(seq, hist);
+		handle_escape_sequence(seq, hist, buf, len);
 	}
 	else if (c >= 32 && c <= 126)
 		handle_printable(buf, len, c);
 	return (1);
+}
+
+static char	*read_non_interactive(void)
+{
+	char	*buf;
+	size_t	len;
+
+	buf = NULL;
+	len = 0;
+	if (getline(&buf, &len, stdin) == -1)
+	{
+		free(buf);
+		return (NULL);
+	}
+	if (len > 0 && buf[len - 1] == '\n')
+		buf[len - 1] = '\0';
+	return (buf);
+}
+
+static char	*read_interactive_line(char *buf, size_t *len, t_hist *hist,
+		struct termios *orig)
+{
+	char	c;
+
+	while (1)
+	{
+		if (read_key(&c) <= 0)
+			break ;
+		if (c == 4)
+		{
+			if (*len == 0)
+			{
+				disable_raw_mode(orig);
+				free(buf);
+				return (NULL);
+			}
+			else
+				continue ;
+		}
+		if (!process_key(c, buf, len, hist))
+			break ;
+	}
+	return (buf);
 }
 
 char	*ft_readline(const char *prompt, t_hist *hist)
@@ -102,39 +177,19 @@ char	*ft_readline(const char *prompt, t_hist *hist)
 	struct termios	orig;
 	char			*buf;
 	size_t			len;
-	char			c;
 
-	// Non-interactive mode: use getline()
 	if (!isatty(STDIN_FILENO))
-	{
-		buf = NULL;
-		len = 0;
-		if (getline(&buf, &len, stdin) == -1)
-		{
-			if (buf)
-				free(buf);
-			return (NULL);
-		}
-		// Remove trailing newline
-		len = strlen(buf);
-		if (len > 0 && buf[len - 1] == '\n')
-			buf[len - 1] = '\0';
-		return (buf);
-	}
-	// Interactive mode: use raw mode
+		return (read_non_interactive());
 	buf = calloc(1024, 1);
 	len = 0;
 	enable_raw_mode(&orig);
 	write(STDOUT_FILENO, prompt, strlen(prompt));
-	while (1)
-	{
-		if (read_key(&c) <= 0)
-			break ;
-		if (!process_key(c, buf, &len, hist))
-			break ;
-	}
+	if (!read_interactive_line(buf, &len, hist, &orig))
+		return (NULL);
 	buf[len] = '\0';
 	write(STDOUT_FILENO, "\n", 1);
+	if (len > 0)
+		add_history(buf, hist);
 	disable_raw_mode(&orig);
 	return (buf);
 }
@@ -148,6 +203,7 @@ void	add_history(char *line, t_hist *hist)
 	hist->idx = (hist->idx + 1) % HIST_MAX;
 	if (hist->size < HIST_MAX)
 		hist->size++;
+	hist->cur = -1;
 }
 
 void	free_hist_box(char *hist_box[HIST_MAX])

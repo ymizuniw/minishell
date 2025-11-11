@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE 
+CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE
 INC = -Iincludes
 
 # -g
@@ -84,7 +84,9 @@ LEXER_UTILS_SRC = $(LEXER_UTILS_DIR)/prepend_tokens.c \
                   $(LEXER_UTILS_DIR)/set_quote_flag.c \
                   $(LEXER_UTILS_DIR)/set_token_type.c \
                   $(LEXER_UTILS_DIR)/word_cat.c \
-                  $(LEXER_UTILS_DIR)/gen_word.c
+                  $(LEXER_UTILS_DIR)/gen_word/gen_word.c \
+                  $(LEXER_UTILS_DIR)/gen_word/expand_wildcard.c \
+                  $(LEXER_UTILS_DIR)/gen_word/expand_dollar.c
 
 PARSER_SRC = $(PARSER_DIR)/fucking_gen_tree.c \
              $(PARSER_DIR)/gen_command_node.c \
