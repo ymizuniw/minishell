@@ -173,99 +173,108 @@ size_t	quote_close_place(char quote, char *value, size_t i)
 	return (0);
 }
 
+	typedef struct s_gen_word
+	{
+		t_word *word;
+		size_t value_len;
+		size_t start;
+		char quote;
+		size_t close_place;
+	} t_gen_word;
+
+	//give start idx, 
+		int quote_wrapper(t_gen_word *gw, char *value, size_t *i)
+		{
+			if (gw->quote == '\'')
+				gw->word->to_expand_doller = false;
+			else
+				gw->word->to_expand_doller = true;
+			gw->word->to_expand_wildcard = false;
+			gw->word->word = ext_unit(value, gw->start+1, gw->close_place);
+			if (!gw->word->word)
+				return (-1);
+			*i = gw->close_place + 1;
+			return (-1);
+		}
+
+		int doller_literal_wrapper(t_gen_word *gw, char *value, size_t value_len, size_t *i)
+		{
+			assert(gw);
+			assert(gw->word);
+			if (value && value[*i] == '$')
+			{
+				gw->word->type = WD_DOLLER;
+				gw->word->to_expand_doller = true;
+				(*i)++;
+			}
+			else
+			{
+				gw->word->type = WD_LITERAL;
+				while (*i < value_len && !is_quote(value[*i]) && value[*i] != '$')
+				{
+					if (gw->word->type == WD_DOLLER && value[*i] == '*')
+						break ;
+					if (gw->word->type != WD_DOLLER && value[*i] == '*')
+						gw->word->to_expand_wildcard = true;
+					(*i)++;
+				}
+			}
+			return (1);
+		}
 
 
 
+	int init_gen_word_data(t_word **word, t_gen_word *gw, char *value, size_t *i)
+	{
+		*word = (t_word *)xcalloc(sizeof(t_word));
+		if (*word == NULL)
+			return (-1);
+		memset(gw, 0, sizeof(t_gen_word));
+		gw->quote = is_quote(value[*i]);
+		gw->close_place = 0;
+		gw->word=*word;
+		return (1);
+	}
 
-
-
-
-
-
-
-
-
-
+t_word *loop_wrapper(char *value, size_t value_len, size_t *i)
+{
+	t_word	*word;
+	t_gen_word gw;
+	
+	if(init_gen_word_data(&word, &gw, value, i)<0)
+		return (NULL);
+	gw.start = *i;
+	if (gw.quote != '\0')
+		gw.close_place = quote_close_place(gw.quote, value, ++(*i));
+	if (gw.quote != '\0' && gw.close_place > 0)
+	{
+		if (quote_wrapper(&gw, value, i)<0)
+			return (xfree(word),NULL);
+	}
+	else
+	{
+		doller_literal_wrapper(&gw, value,value_len,i);
+		word->word = ext_unit(value, gw.start, *i);
+		if (!word->word)
+			return (xfree(word), NULL);
+	}
+	return (word);
+}
 
 // Generate word tokens from value string
 t_word	*gen_word(char *value, size_t value_len, size_t *addition)
 {
 	size_t	i;
-	char	quote;
-	size_t	start;
-	t_word	*head;
-	t_word	*word;
-	size_t	close_place;
-
-
-
-	//if the head is quotation, then set it as the start position,
-	//and then search the close quote for it,
-	//if it found, then ext_unit() with that range including the quotation,
-	//if found, then ext_unit() with that range "aaa" a ato a.
-	//and adjust the idx correctly.
-	//this is for the whole loop.
+	t_word *head=NULL;
+	t_word *word = NULL;
 
 	i = 0;
-
 	head = NULL;
 	while (i < value_len)
 	{
-		quote = is_quote(value[i]);
-		//found quote?
-
-		start = i;
-		//set start point : quotation or the content of the quotation.
-
-		word = (t_word *)xcalloc(sizeof(t_word));
-		if (word == NULL)
-			return (NULL);
-		// word->word = NULL;
-		// word->next=NULL;
-
-		close_place = 0;
-		if (quote != '\0')
-			close_place = quote_close_place(quote, value, ++i);
-		//if close_place is more than zero, then the quotation is closed,
-		//then use the close_place as ext end point, and proceed the idx by one,
-		//for the next idx. this increment is done only when the quotation close was found.
-
-		if (quote != '\0' && close_place > 0)
-		{
-			if (quote == '\'')
-				word->to_expand_doller = false;
-			else
-				word->to_expand_doller = true;
-			word->to_expand_wildcard = false;
-			word->word = ext_unit(value, start, close_place);//end won't extracted.?
-			if (!word->word)
-				return (free_word_list(head), xfree(word), NULL);
-			i = close_place + 1;
-		}
-		else
-		{
-			if (value[i] == '$')
-			{
-				word->type = WD_DOLLER;
-				word->to_expand_doller = true;
-				i++;
-			}
-			else
-			{
-				word->type = WD_LITERAL;
-				while (i < value_len && !is_quote(value[i]) && value[i] != '$')
-				{
-					if (word->type == WD_DOLLER && value[i] == '*')
-						break ;
-					if (word->type != WD_DOLLER && value[i] == '*')
-						word->to_expand_wildcard = true;
-					i++;
-				}
-			}
-			word->word = ext_unit(value, start, i);
-			if (!word->word)
-				return (free_word_list(head), xfree(word), NULL);
-		}
+		word = loop_wrapper(value, value_len, &i);
+		if (word==NULL)
+			return (free_word_list(head), NULL);
 		head = append_node(head, word);
 	}
 	*addition = i;
