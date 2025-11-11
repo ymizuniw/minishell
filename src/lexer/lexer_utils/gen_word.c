@@ -173,6 +173,20 @@ size_t	quote_close_place(char quote, char *value, size_t i)
 	return (0);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Generate word tokens from value string
 t_word	*gen_word(char *value, size_t value_len, size_t *addition)
 {
@@ -183,19 +197,39 @@ t_word	*gen_word(char *value, size_t value_len, size_t *addition)
 	t_word	*word;
 	size_t	close_place;
 
+
+
+	//if the head is quotation, then set it as the start position,
+	//and then search the close quote for it,
+	//if it found, then ext_unit() with that range including the quotation,
+	//if found, then ext_unit() with that range "aaa" a ato a.
+	//and adjust the idx correctly.
+	//this is for the whole loop.
+
 	i = 0;
-	quote = is_quote(value[i]);
-	start = i;
+
 	head = NULL;
 	while (i < value_len)
 	{
+		quote = is_quote(value[i]);
+		//found quote?
+
+		start = i;
+		//set start point : quotation or the content of the quotation.
+
 		word = (t_word *)xcalloc(sizeof(t_word));
 		if (word == NULL)
 			return (NULL);
-		word->word = NULL;
+		// word->word = NULL;
+		// word->next=NULL;
+
 		close_place = 0;
 		if (quote != '\0')
 			close_place = quote_close_place(quote, value, ++i);
+		//if close_place is more than zero, then the quotation is closed,
+		//then use the close_place as ext end point, and proceed the idx by one,
+		//for the next idx. this increment is done only when the quotation close was found.
+
 		if (quote != '\0' && close_place > 0)
 		{
 			if (quote == '\'')
@@ -203,7 +237,7 @@ t_word	*gen_word(char *value, size_t value_len, size_t *addition)
 			else
 				word->to_expand_doller = true;
 			word->to_expand_wildcard = false;
-			word->word = ext_unit(value, start, close_place);
+			word->word = ext_unit(value, start, close_place);//end won't extracted.?
 			if (!word->word)
 				return (free_word_list(head), xfree(word), NULL);
 			i = close_place + 1;
@@ -217,14 +251,16 @@ t_word	*gen_word(char *value, size_t value_len, size_t *addition)
 				i++;
 			}
 			else
-				word->type = WD_LITERAL;
-			while (i < value_len && !is_quote(value[i]) && value[i] != '$')
 			{
-				if (word->type == WD_DOLLER && value[i] == '*')
-					break ;
-				if (word->type != WD_DOLLER && value[i] == '*')
-					word->to_expand_wildcard = true;
-				i++;
+				word->type = WD_LITERAL;
+				while (i < value_len && !is_quote(value[i]) && value[i] != '$')
+				{
+					if (word->type == WD_DOLLER && value[i] == '*')
+						break ;
+					if (word->type != WD_DOLLER && value[i] == '*')
+						word->to_expand_wildcard = true;
+					i++;
+				}
 			}
 			word->word = ext_unit(value, start, i);
 			if (!word->word)
