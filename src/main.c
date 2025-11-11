@@ -78,9 +78,7 @@ int	parse_and_exec(t_token *token_list, t_shell *shell)
 	ast = parser(&cur);
 	if (!ast)
 		return (shell->last_exit_status = 2, 0);
-	printf("err\n");
 	exec_one_ast(ast, shell);
-	printf("err1\n");
 	return (1);
 }
 

@@ -26,7 +26,7 @@ char			**generate_envp(t_env *env_list);
 
 // Variable expansion (at execution time)
 // char			**gen_argv(t_argv *argv_list, t_shell *shell);
-char **ft_expand_word(t_word *word_list, t_env *env_list);
+char			**ft_expand_word(t_word *word_list, t_shell *shell);
 char			*expand_word(char *word, t_shell *shell);
 char			*ft_itoa(int n);
 

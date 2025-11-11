@@ -135,22 +135,19 @@ typedef struct s_redir
 
 typedef enum s_word_type
 {
-    WD_LITERAL,
-    WD_DOLLER,
-    WD_OTHER,
-} t_word_type;
+	WD_LITERAL,
+	WD_DOLLER,
+	WD_OTHER
+}					t_word_type;
 
-//if in command token, then t_word *word_list will be used for args. one word_list corresponds to one set of char **argv;
-//if in redirect token, then t_word *will be used just for filename or delimiter, if you use this for redirectoin parsing.
 typedef struct s_word
 {
-    char            *word;
-    t_word_type     type;
-    bool            to_expand_doller;
-    bool            to_expand_wildcard;
-    struct s_word   *next;
-} t_word;
-
+	char			*word;
+	t_word_type		type;
+	bool			to_expand_doller;
+	bool			to_expand_wildcard;
+	struct s_word	*next;
+}					t_word;
 typedef struct s_cmd
 {
 	t_word			*word_list;
@@ -193,7 +190,7 @@ typedef struct s_shell
 	t_ast			*root;
 	t_token			*token_list;
 	char			*line_ptr;
-	t_hist 			*hist;
+	t_hist			*hist;
 	t_result		res;
 }					t_shell;
 

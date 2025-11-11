@@ -51,20 +51,42 @@ int	parse_redirection(t_redir **redir_head, t_token_type token_type,
 	return (1);
 }
 
-
-//generate command's word_list from command_token.
+// generate command's word_list from command_token.
 int	parse_simple_command(t_word **word_list, t_token *command_token)
 {
 	t_word	*new_argv;
+	t_word	*tail;
+	size_t	addition;
+	size_t	value_len;
+	t_word	*w;
 
 	if (!word_list || !command_token)
 		return (-1);
-	size_t addition = 0;
-	size_t value_len = 0;
+	addition = 0;
+	value_len = 0;
 	if (command_token->value)
 		value_len = strlen(command_token->value);
 	new_argv = gen_word(command_token->value, value_len, &addition);
-	*word_list = new_argv;
+	// If token is in single quotes, disable dollar expansion
+	if (command_token->in_squote && new_argv)
+	{
+		w = new_argv;
+		while (w)
+		{
+			w->to_expand_doller = false;
+			w = w->next;
+		}
+	}
+	// Append to the end of the word list instead of overwriting
+	if (*word_list == NULL)
+		*word_list = new_argv;
+	else
+	{
+		tail = *word_list;
+		while (tail->next)
+			tail = tail->next;
+		tail->next = new_argv;
+	}
 	return (1);
 }
 

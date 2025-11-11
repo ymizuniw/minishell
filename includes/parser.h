@@ -27,8 +27,7 @@ t_ast	*gen_command_node(t_ast *, t_token **);
 t_ast	*gen_subshell_node(t_ast *, t_token **);
 t_ast	*swap_with_parent(t_ast **, t_token **);
 t_ast	*gen_eof_newline_node(t_ast *, t_token **);
-int		parse_redirection(t_redir **, t_token_type,
-			t_token *);
+int		parse_redirection(t_redir **, t_token_type, t_token *);
 int		parse_simple_command(t_word **, t_token *);
 int		parse_command_list(t_cmd *, t_token **);
 

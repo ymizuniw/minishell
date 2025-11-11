@@ -104,6 +104,24 @@ char	*ft_readline(const char *prompt, t_hist *hist)
 	size_t			len;
 	char			c;
 
+	// Non-interactive mode: use getline()
+	if (!isatty(STDIN_FILENO))
+	{
+		buf = NULL;
+		len = 0;
+		if (getline(&buf, &len, stdin) == -1)
+		{
+			if (buf)
+				free(buf);
+			return (NULL);
+		}
+		// Remove trailing newline
+		len = strlen(buf);
+		if (len > 0 && buf[len - 1] == '\n')
+			buf[len - 1] = '\0';
+		return (buf);
+	}
+	// Interactive mode: use raw mode
 	buf = calloc(1024, 1);
 	len = 0;
 	enable_raw_mode(&orig);

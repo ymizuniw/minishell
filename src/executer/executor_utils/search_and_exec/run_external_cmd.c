@@ -18,14 +18,17 @@ static void	free_envp(char **envp)
 static char	*create_env_string(const char *key, const char *value)
 {
 	char	*str;
-	size_t	key_len=0;
-	size_t value_len=0;
-	size_t len = 0;
+	size_t	key_len;
+	size_t	value_len;
+	size_t	len;
 
+	key_len = 0;
+	value_len = 0;
+	len = 0;
 	if (key)
 		key_len = strlen(key);
 	if (value)
-		value_len = strlen(key);
+		value_len = strlen(value);
 	len = key_len + value_len + 2;
 	str = xmalloc(len);
 	if (!str)

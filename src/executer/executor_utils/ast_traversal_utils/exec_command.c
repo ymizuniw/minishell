@@ -37,14 +37,12 @@ static int	process_command(t_ast *node, t_shell *shell, int *fds)
 {
 	char	**expanded_argv;
 
-	printf("process_command\n");
 	if (!node->cmd || !node->cmd->word_list || !node->cmd->word_list->word)
 		return (restore_stdio(fds[0], fds[1]), 0);
-	expanded_argv = ft_expand_word(node->cmd->word_list, shell->env_list);
+	expanded_argv = ft_expand_word(node->cmd->word_list, shell);
 	if (!expanded_argv || !expanded_argv[0])
 		return (xfree(expanded_argv), 0);
 	search_and_exec(shell, expanded_argv);
-	printf("process command ends\n");
 	free_expanded_argv(expanded_argv);
 	return (0);
 }

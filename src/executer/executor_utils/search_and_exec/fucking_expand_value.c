@@ -27,7 +27,10 @@ static char	*get_var_value(char *key, t_shell *shell, bool *need_free)
 	else
 	{
 		env_entry = find_env(shell->env_list, key);
-		value = env_entry ? env_entry->value : (char *)"";
+		if (env_entry)
+			value = env_entry->value;
+		else
+			value = (char *)"";
 		*need_free = false;
 	}
 	return (value);
@@ -37,8 +40,9 @@ static int	append_var_value(char **expanded_word, size_t expanded_word_len,
 		char *value, bool need_free)
 {
 	char	*tmp;
-	size_t	value_len=0;
+	size_t	value_len;
 
+	value_len = 0;
 	if (value)
 		value_len = strlen(value);
 	tmp = realloc(*expanded_word, expanded_word_len + value_len + 1);
@@ -115,8 +119,9 @@ char	*expand_word(char *word, t_shell *shell)
 {
 	char	*expanded;
 	size_t	exp_len;
-	size_t	tail_len=0;
+	size_t	tail_len;
 
+	tail_len = 0;
 	if (!word)
 		return (strdup(""));
 	expanded = NULL;
