@@ -1,6 +1,5 @@
 #include "../../includes/minishell.h"
 
-// Check if parentheses are empty: () is invalid
 static int	check_empty_parenthesis(t_token *lparen)
 {
 	t_token	*next;
@@ -13,39 +12,63 @@ static int	check_empty_parenthesis(t_token *lparen)
 	return (1);
 }
 
+static int	process_lparen(t_token *cur)
+{
+	if (!check_empty_parenthesis(cur))
+		return (-1);
+	return (1);
+}
+
+static int	process_rparen(t_token *cur)
+{
+	int	check;
+
+	check = check_parenthesis(cur);
+	if (check < 0)
+		return (-1);
+	return (0);
+}
+
 int	check_parenthesis(t_token *token)
 {
 	t_token	*cur;
-	int		check;
+	int		result;
 
 	if (!token)
 		return (-1);
 	cur = token->prev;
 	if (cur->type == TK_LPAREN)
-	{
-		// Check for empty parentheses
-		if (!check_empty_parenthesis(cur))
-			return (-1);
-		return (-1);
-	}
+		return (process_lparen(cur));
 	while (cur != NULL)
 	{
 		if (cur->type == TK_LPAREN)
-		{
-			// Check for empty parentheses
-			if (!check_empty_parenthesis(cur))
-				return (-1);
-			return (1);
-		}
+			return (process_lparen(cur));
 		if (cur->type == TK_RPAREN)
 		{
-			check = check_parenthesis(cur);
-			if (check < 0)
+			result = process_rparen(cur);
+			if (result < 0)
 				return (-1);
 		}
 		cur = cur->prev;
 	}
 	return (-1);
+}
+
+static int	check_backward_balance(t_token *cur, int *balance)
+{
+	if (cur->type == TK_LPAREN)
+	{
+		if (cur->prev && cur->prev->type == TK_RPAREN)
+			return (-1);
+		(*balance)++;
+	}
+	else if (cur->type == TK_RPAREN)
+	{
+		(*balance)--;
+		if (*balance < 0)
+			return (-1);
+	}
+	return (0);
 }
 
 int	check_parenthesis_balance(t_token *token_list)
@@ -59,22 +82,8 @@ int	check_parenthesis_balance(t_token *token_list)
 	cur = token_last(token_list);
 	while (cur && cur->type != TK_HEAD)
 	{
-		if (cur->type == TK_LPAREN)
-		{
-			// Check for empty parentheses: when going backwards,
-			// if we see LPAREN and prev is RPAREN, it means () pattern
-			if (cur->prev && cur->prev->type == TK_RPAREN)
-			{
-				return (-1);
-			}
-			balance++;
-		}
-		else if (cur->type == TK_RPAREN)
-		{
-			balance--;
-			if (balance < 0)
-				return (-1);
-		}
+		if (check_backward_balance(cur, &balance) < 0)
+			return (-1);
 		cur = cur->prev;
 	}
 	if (balance > 0)

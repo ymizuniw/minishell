@@ -1,75 +1,14 @@
 #include "../includes/minishell.h"
 
-static void	exec_one_ast(t_ast *ast, t_shell *shell)
-{
-	t_result	res;
-
-	if (!ast)
-		return ;
-	memset(&res, 0, sizeof(t_result));
-	shell->root = ast;
-	res = executor(ast, shell);
-	// if (res)
-	// {
-	// 	shell->last_exit_status = res->exit_code;
-	// 	free_result(res);
-	// }
-	shell->last_exit_status = res.exit_code;
-	free_ast_tree(ast);
-	shell->root = NULL;
-}
-
-static int	check_syntax_errors(t_token *token_list, t_shell *shell)
-{
-	t_token	*cur;
-
-	cur = token_list->next;
-	while (cur && cur->type != TK_EOF)
-	{
-		if (token_is_operator(cur->type) || token_is_redirection(cur->type))
-		{
-			if (!syntax_check(cur))
-			{
-				syntax_error(cur->type);
-				shell->last_exit_status = 2;
-				return (0);
-			}
-		}
-		cur = cur->next;
-	}
-	return (1);
-}
-
-static t_token	*skip_to_command(t_token *token_list)
-{
-	t_token	*cur;
-
-	cur = token_list;
-	while (cur->type == TK_HEAD || cur->type == TK_NEWLINE)
-	{
-		cur = cur->next;
-		if (cur->type == TK_EOF)
-			return (NULL);
-	}
-	return (cur);
-}
-
 int	parse_and_exec(t_token *token_list, t_shell *shell)
 {
 	t_token	*cur;
 	t_ast	*ast;
-	int		paren_check;
 
 	if (!token_list || !shell)
 		return (0);
-	paren_check = check_parenthesis_balance(token_list);
-	if (paren_check > 0)
-		return (write(2,
-				"minishell: syntax error: unexpected EOF while looking for matching ')'\n",
-				72), shell->last_exit_status = 2, 0);
-	if (paren_check < 0)
-		return (write(2, "minishell: syntax error near unexpected token ')'\n",
-				50), shell->last_exit_status = 2, 0);
+	if (!check_parenthesis_errors(token_list, shell))
+		return (0);
 	if (!check_syntax_errors(token_list, shell))
 		return (0);
 	cur = skip_to_command(token_list);
@@ -82,23 +21,33 @@ int	parse_and_exec(t_token *token_list, t_shell *shell)
 	return (1);
 }
 
-static void	process_line(char *line, t_shell *shell, t_hist *hist)
+static void	process_line(char *line, t_shell *shell)
 {
 	t_token	*token_list;
 
-	if (shell->interactive)
-		add_history(line, hist);
 	token_list = lexer(line);
 	shell->line_ptr = line;
 	shell->token_list = token_list;
 	parse_and_exec(token_list, shell);
 	if (g_signum == SIGINT)
 		write(1, "\n", 1);
-	if (shell->token_list)
+	cleanup_after_line(shell);
+}
+
+static int	handle_empty_line(char *line, t_shell *shell)
+{
+	if (!line)
 	{
-		free_token_list(shell->token_list);
-		shell->token_list = NULL;
+		if (shell->interactive)
+			printf("exit\n");
+		return (1);
 	}
+	if (*line == '\0')
+	{
+		xfree(line);
+		return (1);
+	}
+	return (0);
 }
 
 int	shell_loop(t_shell *shell)
@@ -108,6 +57,8 @@ int	shell_loop(t_shell *shell)
 	static t_hist	hist;
 
 	shell->hist = &hist;
+	/* initialize current history pointer to -1 to indicate no browsing */
+	hist.cur = -1;
 	prompt = "minishell$ ";
 	while (1)
 	{
@@ -120,18 +71,13 @@ int	shell_loop(t_shell *shell)
 			xfree(line);
 			continue ;
 		}
-		if (!line)
+		if (handle_empty_line(line, shell))
 		{
-			if (shell->interactive)
-				printf("exit\n");
-			break ;
-		}
-		if (line && *line == '\0')
-		{
-			xfree(line);
+			if (!line)
+				break ;
 			continue ;
 		}
-		process_line(line, shell, &hist);
+		process_line(line, shell);
 		xfree(line);
 		shell->line_ptr = NULL;
 	}

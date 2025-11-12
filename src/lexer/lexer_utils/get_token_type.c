@@ -56,41 +56,44 @@ static t_token_type	andif_or_word(char *input, size_t *idx)
 	}
 }
 
+static t_token_type	handle_simple_tokens(char *input, size_t *idx)
+{
+	if (input[*idx] == '(')
+	{
+		(*idx)++;
+		return (TK_LPAREN);
+	}
+	else if (input[*idx] == ')')
+	{
+		(*idx)++;
+		return (TK_RPAREN);
+	}
+	else if (input[*idx] == '$')
+	{
+		(*idx)++;
+		return (TK_DOLLER);
+	}
+	return (TK_WORD);
+}
+
 // Get the token type beginning at current index of input
 t_token_type	get_token_type(char *input, size_t *idx)
 {
-	if (input[*idx])
+	if (!input[*idx])
+		return (TK_EOF);
+	if (input[*idx] == '\n')
 	{
-		if (input[(*idx)] == '\n')
-		{
-			(*idx)++;
-			return (TK_NEWLINE);
-		}
-		if (input[*idx] == '|')
-			return (pipe_or_orif(input, idx));
-		else if (input[*idx] == '<')
-			return (redir_in_or_heredoc(input, idx));
-		else if (input[*idx] == '>')
-			return (redir_out_or_append(input, idx));
-		else if (input[*idx] == '&')
-			return (andif_or_word(input, idx));
-		else if (input[*idx] == '(')
-		{
-			(*idx)++;
-			return (TK_LPAREN);
-		}
-		else if (input[*idx] == ')')
-		{
-			(*idx)++;
-			return (TK_RPAREN);
-		}
-		else if (input[*idx] == '$')
-		{
-			(*idx)++;
-			return (TK_DOLLER);
-		}
-		else
-			return (TK_WORD);
+		(*idx)++;
+		return (TK_NEWLINE);
 	}
-	return (TK_EOF);
+	if (input[*idx] == '|')
+		return (pipe_or_orif(input, idx));
+	else if (input[*idx] == '<')
+		return (redir_in_or_heredoc(input, idx));
+	else if (input[*idx] == '>')
+		return (redir_out_or_append(input, idx));
+	else if (input[*idx] == '&')
+		return (andif_or_word(input, idx));
+	else
+		return (handle_simple_tokens(input, idx));
 }

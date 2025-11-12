@@ -30,4 +30,13 @@ char			**ft_expand_word(t_word *word_list, t_shell *shell);
 char			*expand_word(char *word, t_shell *shell);
 char			*ft_itoa(int n);
 
+// Word expansion utilities
+size_t			count_word_list(t_word *word);
+char			*expand_doller(t_word *word, t_shell *shell);
+int				add_plain_word(t_word *word, char **res, size_t i);
+int				add_dollar_expansion(t_word *word, char **res, size_t i,
+					t_shell *shell);
+int				expand_wildcard_to_result(t_word *word, char ***res, size_t *i,
+					size_t *total_count);
+
 #endif

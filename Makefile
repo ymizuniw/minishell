@@ -26,12 +26,18 @@ HEREDOC_DIR = $(EXECUTER_UTILS_DIR)/heredoc
 SEARCH_EXEC_DIR = $(EXECUTER_UTILS_DIR)/search_and_exec
 LEXER_DIR = $(SRC_DIR)/lexer
 LEXER_UTILS_DIR = $(LEXER_DIR)/lexer_utils
+WORD_EXPANSION_DIR = $(LEXER_DIR)/word_expansion
+WORD_LIST_DIR = $(LEXER_DIR)/word_list
 PARSER_DIR = $(SRC_DIR)/parser
 SIGNAL_MANAGEMENT_DIR = $(SRC_DIR)/signal_management
 FT_READLINE_DIR = $(SRC_DIR)/ft_readline
+READLINE_UTILS_DIR = $(FT_READLINE_DIR)/readline_utils
+UTILS_DIR = $(SRC_DIR)/utils
+STRING_UTILS_DIR = $(UTILS_DIR)/string
 
 # SOURCE FILES
-MAIN_SRC = $(SRC_DIR)/main.c
+MAIN_SRC = $(SRC_DIR)/main.c \
+           $(SRC_DIR)/shell_loop_utils.c
 
 BUILTIN_SRC = $(BUILTIN_DIR)/exec_builtin.c \
               $(BUILTIN_DIR)/ft_cd.c \
@@ -70,9 +76,13 @@ HEREDOC_SRC = $(HEREDOC_DIR)/ft_mkstmp.c \
 SEARCH_EXEC_SRC = $(SEARCH_EXEC_DIR)/search_and_exec.c \
                   $(SEARCH_EXEC_DIR)/run_external_cmd.c \
                   $(SEARCH_EXEC_DIR)/find_command_path.c \
-                  $(SEARCH_EXEC_DIR)/ft_string_utils.c \
                   $(SEARCH_EXEC_DIR)/fucking_expand_value.c \
                   $(SEARCH_EXEC_DIR)/ft_itoa.c
+
+STRING_UTILS_SRC = $(STRING_UTILS_DIR)/string_basic.c \
+                   $(STRING_UTILS_DIR)/string_compare.c \
+                   $(STRING_UTILS_DIR)/string_copy.c \
+                   $(STRING_UTILS_DIR)/string_split.c
 
 LEXER_SRC = $(LEXER_DIR)/lexer.c
 
@@ -86,6 +96,17 @@ LEXER_UTILS_SRC = $(LEXER_UTILS_DIR)/prepend_tokens.c \
                   $(LEXER_UTILS_DIR)/word_cat.c \
                   $(LEXER_UTILS_DIR)/gen_word.c
 
+WORD_EXPANSION_SRC = $(WORD_EXPANSION_DIR)/ft_expand_word.c \
+                     $(WORD_EXPANSION_DIR)/expand_dollar.c \
+                     $(WORD_EXPANSION_DIR)/expand_wildcard_word.c \
+                     $(WORD_EXPANSION_DIR)/expand_plain_word.c \
+                     $(WORD_EXPANSION_DIR)/word_list_utils.c
+
+WORD_LIST_SRC = $(WORD_LIST_DIR)/gen_word_list.c \
+                $(WORD_LIST_DIR)/word_node_utils.c \
+                $(WORD_LIST_DIR)/quoted_word_handler.c \
+                $(WORD_LIST_DIR)/unquoted_word_handler.c
+
 PARSER_SRC = $(PARSER_DIR)/fucking_gen_tree.c \
              $(PARSER_DIR)/gen_command_node.c \
              $(PARSER_DIR)/gen_op_sep_sub_node.c \
@@ -95,6 +116,11 @@ PARSER_SRC = $(PARSER_DIR)/fucking_gen_tree.c \
              $(PARSER_DIR)/syntax_error.c
 
 FT_READLINE_SRC = $(FT_READLINE_DIR)/ft_readline.c
+
+READLINE_UTILS_SRC = $(READLINE_UTILS_DIR)/terminal_utils.c \
+                     $(READLINE_UTILS_DIR)/input_handlers.c \
+                     $(READLINE_UTILS_DIR)/history_navigation.c \
+                     $(READLINE_UTILS_DIR)/history_management.c
 
 SIGNAL_MANAGEMENT_SRC = $(SIGNAL_MANAGEMENT_DIR)/signal_management.c
 
@@ -108,12 +134,16 @@ SRCS = $(MAIN_SRC) \
        $(AST_TRAVERSAL_SRC) \
        $(HEREDOC_SRC) \
        $(SEARCH_EXEC_SRC) \
+       $(STRING_UTILS_SRC) \
        $(LEXER_SRC) \
        $(LEXER_UTILS_SRC) \
+       $(WORD_EXPANSION_SRC) \
+       $(WORD_LIST_SRC) \
        $(PARSER_SRC) \
        $(PARSER_UTILS_SRC) \
        $(SIGNAL_MANAGEMENT_SRC) \
-       $(FT_READLINE_SRC)
+       $(FT_READLINE_SRC) \
+       $(READLINE_UTILS_SRC)
 
 OBJS = $(SRCS:.c=.o)
 

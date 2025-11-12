@@ -29,6 +29,9 @@
 // # define HERE_TEMPLATE "/tmp/heredoc_tmp_XXXXX"
 # define HIST_MAX 1000
 
+// Forward declarations
+typedef struct s_shell	t_shell;
+
 // ECHOCTL value is depending on executing evironment.
 # ifndef ECHOCTL
 #  define ECHOCTL 0001000
@@ -47,22 +50,36 @@
 # define TOKEN_VALUE_HEREDOC "<<"
 # define TOKEN_VALUE_APPEND ">>"
 
-void				rl_replace_line(const char *text, int clear_undo);
+void					rl_replace_line(const char *text, int clear_undo);
 
 typedef struct s_hist
 {
-	size_t			idx;
-	size_t			size;
-	char			*hist_box[HIST_MAX];
-}					t_hist;
+	size_t				idx;
+	size_t				size;
+	int					cur;
+	char				*hist_box[HIST_MAX];
+}						t_hist;
+
+typedef struct s_readline_ctx
+{
+	size_t				*len;
+	t_hist				*hist;
+	const char			*prompt;
+}						t_readline_ctx;
+
+typedef struct s_expand_ctx
+{
+	t_shell				*shell;
+	size_t				word_list_count;
+}						t_expand_ctx;
 
 typedef struct s_env
 {
-	char			*key;
-	char			*value;
-	int				exported;
-	struct s_env	*next;
-}					t_env;
+	char				*key;
+	char				*value;
+	int					exported;
+	struct s_env		*next;
+}						t_env;
 
 typedef enum e_metachar
 {
@@ -76,7 +93,7 @@ typedef enum e_metachar
 	MT_SPACE,
 	MT_TAB,
 	MT_NEWLINE
-}					t_metachar;
+}						t_metachar;
 
 // token_type classifies which type the token belongs to.
 typedef enum e_token_type
@@ -95,19 +112,19 @@ typedef enum e_token_type
 	TK_RPAREN,
 	TK_DOLLER,
 	TK_EOF
-}					t_token_type;
+}						t_token_type;
 
 typedef struct s_token
 {
 	size_t size; // for dummy head to keep the len of the list.
-	size_t			count_newline;
-	struct s_token	*prev;
-	t_token_type	type;
-	bool			in_squote;
-	bool			in_dquote;
-	char			*value;
-	struct s_token	*next;
-}					t_token;
+	size_t				count_newline;
+	struct s_token		*prev;
+	t_token_type		type;
+	bool				in_squote;
+	bool				in_dquote;
+	char				*value;
+	struct s_token		*next;
+}						t_token;
 
 typedef enum e_node_type
 {
@@ -116,7 +133,7 @@ typedef enum e_node_type
 	NODE_AND,
 	NODE_OR,
 	NODE_SUBSHELL
-}					t_node_type;
+}						t_node_type;
 typedef enum e_redir_type
 {
 	REDIR_IN,
@@ -124,87 +141,87 @@ typedef enum e_redir_type
 	REDIR_APPEND,
 	REDIR_HEREDOC,
 	REDIR_OTHER
-}					t_redir_type;
+}						t_redir_type;
 typedef struct s_redir
 {
-	t_redir_type	type;
-	char			*filename;
-	bool			delim_quoted;
-	struct s_redir	*next;
-}					t_redir;
+	t_redir_type		type;
+	char				*filename;
+	bool				delim_quoted;
+	struct s_redir		*next;
+}						t_redir;
 
 typedef enum s_word_type
 {
 	WD_LITERAL,
 	WD_DOLLER,
 	WD_OTHER
-}					t_word_type;
+}						t_word_type;
 
 typedef struct s_word
 {
-	char			*word;
-	t_word_type		type;
-	bool			to_expand_doller;
-	bool			to_expand_wildcard;
-	struct s_word	*next;
-}					t_word;
+	char				*word;
+	t_word_type			type;
+	bool				to_expand_doller;
+	bool				to_expand_wildcard;
+	struct s_word		*next;
+}						t_word;
 typedef struct s_cmd
 {
-	t_word			*word_list;
-	char			**argv;
-	t_redir			*redir;
-}					t_cmd;
+	t_word				*word_list;
+	char				**argv;
+	t_redir				*redir;
+}						t_cmd;
 
 typedef struct s_fd
 {
-	int				stdin_backup;
-	int				stdout_backup;
-	int				pipe_write;
-	int				pipe_read;
-}					t_fd;
+	int					stdin_backup;
+	int					stdout_backup;
+	int					pipe_write;
+	int					pipe_read;
+}						t_fd;
 
 typedef struct s_ast
 {
-	struct s_ast	*parent;
-	struct s_ast	*subtree;
-	struct s_ast	*left;
-	t_node_type		type;
-	t_cmd			*cmd;
-	t_fd			open_fds;
-	struct s_ast	*right;
-}					t_ast;
+	struct s_ast		*parent;
+	struct s_ast		*subtree;
+	struct s_ast		*left;
+	t_node_type			type;
+	t_cmd				*cmd;
+	t_fd				open_fds;
+	struct s_ast		*right;
+}						t_ast;
 
 typedef struct s_result
 {
-	t_ast			*root;
-	int				exit_code;
-}					t_result;
+	t_ast				*root;
+	int					exit_code;
+}						t_result;
 
 typedef struct s_shell
 {
-	bool			interactive;
-	bool			in_pipe_child;
-	int				last_exit_status;
-	t_env			*env_list;
-	char			*pwd;
-	t_ast			*root;
-	t_token			*token_list;
-	char			*line_ptr;
-	t_hist			*hist;
-	t_result		res;
-}					t_shell;
+	bool				interactive;
+	bool				in_pipe_child;
+	int					last_exit_status;
+	t_env				*env_list;
+	char				*pwd;
+	t_ast				*root;
+	t_token				*token_list;
+	char				*line_ptr;
+	t_hist				*hist;
+	t_result			res;
+}						t_shell;
 
 typedef struct s_heredoc_ctx
 {
-	size_t			i;
-	t_shell			*shell;
-}					t_heredoc_ctx;
+	size_t				i;
+	t_shell				*shell;
+}						t_heredoc_ctx;
 
 typedef struct s_heredoc_params
 {
-	char			*delim;
-	bool			delim_quoted;
-	t_shell			*shell;
-}					t_heredoc_params;
+	char				*delim;
+	bool				delim_quoted;
+	t_shell				*shell;
+}						t_heredoc_params;
 
 #endif
