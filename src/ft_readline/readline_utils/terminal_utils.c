@@ -25,7 +25,16 @@ ssize_t	read_key(char *c)
 
 void	redraw_line(const char *prompt, const char *buf)
 {
+	size_t	prompt_len;
+	size_t	buf_len;
+
 	write(STDOUT_FILENO, "\r\x1b[K", 4);
-	write(STDOUT_FILENO, prompt, strlen(prompt));
-	write(STDOUT_FILENO, buf, strlen(buf));
+	prompt_len = 0;
+	if (prompt)
+		prompt_len = ft_strlen(prompt);
+	write(STDOUT_FILENO, prompt, prompt_len);
+	buf_len = 0;
+	if (buf)
+		buf_len = ft_strlen(buf);
+	write(STDOUT_FILENO, buf, buf_len);
 }

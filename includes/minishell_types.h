@@ -10,6 +10,7 @@
 # include <limits.h>
 // # include <readline/history.h>
 // # include <readline/readline.h>
+# include "../libft/libft.h"
 # include <signal.h>
 # include <stdbool.h>
 # include <stdio.h>   //printf()

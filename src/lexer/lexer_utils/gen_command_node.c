@@ -34,9 +34,9 @@ int	parse_redirection(t_redir **redir_head, t_token_type token_type,
 	set_redir_type(new_redir, token_type);
 	word = filename_token->word_list;
 	if (word && word->word)
-		filename = strdup(word->word);
+		filename = ft_strdup(word->word);
 	else
-		filename = strdup("");
+		filename = ft_strdup("");
 	new_redir->filename = filename;
 	if (!new_redir->filename)
 		return (-1);

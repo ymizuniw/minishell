@@ -26,9 +26,9 @@ static char	*create_env_string(const char *key, const char *value)
 	value_len = 0;
 	len = 0;
 	if (key)
-		key_len = strlen(key);
+		key_len = ft_strlen(key);
 	if (value)
-		value_len = strlen(value);
+		value_len = ft_strlen(value);
 	len = key_len + value_len + 2;
 	str = xmalloc(len);
 	if (!str)

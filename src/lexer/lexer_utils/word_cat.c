@@ -12,7 +12,8 @@ int	handle_quotation(char **word, size_t word_len, char const *input,
 	if (!quote_close)
 		return (0);
 	add_len = quote_close - &input[*idx] - 1;
-	*word = realloc(*word, sizeof(char) * (word_len + add_len + 1));
+	*word = ft_realloc(*word, sizeof(char) * (word_len + 1), sizeof(char)
+			* (word_len + add_len + 1));
 	if (!*word)
 		return (-1);
 	strncpy(*word + word_len, &input[*idx + 1], add_len);
@@ -36,7 +37,8 @@ int	handle_plain(char **word, size_t *word_len, char const *input,
 	add_len = &input[*idx] - tmp_ptr;
 	if (add_len == 0)
 		return (-1);
-	*word = realloc(*word, sizeof(char) * (*word_len + (add_len) + 1));
+	*word = ft_realloc(*word, sizeof(char) * (*word_len + 1), sizeof(char)
+			* (*word_len + (add_len) + 1));
 	if (!*word)
 		return (-1);
 	strncpy(*word + *word_len, tmp_ptr, add_len);
@@ -64,7 +66,8 @@ size_t	word_cat(char **word, size_t word_len, char const *input,
 			if (d_close)
 			{
 				ext_len = (size_t)(d_close - &input[*idx + 1]);
-				*word = realloc(*word, sizeof(char) * (word_len + ext_len + 1));
+				*word = ft_realloc(*word, sizeof(char) * (word_len + 1),
+						sizeof(char) * (word_len + ext_len + 1));
 				if (!*word)
 					return (0);
 				memcpy(*word + word_len, &input[*idx + 1], ext_len);

@@ -4,7 +4,7 @@
 char	*ft_strndup(const char *s, size_t n)
 {
 	char	*str;
-	int		i;
+	size_t	i;
 
 	i = 0;
 	str = malloc(n + 1);
@@ -19,13 +19,13 @@ char	*ft_strndup(const char *s, size_t n)
 	return (str);
 }
 
-int	main(void)
-{
-	char	*str;
-	char	*res;
+// int	main(void)
+// {
+// 	char	*str;
+// 	char	*res;
 
-	str = "hello";
-	res = ft_strndup(str, 3);
-	printf("%s\n", res);
-	return (0);
-}
+// 	str = "hello";
+// 	res = ft_strndup(str, 3);
+// 	printf("%s\n", res);
+// 	return (0);
+// }

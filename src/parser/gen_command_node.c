@@ -30,7 +30,7 @@ int	parse_redirection(t_redir **redir_head, t_token_type token_type,
 	memset(new_redir, 0, sizeof(t_redir));
 	append_redir(redir_head, new_redir);
 	set_redir_type(new_redir, token_type);
-	new_redir->filename = strdup(filename_token->value);
+	new_redir->filename = ft_strdup(filename_token->value);
 	if (!new_redir->filename)
 		return (-1);
 	if (new_redir->type == REDIR_HEREDOC)
@@ -54,7 +54,7 @@ int	parse_simple_command(t_word **word_list, t_token *command_token)
 	addition = 0;
 	value_len = 0;
 	if (command_token->value)
-		value_len = strlen(command_token->value);
+		value_len = ft_strlen(command_token->value);
 	new_argv = gen_word(command_token->value, value_len, &addition);
 	// If token is in single quotes, disable dollar expansion
 	if (command_token->in_squote && new_argv)

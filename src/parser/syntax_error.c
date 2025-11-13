@@ -24,6 +24,7 @@ void	syntax_error(t_token_type type)
 	else if (type == TK_APPEND)
 		token = TOKEN_VALUE_APPEND;
 	write(2, SYNTAX_ERR_TEMPLATE, SYNTAX_ERR_TEMPLATE_LEN);
-	write(2, token, strlen(token));
+	if (token)
+		write(2, token, ft_strlen(token));
 	write(2, "`\n", 2);
 }

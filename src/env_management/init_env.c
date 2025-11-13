@@ -11,7 +11,7 @@ static int	process_env_entry(t_shell *shell, char *envp_entry)
 	value = extract_value(envp_entry);
 	if (value == NULL)
 	{
-		value = strdup("");
+		value = ft_strdup("");
 		if (!value)
 			return (xfree(key), 0);
 	}

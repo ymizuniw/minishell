@@ -13,9 +13,9 @@ static char	*expand_exit_status(char **res, t_shell *shell, size_t *i)
 	res_len = 0;
 	s_len = 0;
 	if (*res)
-		res_len = strlen(*res);
+		res_len = ft_strlen(*res);
 	if (s)
-		s_len = strlen(s);
+		s_len = ft_strlen(s);
 	if (!join_value(res, s, res_len, s_len))
 		return (xfree(s), xfree(*res), NULL);
 	xfree(s);
@@ -47,10 +47,10 @@ static char	*expand_variable(char **res, const char *line, size_t len,
 		val = "";
 	res_len = 0;
 	val_len = 0;
-	if (res)
-		res_len = strlen(*res);
+	if (*res)
+		res_len = ft_strlen(*res);
 	if (val)
-		val_len = strlen(val);
+		val_len = ft_strlen(val);
 	if (!join_value(res, val, res_len, val_len))
 		return (xfree(varname), xfree(*res), NULL);
 	return (xfree(varname), *res);
@@ -65,7 +65,7 @@ static char	*heredoc_value_expansion(const char *line, bool in_quote,
 	size_t			res_len;
 
 	ctx = (t_heredoc_ctx){0, shell};
-	res = strdup("");
+	res = ft_strdup("");
 	if (!res)
 		return (NULL);
 	while (ctx.i < len)
@@ -87,7 +87,7 @@ static char	*heredoc_value_expansion(const char *line, bool in_quote,
 			tmp[1] = '\0';
 			res_len = 0;
 			if (res)
-				res_len = strlen(res);
+				res_len = ft_strlen(res);
 			if (!join_value(&res, tmp, res_len, 1))
 				return (xfree(res), NULL);
 		}
@@ -104,12 +104,14 @@ static int	process_heredoc_line(char **document, size_t *document_len,
 
 	line_len = 0;
 	if (line)
-		line_len = strlen(line);
+		line_len = ft_strlen(line);
 	value = heredoc_value_expansion(line, params->delim_quoted, line_len,
 			params->shell);
 	if (!value)
 		return (free(line), -1);
-	value_len = strlen(value);
+	value_len = 0;
+	if (value)
+		value_len = ft_strlen(value);
 	if (!join_value(document, value, *document_len, value_len))
 		return (free(line), free(value), -1);
 	*document_len += value_len;

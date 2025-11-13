@@ -18,11 +18,11 @@ t_env	*find_env(t_env *env_list, const char *key)
 	size_t	key_len;
 
 	key_len = 0;
+	if (key)
+		key_len = ft_strlen(key);
 	current = env_list;
 	while (current)
 	{
-		if (key)
-			key_len = strlen(key);
 		if (strncmp(current->key, key, key_len + 1) == 0)
 			return (current);
 		current = current->next;
@@ -53,14 +53,14 @@ char	*extract_value(const char *str)
 	equal_sign = strchr(str, '=');
 	if (!equal_sign)
 		return (NULL);
-	return (strdup(equal_sign + 1));
+	return (ft_strdup(equal_sign + 1));
 }
 
 static int	update_existing_var(t_env *current, char *value, int exported)
 {
 	char	*dup;
 
-	dup = strdup(value);
+	dup = ft_strdup(value);
 	if (!dup)
 		return (0);
 	xfree(current->value);
@@ -77,10 +77,10 @@ static t_env	*create_new_env(char *key, char *value, int exported)
 	new = xmalloc(sizeof(t_env));
 	if (!new)
 		return (NULL);
-	new->key = strdup(key);
+	new->key = ft_strdup(key);
 	if (!new->key)
 		return (xfree(new), NULL);
-	new->value = strdup(value);
+	new->value = ft_strdup(value);
 	if (!new->value)
 		return (xfree(new->key), xfree(new), NULL);
 	new->exported = exported;
@@ -97,11 +97,11 @@ void	set_variable(t_shell *shell, char *key, char *value, int exported)
 	key_len = 0;
 	if (!shell || !key || !value)
 		return ;
+	if (key)
+		key_len = ft_strlen(key);
 	current = shell->env_list;
 	while (current)
 	{
-		if (key)
-			key_len = strlen(key);
 		if (strncmp(current->key, key, key_len + 1) == 0)
 		{
 			update_existing_var(current, value, exported);

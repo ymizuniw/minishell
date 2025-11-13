@@ -72,7 +72,7 @@ t_word	*process_quoted_content(const char *content, size_t len,
 	}
 	if (!head)
 	{
-		head = create_word_node(strdup(""), WD_LITERAL, false, false);
+		head = create_word_node(ft_strdup(""), WD_LITERAL, false, false);
 		if (!head || !head->word)
 			return (free_word_list(head), NULL);
 	}

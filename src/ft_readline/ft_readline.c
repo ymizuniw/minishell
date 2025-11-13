@@ -63,13 +63,13 @@ char	*ft_readline(const char *prompt, t_hist *hist)
 
 	if (!isatty(STDIN_FILENO))
 		return (read_non_interactive());
-	buf = calloc(1024, 1);
+	buf = ft_calloc(1024, 1);
 	if (!buf)
 		return (NULL);
 	len = 0;
 	ctx = (t_readline_ctx){&len, hist, prompt};
 	enable_raw_mode(&orig);
-	write(STDOUT_FILENO, prompt, strlen(prompt));
+	write(STDOUT_FILENO, prompt, ft_strlen(prompt));
 	if (read_loop(buf, &len, &ctx) == -1)
 		return (disable_raw_mode(&orig), free(buf), NULL);
 	write(STDOUT_FILENO, "\n", 1);

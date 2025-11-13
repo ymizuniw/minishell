@@ -26,16 +26,18 @@ static char	**init_matches_array(size_t *cap)
 static int	add_match(char ***matches, size_t *count, size_t *cap, char *name)
 {
 	char	**tmp;
+	size_t	old_size;
 
 	if (*count + 1 >= *cap)
 	{
+		old_size = sizeof(char *) * (*cap);
 		*cap *= 2;
-		tmp = realloc(*matches, sizeof(char *) * (*cap));
+		tmp = ft_realloc(*matches, old_size, sizeof(char *) * (*cap));
 		if (!tmp)
 			return (-1);
 		*matches = tmp;
 	}
-	(*matches)[*count] = strdup(name);
+	(*matches)[*count] = ft_strdup(name);
 	(*count)++;
 	return (1);
 }

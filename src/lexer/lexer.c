@@ -50,7 +50,7 @@ int	handle_doller(t_token *token_head, size_t *idx)
 		return (-1);
 	memset(new, 0, sizeof(t_token));
 	new->type = TK_DOLLER;
-	new->value = strdup("$");
+	new->value = ft_strdup("$");
 	if (!new->value)
 		return (-1);
 	prepend_tokens(token_head, new);
@@ -117,7 +117,7 @@ int	handle_eof(t_token *token_head)
 	if (!new)
 		return (-1);
 	new->type = TK_EOF;
-	new->value = strdup("");
+	new->value = ft_strdup("");
 	new->next = NULL;
 	token_add_back(&token_head, new);
 	return (1);
@@ -166,7 +166,9 @@ t_token	*lexer(const char *input)
 		return (NULL);
 	dummy_head->type = TK_HEAD;
 	idx = 0;
-	input_len = strlen(input);
+	input_len = 0;
+	if (input)
+		input_len = ft_strlen(input);
 	while (idx < input_len)
 	{
 		if (input[idx] && isspace((unsigned char)input[idx])

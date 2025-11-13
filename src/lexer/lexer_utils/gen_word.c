@@ -1,159 +1,180 @@
 #include "../../../includes/minishell.h"
 
 // Forward declarations
-char	**ft_expand_word(t_word *word_list, t_shell *shell);
-char	*expand_doller(t_word *word, t_shell *shell);
-char	**expand_wildcard(const char *pattern, const char *path,
-                       size_t *wildcard_count);
-size_t	quote_close_place(char quote, char *value, size_t i);
-size_t	count_word_list(t_word *word);
+char		**ft_expand_word(t_word *word_list, t_shell *shell);
+char		*expand_doller(t_word *word, t_shell *shell);
+char		**expand_wildcard(const char *pattern, const char *path,
+				size_t *wildcard_count);
+size_t		quote_close_place(char quote, char *value, size_t i);
+size_t		count_word_list(t_word *word);
 
 // Extract a substring from src between start and end indices
-char	*ext_unit(char *src, size_t start, size_t end) {
-  char *unit;
-  size_t len;
+char	*ext_unit(char *src, size_t start, size_t end)
+{
+	char	*unit;
+	size_t	len;
 
-  len = end - start;
-  unit = xmalloc(sizeof(char) * (len + 1));
-  if (unit == NULL)
-    return (NULL);
-  strncpy(unit, &src[start], len);
-  unit[len] = '\0';
-  return (unit);
+	len = end - start;
+	unit = xmalloc(sizeof(char) * (len + 1));
+	if (unit == NULL)
+		return (NULL);
+	strncpy(unit, &src[start], len);
+	unit[len] = '\0';
+	return (unit);
 }
 
 // Join two strings by reallocating and concatenating
-int	join_value(char **res, const char *value, size_t size1, size_t size2) {
-  *res = realloc(*res, sizeof(char) * (size1 + size2 + 1));
-  if (*res == NULL)
-    return (0);
-  strncpy(*res + size1, value, size2);
-  (*res)[size1 + size2] = '\0';
-  return (1);
+int	join_value(char **res, const char *value, size_t size1, size_t size2)
+{
+	*res = ft_realloc(*res, sizeof(char) * (size1 + 1), sizeof(char) * (size1
+				+ size2 + 1));
+	if (*res == NULL)
+		return (0);
+	strncpy(*res + size1, value, size2);
+	(*res)[size1 + size2] = '\0';
+	return (1);
 }
 
-size_t	quote_close_place(char quote, char *value, size_t i) {
-  if (value == NULL)
-    return (0);
-  while (value[i] != '\0') {
-    if (value[i] == quote)
-      return (i);
-    i++;
-  }
-  return (0);
+size_t	quote_close_place(char quote, char *value, size_t i)
+{
+	if (value == NULL)
+		return (0);
+	while (value[i] != '\0')
+	{
+		if (value[i] == quote)
+			return (i);
+		i++;
+	}
+	return (0);
 }
 
-typedef struct s_gen_word {
-  t_word *word;
-  size_t value_len;
-  size_t start;
-  char quote;
-  size_t close_place;
-}		t_gen_word;
+typedef struct s_gen_word
+{
+	t_word	*word;
+	size_t	value_len;
+	size_t	start;
+	char	quote;
+	size_t	close_place;
+}			t_gen_word;
 
 // give start idx,
-int	quote_wrapper(t_gen_word *gw, char *value, size_t *i) {
-  if (gw->quote == '\'')
-    gw->word->to_expand_doller = false;
-  else
-    gw->word->to_expand_doller = true;
-  gw->word->to_expand_wildcard = false;
-  gw->word->word = ext_unit(value, gw->start + 1, gw->close_place);
-  if (!gw->word->word)
-    return (-1);
-  *i = gw->close_place + 1;
-  return (1);
+int	quote_wrapper(t_gen_word *gw, char *value, size_t *i)
+{
+	if (gw->quote == '\'')
+		gw->word->to_expand_doller = false;
+	else
+		gw->word->to_expand_doller = true;
+	gw->word->to_expand_wildcard = false;
+	gw->word->word = ext_unit(value, gw->start + 1, gw->close_place);
+	if (!gw->word->word)
+		return (-1);
+	*i = gw->close_place + 1;
+	return (1);
 }
 int	doller_literal_wrapper(t_gen_word *gw, char *value, size_t value_len,
-                           size_t *i) {
-  assert(gw);
-  assert(gw->word);
-  if (value && value[*i] == '$') {
-    (*i)++;
-    // Check if $ is followed by valid variable name characters
-    // Special single-character variables: ?, *, @, #, $, !, 0-9
-    if (*i < value_len &&
-        (value[*i] == '?' || value[*i] == '*' || value[*i] == '@' ||
-         value[*i] == '#' || value[*i] == '$' || value[*i] == '!' ||
-         isdigit(value[*i]))) {
-      gw->word->type = WD_DOLLER;
-      gw->word->to_expand_doller = true;
-      (*i)++;
-    }
-    // Regular variable names: alphanumeric and underscore
-    else if (*i < value_len && (isalpha(value[*i]) || value[*i] == '_')) {
-      gw->word->type = WD_DOLLER;
-      gw->word->to_expand_doller = true;
-      while (*i < value_len && (isalnum(value[*i]) || value[*i] == '_'))
-        (*i)++;
-    }
-    // Lone $ with no valid variable name following - treat as literal
-    else {
-      gw->word->type = WD_LITERAL;
-      gw->word->to_expand_doller = false;
-      // i is already incremented past the $
-    }
-  } else {
-    gw->word->type = WD_LITERAL;
-    while (*i < value_len && !is_quote(value[*i]) && value[*i] != '$') {
-      if (gw->word->type == WD_DOLLER && value[*i] == '*')
-        break ;
-      if (gw->word->type != WD_DOLLER && value[*i] == '*')
-        gw->word->to_expand_wildcard = true;
-      (*i)++;
-    }
-  }
-  return (1);
+		size_t *i)
+{
+	assert(gw);
+	assert(gw->word);
+	if (value && value[*i] == '$')
+	{
+		(*i)++;
+		// Check if $ is followed by valid variable name characters
+		// Special single-character variables: ?, *, @, #, $, !, 0-9
+		if (*i < value_len && (value[*i] == '?' || value[*i] == '*'
+				|| value[*i] == '@' || value[*i] == '#' || value[*i] == '$'
+				|| value[*i] == '!' || isdigit(value[*i])))
+		{
+			gw->word->type = WD_DOLLER;
+			gw->word->to_expand_doller = true;
+			(*i)++;
+		}
+		// Regular variable names: alphanumeric and underscore
+		else if (*i < value_len && (isalpha(value[*i]) || value[*i] == '_'))
+		{
+			gw->word->type = WD_DOLLER;
+			gw->word->to_expand_doller = true;
+			while (*i < value_len && (isalnum(value[*i]) || value[*i] == '_'))
+				(*i)++;
+		}
+		// Lone $ with no valid variable name following - treat as literal
+		else
+		{
+			gw->word->type = WD_LITERAL;
+			gw->word->to_expand_doller = false;
+			// i is already incremented past the $
+		}
+	}
+	else
+	{
+		gw->word->type = WD_LITERAL;
+		while (*i < value_len && !is_quote(value[*i]) && value[*i] != '$')
+		{
+			if (gw->word->type == WD_DOLLER && value[*i] == '*')
+				break ;
+			if (gw->word->type != WD_DOLLER && value[*i] == '*')
+				gw->word->to_expand_wildcard = true;
+			(*i)++;
+		}
+	}
+	return (1);
 }
 
-int	init_gen_word_data(t_word **word, t_gen_word *gw, char *value, size_t *i) {
-  *word = (t_word *)xcalloc(sizeof(t_word));
-  if (*word == NULL)
-    return (-1);
-  memset(gw, 0, sizeof(t_gen_word));
-  gw->quote = is_quote(value[*i]);
-  gw->close_place = 0;
-  gw->word = *word;
-  return (1);
+int	init_gen_word_data(t_word **word, t_gen_word *gw, char *value, size_t *i)
+{
+	*word = (t_word *)xcalloc(sizeof(t_word));
+	if (*word == NULL)
+		return (-1);
+	memset(gw, 0, sizeof(t_gen_word));
+	gw->quote = is_quote(value[*i]);
+	gw->close_place = 0;
+	gw->word = *word;
+	return (1);
 }
 
-t_word	*loop_wrapper(char *value, size_t value_len, size_t *i) {
-  t_word *word;
-  t_gen_word gw;
+t_word	*loop_wrapper(char *value, size_t value_len, size_t *i)
+{
+	t_word		*word;
+	t_gen_word	gw;
 
-  if (init_gen_word_data(&word, &gw, value, i) < 0)
-    return (NULL);
-  gw.start = *i;
-  if (gw.quote != '\0')
-    gw.close_place = quote_close_place(gw.quote, value, ++(*i));
-  if (gw.quote != '\0' && gw.close_place > 0) {
-    if (quote_wrapper(&gw, value, i) < 0)
-      return (xfree(word), NULL);
-  } else {
-    doller_literal_wrapper(&gw, value, value_len, i);
-    word->word = ext_unit(value, gw.start, *i);
-    if (!word->word)
-      return (xfree(word), NULL);
-  }
-  return (word);
+	if (init_gen_word_data(&word, &gw, value, i) < 0)
+		return (NULL);
+	gw.start = *i;
+	if (gw.quote != '\0')
+		gw.close_place = quote_close_place(gw.quote, value, ++(*i));
+	if (gw.quote != '\0' && gw.close_place > 0)
+	{
+		if (quote_wrapper(&gw, value, i) < 0)
+			return (xfree(word), NULL);
+	}
+	else
+	{
+		doller_literal_wrapper(&gw, value, value_len, i);
+		word->word = ext_unit(value, gw.start, *i);
+		if (!word->word)
+			return (xfree(word), NULL);
+	}
+	return (word);
 }
 
 // Generate word tokens from value string
-t_word	*gen_word(char *value, size_t value_len, size_t *addition) {
-  size_t i;
-  t_word *head;
-  t_word *word;
+t_word	*gen_word(char *value, size_t value_len, size_t *addition)
+{
+	size_t	i;
+	t_word	*head;
+	t_word	*word;
 
-  head = NULL;
-  word = NULL;
-  i = 0;
-  head = NULL;
-  while (i < value_len) {
-    word = loop_wrapper(value, value_len, &i);
-    if (word == NULL)
-      return (free_word_list(head), NULL);
-    head = append_node(head, word);
-  }
-  *addition = i;
-  return (head);
+	head = NULL;
+	word = NULL;
+	i = 0;
+	head = NULL;
+	while (i < value_len)
+	{
+		word = loop_wrapper(value, value_len, &i);
+		if (word == NULL)
+			return (free_word_list(head), NULL);
+		head = append_node(head, word);
+	}
+	*addition = i;
+	return (head);
 }

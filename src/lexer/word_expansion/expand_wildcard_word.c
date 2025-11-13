@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:30:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/13 09:55:32 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/13 11:44:50 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 static char	**resize_result(char **res, size_t old_count, size_t new_count)
 {
 	char	**new_res;
+	size_t	old_size;
 
-	new_res = realloc(res, sizeof(char *) * (old_count + new_count + 1));
+	old_size = sizeof(char *) * (old_count + 1);
+	new_res = ft_realloc(res, old_size, sizeof(char *) * (old_count + new_count
+				+ 1));
 	return (new_res);
 }
 
@@ -28,7 +31,7 @@ static int	copy_wildcards(char **res, char **wildcards, size_t *i,
 	j = 0;
 	while (j < count)
 	{
-		res[*i] = strdup(wildcards[j]);
+		res[*i] = ft_strdup(wildcards[j]);
 		if (!res[*i])
 			return (0);
 		(*i)++;
@@ -51,7 +54,7 @@ int	expand_wildcard_to_result(t_word *word, char ***res, size_t *i,
 	if (wildcard_count == 0)
 	{
 		free_double_array(wildcard_arr);
-		(*res)[*i] = strdup(word->word);
+		(*res)[*i] = ft_strdup(word->word);
 		if (!(*res)[*i])
 			return (0);
 		(*i)++;

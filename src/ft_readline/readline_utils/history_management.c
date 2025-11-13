@@ -6,7 +6,7 @@ void	add_history(char *line, t_hist *hist)
 		return ;
 	if (hist->hist_box[hist->idx] != NULL)
 		free(hist->hist_box[hist->idx]);
-	hist->hist_box[hist->idx] = strdup(line);
+	hist->hist_box[hist->idx] = ft_strdup(line);
 	hist->idx = (hist->idx + 1) % HIST_MAX;
 	if (hist->size < HIST_MAX)
 		hist->size++;
