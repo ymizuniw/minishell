@@ -5,11 +5,11 @@ int	is_valid_varname(const char *var)
 	size_t	i;
 
 	i = 0;
-	if (!var || !(isalpha(var[0]) || var[0] == '_'))
+	if (!var || !(ft_isalpha(var[0]) || var[0] == '_'))
 		return (0);
 	while (var[i])
 	{
-		if (!(isalnum(var[i]) || var[i] == '_'))
+		if (!(ft_isalnum(var[i]) || var[i] == '_'))
 			return (0);
 		i++;
 	}

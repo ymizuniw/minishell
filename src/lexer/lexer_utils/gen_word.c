@@ -83,18 +83,19 @@ int	doller_literal_wrapper(t_gen_word *gw, char *value, size_t value_len,
 		// Special single-character variables: ?, *, @, #, $, !, 0-9
 		if (*i < value_len && (value[*i] == '?' || value[*i] == '*'
 				|| value[*i] == '@' || value[*i] == '#' || value[*i] == '$'
-				|| value[*i] == '!' || isdigit(value[*i])))
+				|| value[*i] == '!' || ft_isdigit(value[*i])))
 		{
 			gw->word->type = WD_DOLLER;
 			gw->word->to_expand_doller = true;
 			(*i)++;
 		}
 		// Regular variable names: alphanumeric and underscore
-		else if (*i < value_len && (isalpha(value[*i]) || value[*i] == '_'))
+		else if (*i < value_len && (ft_isalpha(value[*i]) || value[*i] == '_'))
 		{
 			gw->word->type = WD_DOLLER;
 			gw->word->to_expand_doller = true;
-			while (*i < value_len && (isalnum(value[*i]) || value[*i] == '_'))
+			while (*i < value_len && (ft_isalnum(value[*i])
+					|| value[*i] == '_'))
 				(*i)++;
 		}
 		// Lone $ with no valid variable name following - treat as literal

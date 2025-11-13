@@ -12,7 +12,7 @@ static t_word	*process_dollar_in_quote(const char *content, size_t *i,
 		(*i)++;
 	else
 	{
-		while (*i < len && (isalnum(content[*i]) || content[*i] == '_'))
+		while (*i < len && (ft_isalnum(content[*i]) || content[*i] == '_'))
 			(*i)++;
 	}
 	if (*i > start)

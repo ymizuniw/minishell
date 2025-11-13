@@ -34,7 +34,7 @@ static char	*expand_variable(char **res, const char *line, size_t len,
 	size_t		val_len;
 
 	start = ++ctx->i;
-	while (ctx->i < len && (isalnum((unsigned char)line[ctx->i])
+	while (ctx->i < len && (ft_isalnum((unsigned char)line[ctx->i])
 			|| line[ctx->i] == '_'))
 		ctx->i++;
 	varname = ext_unit((char *)line, start, ctx->i);

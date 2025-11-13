@@ -132,7 +132,7 @@ int	handle_internal_separator(t_token *token_head, char const *input,
 		if (handle_newline(idx) < 0)
 			return (-1);
 	}
-	if (input[*idx] && isspace((unsigned char)input[*idx]))
+	if (input[*idx] && ft_isspace((unsigned char)input[*idx]))
 		(*idx)++;
 	return (1);
 }
@@ -171,7 +171,7 @@ t_token	*lexer(const char *input)
 		input_len = ft_strlen(input);
 	while (idx < input_len)
 	{
-		if (input[idx] && isspace((unsigned char)input[idx])
+		if (input[idx] && ft_isspace((unsigned char)input[idx])
 			&& handle_internal_separator(dummy_head, input, &idx) < 0)
 			return (NULL);
 		if (idx >= input_len)

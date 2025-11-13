@@ -45,14 +45,14 @@ static int	expand_single_dollar(char **word_ptr, char **expanded, size_t *len,
 	size_t	key_len;
 	int		ret;
 
-	if (!(*word_ptr)[1] || (!isalnum((*word_ptr)[1]) && (*word_ptr)[1] != '_'
+	if (!(*word_ptr)[1] || (!ft_isalnum((*word_ptr)[1]) && (*word_ptr)[1] != '_'
 			&& (*word_ptr)[1] != '?'))
 		return (append_to_expanded(expanded, len, "$", 1), (*word_ptr)++, 1);
 	key_len = 0;
 	if ((*word_ptr)[1] == '?')
 		key_len = 1;
-	while (key_len == 0 && (isalnum((*word_ptr)[1 + key_len]) || (*word_ptr)[1
-			+ key_len] == '_'))
+	while (key_len == 0 && (ft_isalnum((*word_ptr)[1 + key_len])
+			|| (*word_ptr)[1 + key_len] == '_'))
 		key_len++;
 	key = strndup(*word_ptr + 1, key_len);
 	if (!key)

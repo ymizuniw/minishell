@@ -10,9 +10,9 @@ t_word	*handle_unquoted_word(const char *input, size_t input_len, size_t *idx)
 	start = *idx;
 	len = 0;
 	has_wildcard = false;
-	while (start + len < input_len && !isspace((int)input[start + len])
-		&& is_meta_char(input[start + len]) == MT_OTHER && !is_quote(input[start
-			+ len]))
+	while (start + len < input_len && !ft_isspace((unsigned char)input[start
+			+ len]) && is_meta_char(input[start + len]) == MT_OTHER
+		&& !is_quote(input[start + len]))
 	{
 		if (input[start + len] == '*')
 			has_wildcard = true;
@@ -37,8 +37,8 @@ t_word	*handle_unclosed_quote(const char *input, size_t input_len, size_t *idx)
 
 	start = *idx;
 	len = 0;
-	while (start + len < input_len && !isspace((int)input[start + len])
-		&& is_meta_char(input[start + len]) == MT_OTHER)
+	while (start + len < input_len && !ft_isspace((unsigned char)input[start
+			+ len]) && is_meta_char(input[start + len]) == MT_OTHER)
 	{
 		if (input[start + len] == '$')
 			break ;
@@ -67,7 +67,7 @@ t_word	*handle_doller_word(const char *input, size_t input_len, size_t *idx)
 		len = 1;
 	else
 	{
-		while (start + len < input_len && (isalnum(input[start + len])
+		while (start + len < input_len && (ft_isalnum(input[start + len])
 				|| input[start + len] == '_'))
 			len++;
 	}

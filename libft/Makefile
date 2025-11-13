@@ -28,6 +28,19 @@ SRCS = \
     ft_strndup.c \
     ft_strstr.c \
     ft_substr.c \
+    ft_isalpha.c \
+    ft_isdigit.c \
+    ft_isascii.c \
+    ft_isprint.c \
+    ft_tolower.c \
+    ft_toupper.c \
+    ft_strrchr.c \
+    ft_strnstr.c \
+    ft_strtrim.c \
+    ft_striteri.c \
+    ft_strmapi.c \
+    ft_putendl_fd.c \
+    ft_putnbr_fd.c \
     get_next_line/get_next_line.c
 
 OBJS = $(SRCS:.c=.o)

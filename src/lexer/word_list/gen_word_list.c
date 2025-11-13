@@ -7,7 +7,7 @@ t_word	*gen_word_list(const char *input, size_t input_len, size_t *idx)
 	char	quote;
 
 	word_list = NULL;
-	while (*idx < input_len && !isspace((int)input[*idx])
+	while (*idx < input_len && !ft_isspace((unsigned char)input[*idx])
 		&& is_meta_char(input[*idx]) == MT_OTHER)
 	{
 		quote = is_quote(input[*idx]);

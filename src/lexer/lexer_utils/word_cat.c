@@ -31,7 +31,7 @@ int	handle_plain(char **word, size_t *word_len, char const *input,
 
 	add_len = 0;
 	tmp_ptr = &input[*idx];
-	while (*idx < input_len && !isspace((int)input[*idx])
+	while (*idx < input_len && !ft_isspace((unsigned char)input[*idx])
 		&& is_meta_char(input[*idx]) == MT_OTHER)
 		(*idx)++;
 	add_len = &input[*idx] - tmp_ptr;
@@ -56,7 +56,7 @@ size_t	word_cat(char **word, size_t word_len, char const *input,
 	size_t	ext_len;
 
 	// printf("\n==word_cat() called.==\ninput[%zu]: %s\n", *idx, &input[*idx]);
-	while (*idx < input_len && !isspace((int)input[*idx])
+	while (*idx < input_len && !ft_isspace((unsigned char)input[*idx])
 		&& is_meta_char(input[*idx]) == MT_OTHER)
 	{
 		q_open = is_quote(input[*idx]);
