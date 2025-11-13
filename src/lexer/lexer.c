@@ -12,30 +12,9 @@ int	init_token(t_token **token_head)
 	return (1);
 }
 
-// Handle the newline token
-int	handle_newline(t_token *token_head, const char *input, size_t *idx)
+// Handle the newline - just skip it
+static int	handle_newline(size_t *idx)
 {
-	t_token	*new;
-	char	prev;
-
-	if (*idx > 0)
-	{
-		prev = input[*idx - 1];
-		if (prev == '|' || prev == '&' || prev == '(')
-		{
-			(*idx)++;
-			return (1);
-		}
-	}
-	new = alloc_token();
-	if (!new)
-		return (-1);
-	memset(new, 0, sizeof(t_token));
-	new->type = TK_NEWLINE;
-	new->value = strdup("\n");
-	if (!new->value)
-		return (-1);
-	prepend_tokens(token_head, new);
 	(*idx)++;
 	return (1);
 }
@@ -150,7 +129,7 @@ int	handle_internal_separator(t_token *token_head, char const *input,
 	if (input[*idx] && input[*idx] == '\n')
 	{
 		token_head->count_newline++;
-		if (handle_newline(token_head, input, idx) < 0)
+		if (handle_newline(idx) < 0)
 			return (-1);
 	}
 	if (input[*idx] && isspace((unsigned char)input[*idx]))

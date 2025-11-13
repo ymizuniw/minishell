@@ -89,7 +89,12 @@ void	free_result(t_result *p)
 
 void	free_shell(t_shell *shell)
 {
-	free_hist_box(shell->hist->hist_box);
+	if (shell->stdin_backup >= 0)
+		close(shell->stdin_backup);
+	if (shell->stdout_backup >= 0)
+		close(shell->stdout_backup);
+	if (shell->hist)
+		free_hist_box(shell->hist->hist_box);
 	free_env_list(shell->env_list);
 	free_ast_tree(shell->root);
 	free_token_list(shell->token_list);

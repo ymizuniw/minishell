@@ -31,7 +31,7 @@ int	token_is_redirection(t_token_type type)
 
 int	token_is_newline_or_eof(t_token_type type)
 {
-	if (type == TK_NEWLINE || type == TK_EOF)
+	if (type == TK_EOF)
 		return (1);
 	return (0);
 }

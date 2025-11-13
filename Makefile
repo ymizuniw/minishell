@@ -147,25 +147,34 @@ SRCS = $(MAIN_SRC) \
 
 OBJS = $(SRCS:.c=.o)
 
+# LIBFT
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
+
 # COMPILATION RULES
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(CPPFLAGS) -lreadline -o $(NAME)
-
 all: $(NAME)
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
+$(NAME): $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LDFLAGS) $(CPPFLAGS) -lreadline -o $(NAME)
 
 clean:
 	rm -f $(OBJS)
+	$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
 # Integration tests (non-interactive harness)
-.PHONY: integration-tests
+.PHONY: all clean fclean re integration-tests
 integration-tests: $(NAME)
 	@echo "Running integration tests (Bash harness)"
 	@bash tests/integration/integration_tests.sh || exit 1

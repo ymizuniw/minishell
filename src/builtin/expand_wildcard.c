@@ -51,11 +51,18 @@ char	**expand_wildcard(const char *pattern, const char *path,
 	size_t			cap;
 	int				only_wild;
 
-	keys = NULL;
 	dirp = opendir(path);
 	if (!dirp)
 		return (NULL);
 	only_wild = check_only_wildcards(pattern);
+	if (!only_wild)
+	{
+		keys = ft_split(pattern, '*');
+		if (!keys)
+			return (closedir(dirp), NULL);
+	}
+	else
+		keys = NULL;
 	matches = init_matches_array(&cap);
 	if (!matches)
 		return (closedir(dirp), NULL);
@@ -64,7 +71,7 @@ char	**expand_wildcard(const char *pattern, const char *path,
 	{
 		if (dent->d_name[0] == '.' && pattern[0] != '.')
 			continue ;
-		if (only_wild || match_to_keys(keys, dent->d_name))
+		if (only_wild || match_to_keys(keys, dent->d_name, pattern))
 			if (add_match(&matches, &count, &cap, dent->d_name) < 0)
 				break ;
 	}

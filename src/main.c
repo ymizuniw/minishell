@@ -102,6 +102,8 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	memset(&shell, 0, sizeof(t_shell));
+	shell.stdin_backup = -1;
+	shell.stdout_backup = -1;
 	if (isatty(STDIN_FILENO) == 1)
 		shell.interactive = true;
 	signal_initializer(shell.interactive);

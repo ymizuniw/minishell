@@ -5,7 +5,7 @@ t_token	*skip_to_command(t_token *token_list)
 	t_token	*cur;
 
 	cur = token_list;
-	while (cur->type == TK_HEAD || cur->type == TK_NEWLINE)
+	while (cur->type == TK_HEAD)
 	{
 		cur = cur->next;
 		if (cur->type == TK_EOF)
@@ -21,7 +21,8 @@ int	check_syntax_errors(t_token *token_list, t_shell *shell)
 	cur = token_list->next;
 	while (cur && cur->type != TK_EOF)
 	{
-		if (token_is_operator(cur->type) || token_is_redirection(cur->type))
+		if (token_is_operator(cur->type) || token_is_redirection(cur->type)
+			|| cur->type == TK_LPAREN)
 		{
 			if (!syntax_check(cur))
 			{

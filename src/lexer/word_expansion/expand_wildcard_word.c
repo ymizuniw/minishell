@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:30:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/12 10:27:17 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/13 09:55:32 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,15 @@ int	expand_wildcard_to_result(t_word *word, char ***res, size_t *i,
 	wildcard_arr = expand_wildcard(word->word, "./", &wildcard_count);
 	if (!wildcard_arr)
 		return (0);
+	if (wildcard_count == 0)
+	{
+		free_double_array(wildcard_arr);
+		(*res)[*i] = strdup(word->word);
+		if (!(*res)[*i])
+			return (0);
+		(*i)++;
+		return (1);
+	}
 	new_res = resize_result(*res, *total_count, wildcard_count);
 	if (!new_res)
 		return (free_double_array(wildcard_arr), 0);

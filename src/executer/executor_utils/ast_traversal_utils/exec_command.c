@@ -15,6 +15,8 @@ static int	handle_redirection_error(t_ast *node, int stdin_k, int stdout_k,
 		perror(node->cmd->redir->filename);
 	shell->last_exit_status = 1;
 	restore_stdio(stdin_k, stdout_k);
+	shell->stdin_backup = -1;
+	shell->stdout_backup = -1;
 	return (1);
 }
 
@@ -57,9 +59,13 @@ int	exec_command(t_ast *node, t_shell *shell)
 
 	fds[0] = dup(STDIN_FILENO);
 	fds[1] = dup(STDOUT_FILENO);
+	shell->stdin_backup = fds[0];
+	shell->stdout_backup = fds[1];
 	if (!node || !node->cmd)
 	{
 		restore_stdio(fds[0], fds[1]);
+		shell->stdin_backup = -1;
+		shell->stdout_backup = -1;
 		return (-1);
 	}
 	redir_ret = do_redirection(node, shell);
@@ -67,5 +73,7 @@ int	exec_command(t_ast *node, t_shell *shell)
 		return (handle_redirection_error(node, fds[0], fds[1], shell));
 	process_command(node, shell);
 	restore_stdio(fds[0], fds[1]);
+	shell->stdin_backup = -1;
+	shell->stdout_backup = -1;
 	return (0);
 }

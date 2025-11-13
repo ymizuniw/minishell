@@ -39,7 +39,6 @@ typedef struct s_shell	t_shell;
 
 # define SYNTAX_ERR_TEMPLATE "minishell: syntax error near unexpected token `"
 # define SYNTAX_ERR_TEMPLATE_LEN 47
-# define TOKEN_VALUE_NEWLINE "newline"
 # define TOKEN_VALUE_PIPE "|"
 # define TOKEN_VALUE_AND_IF "&&"
 # define TOKEN_VALUE_OR_IF "||"
@@ -99,7 +98,6 @@ typedef enum e_metachar
 typedef enum e_token_type
 {
 	TK_HEAD,
-	TK_NEWLINE,
 	TK_WORD,
 	TK_PIPE,
 	TK_REDIRECT_IN,
@@ -209,6 +207,8 @@ typedef struct s_shell
 	char				*line_ptr;
 	t_hist				*hist;
 	t_result			res;
+	int					stdin_backup;
+	int					stdout_backup;
 }						t_shell;
 
 typedef struct s_heredoc_ctx

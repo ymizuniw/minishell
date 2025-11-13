@@ -21,7 +21,7 @@ static void	build_tree(t_ast **parent, t_token **cur_token)
 	t_ast	*node;
 
 	if (!*cur_token || (*cur_token)->type == TK_EOF
-		|| (*cur_token)->type == TK_NEWLINE || (*cur_token)->type == TK_LPAREN)
+		|| (*cur_token)->type == TK_LPAREN)
 		return ;
 	node = NULL;
 	if (token_is_operator((*cur_token)->type))

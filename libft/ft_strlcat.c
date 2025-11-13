@@ -1,7 +1,7 @@
 
-#include "minisehll_libft.h"
+#include "minishell_libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 	size_t	dstlen;
@@ -9,10 +9,10 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 
 	dstlen = ft_strlen(dst);
 	srclen = ft_strlen(src);
-	if (size <= dstlen)
-		return (size + srclen);
+	if (dstsize <= dstlen)
+		return (dstsize + srclen);
 	i = 0;
-	while (src[i] && dstlen + i + 1 < size)
+	while (src[i] && dstlen + i + 1 < dstsize)
 	{
 		dst[dstlen + i] = src[i];
 		i++;

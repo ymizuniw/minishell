@@ -39,10 +39,17 @@ static int	check_operator(t_token *token)
 int	syntax_check(t_token *token)
 {
 	t_token_type	type;
+	t_token			*prev;
 
 	if (!token)
 		return (0);
 	type = token->type;
+	if (type == TK_LPAREN)
+	{
+		prev = token->next;
+		if (prev && token_is_command(prev->type))
+			return (0);
+	}
 	if (type == TK_RPAREN)
 		return (check_parenthesis(token));
 	if (token_is_redirection(type))

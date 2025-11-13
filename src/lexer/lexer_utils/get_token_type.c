@@ -79,13 +79,8 @@ static t_token_type	handle_simple_tokens(char *input, size_t *idx)
 // Get the token type beginning at current index of input
 t_token_type	get_token_type(char *input, size_t *idx)
 {
-	if (!input[*idx])
+	if (!input[*idx] || input[*idx] == '\n')
 		return (TK_EOF);
-	if (input[*idx] == '\n')
-	{
-		(*idx)++;
-		return (TK_NEWLINE);
-	}
 	if (input[*idx] == '|')
 		return (pipe_or_orif(input, idx));
 	else if (input[*idx] == '<')

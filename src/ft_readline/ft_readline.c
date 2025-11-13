@@ -1,3 +1,4 @@
+#include "../../includes/get_next_line.h"
 #include "../../includes/minishell.h"
 
 static int	process_key(char c, char *buf, size_t *len, t_readline_ctx *ctx)
@@ -28,11 +29,10 @@ static char	*read_non_interactive(void)
 	char	*buf;
 	size_t	len;
 
-	buf = NULL;
-	len = 0;
-	if (getline(&buf, &len, stdin) == -1)
-		return (free(buf), NULL);
-	len = strlen(buf);
+	buf = get_next_line(STDIN_FILENO);
+	if (!buf)
+		return (NULL);
+	len = ft_strlen(buf);
 	if (len > 0 && buf[len - 1] == '\n')
 		buf[len - 1] = '\0';
 	return (buf);

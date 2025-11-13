@@ -1,3 +1,4 @@
+#include "../../../../includes/get_next_line.h"
 #include "../../../../includes/minishell.h"
 
 static char	*expand_exit_status(char **res, t_shell *shell, size_t *i)
@@ -124,13 +125,11 @@ int	get_document(t_redir *hd, char **document, size_t *document_len,
 	char				*line;
 	char				*line_copy;
 	t_heredoc_params	params;
-	size_t				len;
 	int					is_interactive;
 	size_t				current_len;
 
 	params = (t_heredoc_params){hd->filename, hd->delim_quoted, shell};
 	line = NULL;
-	len = 0;
 	is_interactive = isatty(STDIN_FILENO);
 	while (1)
 	{
@@ -145,41 +144,34 @@ int	get_document(t_redir *hd, char **document, size_t *document_len,
 		// Non-interactive mode: read from stdin directly
 		else
 		{
-			if (getline(&line, &len, stdin) == -1)
-			{
-				if (line)
-					free(line);
+			line = get_next_line(STDIN_FILENO);
+			if (!line)
 				break ;
-			}
-			// Remove trailing newline from getline
-			current_len = strlen(line);
+			// Remove trailing newline from get_next_line
+			current_len = ft_strlen(line);
 			if (current_len > 0 && line[current_len - 1] == '\n')
 				line[current_len - 1] = '\0';
-			// Make a copy for processing (getline buffer is reused)
-			line_copy = strdup(line);
-			if (!line_copy)
-			{
-				free(line);
-				return (-1);
-			}
+			// get_next_line allocates new memory, so we can use it directly
+			line_copy = line;
 		}
 		if (strcmp(line_copy, params.delim) == 0)
 		{
-			free(line_copy);
-			if (!is_interactive)
+			if (is_interactive)
+				free(line_copy);
+			else
 				free(line);
 			return (1);
 		}
 		if (process_heredoc_line(document, document_len, line_copy,
 				&params) < 0)
 		{
-			if (!is_interactive)
+			if (is_interactive)
+				free(line_copy);
+			else
 				free(line);
 			return (-1);
 		}
 	}
-	if (!is_interactive && line)
-		free(line);
 	return (-1);
 }
 
