@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE 
+CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE
 INC = -Iincludes
 
 # -g
@@ -44,7 +44,8 @@ BUILTIN_SRC = $(BUILTIN_DIR)/exec_builtin.c \
               $(BUILTIN_DIR)/ft_echo.c \
               $(BUILTIN_DIR)/ft_env.c \
               $(BUILTIN_DIR)/ft_exit.c \
-              $(BUILTIN_DIR)/ft_export.c \
+              $(BUILTIN_DIR)/ft_export/ft_export.c \
+              $(BUILTIN_DIR)/ft_export/export_print.c \
               $(BUILTIN_DIR)/ft_pwd.c \
               $(BUILTIN_DIR)/ft_unset.c \
               $(BUILTIN_DIR)/expand_wildcard.c
@@ -55,11 +56,14 @@ BUILTIN_UTILS_SRC = $(BUILTIN_UTILS_DIR)/get_pwd.c \
 
 DATA_MANAGEMENT_SRC = $(DATA_MANAGEMENT_DIR)/alloc_t.c \
                       $(DATA_MANAGEMENT_DIR)/free_t.c \
+                      $(DATA_MANAGEMENT_DIR)/free_ast.c \
                       $(DATA_MANAGEMENT_DIR)/xfree.c \
                       $(DATA_MANAGEMENT_DIR)/xmalloc.c \
-                      $(DATA_MANAGEMENT_DIR)/list_utils.c
+                      $(DATA_MANAGEMENT_DIR)/list_utils_last.c \
+                      $(DATA_MANAGEMENT_DIR)/list_utils_add.c
 
 ENV_MANAGEMENT_SRC = $(ENV_MANAGEMENT_DIR)/ft_getenv.c \
+                     $(ENV_MANAGEMENT_DIR)/getenv_utiles.c \
                      $(ENV_MANAGEMENT_DIR)/init_env.c
 
 EXECUTER_SRC = $(EXECUTER_DIR)/executor.c
@@ -71,13 +75,20 @@ AST_TRAVERSAL_SRC = $(AST_TRAVERSAL_DIR)/ast_traversal.c \
                     $(AST_TRAVERSAL_DIR)/exec_subshell.c
 
 HEREDOC_SRC = $(HEREDOC_DIR)/ft_mkstmp.c \
-              $(HEREDOC_DIR)/make_heredoc.c
+              $(HEREDOC_DIR)/make_heredoc.c \
+              $(HEREDOC_DIR)/get_document.c \
+              $(HEREDOC_DIR)/heredoc_value_expansion.c
 
 SEARCH_EXEC_SRC = $(SEARCH_EXEC_DIR)/search_and_exec.c \
                   $(SEARCH_EXEC_DIR)/run_external_cmd.c \
                   $(SEARCH_EXEC_DIR)/find_command_path.c \
-                  $(SEARCH_EXEC_DIR)/fucking_expand_value.c \
-                  $(SEARCH_EXEC_DIR)/ft_itoa.c
+                  $(SEARCH_EXEC_DIR)/expand_value.c \
+                  $(SEARCH_EXEC_DIR)/ft_itoa.c \
+                  $(SEARCH_EXEC_DIR)/exec_with_slash.c \
+                  $(SEARCH_EXEC_DIR)/string_utiles.c \
+                  $(SEARCH_EXEC_DIR)/env_utiles.c \
+                  $(SEARCH_EXEC_DIR)/generate_env.c \
+                  $(SEARCH_EXEC_DIR)/expand_dollar.c
 
 STRING_UTILS_SRC = $(STRING_UTILS_DIR)/string_basic.c \
                    $(STRING_UTILS_DIR)/string_compare.c \

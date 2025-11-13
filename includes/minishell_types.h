@@ -225,4 +225,13 @@ typedef struct s_heredoc_params
 	t_shell				*shell;
 }						t_heredoc_params;
 
+typedef struct s_match_data
+{
+	char				**matches;
+	size_t				count;
+	size_t				cap;
+	char				**keys;
+	int					only_wild;
+}						t_match_data;
+
 #endif

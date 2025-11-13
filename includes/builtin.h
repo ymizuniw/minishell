@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 02:05:22 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/11 11:17:42 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/13 17:28:14 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		ft_echo(char **cmd);
 int		ft_cd(char **cmd, t_shell *shell);
 int		ft_pwd(t_shell *shell, int fd);
 int		ft_export(t_shell *shell, char **cmd, int fd);
+void	print_exported_vars(t_env *env_list, int fd);
 int		ft_unset(t_shell *shell, char **cmd);
 int		ft_env(t_shell *shell, char **cmd);
 void	ft_exit(char **cmd, int last_exit_status, t_shell *shell);
@@ -44,6 +45,7 @@ int		ft_strcmp(const char *s1, const char *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 char	**ft_split(char const *s, char c);
+char	*ft_strstr(const char *haystack, const char *needle);
 
 char	*find_command_path(t_shell *shell, char *cmd);
 // void				run_external_cmd(t_shell *shell, char **cmd_args);

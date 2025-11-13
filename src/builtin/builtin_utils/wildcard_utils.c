@@ -7,8 +7,8 @@ bool	match_prefix(const char *name, const char *prefix, size_t *start)
 	prefix_len = 0;
 	if (!prefix || prefix[0] == '\0')
 		return (true);
-	prefix_len = strlen(prefix);
-	if (strncmp(name, prefix, prefix_len) != 0)
+	prefix_len = ft_strlen(prefix);
+	if (ft_strncmp(name, prefix, prefix_len) != 0)
 		return (false);
 	*start = prefix_len;
 	return (true);
@@ -26,11 +26,11 @@ bool	match_middle(const char *name, char **keys, size_t key_count,
 	i = 1;
 	while (i + 1 < key_count)
 	{
-		found = strstr(name + *start, keys[i]);
+		found = ft_strstr(name + *start, keys[i]);
 		if (!found)
 			return (false);
 		if (keys[i])
-			key_len = strlen(keys[i]);
+			key_len = ft_strlen(keys[i]);
 		*start = (found - name) + key_len;
 		i++;
 	}
@@ -46,14 +46,26 @@ bool	match_suffix(const char *name, const char *last)
 	last_len = 0;
 	assert(last != NULL);
 	if (name)
-		name_len = strlen(name);
+		name_len = ft_strlen(name);
 	if (!last || last[0] == '\0')
 		return (true);
 	if (last)
-		last_len = strlen(last);
+		last_len = ft_strlen(last);
 	if (name_len < last_len)
 		return (false);
-	return (strcmp(name + name_len - last_len, last) == 0);
+	return (ft_strcmp(name + name_len - last_len, last) == 0);
+}
+
+bool	match_single_key(const char *key, const char *name,
+		bool starts_with_wildcard, bool ends_with_wildcard)
+{
+	if (starts_with_wildcard && ends_with_wildcard)
+		return (ft_strstr(name, key) != NULL);
+	if (starts_with_wildcard)
+		return (match_suffix(name, key));
+	if (ends_with_wildcard)
+		return (match_prefix(name, key, &(size_t){0}));
+	return (ft_strcmp(key, name) == 0);
 }
 
 bool	match_to_keys(char **keys, const char *name, const char *pattern)
@@ -73,13 +85,8 @@ bool	match_to_keys(char **keys, const char *name, const char *pattern)
 	ends_with_wildcard = (pattern[ft_strlen(pattern) - 1] == '*');
 	if (key_count == 1)
 	{
-		if (starts_with_wildcard && ends_with_wildcard)
-			return (strstr(name, keys[0]) != NULL);
-		if (starts_with_wildcard)
-			return (match_suffix(name, keys[0]));
-		if (ends_with_wildcard)
-			return (match_prefix(name, keys[0], &start));
-		return (strcmp(keys[0], name) == 0);
+		return (match_single_key(keys[0], name, starts_with_wildcard,
+				ends_with_wildcard));
 	}
 	if (!match_prefix(name, keys[0], &start))
 		return (false);

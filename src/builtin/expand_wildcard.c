@@ -42,44 +42,53 @@ static int	add_match(char ***matches, size_t *count, size_t *cap, char *name)
 	return (1);
 }
 
+static void	process_directory_entries(DIR *dirp, const char *pattern,
+		t_match_data *data)
+{
+	struct dirent	*dent;
+	char			*name;
+
+	dent = readdir(dirp);
+	while (dent)
+	{
+		name = dent->d_name;
+		if (name[0] == '.' && pattern[0] != '.')
+		{
+			dent = readdir(dirp);
+			continue ;
+		}
+		if (data->only_wild || match_to_keys(data->keys, name, pattern))
+			if (add_match(&data->matches, &data->count, &data->cap, name) < 0)
+				break ;
+		dent = readdir(dirp);
+	}
+}
+
 char	**expand_wildcard(const char *pattern, const char *path,
 		size_t *wildcard_count)
 {
 	DIR				*dirp;
-	struct dirent	*dent;
-	char			**keys;
-	char			**matches;
-	size_t			count;
-	size_t			cap;
-	int				only_wild;
+	t_match_data	data;
 
 	dirp = opendir(path);
 	if (!dirp)
 		return (NULL);
-	only_wild = check_only_wildcards(pattern);
-	if (!only_wild)
-	{
-		keys = ft_split(pattern, '*');
-		if (!keys)
-			return (closedir(dirp), NULL);
-	}
+	data.only_wild = check_only_wildcards(pattern);
+	if (!data.only_wild)
+		data.keys = ft_split(pattern, '*');
 	else
-		keys = NULL;
-	matches = init_matches_array(&cap);
-	if (!matches)
+		data.keys = NULL;
+	if (!data.only_wild && !data.keys)
 		return (closedir(dirp), NULL);
-	count = 0;
-	while ((dent = readdir(dirp)))
-	{
-		if (dent->d_name[0] == '.' && pattern[0] != '.')
-			continue ;
-		if (only_wild || match_to_keys(keys, dent->d_name, pattern))
-			if (add_match(&matches, &count, &cap, dent->d_name) < 0)
-				break ;
-	}
-	matches[count] = NULL;
-	*wildcard_count = count;
-	if (!only_wild)
-		free_double_array(keys);
-	return (closedir(dirp), matches);
+	data.matches = init_matches_array(&data.cap);
+	if (!data.matches)
+		return (closedir(dirp), NULL);
+	data.count = 0;
+	process_directory_entries(dirp, pattern, &data);
+	data.matches[data.count] = NULL;
+	*wildcard_count = data.count;
+	if (!data.only_wild)
+		free_double_array(data.keys);
+	closedir(dirp);
+	return (data.matches);
 }

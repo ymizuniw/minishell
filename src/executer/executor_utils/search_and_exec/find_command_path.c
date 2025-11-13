@@ -3,54 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   find_command_path.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 22:49:57 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/08 11:45:59 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/13 20:53:57 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/minishell.h"
 
-static char	*join_path(char *dir, char *cmd)
-{
-	char	*path;
-	size_t	len;
+// static char	*join_path(char *dir, char *cmd)
+// {
+// 	char	*path;
+// 	size_t	len;
 
-	len = ft_strlen(dir) + ft_strlen(cmd) + 2;
-	path = malloc(len);
-	if (!path)
-		return (NULL);
-	ft_strlcpy(path, dir, len);
-	ft_strlcat(path, "/", len);
-	ft_strlcat(path, cmd, len);
-	return (path);
-}
+// 	len = ft_strlen(dir) + ft_strlen(cmd) + 2;
+// 	path = malloc(len);
+// 	if (!path)
+// 		return (NULL);
+// 	ft_strlcpy(path, dir, len);
+// 	ft_strlcat(path, "/", len);
+// 	ft_strlcat(path, cmd, len);
+// 	return (path);
+// }
 
-char	*get_env_value(t_env *env_list, const char *key)
-{
-	t_env	*var;
+// static void	free_split(char **split)
+// {
+// 	size_t	i;
 
-	var = find_env(env_list, key);
-	if (var)
-		return (var->value);
-	return (NULL);
-}
-
-static void	free_split(char **split)
-{
-	size_t	i;
-
-	if (!split)
-		return ;
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
-}
+// 	if (!split)
+// 		return ;
+// 	i = 0;
+// 	while (split[i])
+// 	{
+// 		free(split[i]);
+// 		i++;
+// 	}
+// 	free(split);
+// }
 
 static char	*build_pwd_path(t_shell *shell, char *cmd)
 {

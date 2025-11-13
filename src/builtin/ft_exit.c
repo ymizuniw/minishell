@@ -25,20 +25,20 @@ void	print_err_num(char **cmd)
 	size_t		len;
 
 	len = 0;
-	write(2, prefix, strlen(prefix));
+	write(2, prefix, ft_strlen(prefix));
 	if (cmd[1])
 	{
-		len = strlen(cmd[1]);
+		len = ft_strlen(cmd[1]);
 		write(2, cmd[1], len);
 	}
-	write(2, suffix, strlen(suffix));
+	write(2, suffix, ft_strlen(suffix));
 }
 
 void	print_err_args(void)
 {
 	const char	*msg = "exit: too many arguments\n";
 
-	write(2, msg, strlen(msg));
+	write(2, msg, ft_strlen(msg));
 }
 
 static void	exit_with_error(t_shell *shell, int code, bool print_num_err,

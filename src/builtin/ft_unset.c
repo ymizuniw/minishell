@@ -17,12 +17,12 @@ static void	remove_env_var(t_env **env_list, const char *key)
 	if (!env_list || !*env_list || !key)
 		return ;
 	if (key)
-		len = strlen(key);
+		len = ft_strlen(key);
 	current = *env_list;
 	prev = NULL;
 	while (current)
 	{
-		if (strncmp(current->key, key, len + 1) == 0)
+		if (ft_strncmp(current->key, key, len + 1) == 0)
 		{
 			if (!prev)
 				*env_list = current->next;
@@ -49,7 +49,7 @@ int	ft_unset(t_shell *shell, char **cmd)
 		if (!is_valid_varname(cmd[i]))
 		{
 			if (cmd[i])
-				len = strlen(cmd[i]);
+				len = ft_strlen(cmd[i]);
 			write(2, "unset: `", 8);
 			write(2, cmd[i], len);
 			write(2, "': not a valid identifier\n", 26);
