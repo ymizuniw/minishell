@@ -204,6 +204,17 @@ test-integration: $(NAME)
 test-stress: $(NAME)
 	@if [ ! -d "$(TESTER_DIR)" ]; then \
 		echo "Error: Tester not found at $(TESTER_DIR)"; \
+
+test-enhanced: $(NAME)
+	@if [ ! -d "$(TESTER_DIR)" ]; then \
+		echo "Error: Tester not found at $(TESTER_DIR)"; \
 		exit 1; \
 	fi
-	@$(TESTER_DIR)/run_tests.sh $(PWD)/$(NAME) --stress
+	@$(TESTER_DIR)/run_tests.sh $(PWD)/$(NAME) --enhanced
+
+test-all: $(NAME)
+	@if [ ! -d "$(TESTER_DIR)" ]; then \
+		echo "Error: Tester not found at $(TESTER_DIR)"; \
+		exit 1; \
+	fi
+	@$(TESTER_DIR)/run_tests.sh $(PWD)/$(NAME) --integration --stress --enhanced
