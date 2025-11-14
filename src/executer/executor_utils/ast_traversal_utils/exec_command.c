@@ -39,9 +39,10 @@ static int	process_command(t_ast *node, t_shell *shell)
 {
 	char	**expanded_argv;
 
-	if (!node->cmd || !node->cmd->word_list || !node->cmd->word_list->word)
+	if (!node->cmd || !node->cmd->tokens || node->cmd->token_count == 0)
 		return (0);
-	expanded_argv = ft_expand_word(node->cmd->word_list, shell);
+	expanded_argv = ft_expand_word(node->cmd->tokens, node->cmd->token_count,
+			shell);
 	if (!expanded_argv || !expanded_argv[0])
 	{
 		xfree(expanded_argv);

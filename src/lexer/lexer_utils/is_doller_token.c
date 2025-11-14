@@ -15,7 +15,5 @@ bool	is_doller_token(const char *p)
 		return (true);
 	if (ft_isspace((unsigned char)p[1]))
 		return (true);
-	if (p[1] == '\'' || p[1] == '\"')
-		return (true);
 	return (false);
 }

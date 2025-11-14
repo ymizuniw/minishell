@@ -41,33 +41,31 @@ int	parse_redirection(t_redir **redir_head, t_token_type token_type,
 	return (1);
 }
 
-// generate command's word_list from command_token.
-int	parse_simple_command(t_word **word_list, t_token *command_token)
+// Store token pointer in command's token array
+int	parse_simple_command(t_cmd *cmd, t_token *command_token)
 {
-	t_word	*new_argv;
-	size_t	addition;
-	size_t	value_len;
-	t_word	*w;
+	t_token	**new_tokens;
+	size_t	i;
 
-	if (!word_list || !command_token)
+	if (!cmd || !command_token)
 		return (-1);
-	addition = 0;
-	value_len = 0;
-	if (command_token->value)
-		value_len = ft_strlen(command_token->value);
-	new_argv = gen_word(command_token->value, value_len, &addition);
-	// If token is in single quotes, disable dollar expansion
-	if (command_token->in_squote && new_argv)
+	// Reallocate tokens array to add one more token
+	new_tokens = xmalloc(sizeof(t_token *) * (cmd->token_count + 1));
+	if (!new_tokens)
+		return (-1);
+	// Copy existing token pointers
+	i = 0;
+	while (i < cmd->token_count)
 	{
-		w = new_argv;
-		while (w)
-		{
-			w->to_expand_doller = false;
-			w = w->next;
-		}
+		new_tokens[i] = cmd->tokens[i];
+		i++;
 	}
-	// Append to the end of the word list instead of overwriting
-	word_add_back(word_list, new_argv);
+	// Add new token pointer
+	new_tokens[cmd->token_count] = command_token;
+	// Free old array and update
+	xfree(cmd->tokens);
+	cmd->tokens = new_tokens;
+	cmd->token_count++;
 	return (1);
 }
 
@@ -100,7 +98,7 @@ static int	process_token(t_cmd *cmd, t_token *tmp)
 	if (token_is_redirection(tmp->type))
 		return (handle_redirection_parse(cmd, tmp));
 	else
-		return (parse_simple_command(&cmd->word_list, tmp));
+		return (parse_simple_command(cmd, tmp));
 }
 
 int	parse_command_list(t_cmd *cmd, t_token **cur_token)

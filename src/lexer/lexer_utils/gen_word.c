@@ -1,7 +1,7 @@
 #include "../../../includes/minishell.h"
 
-// Forward declarations
-char		**ft_expand_word(t_word *word_list, t_shell *shell);
+// Forward declarations for internal word generation
+t_word		*append_node(t_word *head, t_word *new);
 char		*expand_doller(t_word *word, t_shell *shell);
 char		**expand_wildcard(const char *pattern, const char *path,
 				size_t *wildcard_count);
@@ -60,22 +60,30 @@ typedef struct s_gen_word
 // give start idx,
 int	quote_wrapper(t_gen_word *gw, char *value, size_t *i)
 {
+	char	*content;
+
 	if (gw->quote == '\'')
 		gw->word->to_expand_doller = false;
 	else
 		gw->word->to_expand_doller = true;
 	gw->word->to_expand_wildcard = false;
-	gw->word->word = ext_unit(value, gw->start + 1, gw->close_place);
-	if (!gw->word->word)
+	content = ext_unit(value, gw->start + 1, gw->close_place);
+	if (!content)
 		return (-1);
+	gw->word->word = content;
+	// Set type based on content and quote type
+	if (gw->quote == '"' && strchr(content, '$'))
+		gw->word->type = WD_DOLLER; // Contains $ in double quotes
+	else if (gw->quote == '"' && content[0] == '$' && content[1] != '\0')
+		gw->word->type = WD_DOLLER;
+	else
+		gw->word->type = WD_LITERAL;
 	*i = gw->close_place + 1;
 	return (1);
 }
 int	doller_literal_wrapper(t_gen_word *gw, char *value, size_t value_len,
 		size_t *i)
 {
-	assert(gw);
-	assert(gw->word);
 	if (value && value[*i] == '$')
 	{
 		(*i)++;
@@ -98,11 +106,11 @@ int	doller_literal_wrapper(t_gen_word *gw, char *value, size_t value_len,
 					|| value[*i] == '_'))
 				(*i)++;
 		}
-		// Lone $ with no valid variable name following - treat as literal
+		// Lone $ with no valid variable name following - expand to empty string
 		else
 		{
-			gw->word->type = WD_LITERAL;
-			gw->word->to_expand_doller = false;
+			gw->word->type = WD_DOLLER;
+			gw->word->to_expand_doller = true;
 			// i is already incremented past the $
 		}
 	}
@@ -164,17 +172,20 @@ t_word	*gen_word(char *value, size_t value_len, size_t *addition)
 	size_t	i;
 	t_word	*head;
 	t_word	*word;
+	t_word	*new_head;
 
 	head = NULL;
 	word = NULL;
 	i = 0;
-	head = NULL;
 	while (i < value_len)
 	{
 		word = loop_wrapper(value, value_len, &i);
 		if (word == NULL)
 			return (free_word_list(head), NULL);
-		head = append_node(head, word);
+		new_head = append_node(head, word);
+		if (!new_head && head != NULL)
+			return (xfree(word), free_word_list(head), NULL);
+		head = new_head;
 	}
 	*addition = i;
 	return (head);

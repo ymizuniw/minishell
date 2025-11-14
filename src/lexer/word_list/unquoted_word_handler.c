@@ -1,5 +1,9 @@
 #include "../../../includes/minishell.h"
 
+// Forward declarations for internal functions
+t_word	*create_word_node(char *content, t_word_type type, bool expand_doller,
+			bool expand_wildcard);
+
 t_word	*handle_unquoted_word(const char *input, size_t input_len, size_t *idx)
 {
 	size_t	start;

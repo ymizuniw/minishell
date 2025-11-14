@@ -1,5 +1,13 @@
 #include "../../../includes/minishell.h"
 
+// Forward declarations for internal word handlers
+t_word	*handle_quoted_word(const char *input, size_t *idx, char quote);
+t_word	*handle_unclosed_quote(const char *input, size_t input_len,
+			size_t *idx);
+t_word	*handle_doller_word(const char *input, size_t input_len, size_t *idx);
+t_word	*handle_unquoted_word(const char *input, size_t input_len, size_t *idx);
+t_word	*append_node(t_word *head, t_word *new);
+
 t_word	*gen_word_list(const char *input, size_t input_len, size_t *idx)
 {
 	t_word	*word_list;

@@ -1,5 +1,10 @@
 #include "../../../includes/minishell.h"
 
+// Forward declarations for internal functions
+t_word			*create_word_node(char *content, t_word_type type,
+					bool expand_doller, bool expand_wildcard);
+t_word			*append_node(t_word *head, t_word *new);
+
 static t_word	*process_dollar_in_quote(const char *content, size_t *i,
 		size_t len)
 {

@@ -166,7 +166,8 @@ typedef struct s_word
 }						t_word;
 typedef struct s_cmd
 {
-	t_word				*word_list;
+	t_token				**tokens;
+	size_t				token_count;
 	char				**argv;
 	t_redir				*redir;
 }						t_cmd;

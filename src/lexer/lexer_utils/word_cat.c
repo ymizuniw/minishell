@@ -65,14 +65,15 @@ size_t	word_cat(char **word, size_t word_len, char const *input,
 			d_close = strchr(&input[*idx + 1], q_open);
 			if (d_close)
 			{
-				ext_len = (size_t)(d_close - &input[*idx + 1]);
+				// Include quotes in the token value
+				ext_len = (size_t)(d_close - &input[*idx]) + 1;
 				*word = ft_realloc(*word, sizeof(char) * (word_len + 1),
 						sizeof(char) * (word_len + ext_len + 1));
 				if (!*word)
 					return (0);
-				memcpy(*word + word_len, &input[*idx + 1], ext_len);
+				memcpy(*word + word_len, &input[*idx], ext_len);
 				(*word)[word_len + ext_len] = '\0';
-				*idx += ext_len + 2;
+				*idx += ext_len;
 				if (q_open == '\'')
 					*had_sq = true;
 				else if (q_open == '"')
@@ -80,6 +81,7 @@ size_t	word_cat(char **word, size_t word_len, char const *input,
 				word_len += ext_len;
 				continue ;
 			}
+			// Unclosed quote: treat as plain text
 		}
 		if (handle_plain(word, &word_len, input, input_len, idx) < 0)
 			return (0);
