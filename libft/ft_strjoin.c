@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_libft.h"
+#include "libft.h"
 
 // Join two strings into a newly allocated string
 char	*ft_strjoin(char const *s1, char const *s2)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_libft.h"
+#include "libft.h"
 
 // Add element to the end of a generic linked list
 void	ft_lst_add_back(void **head, void *new, size_t next_offset)

@@ -1,5 +1,5 @@
 
-#include "minishell_libft.h"
+#include "libft.h"
 
 int ft_isspace(int c)
 {

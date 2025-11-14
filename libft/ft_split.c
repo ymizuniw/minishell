@@ -1,5 +1,5 @@
 
-#include "minishell_libft.h"
+#include "libft.h"
 
 static void	free_split(char **words, size_t j)
 {
@@ -71,20 +71,4 @@ char	**ft_split(char const *s, char c)
 	if (words == NULL)
 		return (NULL);
 	return (split_words(s, c, words));
-}
-
-#include <stdio.h>
-
-int main(void)
-{
-	char *str = "hello world this is test\n";
-	char c = ' ';
-	char **result = ft_split(str, c);
-	int i = 0;
-	while (result[i])
-	{
-		printf("%s\n", result[i]);
-		i++;
-	}
-	return (0);
 }

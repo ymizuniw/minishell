@@ -32,8 +32,6 @@ PARSER_DIR = $(SRC_DIR)/parser
 SIGNAL_MANAGEMENT_DIR = $(SRC_DIR)/signal_management
 FT_READLINE_DIR = $(SRC_DIR)/ft_readline
 READLINE_UTILS_DIR = $(FT_READLINE_DIR)/readline_utils
-UTILS_DIR = $(SRC_DIR)/utils
-STRING_UTILS_DIR = $(UTILS_DIR)/string
 
 # SOURCE FILES
 MAIN_SRC = $(SRC_DIR)/main.c \
@@ -90,11 +88,6 @@ SEARCH_EXEC_SRC = $(SEARCH_EXEC_DIR)/search_and_exec.c \
                   $(SEARCH_EXEC_DIR)/generate_env.c \
                   $(SEARCH_EXEC_DIR)/expand_dollar.c
 
-STRING_UTILS_SRC = $(STRING_UTILS_DIR)/string_basic.c \
-                   $(STRING_UTILS_DIR)/string_compare.c \
-                   $(STRING_UTILS_DIR)/string_copy.c \
-                   $(STRING_UTILS_DIR)/string_split.c
-
 LEXER_SRC = $(LEXER_DIR)/lexer.c
 
 LEXER_UTILS_SRC = $(LEXER_UTILS_DIR)/prepend_tokens.c \
@@ -145,7 +138,6 @@ SRCS = $(MAIN_SRC) \
        $(AST_TRAVERSAL_SRC) \
        $(HEREDOC_SRC) \
        $(SEARCH_EXEC_SRC) \
-       $(STRING_UTILS_SRC) \
        $(LEXER_SRC) \
        $(LEXER_UTILS_SRC) \
        $(WORD_EXPANSION_SRC) \
@@ -184,8 +176,33 @@ fclean: clean
 
 re: fclean all
 
-# Integration tests (non-interactive harness)
-.PHONY: all clean fclean re integration-tests
-integration-tests: $(NAME)
-	@echo "Running integration tests (Bash harness)"
-	@bash tests/integration/integration_tests.sh || exit 1
+# Testing targets
+# Note: Tests are now in separate minishell_tester repository
+.PHONY: all clean fclean re test test-integration test-stress
+
+TESTER_DIR = ../minishell_tester
+
+test: $(NAME)
+	@if [ ! -d "$(TESTER_DIR)" ]; then \
+		echo "Error: Tester not found at $(TESTER_DIR)"; \
+		echo "Please clone or link minishell_tester repository"; \
+		exit 1; \
+	fi
+	@cd $(TESTER_DIR) && ./run_tests.sh $(PWD)/$(NAME)
+
+test-integration: $(NAME)
+	@if [ ! -d "$(TESTER_DIR)" ]; then \
+		echo "Error: Tester not found at $(TESTER_DIR)"; \
+		exit 1; \
+	fi
+	@cd $(TESTER_DIR) && ./run_tests.sh $(PWD)/$(NAME) --integration
+
+test-stress: $(NAME)
+	@if [ ! -d "$(TESTER_DIR)" ]; then \
+		echo "Error: Tester not found at $(TESTER_DIR)"; \
+		exit 1; \
+	fi
+	@cd $(TESTER_DIR) && ./run_tests.sh $(PWD)/$(NAME) --stress
+
+# Legacy target for compatibility
+integration-tests: test-integration

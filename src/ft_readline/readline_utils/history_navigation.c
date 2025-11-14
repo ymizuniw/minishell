@@ -9,8 +9,7 @@ static void	copy_history_to_buffer(t_hist *hist, char *buf, size_t *len)
 		hist_len = ft_strlen(hist->hist_box[hist->cur]);
 	if (hist_len > 1023)
 		return ;
-	strncpy(buf, hist->hist_box[hist->cur], 1023);
-	buf[1023] = '\0';
+	ft_strlcpy(buf, hist->hist_box[hist->cur], 1024);
 	*len = 0;
 	if (buf)
 		*len = ft_strlen(buf);

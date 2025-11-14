@@ -16,7 +16,7 @@ int	handle_quotation(char **word, size_t word_len, char const *input,
 			* (word_len + add_len + 1));
 	if (!*word)
 		return (-1);
-	strncpy(*word + word_len, &input[*idx + 1], add_len);
+	ft_memcpy(*word + word_len, &input[*idx + 1], add_len);
 	(*word)[add_len] = '\0';
 	*idx += add_len + 2;
 	*consumed_len = add_len;
@@ -41,7 +41,7 @@ int	handle_plain(char **word, size_t *word_len, char const *input,
 			* (*word_len + (add_len) + 1));
 	if (!*word)
 		return (-1);
-	strncpy(*word + *word_len, tmp_ptr, add_len);
+	ft_memcpy(*word + *word_len, tmp_ptr, add_len);
 	(*word)[*word_len + add_len] = '\0';
 	*word_len += add_len;
 	return (1);

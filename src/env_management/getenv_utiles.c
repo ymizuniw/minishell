@@ -32,18 +32,12 @@ t_env	*find_env(t_env *env_list, const char *key)
 
 char	*extract_key(const char *cmd)
 {
-	int		len;
-	char	*key;
+	int	len;
 
 	len = 0;
 	while (cmd[len] && cmd[len] != '=')
 		len++;
-	key = xmalloc(len + 1);
-	if (!key)
-		return (NULL);
-	ft_strncpy(key, cmd, len);
-	key[len] = '\0';
-	return (key);
+	return (ft_substr(cmd, 0, len));
 }
 
 char	*extract_value(const char *str)

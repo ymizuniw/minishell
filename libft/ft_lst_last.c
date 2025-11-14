@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/11 10:51:06 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/14 11:47:23 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_libft.h"
+#include "libft.h"
 
 // Get the last element of a generic linked list
 void	*ft_lst_last(void *head, size_t next_offset)

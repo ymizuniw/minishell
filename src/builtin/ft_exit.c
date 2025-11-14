@@ -57,7 +57,8 @@ static void	exit_with_error(t_shell *shell, int code, bool print_num_err,
 
 void	ft_exit(char **cmd, int last_exit_status, t_shell *shell)
 {
-	int	exit_code;
+	long long	exit_code;
+	int			overflow;
 
 	if (shell->interactive)
 		printf("exit\n");
@@ -67,7 +68,9 @@ void	ft_exit(char **cmd, int last_exit_status, t_shell *shell)
 			exit_with_error(shell, 2, true, cmd);
 		if (cmd[2])
 			exit_with_error(shell, 1, false, cmd);
-		exit_code = atoi(cmd[1]);
+		exit_code = ft_atoll(cmd[1], &overflow);
+		if (overflow)
+			exit_with_error(shell, 2, true, cmd);
 		free_shell(shell);
 		exit((unsigned char)exit_code);
 	}

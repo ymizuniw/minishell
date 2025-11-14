@@ -1,4 +1,5 @@
 #include "../../../includes/minishell.h"
+#include <stddef.h>
 
 t_word	*create_word_node(char *content, t_word_type type, bool expand_doller,
 		bool expand_wildcard)
@@ -18,13 +19,8 @@ t_word	*create_word_node(char *content, t_word_type type, bool expand_doller,
 
 t_word	*append_node(t_word *head, t_word *new)
 {
-	t_word	*current;
-
 	if (!head)
 		return (new);
-	current = head;
-	while (current->next)
-		current = current->next;
-	current->next = new;
+	ft_lst_add_back((void **)&head, new, offsetof(t_word, next));
 	return (head);
 }

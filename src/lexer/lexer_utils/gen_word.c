@@ -11,16 +11,7 @@ size_t		count_word_list(t_word *word);
 // Extract a substring from src between start and end indices
 char	*ext_unit(char *src, size_t start, size_t end)
 {
-	char	*unit;
-	size_t	len;
-
-	len = end - start;
-	unit = xmalloc(sizeof(char) * (len + 1));
-	if (unit == NULL)
-		return (NULL);
-	strncpy(unit, &src[start], len);
-	unit[len] = '\0';
-	return (unit);
+	return (ft_substr(src, start, end - start));
 }
 
 // Join two strings by reallocating and concatenating
@@ -30,7 +21,7 @@ int	join_value(char **res, const char *value, size_t size1, size_t size2)
 				+ size2 + 1));
 	if (*res == NULL)
 		return (0);
-	strncpy(*res + size1, value, size2);
+	ft_memcpy(*res + size1, value, size2);
 	(*res)[size1 + size2] = '\0';
 	return (1);
 }
