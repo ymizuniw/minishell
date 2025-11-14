@@ -29,7 +29,7 @@ int	parse_redirection(t_redir **redir_head, t_token_type token_type,
 	new_redir = alloc_redir();
 	if (!new_redir)
 		return (-1);
-	memset(new_redir, 0, sizeof(t_redir));
+	ft_memset(new_redir, 0, sizeof(t_redir));
 	append_redir(redir_head, new_redir);
 	set_redir_type(new_redir, token_type);
 	word = filename_token->word_list;
@@ -128,7 +128,7 @@ t_ast	*gen_command_node(t_ast *parent, t_token **cur_token)
 	node = alloc_node();
 	if (!node)
 		return (NULL);
-	memset(node, 0, sizeof(t_ast));
+	ft_memset(node, 0, sizeof(t_ast));
 	node->parent = parent;
 	node->type = NODE_CMD;
 	node->cmd = alloc_cmd();
@@ -137,7 +137,7 @@ t_ast	*gen_command_node(t_ast *parent, t_token **cur_token)
 		xfree(node);
 		return (NULL);
 	}
-	memset(node->cmd, 0, sizeof(t_cmd));
+	ft_memset(node->cmd, 0, sizeof(t_cmd));
 	result = parse_command_list(node->cmd, cur_token);
 	if (result == -1)
 	{

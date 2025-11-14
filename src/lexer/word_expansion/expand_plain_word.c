@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:30:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/13 11:44:52 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:06:17 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	add_plain_word(t_word *word, char **res, size_t i)
 {
-	assert(word->word != NULL);
 	res[i] = ft_strdup(word->word);
 	if (!res[i])
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:30:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/14 11:21:18 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:49:54 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	*expand_token_words(t_word *word_list, t_shell *shell)
 		if (w->to_expand_doller && w->type == WD_DOLLER)
 		{
 			// Check if this is a double-quoted string with $ inside
-			if (strchr(w->word, '$'))
+			if (ft_strchr(w->word, '$'))
 				expanded = expand_string_with_dollars(w->word, shell);
 			else
 				expanded = expand_doller(w, shell);
@@ -139,114 +139,161 @@ static char	**expand_token_with_wildcard(t_word *word_list, t_shell *shell,
 	return (wildcard_results);
 }
 
-char	**ft_expand_word(t_token **tokens, size_t token_count, t_shell *shell)
-{
-	char	***token_results;
-	size_t	*token_result_counts;
-	size_t	total_count;
-	char	**final_res;
-	size_t	i;
-	size_t	j;
-	size_t	k;
-	t_word	*word_list;
-	size_t	addition;
-	size_t	value_len;
+
+//t_token_result ,,,
+	void cleanup_token_results(size_t token_count, char ***token_results, size_t *token_result_counts)
+	{
+		size_t i;
+		i = 0;
+		while (i < token_count)
+		{
+			if (token_results[i])
+				free_double_array(token_results[i]);
+			i++;
+		}
+		xfree(token_results);
+		xfree(token_result_counts);
+	}
+
+	typedef struct s_token_result
+	{
+		char	***token_results;
+		size_t	*token_result_counts;
+		size_t	total_count;
+		size_t	i;
+	} t_token_result;
 
 	// Allocate arrays to hold results for each token
-	token_results = (char ***)xcalloc(sizeof(char **) * token_count);
-	token_result_counts = (size_t *)xcalloc(sizeof(size_t) * token_count);
-	if (!token_results || !token_result_counts)
-		return (xfree(token_results), xfree(token_result_counts), NULL);
-	// Process each token
-	total_count = 0;
-	i = 0;
-	while (i < token_count)
+	int init_token_results(t_token_result *tr, size_t token_count)
 	{
-		if (!tokens[i] || !tokens[i]->value)
+		tr->token_results = (char ***)xcalloc(sizeof(char **) * token_count);//the list of char *argv[], {char *argv[], ...};
+		tr->token_result_counts = (size_t *)xcalloc(sizeof(size_t) * token_count);//the size of each char *argv[] corresponding to the idx of token_results.
+		if (!tr->token_results || !tr->token_result_counts)
+			return (xfree(tr->token_results), xfree(tr->token_result_counts), -1);
+		return (1);
+	}
+
+		void init_token_results_elem(t_token_result *tr, t_token **tokens, size_t token_count)
 		{
-			token_results[i] = (char **)xcalloc(sizeof(char *) * 2);
-			if (!token_results[i])
-				goto cleanup_error;
-			token_results[i][0] = ft_strdup("");
-			token_results[i][1] = NULL;
-			token_result_counts[i] = 1;
-			total_count += 1;
-			i++;
-			continue ;
-		}
-		value_len = ft_strlen(tokens[i]->value);
-		word_list = gen_word(tokens[i]->value, value_len, &addition);
-		if (!word_list)
-			goto cleanup_error;
-		// Check if token has wildcard to expand
-		if (has_wildcard_to_expand(word_list))
-		{
-			token_results[i] = expand_token_with_wildcard(word_list, shell,
-					&token_result_counts[i]);
-			free_word_list(word_list);
-			if (!token_results[i])
-				goto cleanup_error;
-		}
-		else
-		{
-			token_results[i] = (char **)xcalloc(sizeof(char *) * 2);
-			if (!token_results[i])
+			while (tr->i < token_count)
 			{
+				if (!tokens[tr->i] || !tokens[tr->i]->value)
+				{
+					tr->token_results[tr->i] = (char **)xcalloc(sizeof(char *) * 2);
+					if (!tr->token_results[tr->i])
+						goto cleanup_error;
+					tr->token_results[tr->i][0] = ft_strdup("");
+					tr->token_results[tr->i][1] = NULL;
+					tr->token_result_counts[tr->i] = 1;
+					tr->total_count += 1;
+					tr->i++;
+					continue ;
+				}
+			}
+		}
+
+
+		int with_wildcard(t_shell *shell, t_token_result *tr, t_word *word_list)
+			{
+				tr->token_results[tr->i] = expand_token_with_wildcard(word_list, shell,
+						&tr->token_result_counts[tr->i]);
 				free_word_list(word_list);
-				goto cleanup_error;
+				if (!tr->token_results[tr->i])
+					goto cleanup_error;
+				//return(-1);
+				//return(1);
 			}
-			token_results[i][0] = expand_token_words(word_list, shell);
-			token_results[i][1] = NULL;
-			free_word_list(word_list);
-			if (!token_results[i][0])
-				goto cleanup_error;
-			token_result_counts[i] = 1;
-		}
-		total_count += token_result_counts[i];
-		i++;
-	}
-	// Combine all results into final array
-	final_res = (char **)xcalloc(sizeof(char *) * (total_count + 1));
-	if (!final_res)
-		goto cleanup_error;
-	k = 0;
-	i = 0;
-	while (i < token_count)
-	{
-		j = 0;
-		while (j < token_result_counts[i])
-		{
-			final_res[k++] = ft_strdup(token_results[i][j]);
-			if (!final_res[k - 1])
+
+
+			int without_wildcard(t_shell *shell, t_token_result *tr, t_word *word_list)
 			{
-				free_double_array(final_res);
-				goto cleanup_error;
+				tr->token_results[tr->i] = (char **)xcalloc(sizeof(char *) * 2);
+				if (!tr->token_results[tr->i])
+				{
+					free_word_list(word_list);
+					goto cleanup_error;//return (-1);
+				}
+				tr->token_results[tr->i][0] = expand_token_words(word_list, shell);
+				tr->token_results[tr->i][1] = NULL;
+				free_word_list(word_list);
+				if (!tr->token_results[tr->i][0])
+					goto cleanup_error;//return(-1);
+				tr->token_result_counts[tr->i] = 1;
+				return (1);
 			}
-			j++;
+
+	int build_final_res(char ***final_res, t_token_result *tr, size_t token_count)
+	{
+		size_t k;
+		size_t j;
+		
+		*final_res = (char **)xcalloc(sizeof(char *) * (tr->i + 1));
+		if (!final_res)
+			goto cleanup_error;//free and return ;
+		k = 0;
+		tr->i = 0;
+		while (tr->i < token_count)
+		{
+			j = 0;
+			while (j < tr->token_result_counts[tr->i])
+			{
+				final_res[k++] = ft_strdup(tr->token_results[tr->i][j]);
+				if (!final_res[k - 1])
+				{
+					free_double_array(final_res);
+					goto cleanup_error;//free and return ;
+				}
+				j++;
+			}
+			tr->i++;
 		}
-		i++;
+		final_res[k] = NULL;
 	}
-	final_res[k] = NULL;
-	// Cleanup temporary arrays
-	i = 0;
-	while (i < token_count)
+	
+	int expand_loop(t_shell *shell, t_token_result *tr, t_token **tokens, size_t token_count)
 	{
-		if (token_results[i])
-			free_double_array(token_results[i]);
-		i++;
+		size_t value_len;
+		size_t addition = 0;
+		t_word *word_list = NULL;
+		
+		while (tr->i < token_count)
+		{
+			init_token_results_elem(&tr, tokens, token_count);
+			value_len = ft_strlen(tokens[tr->i]->value);
+			word_list = gen_word(tokens[tr->i]->value, value_len, &addition);
+			if (!word_list)
+				goto cleanup_error;//free and return?return (-1);
+			
+			if (has_wildcard_to_expand(word_list))//with wildcard path
+			{
+				if (with_wildcard(shell, &tr, word_list)<0)
+					break ;//free and return ?return (-1);
+			}
+			else//without wildcard path
+			{
+				if (without_wildcard(shell, &tr, word_list)<0)
+					break ;//free and return ?return (-1);
+			}
+			tr->total_count += tr->token_result_counts[tr->i];
+			tr->i++;
+		}
+		return (1);
 	}
-	xfree(token_results);
-	xfree(token_result_counts);
+
+
+//t_token **tr->tokens is t_token *token 's address array.
+char	**ft_expand_word(t_token **tokens, size_t token_count, t_shell *shell)
+{
+	t_token_result tr;
+	char	**final_res;
+
+	if (init_token_results(&tr, token_count)<0)
+		return (NULL);
+	tr.total_count = 0;
+	tr.i = 0;
+	if (expand_loop(shell, &tr, tokens, token_count)<0)
+		return (NULL);
+	if (build_final_res(&final_res, &tr, token_count)<0)
+		return (NULL);//free and return NULL;
 	return (final_res);
-cleanup_error:
-	i = 0;
-	while (i < token_count)
-	{
-		if (token_results[i])
-			free_double_array(token_results[i]);
-		i++;
-	}
-	xfree(token_results);
-	xfree(token_result_counts);
-	return (NULL);
 }

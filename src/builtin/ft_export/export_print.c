@@ -13,7 +13,7 @@ static void	sort_env_array(t_env **arr, size_t count)
 		j = 0;
 		while (j < count - i - 1)
 		{
-			if (strcmp(arr[j]->key, arr[j + 1]->key) > 0)
+			if (ft_strcmp(arr[j]->key, arr[j + 1]->key) > 0)
 			{
 				tmp = arr[j];
 				arr[j] = arr[j + 1];
@@ -40,8 +40,9 @@ static size_t	count_exported_vars(t_env *env_list)
 	}
 	return (count);
 }
-//関数名かぶり
 
+
+//this is for generate envp array for execve();
 static t_env	**env_list_to_array(t_env *env_list, size_t count)
 {
 	t_env	**array;

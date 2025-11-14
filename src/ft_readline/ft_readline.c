@@ -5,21 +5,21 @@ static int	process_key(char c, char *buf, size_t *len, t_readline_ctx *ctx)
 {
 	char	seq[2];
 
-	if (c == 3)
+	if (c == ASC_ETX)
 		return (1);
 	if (c == '\n')
 		return (0);
-	if (c == 4 && *len == 0)
+	if (c == ASC_EOT && *len == 0)
 		return (-1);
-	if (c == 127)
+	if (c == ASC_DEL)
 		handle_backspace(buf, len);
-	else if (c == 27)
+	else if (c == ASC_ESC)
 	{
 		if (read_key(&seq[0]) <= 0 || read_key(&seq[1]) <= 0)
 			return (1);
 		handle_escape_sequence(seq, ctx->hist, buf, ctx);
 	}
-	else if (c >= 32 && c <= 126)
+	else if (ft_isprint((int)c))
 		handle_printable(buf, len, c);
 	return (1);
 }
@@ -74,7 +74,7 @@ char	*ft_readline(const char *prompt, t_hist *hist)
 		return (disable_raw_mode(&orig), free(buf), NULL);
 	write(STDOUT_FILENO, "\n", 1);
 	disable_raw_mode(&orig);
-	if (len > 0)
+	if (hist!=NULL && len > 0)
 		add_history(buf, hist);
 	return (buf);
 }

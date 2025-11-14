@@ -63,7 +63,7 @@ int	quote_wrapper(t_gen_word *gw, char *value, size_t *i)
 		return (-1);
 	gw->word->word = content;
 	// Set type based on content and quote type
-	if (gw->quote == '"' && strchr(content, '$'))
+	if (gw->quote == '"' && ft_strchr(content, '$'))
 		gw->word->type = WD_DOLLER; // Contains $ in double quotes
 	else if (gw->quote == '"' && content[0] == '$' && content[1] != '\0')
 		gw->word->type = WD_DOLLER;
@@ -72,17 +72,24 @@ int	quote_wrapper(t_gen_word *gw, char *value, size_t *i)
 	*i = gw->close_place + 1;
 	return (1);
 }
+
+static int correct_env_var_format(char c)
+{
+	if (c == '?' || c == '*'
+				|| c == '@' || c == '#' || c == '$'
+				|| c == '!' || ft_isdigit(c))
+		return (1);
+	else
+		return (0);
+}
+
 int	doller_literal_wrapper(t_gen_word *gw, char *value, size_t value_len,
 		size_t *i)
 {
 	if (value && value[*i] == '$')
 	{
 		(*i)++;
-		// Check if $ is followed by valid variable name characters
-		// Special single-character variables: ?, *, @, #, $, !, 0-9
-		if (*i < value_len && (value[*i] == '?' || value[*i] == '*'
-				|| value[*i] == '@' || value[*i] == '#' || value[*i] == '$'
-				|| value[*i] == '!' || ft_isdigit(value[*i])))
+		if (*i < value_len && correct_env_var_format(value[*i]))
 		{
 			gw->word->type = WD_DOLLER;
 			gw->word->to_expand_doller = true;
@@ -102,7 +109,6 @@ int	doller_literal_wrapper(t_gen_word *gw, char *value, size_t value_len,
 		{
 			gw->word->type = WD_LITERAL;
 			gw->word->to_expand_doller = false;
-			// i is already incremented past the $
 		}
 	}
 	else
@@ -125,7 +131,7 @@ int	init_gen_word_data(t_word **word, t_gen_word *gw, char *value, size_t *i)
 	*word = (t_word *)xcalloc(sizeof(t_word));
 	if (*word == NULL)
 		return (-1);
-	memset(gw, 0, sizeof(t_gen_word));
+	ft_memset(gw, 0, sizeof(t_gen_word));
 	gw->quote = is_quote(value[*i]);
 	gw->close_place = 0;
 	gw->word = *word;

@@ -5,7 +5,7 @@ static char	*get_var_value(const char *key, t_shell *shell, bool *need_free)
 {
 	t_env	*env_entry;
 
-	if (strcmp(key, "?") == 0)
+	if (ft_strcmp(key, "?") == 0)
 	{
 		*need_free = true;
 		return (ft_itoa(shell->last_exit_status));
@@ -44,7 +44,7 @@ int	expand_single_dollar(char **word_ptr, char **expanded, size_t *len,
 			&& (*word_ptr)[1] != '?'))
 		return (append_to_expanded(expanded, len, "$", 1), (*word_ptr)++, 1);
 	key_len = get_var_key_len(*word_ptr);
-	key = strndup(*word_ptr + 1, key_len);
+	key = ft_strndup(*word_ptr + 1, key_len);
 	if (!key)
 		return (-1);
 	value = get_var_value(key, shell, &need_free);

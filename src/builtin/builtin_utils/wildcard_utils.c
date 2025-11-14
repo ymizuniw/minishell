@@ -22,7 +22,6 @@ bool	match_middle(const char *name, char **keys, size_t key_count,
 	size_t	key_len;
 
 	key_len = 0;
-	assert(keys != NULL);
 	i = 1;
 	while (i + 1 < key_count)
 	{
@@ -44,7 +43,6 @@ bool	match_suffix(const char *name, const char *last)
 
 	name_len = 0;
 	last_len = 0;
-	assert(last != NULL);
 	if (name)
 		name_len = ft_strlen(name);
 	if (!last || last[0] == '\0')

@@ -10,7 +10,6 @@
 # include "parser.h"
 # include "signal_management.h"
 # include "wildcard.h"
-# include <assert.h>
 // static definition needed.
 
 // main.c

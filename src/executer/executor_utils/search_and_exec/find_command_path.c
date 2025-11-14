@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_command_path.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 22:49:57 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/13 20:53:57 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:07:23 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static char	*build_pwd_path(t_shell *shell, char *cmd)
 	full_path = malloc(len_pwd + len_cmd + 2);
 	if (!full_path)
 		return (NULL);
-	memcpy(full_path, shell->pwd, len_pwd);
+	ft_memcpy(full_path, shell->pwd, len_pwd);
 	full_path[len_pwd] = '/';
-	memcpy(full_path + len_pwd + 1, cmd, len_cmd);
+	ft_memcpy(full_path + len_pwd + 1, cmd, len_cmd);
 	full_path[len_pwd + len_cmd + 1] = '\0';
 	return (full_path);
 }

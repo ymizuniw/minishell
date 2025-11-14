@@ -46,7 +46,7 @@ void	set_variable(t_shell *shell, char *key, char *value, int exported)
 	current = shell->env_list;
 	while (current)
 	{
-		if (strncmp(current->key, key, key_len + 1) == 0)
+		if (ft_strncmp(current->key, key, key_len + 1) == 0)
 		{
 			update_existing_var(current, value, exported);
 			return ;

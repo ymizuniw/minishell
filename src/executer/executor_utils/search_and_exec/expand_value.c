@@ -22,7 +22,7 @@ static int	dollar_expansions(char **expanded, size_t *len, char **current,
 {
 	char	*dollar;
 
-	dollar = strchr(*current, '$');
+	dollar = ft_strchr(*current, '$');
 	while (dollar)
 	{
 		if (dollar > *current && append_to_expanded(expanded, len, *current,

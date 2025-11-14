@@ -8,7 +8,7 @@ int	init_token(t_token **token_head)
 		perror("token_alloc");
 		return (0);
 	}
-	memset(*token_head, 0, sizeof(t_token));
+	ft_memset(*token_head, 0, sizeof(t_token));
 	return (1);
 }
 
@@ -28,10 +28,10 @@ int	handle_meta_char(t_token *token_head, const char *input, size_t *idx)
 	new = alloc_token();
 	if (!new)
 		return (-1);
-	memset(new, 0, sizeof(t_token));
+	ft_memset(new, 0, sizeof(t_token));
 	start_idx = *idx;
 	new->type = get_token_type((char *)input, idx);
-	new->value = strndup(&input[start_idx], *idx - start_idx);
+	new->value = ft_strndup(&input[start_idx], *idx - start_idx);
 	if (!new->value)
 	{
 		free(new);
@@ -48,7 +48,7 @@ int	handle_doller(t_token *token_head, size_t *idx)
 	new = alloc_token();
 	if (!new)
 		return (-1);
-	memset(new, 0, sizeof(t_token));
+	ft_memset(new, 0, sizeof(t_token));
 	new->type = TK_DOLLER;
 	new->value = ft_strdup("$");
 	if (!new->value)
@@ -73,7 +73,7 @@ int	handle_word(t_token *token_head, char const *input, size_t input_len,
 	new = alloc_token();
 	if (!new)
 		return (-1);
-	memset(new, 0, sizeof(t_token));
+	ft_memset(new, 0, sizeof(t_token));
 	word = NULL;
 	if (word_cat(&word, 0, (char *)input, input_len, idx, &had_sq, &had_dq,
 			&had_unq) == 0)

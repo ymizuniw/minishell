@@ -7,7 +7,7 @@ static int	check_file_access(char *path, t_shell *shell)
 	if (access(path, F_OK) != 0)
 	{
 		write(2, "minishell: ", 6);
-		write(2, path, strlen(path));
+		write(2, path, ft_strlen(path));
 		write(2, ": No such file or directory\n", 28);
 		shell->last_exit_status = 127;
 		return (0);
@@ -19,7 +19,7 @@ static int	check_file_access(char *path, t_shell *shell)
 	if (access(path, X_OK) != 0)
 	{
 		write(2, "minishell: ", 6);
-		write(2, path, strlen(path));
+		write(2, path, ft_strlen(path));
 		write(2, ": Permission denied\n", 20);
 		shell->last_exit_status = 126;
 		return (0);

@@ -1,20 +1,20 @@
 #include "../../../../includes/minishell.h"
 
-static size_t	count_exported_vars(t_env *env_list)
-{
-	t_env	*current;
-	size_t	count;
+// static size_t	count_exported_vars(t_env *env_list)
+// {
+// 	t_env	*current;
+// 	size_t	count;
 
-	current = env_list;
-	count = 0;
-	while (current)
-	{
-		if (current->exported)
-			count++;
-		current = current->next;
-	}
-	return (count);
-}
+// 	current = env_list;
+// 	count = 0;
+// 	while (current)
+// 	{
+// 		if (current->exported)
+// 			count++;
+// 		current = current->next;
+// 	}
+// 	return (count);
+// }
 
 char	*create_env_string(const char *key, const char *value)
 {
@@ -31,10 +31,12 @@ char	*create_env_string(const char *key, const char *value)
 	if (value)
 		value_len = ft_strlen(value);
 	len = key_len + value_len + 2;
-	str = xmalloc(len);
+	str = xcalloc(len);
 	if (!str)
 		return (NULL);
-	snprintf(str, len, "%s=%s", key, value);
+	ft_memcpy(str, key, key_len);
+	ft_memcpy(str + key_len, "=", 1);
+	ft_memcpy(str + key_len + 1, value, value_len);
 	return (str);
 }
 
@@ -47,17 +49,26 @@ static int	add_env_to_array(char **envp, t_env *env_list)
 	i = 0;
 	while (current)
 	{
-		if (current->exported)
-		{
-			envp[i] = create_env_string(current->key, current->value);
-			if (!envp[i])
-				return (free_envp(envp), 0);
-			i++;
-		}
+		envp[i] = create_env_string(current->key, current->value);
+		if (!envp[i])
+			return (free_envp(envp), 0);
+		i++;
 		current = current->next;
 	}
 	envp[i] = NULL;
 	return (1);
+}
+
+static size_t count_env_list_size(t_env *env_list)
+{
+	size_t size=0;
+
+	while (env_list)
+	{
+		size++;
+		env_list=env_list->next;
+	}
+	return (size);
 }
 
 char	**generate_envp(t_env *env_list)
@@ -65,7 +76,7 @@ char	**generate_envp(t_env *env_list)
 	char	**envp;
 	size_t	count;
 
-	count = count_exported_vars(env_list);
+	count = count_env_list_size(env_list);
 	envp = xmalloc(sizeof(char *) * (count + 1));
 	if (!envp)
 		return (NULL);

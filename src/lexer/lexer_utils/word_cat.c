@@ -8,7 +8,7 @@ int	handle_quotation(char **word, size_t word_len, char const *input,
 
 	quote_close = NULL;
 	if (input[*idx + 1])
-		quote_close = strchr(&input[*idx + 1], quote_open);
+		quote_close = ft_strchr(&input[*idx + 1], quote_open);
 	if (!quote_close)
 		return (0);
 	add_len = quote_close - &input[*idx] - 1;
@@ -61,7 +61,7 @@ size_t	word_cat(char **word, size_t word_len, char const *input,
 		q_open = is_quote(input[*idx]);
 		if (q_open != '\0')
 		{
-			d_close = strchr(&input[*idx + 1], q_open);
+			d_close = ft_strchr(&input[*idx + 1], q_open);
 			if (d_close)
 			{
 				// Include quotes in the token value
@@ -70,7 +70,7 @@ size_t	word_cat(char **word, size_t word_len, char const *input,
 						sizeof(char) * (word_len + ext_len + 1));
 				if (!*word)
 					return (0);
-				memcpy(*word + word_len, &input[*idx], ext_len);
+				ft_memcpy(*word + word_len, &input[*idx], ext_len);
 				(*word)[word_len + ext_len] = '\0';
 				*idx += ext_len;
 				if (q_open == '\'')

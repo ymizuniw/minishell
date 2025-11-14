@@ -20,6 +20,6 @@ void	*xcalloc(size_t size)
 
 	p = xmalloc(size);
 	if (p != NULL)
-		memset(p, 0, size);
+		ft_memset(p, 0, size);
 	return (p);
 }

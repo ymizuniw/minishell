@@ -64,7 +64,7 @@ void	exec_one_ast(t_ast *ast, t_shell *shell)
 
 	if (!ast)
 		return ;
-	memset(&res, 0, sizeof(t_result));
+	ft_memset(&res, 0, sizeof(t_result));
 	shell->root = ast;
 	res = executor(ast, shell);
 	shell->last_exit_status = res.exit_code;

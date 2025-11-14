@@ -19,7 +19,7 @@ t_ast	*swap_with_parent(t_ast **parent, t_token **cur_token)
 	node = alloc_node();
 	if (!node)
 		return (NULL);
-	memset(node, 0, sizeof(t_ast));
+	ft_memset(node, 0, sizeof(t_ast));
 	set_node_type(node, (*cur_token)->type);
 	if (*parent)
 	{
@@ -42,7 +42,7 @@ static int	parse_subshell_redir(t_ast *node, t_token **redir_scan)
 			node->cmd = alloc_cmd();
 			if (!node->cmd)
 				return (0);
-			memset(node->cmd, 0, sizeof(t_cmd));
+			ft_memset(node->cmd, 0, sizeof(t_cmd));
 		}
 		parse_redirection(&node->cmd->redir, (*redir_scan)->type,
 			(*redir_scan)->prev);
@@ -63,7 +63,7 @@ t_ast	*gen_subshell_node(t_ast *parent, t_token **cur_token)
 	node = alloc_node();
 	if (!node)
 		return (NULL);
-	memset(node, 0, sizeof(t_ast));
+	ft_memset(node, 0, sizeof(t_ast));
 	node->parent = parent;
 	node->type = NODE_SUBSHELL;
 	redir_scan = (*cur_token)->prev;

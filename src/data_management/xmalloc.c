@@ -15,6 +15,6 @@ void	*xcalloc(size_t size)
 	void	*p;
 
 	p = xmalloc(size);
-	memset(p, 0, size);
+	ft_memset(p, 0, size);
 	return (p);
 }

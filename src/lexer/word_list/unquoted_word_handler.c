@@ -26,7 +26,7 @@ t_word	*handle_unquoted_word(const char *input, size_t input_len, size_t *idx)
 	}
 	if (len == 0)
 		return (NULL);
-	content = strndup(&input[start], len);
+	content = ft_strndup(&input[start], len);
 	if (!content)
 		return (NULL);
 	*idx = start + len;
@@ -50,7 +50,7 @@ t_word	*handle_unclosed_quote(const char *input, size_t input_len, size_t *idx)
 	}
 	if (len == 0)
 		return (NULL);
-	content = strndup(&input[start], len);
+	content = ft_strndup(&input[start], len);
 	if (!content)
 		return (NULL);
 	*idx = start + len;
@@ -77,7 +77,7 @@ t_word	*handle_doller_word(const char *input, size_t input_len, size_t *idx)
 	}
 	if (len == 0)
 		return (NULL);
-	content = strndup(&input[start], len);
+	content = ft_strndup(&input[start], len);
 	if (!content)
 		return (NULL);
 	*idx = start + len;

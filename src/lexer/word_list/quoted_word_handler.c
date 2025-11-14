@@ -22,7 +22,7 @@ static t_word	*process_dollar_in_quote(const char *content, size_t *i,
 	}
 	if (*i > start)
 	{
-		str = strndup(&content[start], *i - start);
+		str = ft_strndup(&content[start], *i - start);
 		if (!str)
 			return (NULL);
 		return (create_word_node(str, WD_DOLLER, true, false));
@@ -41,7 +41,7 @@ static t_word	*process_literal_in_quote(const char *content, size_t *i,
 		(*i)++;
 	if (*i > start)
 	{
-		str = strndup(&content[start], *i - start);
+		str = ft_strndup(&content[start], *i - start);
 		if (!str)
 			return (NULL);
 		return (create_word_node(str, WD_LITERAL, false, false));

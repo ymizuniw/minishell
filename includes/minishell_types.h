@@ -51,6 +51,11 @@ typedef struct s_shell	t_shell;
 # define TOKEN_VALUE_HEREDOC "<<"
 # define TOKEN_VALUE_APPEND ">>"
 
+#define ASC_ETX 3
+#define ASC_EOT 4
+#define ASC_DEL 127
+#define ASC_ESC 27
+
 void					rl_replace_line(const char *text, int clear_undo);
 
 typedef struct s_hist
