@@ -57,7 +57,6 @@ int	shell_loop(t_shell *shell)
 	static t_hist	hist;
 
 	shell->hist = &hist;
-	/* initialize current history pointer to -1 to indicate no browsing */
 	hist.cur = -1;
 	prompt = "minishell$ ";
 	while (1)
@@ -82,16 +81,6 @@ int	shell_loop(t_shell *shell)
 		shell->line_ptr = NULL;
 	}
 	return (0);
-}
-
-void	disable_echoctl(void)
-{
-	struct termios	term;
-
-	if (tcgetattr(STDIN_FILENO, &term) == -1)
-		return ;
-	term.c_lflag &= ~ECHOCTL;
-	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
 int	main(int argc, char **argv, char **env)
