@@ -31,9 +31,6 @@
 // # define HERE_TEMPLATE "/tmp/heredoc_tmp_XXXXX"
 # define HIST_MAX 1000
 
-// Forward declarations
-typedef struct s_shell	t_shell;
-
 // ECHOCTL value is depending on executing evironment.
 # ifndef ECHOCTL
 #  define ECHOCTL 0001000
@@ -56,7 +53,7 @@ typedef struct s_shell	t_shell;
 #define ASC_DEL 127
 #define ASC_ESC 27
 
-void					rl_replace_line(const char *text, int clear_undo);
+typedef struct s_shell t_shell;
 
 typedef struct s_hist
 {
@@ -217,6 +214,7 @@ typedef struct s_shell
 	t_result			res;
 	int					stdin_backup;
 	int					stdout_backup;
+	struct	termios		orig_term;
 }						t_shell;
 
 typedef struct s_heredoc_ctx

@@ -117,7 +117,7 @@ int	handle_eof(t_token *token_head)
 	if (!new)
 		return (-1);
 	new->type = TK_EOF;
-	new->value = ft_strdup("");
+	new->value = ft_strdup("");//
 	new->next = NULL;
 	token_add_back(&token_head, new);
 	return (1);

@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE
+CFLAGS = -g -fsanitize=address -Wall -Wextra -Werror -D_DEFAULT_SOURCE
 INC = -Iincludes
 
 # -g

@@ -75,5 +75,7 @@ void	ft_exit(char **cmd, int last_exit_status, t_shell *shell)
 		exit((unsigned char)exit_code);
 	}
 	free_shell(shell);
+	//debug.
+	disable_raw_mode(&shell->orig_term);
 	exit(last_exit_status);
 }

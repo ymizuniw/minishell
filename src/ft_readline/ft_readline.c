@@ -54,9 +54,8 @@ static int	read_loop(char *buf, size_t *len, t_readline_ctx *ctx)
 	return (0);
 }
 
-char	*ft_readline(const char *prompt, t_hist *hist)
+char	*ft_readline(t_shell *shell, const char *prompt, t_hist *hist)
 {
-	struct termios	orig;
 	char			*buf;
 	size_t			len;
 	t_readline_ctx	ctx;
@@ -68,12 +67,13 @@ char	*ft_readline(const char *prompt, t_hist *hist)
 		return (NULL);
 	len = 0;
 	ctx = (t_readline_ctx){&len, hist, prompt};
-	enable_raw_mode(&orig);
+	enable_raw_mode(&shell->orig_term);
 	write(STDOUT_FILENO, prompt, ft_strlen(prompt));
 	if (read_loop(buf, &len, &ctx) == -1)
-		return (disable_raw_mode(&orig), free(buf), NULL);
+		return (disable_raw_mode(&shell->orig_term), free(buf), NULL);
 	write(STDOUT_FILENO, "\n", 1);
-	disable_raw_mode(&orig);
+	if (shell)
+		disable_raw_mode(&shell->orig_term);
 	if (hist!=NULL && len > 0)
 		add_history(buf, hist);
 	return (buf);

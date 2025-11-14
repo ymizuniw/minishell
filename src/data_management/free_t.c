@@ -13,7 +13,7 @@ void	free_double_array(char **p)
 {
 	size_t	i;
 
-	if (p == NULL)
+	if (p == NULL || (p && p[0]==NULL))
 		return ;
 	i = 0;
 	while (p[i] != NULL)

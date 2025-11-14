@@ -62,7 +62,7 @@ int	shell_loop(t_shell *shell)
 	while (1)
 	{
 		g_signum = 0;
-		line = ft_readline(prompt, &hist);
+		line = ft_readline(shell, prompt, &hist);
 		if (g_signum == SIGINT)
 		{
 			shell->last_exit_status = 130;

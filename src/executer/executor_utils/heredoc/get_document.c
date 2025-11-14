@@ -7,7 +7,7 @@ static bool	read_heredoc_line(char **line, char **line_copy, int is_interactive)
 
 	if (is_interactive)
 	{
-		*line = ft_readline(">", NULL);
+		*line = ft_readline(NULL, ">", NULL);
 		if (!*line)
 			return (false);
 		*line_copy = *line;
