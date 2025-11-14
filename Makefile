@@ -176,33 +176,8 @@ fclean: clean
 
 re: fclean all
 
-# Testing targets
-# Note: Tests are now in separate minishell_tester repository
-.PHONY: all clean fclean re test test-integration test-stress
-
-TESTER_DIR = ../minishell_tester
-
-test: $(NAME)
-	@if [ ! -d "$(TESTER_DIR)" ]; then \
-		echo "Error: Tester not found at $(TESTER_DIR)"; \
-		echo "Please clone or link minishell_tester repository"; \
-		exit 1; \
-	fi
-	@cd $(TESTER_DIR) && ./run_tests.sh $(PWD)/$(NAME)
-
-test-integration: $(NAME)
-	@if [ ! -d "$(TESTER_DIR)" ]; then \
-		echo "Error: Tester not found at $(TESTER_DIR)"; \
-		exit 1; \
-	fi
-	@cd $(TESTER_DIR) && ./run_tests.sh $(PWD)/$(NAME) --integration
-
-test-stress: $(NAME)
-	@if [ ! -d "$(TESTER_DIR)" ]; then \
-		echo "Error: Tester not found at $(TESTER_DIR)"; \
-		exit 1; \
-	fi
-	@cd $(TESTER_DIR) && ./run_tests.sh $(PWD)/$(NAME) --stress
-
-# Legacy target for compatibility
-integration-tests: test-integration
+# Integration tests (non-interactive harness)
+.PHONY: all clean fclean re integration-tests
+integration-tests: $(NAME)
+	@echo "Running integration tests (Bash harness)"
+	@bash tests/integration/integration_tests.sh || exit 1
