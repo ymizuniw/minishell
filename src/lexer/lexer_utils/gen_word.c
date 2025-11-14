@@ -106,11 +106,11 @@ int	doller_literal_wrapper(t_gen_word *gw, char *value, size_t value_len,
 					|| value[*i] == '_'))
 				(*i)++;
 		}
-		// Lone $ with no valid variable name following - expand to empty string
+		// Lone $ with no valid variable name following - keep as literal $
 		else
 		{
-			gw->word->type = WD_DOLLER;
-			gw->word->to_expand_doller = true;
+			gw->word->type = WD_LITERAL;
+			gw->word->to_expand_doller = false;
 			// i is already incremented past the $
 		}
 	}

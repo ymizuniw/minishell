@@ -368,10 +368,12 @@ run_case "unclosed quote" \
   ANY "" \
   ANY "" \
   0
-run_case "unclosed quote is plain text (no special interpretation)" \
+# Unclosed quotes should be syntax errors (bash-compliant behavior)
+# Treating them as plain text is dangerous as it can cause metacharacter misinterpretation
+run_case "unclosed quote is syntax error" \
   "echo 'abc" \
-  CONTAINS "'abc" \
   EMPTY "" \
+  CONTAINS "syntax error" \
   0
 
 ########################################

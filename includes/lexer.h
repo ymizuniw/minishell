@@ -4,6 +4,7 @@
 # include "minishell_types.h"
 
 // lexer utils
+int				check_unclosed_quotes(const char *input);
 char			*ext_unit(char *src, size_t start, size_t end);
 int				join_value(char **res, const char *value, size_t size1,
 					size_t size2);

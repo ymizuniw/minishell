@@ -55,7 +55,6 @@ size_t	word_cat(char **word, size_t word_len, char const *input,
 	char	*d_close;
 	size_t	ext_len;
 
-	// printf("\n==word_cat() called.==\ninput[%zu]: %s\n", *idx, &input[*idx]);
 	while (*idx < input_len && !ft_isspace((unsigned char)input[*idx])
 		&& is_meta_char(input[*idx]) == MT_OTHER)
 	{
@@ -81,7 +80,10 @@ size_t	word_cat(char **word, size_t word_len, char const *input,
 				word_len += ext_len;
 				continue ;
 			}
-			// Unclosed quote: treat as plain text
+			// Unclosed quote detected
+			ft_putstr_fd("minishell: syntax error: unclosed quote\n",
+				STDERR_FILENO);
+			return (0);
 		}
 		if (handle_plain(word, &word_len, input, input_len, idx) < 0)
 			return (0);
