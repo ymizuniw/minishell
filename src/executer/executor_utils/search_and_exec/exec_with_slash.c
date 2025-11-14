@@ -27,17 +27,19 @@ static int	check_file_access(char *path, t_shell *shell)
 	return (1);
 }
 
-static void	exec_in_child(char **cmd_args, char **env)
+static void	exec_in_child(char **cmd_args, char **env, t_shell *shell)
 {
 	set_sig_dfl();
+	cleanup_before_execve(shell);
 	execve(cmd_args[0], cmd_args, env);
 	perror("execve");
 	free_envp(env);
 	exit(127);
 }
 
-static void	exec_direct(char **cmd_args, char **env)
+static void	exec_direct(char **cmd_args, char **env, t_shell *shell)
 {
+	cleanup_before_execve(shell);
 	execve(cmd_args[0], cmd_args, env);
 	perror("execve");
 	free_envp(env);
@@ -52,7 +54,7 @@ void	exec_with_slash(t_shell *shell, char **cmd_args, char **env)
 		return ;
 	if (shell->in_pipe_child)
 	{
-		exec_direct(cmd_args, env);
+		exec_direct(cmd_args, env, shell);
 		return ;
 	}
 	pid = fork();
@@ -64,7 +66,7 @@ void	exec_with_slash(t_shell *shell, char **cmd_args, char **env)
 		return ;
 	}
 	if (pid == 0)
-		exec_in_child(cmd_args, env);
+		exec_in_child(cmd_args, env, shell);
 	handle_child(&shell->last_exit_status, pid);
 	free_envp(env);
 }

@@ -51,6 +51,7 @@ static void	exit_with_error(t_shell *shell, int code, bool print_num_err,
 		else
 			print_err_args();
 	}
+	free_double_array(cmd);
 	free_shell(shell);
 	exit(code);
 }
@@ -71,9 +72,11 @@ void	ft_exit(char **cmd, int last_exit_status, t_shell *shell)
 		exit_code = ft_atoll(cmd[1], &overflow);
 		if (overflow)
 			exit_with_error(shell, 2, true, cmd);
+		free_double_array(cmd);
 		free_shell(shell);
 		exit((unsigned char)exit_code);
 	}
+	free_double_array(cmd);
 	free_shell(shell);
 	//debug.
 	disable_raw_mode(&shell->orig_term);

@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:30:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/14 20:04:58 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/14 21:27:36 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,22 +235,16 @@ int without_wildcard(t_shell *shell, t_token_result *tr, t_word *word_list, size
 
 
 //=================================================================
-// ==2387728==ERROR: AddressSanitizer: stack-buffer-overflow
+// Build final result array with correct size (total_count + 1 for NULL terminator)
 int build_final_res(char ***final_res, t_token_result *tr, size_t token_count)
 {
 	size_t k;
 	size_t j;
 	
-	*final_res = (char **)xcalloc(sizeof(char *) * (tr->i + 1));
-
-	//alloc memory size
-	//loop count tr->i
-	//token_results[tr->] 's NULL check
-	/*
-		it seems that final_res is no realloc()ed when new string is put in the array.
-	*/
+	// Allocate based on total_count, not token count
+	*final_res = (char **)xcalloc(sizeof(char *) * (tr->total_count + 1));
 	
-	if (!final_res)
+	if (!*final_res)
 	{
 		cleanup_token_results(token_count, tr->token_results, tr->token_result_counts);
 		return (-1);
@@ -263,9 +257,9 @@ int build_final_res(char ***final_res, t_token_result *tr, size_t token_count)
 		while (j < tr->token_result_counts[tr->i])
 		{
 			(*final_res)[k++] = ft_strdup(tr->token_results[tr->i][j]);
-			if (!final_res[k - 1])
+			if (!(*final_res)[k - 1])
 			{
-				// free_double_array(final_res[]);
+				free_double_array(*final_res);
 				cleanup_token_results(token_count, tr->token_results, tr->token_result_counts);
 				return (-1);					
 			}

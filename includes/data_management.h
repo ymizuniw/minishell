@@ -26,6 +26,7 @@ void		free_word_list(t_word *p);
 void		free_cmd_structure(t_cmd *p);
 void		free_result(t_result *s);
 void		free_shell(t_shell *shell);
+void		cleanup_before_execve(t_shell *shell);
 
 // list utilities
 t_token		*token_last(t_token *head);

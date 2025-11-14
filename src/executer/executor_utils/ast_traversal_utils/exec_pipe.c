@@ -9,6 +9,7 @@ static void	exec_pipe_right_child(int *pip, t_ast *node, t_shell *shell)
 		ft_exit(NULL, 1, shell);
 	close(pip[1]);
 	ast_traversal(node->right, shell);
+	free_shell(shell);
 	exit(shell->last_exit_status);
 }
 
@@ -21,6 +22,7 @@ static void	exec_pipe_left_child(int *pip, t_ast *node, t_shell *shell)
 		ft_exit(NULL, shell->last_exit_status, shell);
 	close(pip[0]);
 	ast_traversal(node->left, shell);
+	free_shell(shell);
 	exit(shell->last_exit_status);
 }
 
