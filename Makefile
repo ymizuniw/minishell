@@ -106,7 +106,6 @@ LEXER_UTILS_SRC = $(LEXER_UTILS_DIR)/prepend_tokens.c \
                   $(LEXER_UTILS_DIR)/set_token_type.c \
                   $(LEXER_UTILS_DIR)/word_cat.c \
                   $(LEXER_UTILS_DIR)/gen_word.c \
-                  $(LEXER_UTILS_DIR)/check_unclosed_quotes.c
 
 WORD_EXPANSION_SRC = $(WORD_EXPANSION_DIR)/ft_expand_word.c \
                      $(WORD_EXPANSION_DIR)/expand_dollar.c \

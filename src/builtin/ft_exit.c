@@ -66,10 +66,10 @@ void	ft_exit(char **cmd, int last_exit_status, t_shell *shell)
 		if (!is_numeric(cmd[1]))
 			exit_with_error(shell, 2, true, cmd);
 		if (cmd[2])
-			exit_with_error(shell, 2, false, cmd);
+			exit_with_error(shell, 1, false, cmd);
 		exit_code = atoi(cmd[1]);
 		free_shell(shell);
-		exit(exit_code % 256);
+		exit((unsigned char)exit_code);
 	}
 	free_shell(shell);
 	exit(last_exit_status);

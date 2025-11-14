@@ -6,6 +6,7 @@
 # endif
 # include <ctype.h> //isspace()->rem
 # include <dirent.h>
+# include <errno.h>
 # include <fcntl.h> //open()
 # include <limits.h>
 // # include <readline/history.h>
