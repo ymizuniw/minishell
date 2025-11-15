@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:42:53 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:42:55 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 19:26:16 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,13 @@ int	check_parenthesis_errors(t_token *token_list, t_shell *shell)
 	paren_check = check_parenthesis_balance(token_list);
 	if (paren_check > 0)
 	{
-		write(2,
-			"minishell: syntax error: unexpected EOF while looking for matching ')'\n",
-			72);
+		write(2, UNEXPECTED_EOF_MSG, 72);
 		shell->last_exit_status = 2;
 		return (0);
 	}
 	if (paren_check < 0)
 	{
-		write(2, "minishell: syntax error near unexpected token ')'\n", 50);
+		write(2, UNEXPECTED_RPAREN_MSG, 50);
 		shell->last_exit_status = 2;
 		return (0);
 	}

@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:39:35 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:39:36 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 20:08:15 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ unsigned char	is_quote(int c)
 	else if (uc == '\'')
 		return ('\'');
 	else
+	{
 		return ('\0');
+	}
 }

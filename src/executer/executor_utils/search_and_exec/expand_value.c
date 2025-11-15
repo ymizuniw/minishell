@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:49 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:37:50 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 20:14:17 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	append_to_expanded(char **expanded, size_t *len, const char *str,
 	if (!tmp)
 		return (-1);
 	*expanded = tmp;
-	memcpy(*expanded + *len, str, str_len);
+	ft_memcpy(*expanded + *len, str, str_len);
 	*len += str_len;
 	(*expanded)[*len] = '\0';
 	return (1);

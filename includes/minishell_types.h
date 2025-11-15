@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_types.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:31 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/15 18:35:38 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/15 19:45:09 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@
 
 # define SYNTAX_ERR_TEMPLATE "minishell: syntax error near unexpected token `"
 # define SYNTAX_ERR_TEMPLATE_LEN 47
+# define UNEXPECTED_EOF_MSG \
+	"minishell: syntax error: \
+unexpected EOF while looking for matching ')'\n"
+# define UNEXPECTED_RPAREN_MSG \
+	"minishell: syntax error\
+ near unexpected token ')'\n"
+
 # define TOKEN_VALUE_PIPE "|"
 # define TOKEN_VALUE_AND_IF "&&"
 # define TOKEN_VALUE_OR_IF "||"
@@ -246,7 +253,7 @@ typedef struct s_gen_word
 	t_word				*word;
 	size_t				value_len;
 	size_t				start;
-	char				quote;
+	unsigned char		quote;
 	size_t				close_place;
 }						t_gen_word;
 

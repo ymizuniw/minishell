@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:15 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/15 18:35:19 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/15 20:33:03 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ char			*create_env_string(const char *key, const char *value);
 char			**generate_envp(t_env *env_list);
 
 // Variable expansion (at execution time)
-// char			**gen_argv(t_argv *argv_list, t_shell *shell);
 char			**ft_expand_word(t_token **tokens, size_t token_count,
 					t_shell *shell);
 char			*expand_word(char *word, t_shell *shell);
@@ -71,5 +70,6 @@ int				expand_wildcard_to_result(t_word *word, char ***res, size_t *i,
 					size_t *total_count);
 int				get_document(t_redir *hd, char **document, size_t *document_len,
 					t_shell *shell);
+t_word			*loop_wrapper(char *value, size_t *i);
 
 #endif

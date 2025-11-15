@@ -6,17 +6,17 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:26 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:41:29 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 20:13:32 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int		handle_eof(t_token *token_head);
-int		handle_internal_separator(t_token *token_head, char const *input,
-			size_t *idx);
-int		handle_operators_and_words(t_token *token_head, char const *input,
-			size_t input_len, size_t *idx);
+int				handle_eof(t_token *token_head);
+int				handle_internal_separator(t_token *token_head,
+					char const *input, size_t *idx);
+int				handle_operators_and_words(t_token *token_head,
+					char const *input, size_t input_len, size_t *idx);
 
 int	init_token(t_token **token_head)
 {
@@ -30,6 +30,14 @@ int	init_token(t_token **token_head)
 	return (1);
 }
 
+static size_t	get_input_len(char const *input)
+{
+	if (input == NULL)
+		return (0);
+	else
+		return (ft_strlen(input));
+}
+
 t_token	*lexer(const char *input)
 {
 	size_t	idx;
@@ -40,9 +48,7 @@ t_token	*lexer(const char *input)
 		return (NULL);
 	dummy_head->type = TK_HEAD;
 	idx = 0;
-	input_len = 0;
-	if (input)
-		input_len = ft_strlen(input);
+	input_len = get_input_len(input);
 	while (idx < input_len)
 	{
 		if (input[idx] && ft_isspace((unsigned char)input[idx])
@@ -54,9 +60,6 @@ t_token	*lexer(const char *input)
 			return (NULL);
 	}
 	if (handle_eof(dummy_head) < 0)
-	{
-		printf("handle_eof entered\n");
 		return (NULL);
-	}
 	return (dummy_head);
 }

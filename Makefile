@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/11/15 18:41:29 by kemotoha         ###   ########.fr        #
+#    Updated: 2025/11/15 20:21:47 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -g -fsanitize=address -Wall -Wextra -Werror -D_DEFAULT_SOURCE
+CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE
 INC = -Iincludes
 # -fsanitize=address
 # -g

@@ -6,15 +6,26 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:18 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:41:20 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 19:13:27 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
 // Forward declarations for internal functions
-t_word	*create_word_node(char *content, t_word_type type, bool expand_doller,
-			bool expand_wildcard);
+t_word		*create_word_node(char *content, t_word_type type,
+				bool expand_doller, bool expand_wildcard);
+
+static int	not_word(const char *input, size_t start, size_t len)
+{
+	if (ft_isspace((unsigned char)input[start + len]))
+		return (1);
+	if (is_meta_char(input[start + len]) != MT_OTHER)
+		return (1);
+	if (is_quote(input[start + len]))
+		return (1);
+	return (0);
+}
 
 t_word	*handle_unquoted_word(const char *input, size_t input_len, size_t *idx)
 {
@@ -26,10 +37,10 @@ t_word	*handle_unquoted_word(const char *input, size_t input_len, size_t *idx)
 	start = *idx;
 	len = 0;
 	has_wildcard = false;
-	while (start + len < input_len && !ft_isspace((unsigned char)input[start
-			+ len]) && is_meta_char(input[start + len]) == MT_OTHER
-		&& !is_quote(input[start + len]))
+	while (start + len < input_len)
 	{
+		if (not_word(input, start, len))
+			break ;
 		if (input[start + len] == '*')
 			has_wildcard = true;
 		if (input[start + len] == '$')
@@ -53,9 +64,11 @@ t_word	*handle_unclosed_quote(const char *input, size_t input_len, size_t *idx)
 
 	start = *idx;
 	len = 0;
-	while (start + len < input_len && !ft_isspace((unsigned char)input[start
-			+ len]) && is_meta_char(input[start + len]) == MT_OTHER)
+	while (start + len < input_len)
 	{
+		if (ft_isspace((unsigned char)input[start + len])
+			|| is_meta_char(input[start + len]) != MT_OTHER)
+			break ;
 		if (input[start + len] == '$')
 			break ;
 		len++;

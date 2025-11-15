@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:39:02 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 20:21:35 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ size_t	quote_close_place(char quote, char *value, size_t i)
 
 int	init_gen_word_data(t_word **word, t_gen_word *gw, char *value, size_t *i)
 {
+	if (!word || !gw || !value || !i)
+		return (-1);
+	if (value[*i] == '\0')
+		return (-1);
 	*word = (t_word *)xcalloc(sizeof(t_word));
 	if (*word == NULL)
 		return (-1);
@@ -52,3 +56,5 @@ int	init_gen_word_data(t_word **word, t_gen_word *gw, char *value, size_t *i)
 	gw->word = *word;
 	return (1);
 }
+
+// Need to see this file to fix the bug
