@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:40 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/15 19:20:35 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 21:51:03 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include "parser.h"
 # include "signal_management.h"
 # include "wildcard.h"
-# include <assert.h>
 // static definition needed.
 
 // main.c

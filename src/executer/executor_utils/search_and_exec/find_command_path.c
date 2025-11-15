@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 22:49:57 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/15 21:50:18 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 21:50:57 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ char	*find_command_path(t_shell *shell, char *cmd)
 		return (NULL);
 	result = search_in_paths(paths, cmd);
 	free_split(paths);
-	assert(result == NULL);
 	if (result != NULL)
 		return (result);
 	write(2, cmd, ft_strlen(cmd));
