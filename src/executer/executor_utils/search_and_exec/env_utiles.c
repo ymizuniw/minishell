@@ -24,5 +24,3 @@ void	free_envp(char **envp)
 	}
 	xfree(envp);
 }
-
-//多分env_mannagementに入れたほうがいい

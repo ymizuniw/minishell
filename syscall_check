@@ -37,10 +37,6 @@ _stat
 _strchr
 _strcmp
 
-_strlen
-
-_strncmp
-_strndup
 
 _tcgetattr
 _tcsetattr

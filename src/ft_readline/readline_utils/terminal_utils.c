@@ -4,6 +4,8 @@ void	enable_raw_mode(struct termios *orig)
 {
 	struct termios	raw;
 
+	if (orig==NULL)
+		printf("orig is null\n");
 	tcgetattr(STDIN_FILENO, orig);
 	raw = *orig;
 	raw.c_lflag &= ~(ICANON | ECHO);

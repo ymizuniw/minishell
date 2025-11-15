@@ -67,7 +67,8 @@ char	*ft_readline(t_shell *shell, const char *prompt, t_hist *hist)
 		return (NULL);
 	len = 0;
 	ctx = (t_readline_ctx){&len, hist, prompt};
-	enable_raw_mode(&shell->orig_term);
+	if (shell)
+		enable_raw_mode(&shell->orig_term);
 	write(STDOUT_FILENO, prompt, ft_strlen(prompt));
 	if (read_loop(buf, &len, &ctx) == -1)
 		return (disable_raw_mode(&shell->orig_term), free(buf), NULL);

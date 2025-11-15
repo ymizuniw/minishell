@@ -7,12 +7,13 @@ int	ft_mkstmpfd(char *template, char **filename)
 	(void)template;
 	(void)filename;
 	fd = open("/tmp", O_EXCL | __O_TMPFILE, 0600);
+	// fd = open("/tmp/tempfile", O_EXCL | O_RDWR, 0600);
 	if (fd >= 0)
 		return (fd);
 	return (-1);
 }
 
-// //for Mac book environment. __O_TMPFILE is not available.
+// // //for Mac book environment. __O_TMPFILE is not available.
 // int	ft_mkstmpfd(char *template, char **filename)
 // {
 // 	int	fd;
