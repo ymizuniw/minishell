@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
+#    Updated: 2025/11/15 18:41:29 by kemotoha         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = minishell
 CC = cc
 CFLAGS = -g -fsanitize=address -Wall -Wextra -Werror -D_DEFAULT_SOURCE
