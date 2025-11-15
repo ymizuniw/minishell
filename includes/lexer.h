@@ -14,8 +14,7 @@ void			set_token_type(t_token *token, char *input, size_t *tmp_idx);
 void			set_quote_flag(t_token *token, char *input,
 					char const quote_open);
 t_metachar		is_meta_char(int c);
-bool			is_doller_token(const char *);
+bool			is_doller_token(const char *value);
 void			prepend_tokens(t_token *head, t_token *new);
-// size_t			word_cat(t_word_cat *, size_t word_len);
 
 #endif

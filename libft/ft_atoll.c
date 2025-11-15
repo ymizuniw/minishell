@@ -14,25 +14,14 @@ static int	parse_sign(const char **s)
 	return (sign);
 }
 
-static int	check_overflow(long long n, int digit, int sign)
-{
-	if (sign == 1 && n > (LLONG_MAX - digit) / 10)
-		return (1);
-	if (sign == -1 && n > (-(LLONG_MIN + digit)) / 10)
-		return (1);
-	return (0);
-}
-
 long long	ft_atoll(const char *s, int *overflow)
 {
-	long long	n;
+	long long	res;
 	int			sign;
-	int			digit;
 
-	*overflow = 0;
-	while (*s == 32 || (*s >= 9 && *s <= 13))
+	while (ft_isspace(*s))
 		s++;
-	n = 0;
+	res = 0;
 	sign = parse_sign(&s);
 	while (*s)
 	{
@@ -41,14 +30,13 @@ long long	ft_atoll(const char *s, int *overflow)
 			*overflow = 1;
 			return (0);
 		}
-		digit = *s - '0';
-		if (check_overflow(n, digit, sign))
+		res = 10 * res + (*s - '0');
+		if ((sign == -1 && (-res) < INT_MIN) || (sign == 1 && res > INT_MAX))
 		{
 			*overflow = 1;
 			return (0);
 		}
-		n = n * 10 + digit;
 		s++;
 	}
-	return (n * sign);
+	return (res);
 }

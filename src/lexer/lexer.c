@@ -1,10 +1,10 @@
 #include "../../includes/minishell.h"
 
-int	handle_eof(t_token *token_head);
-int	handle_internal_separator(t_token *token_head, char const *input,
-		size_t *idx);
-int	handle_operators_and_words(t_token *token_head, char const *input,
-		size_t input_len, size_t *idx);
+int		handle_eof(t_token *token_head);
+int		handle_internal_separator(t_token *token_head, char const *input,
+			size_t *idx);
+int		handle_operators_and_words(t_token *token_head, char const *input,
+			size_t input_len, size_t *idx);
 
 int	init_token(t_token **token_head)
 {
