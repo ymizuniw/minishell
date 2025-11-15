@@ -75,7 +75,7 @@ char	*ft_readline(t_shell *shell, const char *prompt, t_hist *hist)
 	write(STDOUT_FILENO, "\n", 1);
 	if (shell)
 		disable_raw_mode(&shell->orig_term);
-	if (hist!=NULL && len > 0)
+	if (hist != NULL && len > 0)
 		add_history(buf, hist);
 	return (buf);
 }

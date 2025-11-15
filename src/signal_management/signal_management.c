@@ -33,7 +33,6 @@ int	signal_initializer(bool interactive)
 		sact.sa_flags = 0;
 		sigaction(SIGTERM, &sact, NULL);
 		sigaction(SIGQUIT, &sact, NULL);
-		// sact.sa_flags = SA_RESTART;
 		sact.sa_flags = 0;
 		sact.sa_handler = signal_handler;
 		sigaction(SIGINT, &sact, NULL);

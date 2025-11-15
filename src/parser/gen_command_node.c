@@ -1,15 +1,13 @@
 #include "../../includes/minishell.h"
 
-t_token	*find_end_token(t_token *cur_token);
-int		handle_redirection_parse(t_cmd *cmd, t_token *tmp);
-int		process_token(t_cmd *cmd, t_token *tmp);
+t_token			*find_end_token(t_token *cur_token);
+int				handle_redirection_parse(t_cmd *cmd, t_token *tmp);
+int				process_token(t_cmd *cmd, t_token *tmp);
 
 int	parse_redirection(t_redir **redir_head, t_token_type token_type,
 		t_token *filename_token)
 {
 	t_redir	*new_redir;
-	void	set_redir_type(t_redir *new_redir, t_token_type token_type);
-	void	append_redir(t_redir **redir_head, t_redir *new_redir);
 
 	if (!redir_head || !filename_token)
 		return (-1);

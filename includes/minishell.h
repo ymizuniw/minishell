@@ -41,4 +41,10 @@ void		cleanup_after_line(t_shell *shell);
 t_token		*lexer(const char *input);
 t_result	executor(t_ast *ast, t_shell *shell);
 
+// word_cat.c
+int			handle_quotation(t_word_cat *ctx, size_t word_len,
+				size_t *consumed_len, char quote_open);
+int			handle_plain(t_word_cat *ctx, size_t *word_len);
+size_t		word_cat(t_word_cat *ctx, size_t word_len);
+
 #endif

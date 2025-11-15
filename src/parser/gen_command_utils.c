@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 11:35:27 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 16:40:07 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ t_token	*find_end_token(t_token *cur_token)
 
 int	handle_redirection_parse(t_cmd *cmd, t_token *tmp)
 {
-	int	parse_redirection(t_redir **redir_head, t_token_type token_type,
-			t_token *filename_token);
-
 	if (!syntax_check(tmp))
 		return (syntax_error(tmp->type), -1);
 	if (!tmp->next)
@@ -58,8 +55,6 @@ int	handle_redirection_parse(t_cmd *cmd, t_token *tmp)
 
 int	process_token(t_cmd *cmd, t_token *tmp)
 {
-	int	parse_simple_command(t_cmd *cmd, t_token *command_token);
-
 	if (token_is_redirection(tmp->type))
 		return (handle_redirection_parse(cmd, tmp));
 	else

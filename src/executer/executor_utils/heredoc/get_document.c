@@ -74,7 +74,7 @@ int	get_document(t_redir *hd, char **document, size_t *document_len,
 	{
 		if (!read_heredoc_line(&line, &line_copy, is_interactive))
 			break ;
-		if (strcmp(line_copy, params.delim) == 0)
+		if (ft_strcmp(line_copy, params.delim) == 0)
 		{
 			free_line_mode(line, line_copy, is_interactive);
 			return (1);

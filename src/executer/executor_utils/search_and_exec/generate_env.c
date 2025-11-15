@@ -59,14 +59,15 @@ static int	add_env_to_array(char **envp, t_env *env_list)
 	return (1);
 }
 
-static size_t count_env_list_size(t_env *env_list)
+static size_t	count_env_list_size(t_env *env_list)
 {
-	size_t size=0;
+	size_t	size;
 
+	size = 0;
 	while (env_list)
 	{
 		size++;
-		env_list=env_list->next;
+		env_list = env_list->next;
 	}
 	return (size);
 }

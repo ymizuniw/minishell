@@ -6,15 +6,15 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 12:21:35 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 16:32:26 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-char	*expand_token_words(t_word *word_list, t_shell *shell);
-char	**expand_wildcard(const char *pattern, const char *path,
-			size_t *wildcard_count);
+char		*expand_token_words(t_word *word_list, t_shell *shell);
+char		**expand_wildcard(const char *pattern, const char *path,
+				size_t *wildcard_count);
 
 // Check if word list contains wildcard to expand
 bool	has_wildcard_to_expand(t_word *word_list)

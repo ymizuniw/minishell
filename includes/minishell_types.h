@@ -48,12 +48,12 @@
 # define TOKEN_VALUE_HEREDOC "<<"
 # define TOKEN_VALUE_APPEND ">>"
 
-#define ASC_ETX 3
-#define ASC_EOT 4
-#define ASC_DEL 127
-#define ASC_ESC 27
+# define ASC_ETX 3
+# define ASC_EOT 4
+# define ASC_DEL 127
+# define ASC_ESC 27
 
-typedef struct s_shell t_shell;
+typedef struct s_shell	t_shell;
 
 typedef struct s_hist
 {
@@ -118,7 +118,7 @@ typedef enum e_token_type
 
 typedef struct s_token
 {
-	size_t size; // for dummy head to keep the len of the list.
+	size_t				size;
 	size_t				count_newline;
 	struct s_token		*prev;
 	t_token_type		type;
@@ -214,7 +214,7 @@ typedef struct s_shell
 	t_result			res;
 	int					stdin_backup;
 	int					stdout_backup;
-	struct	termios		orig_term;
+	struct termios		orig_term;
 }						t_shell;
 
 typedef struct s_heredoc_ctx
@@ -255,5 +255,13 @@ typedef struct s_gen_word
 	char				quote;
 	size_t				close_place;
 }						t_gen_word;
+
+typedef struct s_word_cat
+{
+	char				**word;
+	char const			*input;
+	size_t				input_len;
+	size_t				*idx;
+}						t_word_cat;
 
 #endif

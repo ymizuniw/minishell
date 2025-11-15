@@ -10,7 +10,9 @@ char	*get_next_line(int fd)
 	size_t		chunk;
 	char		*new;
 	size_t		rem;
+	size_t		tmp_len;
 
+	tmp_len = 0;
 	ret = NULL;
 	ret_len = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -23,8 +25,11 @@ char	*get_next_line(int fd)
 			if (nl)
 			{
 				chunk = (size_t)(nl - buffer) + 1;
-				new = ft_realloc(ret, ret ? ft_strlen(ret) + 1 : 0, ret_len
-						+ chunk + 1);
+				if (ret)
+					tmp_len = ft_strlen(ret) + 1;
+				else
+					tmp_len = 0;
+				new = ft_realloc(ret, tmp_len, ret_len + chunk + 1);
 				if (!new)
 					return (free(ret), NULL);
 				ft_memcpy(new + ret_len, buffer, chunk);

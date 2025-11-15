@@ -1,5 +1,5 @@
-#ifndef WILD_H
-# define WILD_H
+#ifndef WILDCARD_H
+# define WILDCARD_H
 
 # include "minishell.h"
 

@@ -16,7 +16,7 @@ void	word_add_back(t_word **head, t_word *new)
 // Add token to the end of the list
 void	token_add_back(t_token **head, t_token *new)
 {
-	t_token *last;
+	t_token	*last;
 
 	if (!head || !new)
 		return ;

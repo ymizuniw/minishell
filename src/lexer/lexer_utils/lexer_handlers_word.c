@@ -6,15 +6,13 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 15:09:47 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 16:41:31 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
 void	prepend_tokens(t_token *token_head, t_token *new_token);
-size_t	word_cat(char **word, size_t word_len, char const *input,
-			size_t input_len, size_t *idx);
 bool	is_doller_token(const char *str);
 int		handle_meta_char(t_token *token_head, const char *input, size_t *idx);
 
@@ -38,15 +36,21 @@ int	handle_doller(t_token *token_head, size_t *idx)
 int	handle_word(t_token *token_head, char const *input, size_t input_len,
 		size_t *idx)
 {
-	t_token	*new;
-	char	*word;
+	t_token		*new;
+	char		*word;
+	t_word_cat	wc;
 
 	new = alloc_token();
 	if (!new)
 		return (-1);
-	ft_memset(new, 0, sizeof(t_token));
 	word = NULL;
-	if (word_cat(&word, 0, (char *)input, input_len, idx) == 0)
+	ft_memset(new, 0, sizeof(t_token));
+	ft_memset(&wc, 0, sizeof(t_word_cat));
+	wc.idx = idx;
+	wc.input = input;
+	wc.word = &word;
+	wc.input_len = input_len;
+	if (word_cat(&wc, 0) == 0)
 	{
 		free(new);
 		free(word);

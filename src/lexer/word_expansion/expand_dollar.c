@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:30:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 15:30:49 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 16:34:24 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static char	*get_target_var(t_word *word)
 
 static char	*expand_exit_status(t_shell *shell)
 {
-	char *stat_str;
-	
+	char	*stat_str;
+
 	stat_str = ft_itoa(shell->last_exit_status);
-	if (stat_str==NULL)
-		return(NULL);
+	if (stat_str == NULL)
+		return (NULL);
 	return (stat_str);
 }
 

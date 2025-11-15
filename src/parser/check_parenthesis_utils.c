@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 11:42:42 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 16:07:25 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	process_lparen(t_token *cur)
 int	process_rparen(t_token *cur)
 {
 	int	check;
-	int	check_parenthesis(t_token *token);
 
 	check = check_parenthesis(cur);
 	if (check < 0)

@@ -6,16 +6,19 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 12:30:26 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 16:56:58 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-char	*ext_unit(char *src, size_t start, size_t end);
-int		quote_wrapper(t_gen_word *gw, char *value, size_t *i);
-int		doller_literal_wrapper(t_gen_word *gw, char *value, size_t value_len,
-			size_t *i);
+char		*ext_unit(char *src, size_t start, size_t end);
+int			quote_wrapper(t_gen_word *gw, char *value, size_t *i);
+int			doller_literal_wrapper(t_gen_word *gw, char *value,
+				size_t value_len, size_t *i);
+int			init_gen_word_data(t_word **word, t_gen_word *gw, char *value,
+				size_t *i);
+size_t		quote_close_place(char quote, char *value, size_t i);
 
 static int	handle_quoted_word(t_word *word, t_gen_word *gw, char *value,
 		size_t *i)
@@ -40,9 +43,6 @@ t_word	*loop_wrapper(char *value, size_t value_len, size_t *i)
 {
 	t_word		*word;
 	t_gen_word	gw;
-	int			init_gen_word_data(t_word **word, t_gen_word *gw,
-					char *value, size_t *i);
-	size_t		quote_close_place(char quote, char *value, size_t i);
 
 	if (init_gen_word_data(&word, &gw, value, i) < 0)
 		return (NULL);

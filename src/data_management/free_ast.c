@@ -50,8 +50,6 @@ void	free_cmd_structure(t_cmd *p)
 	free_double_array(p->argv);
 	if (p->redir != NULL)
 		free_redir_list(p->redir);
-	// Note: tokens are owned by token_list, not by cmd
-	// So we only free the tokens array, not the tokens themselves
 	if (p->tokens != NULL)
 		xfree(p->tokens);
 	xfree(p);

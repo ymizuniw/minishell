@@ -6,23 +6,23 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:30:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 11:51:26 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 16:28:54 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-t_word	*gen_word(char *value, size_t value_len, size_t *addition);
-void	cleanup_token_results(size_t token_count, char ***token_results,
-			size_t *token_result_counts);
-int		init_token_results(t_token_result *tr, size_t token_count);
-void	init_token_results_elem(t_token_result *tr, t_token **tokens,
-			size_t token_count);
-int		with_wildcard(t_shell *shell, t_token_result *tr, t_word *word_list,
-			size_t token_count);
-int		without_wildcard(t_shell *shell, t_token_result *tr, t_word *word_list,
-			size_t token_count);
-bool	has_wildcard_to_expand(t_word *word_list);
+t_word		*gen_word(char *value, size_t value_len, size_t *addition);
+void		cleanup_token_results(size_t token_count, char ***token_results,
+				size_t *token_result_counts);
+int			init_token_results(t_token_result *tr, size_t token_count);
+void		init_token_results_elem(t_token_result *tr, t_token **tokens,
+				size_t token_count);
+int			with_wildcard(t_shell *shell, t_token_result *tr, t_word *word_list,
+				size_t token_count);
+int			without_wildcard(t_shell *shell, t_token_result *tr,
+				t_word *word_list, size_t token_count);
+bool		has_wildcard_to_expand(t_word *word_list);
 
 static int	copy_token_result(char ***final_res, size_t *k, char **token_result,
 		size_t result_count)

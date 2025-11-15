@@ -1,4 +1,3 @@
-
 #include "libft.h"
 
 static void	free_split(char **words, size_t j)

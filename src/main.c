@@ -1,7 +1,7 @@
 #include "../includes/minishell.h"
 
-void	init_shell(t_shell *shell, char **env);
-int	parse_and_exec(t_token *token_list, t_shell *shell);
+void		init_shell(t_shell *shell, char **env);
+int			parse_and_exec(t_token *token_list, t_shell *shell);
 
 static void	process_line(char *line, t_shell *shell)
 {

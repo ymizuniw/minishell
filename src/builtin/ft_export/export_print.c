@@ -1,4 +1,3 @@
-
 #include "../../../includes/minishell.h"
 
 static void	sort_env_array(t_env **arr, size_t count)
@@ -41,8 +40,7 @@ static size_t	count_exported_vars(t_env *env_list)
 	return (count);
 }
 
-
-//this is for generate envp array for execve();
+// this is for generate envp array for execve();
 static t_env	**env_list_to_array(t_env *env_list, size_t count)
 {
 	t_env	**array;

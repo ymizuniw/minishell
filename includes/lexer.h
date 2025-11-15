@@ -1,5 +1,5 @@
-#ifndef LXER_H
-# define LXER_H
+#ifndef LEXER_H
+# define LEXER_H
 
 # include "minishell_types.h"
 
@@ -16,6 +16,6 @@ void			set_quote_flag(t_token *token, char *input,
 t_metachar		is_meta_char(int c);
 bool			is_doller_token(const char *);
 void			prepend_tokens(t_token *head, t_token *new);
-size_t			word_cat(char **, size_t, char const *, size_t, size_t *);
+// size_t			word_cat(t_word_cat *, size_t word_len);
 
 #endif

@@ -1,5 +1,5 @@
-#ifndef ENV_MANAGE_H
-# define ENV_MANAGE_H
+#ifndef ENV_MANAGEMENT_H
+# define ENV_MANAGEMENT_H
 
 # include "minishell_types.h"
 

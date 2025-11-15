@@ -1,5 +1,5 @@
-#ifndef SIGNAL_MANAGE_H
-# define SIGNAL_MANAGE_H
+#ifndef SIGNAL_MANAGEMENT_H
+# define SIGNAL_MANAGEMENT_H
 
 # include "minishell_types.h"
 

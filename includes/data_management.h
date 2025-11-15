@@ -1,12 +1,12 @@
-#ifndef DATA_MANAGE_H
-# define DATA_MANAGE_H
+#ifndef DATA_MANAGEMENT_H
+# define DATA_MANAGEMENT_H
 
 # include "minishell_types.h"
 
 // wrapper for malloc and free
-void		*xmalloc(size_t);
-void		*xcalloc(size_t);
-void		xfree(void *);
+void		*xmalloc(size_t size);
+void		*xcalloc(size_t size);
+void		xfree(void *p);
 
 // alloc application
 t_token		*alloc_token(void);

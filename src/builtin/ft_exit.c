@@ -78,7 +78,6 @@ void	ft_exit(char **cmd, int last_exit_status, t_shell *shell)
 	}
 	free_double_array(cmd);
 	free_shell(shell);
-	//debug.
 	disable_raw_mode(&shell->orig_term);
 	exit(last_exit_status);
 }
