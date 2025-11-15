@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 12:21:35 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 15:21:41 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,13 @@ int	quote_wrapper(t_gen_word *gw, char *value, size_t *i)
 {
 	char	*content;
 
-	if (gw->quote == '\'')
-		gw->word->to_expand_doller = false;
-	else
-		gw->word->to_expand_doller = true;
+	gw->word->to_expand_doller = (gw->quote == '"');
 	gw->word->to_expand_wildcard = false;
 	content = ext_unit(value, gw->start + 1, gw->close_place);
 	if (!content)
 		return (-1);
 	gw->word->word = content;
-	if (gw->quote == '"' && ft_strchr(content, '$'))
-		gw->word->type = WD_DOLLER;
-	else if (gw->quote == '"' && content[0] == '$' && content[1] != '\0')
+	if (ft_strcmp(content, "$") == 0 || (gw->quote == '"' && ft_strchr(content, '$')))
 		gw->word->type = WD_DOLLER;
 	else
 		gw->word->type = WD_LITERAL;
@@ -37,26 +32,29 @@ int	quote_wrapper(t_gen_word *gw, char *value, size_t *i)
 	return (1);
 }
 
-static int	correct_env_var_format(char c)
+static bool	is_special_var_char(char c)
 {
-	if (c == '?' || c == '*' || c == '@' || c == '#' || c == '$'
-		|| c == '!' || ft_isdigit(c))
-		return (1);
-	else
-		return (0);
+	return (c == '?' || c == '*' || c == '@' || c == '#' || c == '$'
+		|| c == '!' || ft_isdigit(c));
 }
 
 static void	handle_dollar_sign(t_gen_word *gw, char *value, size_t value_len,
-		size_t *i)
+				size_t *i)
 {
 	(*i)++;
-	if (*i < value_len && correct_env_var_format(value[*i]))
+	if (*i >= value_len)
+	{
+		gw->word->type = WD_LITERAL;
+		gw->word->to_expand_doller = false;
+		return ;
+	}
+	if (is_special_var_char(value[*i]))
 	{
 		gw->word->type = WD_DOLLER;
 		gw->word->to_expand_doller = true;
 		(*i)++;
 	}
-	else if (*i < value_len && (ft_isalpha(value[*i]) || value[*i] == '_'))
+	else if (ft_isalpha(value[*i]) || value[*i] == '_')
 	{
 		gw->word->type = WD_DOLLER;
 		gw->word->to_expand_doller = true;
@@ -71,7 +69,7 @@ static void	handle_dollar_sign(t_gen_word *gw, char *value, size_t value_len,
 }
 
 static void	handle_literal_text(t_gen_word *gw, char *value, size_t value_len,
-		size_t *i)
+				size_t *i)
 {
 	gw->word->type = WD_LITERAL;
 	while (*i < value_len && !is_quote(value[*i]) && value[*i] != '$')
@@ -85,7 +83,7 @@ static void	handle_literal_text(t_gen_word *gw, char *value, size_t value_len,
 }
 
 int	doller_literal_wrapper(t_gen_word *gw, char *value, size_t value_len,
-		size_t *i)
+				size_t *i)
 {
 	if (value && value[*i] == '$')
 		handle_dollar_sign(gw, value, value_len, i);

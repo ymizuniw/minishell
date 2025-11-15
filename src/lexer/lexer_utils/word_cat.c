@@ -47,49 +47,35 @@ int	handle_plain(char **word, size_t *word_len, char const *input,
 	return (1);
 }
 
-static int	handle_quote_in_word(char **word, size_t *word_len, char const *input,
-		size_t *idx, char q_open)
-{
-	char	*d_close;
-	size_t	ext_len;
-
-	d_close = ft_strchr(&input[*idx + 1], q_open);
-	if (d_close)
-	{
-		ext_len = (size_t)(d_close - &input[*idx]) + 1;
-		*word = ft_realloc(*word, sizeof(char) * (*word_len + 1),
-				sizeof(char) * (*word_len + ext_len + 1));
-		if (!*word)
-			return (-1);
-		ft_memcpy(*word + *word_len, &input[*idx], ext_len);
-		(*word)[*word_len + ext_len] = '\0';
-		*idx += ext_len;
-		*word_len += ext_len;
-		return (1);
-	}
-	ft_putstr_fd("minishell: syntax error: unclosed quote\n", STDERR_FILENO);
-	return (0);
-}
-
 size_t	word_cat(char **word, size_t word_len, char const *input,
 		size_t input_len, size_t *idx)
 {
-	char	q_open;
-	int		result;
+	char	quote;
+	size_t	start;
 
-	while (*idx < input_len && !ft_isspace((unsigned char)input[*idx])
-		&& is_meta_char(input[*idx]) == MT_OTHER)
+	start = *idx;
+	quote = 0;
+	while (*idx < input_len)
 	{
-		q_open = is_quote(input[*idx]);
-		if (q_open != '\0')
-		{
-			result = handle_quote_in_word(word, &word_len, input, idx, q_open);
-			if (result <= 0)
-				return (0);
-			continue ;
-		}
-		if (handle_plain(word, &word_len, input, input_len, idx) < 0)
-			return (0);
+		if (!quote && is_quote(input[*idx]))
+			quote = input[*idx];
+		else if (quote && input[*idx] == quote)
+			quote = 0;
+		else if (!quote && (ft_isspace((unsigned char)input[*idx])
+				|| is_meta_char(input[*idx]) != MT_OTHER))
+			break ;
+		(*idx)++;
 	}
+	if (quote)
+	{
+		ft_putstr_fd("minishell: syntax error: unclosed quote\n", STDERR_FILENO);
+		return (0);
+	}
+	*word = ft_realloc(*word, sizeof(char) * (word_len + 1),
+			sizeof(char) * (word_len + (*idx - start) + 1));
+	if (!*word)
+		return (0);
+	ft_memcpy(*word + word_len, &input[start], *idx - start);
+	(*word)[word_len + (*idx - start)] = '\0';
 	return (1);
 }
