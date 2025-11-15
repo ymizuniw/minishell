@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:31 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/15 19:45:09 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 23:17:14 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ unexpected EOF while looking for matching ')'\n"
 
 typedef struct s_shell	t_shell;
 
+//change cur to cur_idx
 typedef struct s_hist
 {
 	size_t				idx;
@@ -73,6 +74,7 @@ typedef struct s_hist
 	char				*hist_box[HIST_MAX];
 }						t_hist;
 
+//prompt shall be macro def.
 typedef struct s_readline_ctx
 {
 	size_t				*len;
@@ -80,6 +82,7 @@ typedef struct s_readline_ctx
 	const char			*prompt;
 }						t_readline_ctx;
 
+// naming is bad. this is variable?
 typedef struct s_expand_ctx
 {
 	t_shell				*shell;
@@ -104,8 +107,8 @@ typedef enum e_metachar
 	MT_LESS,
 	MT_GREAT,
 	MT_SPACE,
-	MT_TAB,
-	MT_NEWLINE
+	MT_TAB,//del
+	MT_NEWLINE//del
 }						t_metachar;
 
 // token_type classifies which type the token belongs to.
@@ -126,14 +129,15 @@ typedef enum e_token_type
 	TK_EOF
 }						t_token_type;
 
+//size is of which?
 typedef struct s_token
 {
 	size_t				size;
-	size_t				count_newline;
+	size_t				count_newline;//del?
 	struct s_token		*prev;
 	t_token_type		type;
-	bool				in_squote;
-	bool				in_dquote;
+	bool				in_squote;//del
+	bool				in_dquote;//del
 	char				*value;
 	struct s_token		*next;
 }						t_token;
@@ -146,6 +150,7 @@ typedef enum e_node_type
 	NODE_OR,
 	NODE_SUBSHELL
 }						t_node_type;
+
 typedef enum e_redir_type
 {
 	REDIR_IN,
@@ -154,6 +159,7 @@ typedef enum e_redir_type
 	REDIR_HEREDOC,
 	REDIR_OTHER
 }						t_redir_type;
+
 typedef struct s_redir
 {
 	t_redir_type		type;
@@ -177,6 +183,7 @@ typedef struct s_word
 	bool				to_expand_wildcard;
 	struct s_word		*next;
 }						t_word;
+
 typedef struct s_cmd
 {
 	t_token				**tokens;
@@ -240,6 +247,7 @@ typedef struct s_match_data
 	int					only_wild;
 }						t_match_data;
 
+//i is fucking.
 typedef struct s_token_result
 {
 	char				***token_results;

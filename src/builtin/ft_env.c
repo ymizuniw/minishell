@@ -6,11 +6,24 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:43 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:35:43 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 22:56:46 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+// env コマンド実装
+// for each node:
+//     if (node->exported && node->value != NULL)
+//         print("key=value");
+
+// export コマンド表示
+// for each node:
+//     if (node->exported)
+//         if (node->value != NULL)
+//             print("declare -x key=\"value\"");
+//         else
+//             print("declare -x key");
+// ここまで実装すれば bash 仕様に合う。
 
 int	ft_env(t_shell *shell, char **cmd)
 {
