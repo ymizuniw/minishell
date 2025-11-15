@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 11:35:27 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 21:34:59 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int	init_token_results(t_token_result *tr, size_t token_count)
 	tr->token_results = (char ***)xcalloc(sizeof(char **) * token_count);
 	tr->token_result_counts = (size_t *)xcalloc(sizeof(size_t) * token_count);
 	if (!tr->token_results || !tr->token_result_counts)
-		return (xfree(tr->token_results),
-			xfree(tr->token_result_counts), -1);
+		return (xfree(tr->token_results), xfree(tr->token_result_counts), -1);
 	return (1);
 }
 

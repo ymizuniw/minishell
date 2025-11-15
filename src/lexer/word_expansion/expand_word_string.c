@@ -6,16 +6,16 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 12:06:05 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 21:35:23 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int	expand_single_dollar(char **word_ptr, char **expanded, size_t *len,
-		t_shell *shell);
-int	append_to_expanded(char **expanded, size_t *len, const char *str,
-		size_t str_len);
+int			expand_single_dollar(char **word_ptr, char **expanded, size_t *len,
+				t_shell *shell);
+int			append_to_expanded(char **expanded, size_t *len, const char *str,
+				size_t str_len);
 
 // Expand string with dollar variables (for double-quoted strings)
 char	*expand_string_with_dollars(char *str, t_shell *shell)

@@ -6,13 +6,13 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/11/15 20:21:47 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/11/15 21:26:32 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE
+CFLAGS = -g  -fsanitize=address -Wall -Wextra -Werror -D_DEFAULT_SOURCE
 INC = -Iincludes
 # -fsanitize=address
 # -g
