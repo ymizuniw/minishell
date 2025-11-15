@@ -8,11 +8,6 @@ INC = -Iincludes
 CPPFLAGS = -I/opt/homebrew/opt/readline/include/
 LDFLAGS = -L/opt/homebrew/opt/readline/lib
 
-#for later rename.
-# lex_util_
-# pse_util_
-# exe_util_
-
 # DIRECTORIES
 SRC_DIR = src
 BUILTIN_DIR = $(SRC_DIR)/builtin
@@ -194,43 +189,43 @@ re: fclean all
 
 # Integration tests (non-interactive harness)
 .PHONY: all clean fclean re integration-tests
-integration-tests: $(NAME)
-	@echo "Running integration tests (Bash harness)"
-	@bash tests/integration/integration_tests.sh || exit 1
+# integration-tests: $(NAME)
+# 	@echo "Running integration tests (Bash harness)"
+# 	@bash tests/integration/integration_tests.sh || exit 1
 
-# Testing targets - requires minishell_tester in parent directory
-TESTER_DIR = ../minishell_tester
+# # Testing targets - requires minishell_tester in parent directory
+# TESTER_DIR = ../minishell_tester
 
-.PHONY: test test-integration test-stress
+# .PHONY: test test-integration test-stress
 
-test: $(NAME)
-	@if [ ! -d "$(TESTER_DIR)" ]; then \
-		echo "Error: Tester not found at $(TESTER_DIR)"; \
-		exit 1; \
-	fi
-	@$(TESTER_DIR)/run_tests.sh $(PWD)/$(NAME)
+# test: $(NAME)
+# 	@if [ ! -d "$(TESTER_DIR)" ]; then \
+# 		echo "Error: Tester not found at $(TESTER_DIR)"; \
+# 		exit 1; \
+# 	fi
+# 	@$(TESTER_DIR)/run_tests.sh $(PWD)/$(NAME)
 
-test-integration: $(NAME)
-	@if [ ! -d "$(TESTER_DIR)" ]; then \
-		echo "Error: Tester not found at $(TESTER_DIR)"; \
-		exit 1; \
-	fi
-	@$(TESTER_DIR)/run_tests.sh $(PWD)/$(NAME) --integration
+# test-integration: $(NAME)
+# 	@if [ ! -d "$(TESTER_DIR)" ]; then \
+# 		echo "Error: Tester not found at $(TESTER_DIR)"; \
+# 		exit 1; \
+# 	fi
+# 	@$(TESTER_DIR)/run_tests.sh $(PWD)/$(NAME) --integration
 
-test-stress: $(NAME)
-	@if [ ! -d "$(TESTER_DIR)" ]; then \
-		echo "Error: Tester not found at $(TESTER_DIR)"; \
+# test-stress: $(NAME)
+# 	@if [ ! -d "$(TESTER_DIR)" ]; then \
+# 		echo "Error: Tester not found at $(TESTER_DIR)"; \
 
-test-enhanced: $(NAME)
-	@if [ ! -d "$(TESTER_DIR)" ]; then \
-		echo "Error: Tester not found at $(TESTER_DIR)"; \
-		exit 1; \
-	fi
-	@$(TESTER_DIR)/run_tests.sh $(PWD)/$(NAME) --enhanced
+# test-enhanced: $(NAME)
+# 	@if [ ! -d "$(TESTER_DIR)" ]; then \
+# 		echo "Error: Tester not found at $(TESTER_DIR)"; \
+# 		exit 1; \
+# 	fi
+# 	@$(TESTER_DIR)/run_tests.sh $(PWD)/$(NAME) --enhanced
 
-test-all: $(NAME)
-	@if [ ! -d "$(TESTER_DIR)" ]; then \
-		echo "Error: Tester not found at $(TESTER_DIR)"; \
-		exit 1; \
-	fi
-	@$(TESTER_DIR)/run_tests.sh $(PWD)/$(NAME) --integration --stress --enhanced
+# test-all: $(NAME)
+# 	@if [ ! -d "$(TESTER_DIR)" ]; then \
+# 		echo "Error: Tester not found at $(TESTER_DIR)"; \
+# 		exit 1; \
+# 	fi
+# 	@$(TESTER_DIR)/run_tests.sh $(PWD)/$(NAME) --integration --stress --enhanced

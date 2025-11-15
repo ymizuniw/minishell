@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_value_expansion.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/15 18:37:33 by ymizuniw          #+#    #+#             */
+/*   Updated: 2025/11/15 18:37:34 by ymizuniw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../../includes/minishell.h"
 
 static char	*expand_exit_status(char **res, t_shell *shell, size_t *i)

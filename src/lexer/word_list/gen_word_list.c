@@ -1,12 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gen_word_list.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/15 18:41:07 by ymizuniw          #+#    #+#             */
+/*   Updated: 2025/11/15 18:41:08 by ymizuniw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../includes/minishell.h"
 
 // Forward declarations for internal word handlers
-t_word	*handle_quoted_word(const char *input, size_t *idx, char quote);
-t_word	*handle_unclosed_quote(const char *input, size_t input_len,
-			size_t *idx);
-t_word	*handle_doller_word(const char *input, size_t input_len, size_t *idx);
-t_word	*handle_unquoted_word(const char *input, size_t input_len, size_t *idx);
-t_word	*append_node(t_word *head, t_word *new);
+t_word			*handle_quoted_word(const char *input, size_t *idx, char quote);
+t_word			*handle_unclosed_quote(const char *input, size_t input_len,
+					size_t *idx);
+t_word			*handle_doller_word(const char *input, size_t input_len,
+					size_t *idx);
+t_word			*handle_unquoted_word(const char *input, size_t input_len,
+					size_t *idx);
+t_word			*append_node(t_word *head, t_word *new);
 
 static t_word	*get_word_by_type(const char *input, size_t input_len,
 		size_t *idx, char quote)

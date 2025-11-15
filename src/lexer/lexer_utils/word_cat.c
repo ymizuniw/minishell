@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   word_cat.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/15 18:40:39 by ymizuniw          #+#    #+#             */
+/*   Updated: 2025/11/15 18:40:45 by ymizuniw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../includes/minishell.h"
 
 int	handle_quotation(t_word_cat *wc, size_t word_len, size_t *consumed_len,
@@ -63,9 +75,6 @@ int	extract_word_loop(t_word_cat *wc, char *quote)
 	return (1);
 }
 
-// let's devide by semantics!
-// word_cat() is to extract one string from input.
-// split by metachar.
 size_t	word_cat(t_word_cat *wc, size_t word_len)
 {
 	char	quote;
