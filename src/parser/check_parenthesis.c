@@ -1,33 +1,9 @@
 #include "../../includes/minishell.h"
 
-static int	check_empty_parenthesis(t_token *lparen)
-{
-	t_token	*next;
-
-	if (!lparen || lparen->type != TK_LPAREN)
-		return (1);
-	next = lparen->next;
-	if (next && next->type == TK_RPAREN)
-		return (0);
-	return (1);
-}
-
-static int	process_lparen(t_token *cur)
-{
-	if (!check_empty_parenthesis(cur))
-		return (-1);
-	return (1);
-}
-
-static int	process_rparen(t_token *cur)
-{
-	int	check;
-
-	check = check_parenthesis(cur);
-	if (check < 0)
-		return (-1);
-	return (0);
-}
+int	check_empty_parenthesis(t_token *lparen);
+int	process_lparen(t_token *cur);
+int	process_rparen(t_token *cur);
+int	check_backward_balance(t_token *cur, int *balance);
 
 int	check_parenthesis(t_token *token)
 {
@@ -52,23 +28,6 @@ int	check_parenthesis(t_token *token)
 		cur = cur->prev;
 	}
 	return (-1);
-}
-
-static int	check_backward_balance(t_token *cur, int *balance)
-{
-	if (cur->type == TK_LPAREN)
-	{
-		if (cur->prev && cur->prev->type == TK_RPAREN)
-			return (-1);
-		(*balance)++;
-	}
-	else if (cur->type == TK_RPAREN)
-	{
-		(*balance)--;
-		if (*balance < 0)
-			return (-1);
-	}
-	return (0);
 }
 
 int	check_parenthesis_balance(t_token *token_list)

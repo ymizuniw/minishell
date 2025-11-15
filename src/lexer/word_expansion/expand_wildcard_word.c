@@ -40,6 +40,17 @@ static int	copy_wildcards(char **res, char **wildcards, size_t *i,
 	return (1);
 }
 
+static int	handle_no_wildcard(t_word *word, char ***res, size_t *i,
+		char **wildcard_arr)
+{
+	free_double_array(wildcard_arr);
+	(*res)[*i] = ft_strdup(word->word);
+	if (!(*res)[*i])
+		return (0);
+	(*i)++;
+	return (1);
+}
+
 int	expand_wildcard_to_result(t_word *word, char ***res, size_t *i,
 		size_t *total_count)
 {
@@ -52,14 +63,7 @@ int	expand_wildcard_to_result(t_word *word, char ***res, size_t *i,
 	if (!wildcard_arr)
 		return (0);
 	if (wildcard_count == 0)
-	{
-		free_double_array(wildcard_arr);
-		(*res)[*i] = ft_strdup(word->word);
-		if (!(*res)[*i])
-			return (0);
-		(*i)++;
-		return (1);
-	}
+		return (handle_no_wildcard(word, res, i, wildcard_arr));
 	new_res = resize_result(*res, *total_count, wildcard_count);
 	if (!new_res)
 		return (free_double_array(wildcard_arr), 0);

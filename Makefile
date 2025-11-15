@@ -93,18 +93,25 @@ LEXER_SRC = $(LEXER_DIR)/lexer.c
 LEXER_UTILS_SRC = $(LEXER_UTILS_DIR)/prepend_tokens.c \
                   $(LEXER_UTILS_DIR)/get_meta_char.c \
                   $(LEXER_UTILS_DIR)/get_token_type.c \
+                  $(LEXER_UTILS_DIR)/get_token_type_utils.c \
                   $(LEXER_UTILS_DIR)/is_doller_token.c \
                   $(LEXER_UTILS_DIR)/is_quote.c \
                   $(LEXER_UTILS_DIR)/set_quote_flag.c \
                   $(LEXER_UTILS_DIR)/set_token_type.c \
                   $(LEXER_UTILS_DIR)/word_cat.c \
                   $(LEXER_UTILS_DIR)/gen_word.c \
+                  $(LEXER_UTILS_DIR)/gen_word_utils.c \
+                  $(LEXER_UTILS_DIR)/gen_word_wrappers.c \
+                  $(LEXER_UTILS_DIR)/lexer_handlers.c
 
 WORD_EXPANSION_SRC = $(WORD_EXPANSION_DIR)/ft_expand_word.c \
                      $(WORD_EXPANSION_DIR)/expand_dollar.c \
                      $(WORD_EXPANSION_DIR)/expand_wildcard_word.c \
                      $(WORD_EXPANSION_DIR)/expand_plain_word.c \
-                     $(WORD_EXPANSION_DIR)/word_list_utils.c
+                     $(WORD_EXPANSION_DIR)/word_list_utils.c \
+                     $(WORD_EXPANSION_DIR)/expand_word_string.c \
+                     $(WORD_EXPANSION_DIR)/expand_word_wildcard.c \
+                     $(WORD_EXPANSION_DIR)/expand_word_utils.c
 
 WORD_LIST_SRC = $(WORD_LIST_DIR)/gen_word_list.c \
                 $(WORD_LIST_DIR)/word_node_utils.c \
@@ -112,10 +119,13 @@ WORD_LIST_SRC = $(WORD_LIST_DIR)/gen_word_list.c \
                 $(WORD_LIST_DIR)/unquoted_word_handler.c
 
 PARSER_SRC = $(PARSER_DIR)/fucking_gen_tree.c \
+             $(PARSER_DIR)/gen_tree_utils.c \
              $(PARSER_DIR)/gen_command_node.c \
+             $(PARSER_DIR)/gen_command_utils.c \
              $(PARSER_DIR)/gen_op_sep_sub_node.c \
              $(PARSER_DIR)/token_type_identification.c \
              $(PARSER_DIR)/check_parenthesis.c \
+             $(PARSER_DIR)/check_parenthesis_utils.c \
              $(PARSER_DIR)/syntax_checker.c \
              $(PARSER_DIR)/syntax_error.c
 

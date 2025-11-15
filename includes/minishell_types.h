@@ -239,4 +239,21 @@ typedef struct s_match_data
 	int					only_wild;
 }						t_match_data;
 
+typedef struct s_token_result
+{
+	char				***token_results;
+	size_t				*token_result_counts;
+	size_t				total_count;
+	size_t				i;
+}						t_token_result;
+
+typedef struct s_gen_word
+{
+	t_word				*word;
+	size_t				value_len;
+	size_t				start;
+	char				quote;
+	size_t				close_place;
+}						t_gen_word;
+
 #endif

@@ -49,6 +49,15 @@ static t_word	*process_literal_in_quote(const char *content, size_t *i,
 	return (NULL);
 }
 
+static t_word	*process_content_segment(const char *content, size_t *i,
+		size_t len, bool is_double_quote)
+{
+	if (is_double_quote && content[*i] == '$' && *i + 1 < len)
+		return (process_dollar_in_quote(content, i, len));
+	else
+		return (process_literal_in_quote(content, i, len, is_double_quote));
+}
+
 t_word	*process_quoted_content(const char *content, size_t len,
 		bool is_double_quote)
 {
@@ -60,20 +69,10 @@ t_word	*process_quoted_content(const char *content, size_t len,
 	i = 0;
 	while (i < len)
 	{
-		if (is_double_quote && content[i] == '$' && i + 1 < len)
-		{
-			word = process_dollar_in_quote(content, &i, len);
-			if (!word)
-				return (free_word_list(head), NULL);
-			head = append_node(head, word);
-		}
-		else
-		{
-			word = process_literal_in_quote(content, &i, len, is_double_quote);
-			if (!word)
-				return (free_word_list(head), NULL);
-			head = append_node(head, word);
-		}
+		word = process_content_segment(content, &i, len, is_double_quote);
+		if (!word)
+			return (free_word_list(head), NULL);
+		head = append_node(head, word);
 	}
 	if (!head)
 	{

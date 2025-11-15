@@ -57,6 +57,20 @@ static int	handle_empty_line(char *line, t_shell *shell)
 	return (0);
 }
 
+static int	handle_signal_or_empty(char *line, t_shell *shell)
+{
+	if (g_signum == SIGINT)
+	{
+		shell->last_exit_status = 130;
+		g_signum = 0;
+		xfree(line);
+		return (1);
+	}
+	if (handle_empty_line(line, shell))
+		return (1);
+	return (0);
+}
+
 int	shell_loop(t_shell *shell)
 {
 	char			*line;
@@ -70,16 +84,9 @@ int	shell_loop(t_shell *shell)
 	{
 		g_signum = 0;
 		line = ft_readline(shell, prompt, &hist);
-		if (g_signum == SIGINT)
+		if (handle_signal_or_empty(line, shell))
 		{
-			shell->last_exit_status = 130;
-			g_signum = 0;
-			xfree(line);
-			continue ;
-		}
-		if (handle_empty_line(line, shell))
-		{
-			if (!line)
+			if (!line && !g_signum)
 				break ;
 			continue ;
 		}

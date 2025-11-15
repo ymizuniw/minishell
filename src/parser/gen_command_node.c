@@ -1,26 +1,15 @@
 #include "../../includes/minishell.h"
 
-static void	set_redir_type(t_redir *new_redir, t_token_type token_type)
-{
-	if (token_type == TK_REDIRECT_IN)
-		new_redir->type = REDIR_IN;
-	else if (token_type == TK_REDIRECT_OUT)
-		new_redir->type = REDIR_OUT;
-	else if (token_type == TK_HEREDOC)
-		new_redir->type = REDIR_HEREDOC;
-	else
-		new_redir->type = REDIR_APPEND;
-}
-
-static void	append_redir(t_redir **redir_head, t_redir *new_redir)
-{
-	redir_add_back(redir_head, new_redir);
-}
+t_token	*find_end_token(t_token *cur_token);
+int		handle_redirection_parse(t_cmd *cmd, t_token *tmp);
+int		process_token(t_cmd *cmd, t_token *tmp);
 
 int	parse_redirection(t_redir **redir_head, t_token_type token_type,
 		t_token *filename_token)
 {
 	t_redir	*new_redir;
+	void	set_redir_type(t_redir *new_redir, t_token_type token_type);
+	void	append_redir(t_redir **redir_head, t_redir *new_redir);
 
 	if (!redir_head || !filename_token)
 		return (-1);
@@ -41,7 +30,6 @@ int	parse_redirection(t_redir **redir_head, t_token_type token_type,
 	return (1);
 }
 
-// Store token pointer in command's token array
 int	parse_simple_command(t_cmd *cmd, t_token *command_token)
 {
 	t_token	**new_tokens;
@@ -49,56 +37,20 @@ int	parse_simple_command(t_cmd *cmd, t_token *command_token)
 
 	if (!cmd || !command_token)
 		return (-1);
-	// Reallocate tokens array to add one more token
 	new_tokens = xmalloc(sizeof(t_token *) * (cmd->token_count + 1));
 	if (!new_tokens)
 		return (-1);
-	// Copy existing token pointers
 	i = 0;
 	while (i < cmd->token_count)
 	{
 		new_tokens[i] = cmd->tokens[i];
 		i++;
 	}
-	// Add new token pointer
 	new_tokens[cmd->token_count] = command_token;
-	// Free old array and update
 	xfree(cmd->tokens);
 	cmd->tokens = new_tokens;
 	cmd->token_count++;
 	return (1);
-}
-
-static t_token	*find_end_token(t_token *cur_token)
-{
-	t_token	*tmp;
-
-	tmp = cur_token;
-	while (tmp->next && (token_is_command(tmp->next->type)
-			|| token_is_redirection(tmp->next->type)))
-		tmp = tmp->next;
-	return (tmp->next);
-}
-
-static int	handle_redirection_parse(t_cmd *cmd, t_token *tmp)
-{
-	if (!syntax_check(tmp))
-		return (syntax_error(tmp->type), -1);
-	if (!tmp->next)
-		return (-1);
-	if (!tmp->prev)
-		return (write(2,
-				"minishell: syntax error: missing redirection target\n", 53),
-			-1);
-	return (parse_redirection(&cmd->redir, tmp->type, tmp->prev));
-}
-
-static int	process_token(t_cmd *cmd, t_token *tmp)
-{
-	if (token_is_redirection(tmp->type))
-		return (handle_redirection_parse(cmd, tmp));
-	else
-		return (parse_simple_command(cmd, tmp));
 }
 
 int	parse_command_list(t_cmd *cmd, t_token **cur_token)
@@ -125,13 +77,10 @@ int	parse_command_list(t_cmd *cmd, t_token **cur_token)
 	return (1);
 }
 
-t_ast	*gen_command_node(t_ast *parent, t_token **cur_token)
+static t_ast	*init_command_node(t_ast *parent)
 {
 	t_ast	*node;
-	int		result;
 
-	if (!cur_token)
-		return (NULL);
 	node = alloc_node();
 	if (!node)
 		return (NULL);
@@ -140,17 +89,23 @@ t_ast	*gen_command_node(t_ast *parent, t_token **cur_token)
 	node->type = NODE_CMD;
 	node->cmd = alloc_cmd();
 	if (!node->cmd)
-	{
-		xfree(node);
-		return (NULL);
-	}
+		return (xfree(node), NULL);
 	ft_memset(node->cmd, 0, sizeof(t_cmd));
+	return (node);
+}
+
+t_ast	*gen_command_node(t_ast *parent, t_token **cur_token)
+{
+	t_ast	*node;
+	int		result;
+
+	if (!cur_token)
+		return (NULL);
+	node = init_command_node(parent);
+	if (!node)
+		return (NULL);
 	result = parse_command_list(node->cmd, cur_token);
 	if (result == -1)
-	{
-		xfree(node->cmd);
-		xfree(node);
-		return (NULL);
-	}
+		return (xfree(node->cmd), xfree(node), NULL);
 	return (node);
 }

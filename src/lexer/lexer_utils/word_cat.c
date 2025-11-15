@@ -47,13 +47,35 @@ int	handle_plain(char **word, size_t *word_len, char const *input,
 	return (1);
 }
 
-size_t	word_cat(char **word, size_t word_len, char const *input,
-		size_t input_len, size_t *idx, bool *had_sq, bool *had_dq,
-		bool *had_unq)
+static int	handle_quote_in_word(char **word, size_t *word_len, char const *input,
+		size_t *idx, char q_open)
 {
-	char	q_open;
 	char	*d_close;
 	size_t	ext_len;
+
+	d_close = ft_strchr(&input[*idx + 1], q_open);
+	if (d_close)
+	{
+		ext_len = (size_t)(d_close - &input[*idx]) + 1;
+		*word = ft_realloc(*word, sizeof(char) * (*word_len + 1),
+				sizeof(char) * (*word_len + ext_len + 1));
+		if (!*word)
+			return (-1);
+		ft_memcpy(*word + *word_len, &input[*idx], ext_len);
+		(*word)[*word_len + ext_len] = '\0';
+		*idx += ext_len;
+		*word_len += ext_len;
+		return (1);
+	}
+	ft_putstr_fd("minishell: syntax error: unclosed quote\n", STDERR_FILENO);
+	return (0);
+}
+
+size_t	word_cat(char **word, size_t word_len, char const *input,
+		size_t input_len, size_t *idx)
+{
+	char	q_open;
+	int		result;
 
 	while (*idx < input_len && !ft_isspace((unsigned char)input[*idx])
 		&& is_meta_char(input[*idx]) == MT_OTHER)
@@ -61,33 +83,13 @@ size_t	word_cat(char **word, size_t word_len, char const *input,
 		q_open = is_quote(input[*idx]);
 		if (q_open != '\0')
 		{
-			d_close = ft_strchr(&input[*idx + 1], q_open);
-			if (d_close)
-			{
-				// Include quotes in the token value
-				ext_len = (size_t)(d_close - &input[*idx]) + 1;
-				*word = ft_realloc(*word, sizeof(char) * (word_len + 1),
-						sizeof(char) * (word_len + ext_len + 1));
-				if (!*word)
-					return (0);
-				ft_memcpy(*word + word_len, &input[*idx], ext_len);
-				(*word)[word_len + ext_len] = '\0';
-				*idx += ext_len;
-				if (q_open == '\'')
-					*had_sq = true;
-				else if (q_open == '"')
-					*had_dq = true;
-				word_len += ext_len;
-				continue ;
-			}
-			// Unclosed quote detected
-			ft_putstr_fd("minishell: syntax error: unclosed quote\n",
-				STDERR_FILENO);
-			return (0);
+			result = handle_quote_in_word(word, &word_len, input, idx, q_open);
+			if (result <= 0)
+				return (0);
+			continue ;
 		}
 		if (handle_plain(word, &word_len, input, input_len, idx) < 0)
 			return (0);
-		*had_unq = true;
 	}
 	return (1);
 }

@@ -1,22 +1,8 @@
-
 #include "../../includes/minishell.h"
 
-static void		build_tree(t_ast **parent, t_token **cur_token);
+t_ast	*handle_operator(t_ast **parent, t_token **cur_token);
 
-static t_ast	*handle_operator(t_ast **parent, t_token **cur_token)
-{
-	t_ast	*node;
-	t_ast	*right;
-
-	node = swap_with_parent(parent, cur_token);
-	*parent = node;
-	right = NULL;
-	build_tree(&right, cur_token);
-	node->right = right;
-	return (node);
-}
-
-static void	build_tree(t_ast **parent, t_token **cur_token)
+void	build_tree(t_ast **parent, t_token **cur_token)
 {
 	t_ast	*node;
 
