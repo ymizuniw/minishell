@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:40 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/15 21:51:03 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 21:52:11 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include "parser.h"
 # include "signal_management.h"
 # include "wildcard.h"
-// static definition needed.
 
 // main.c
 char		*ft_readline(t_shell *shell, const char *prompt, t_hist *hist);
