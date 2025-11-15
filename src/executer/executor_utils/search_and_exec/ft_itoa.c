@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:02 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:38:03 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 22:02:13 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_itoa(int n)
 
 	num = n;
 	len = count_digits(n);
-	str = malloc(sizeof(char) * (len + 1));
+	str = xmalloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
 	str[len] = '\0';

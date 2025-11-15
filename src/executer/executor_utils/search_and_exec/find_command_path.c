@@ -6,41 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 22:49:57 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/15 21:50:57 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 22:03:59 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/minishell.h"
-
-// static char	*join_path(char *dir, char *cmd)
-// {
-// 	char	*path;
-// 	size_t	len;
-
-// 	len = ft_strlen(dir) + ft_strlen(cmd) + 2;
-// 	path = malloc(len);
-// 	if (!path)
-// 		return (NULL);
-// 	ft_strlcpy(path, dir, len);
-// 	ft_strlcat(path, "/", len);
-// 	ft_strlcat(path, cmd, len);
-// 	return (path);
-// }
-
-// static void	free_split(char **split)
-// {
-// 	size_t	i;
-
-// 	if (!split)
-// 		return ;
-// 	i = 0;
-// 	while (split[i])
-// 	{
-// 		free(split[i]);
-// 		i++;
-// 	}
-// 	free(split);
-// }
 
 static char	*build_pwd_path(t_shell *shell, char *cmd)
 {
@@ -50,7 +20,7 @@ static char	*build_pwd_path(t_shell *shell, char *cmd)
 
 	len_pwd = ft_strlen(shell->pwd);
 	len_cmd = ft_strlen(cmd);
-	full_path = malloc(len_pwd + len_cmd + 2);
+	full_path = xmalloc(len_pwd + len_cmd + 2);
 	if (!full_path)
 		return (NULL);
 	ft_memcpy(full_path, shell->pwd, len_pwd);
@@ -103,7 +73,7 @@ static char	*search_in_paths(char **paths, char *cmd)
 		full_path = join_path(paths[i], cmd);
 		if (full_path && is_valid_executable(full_path))
 			return (full_path);
-		free(full_path);
+		xfree(full_path);
 		i++;
 	}
 	return (NULL);

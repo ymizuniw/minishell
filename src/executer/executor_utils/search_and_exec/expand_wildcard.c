@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:51 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 20:30:15 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 22:03:48 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	**init_matches_array(size_t *cap)
 	char	**matches;
 
 	*cap = 16;
-	matches = malloc(sizeof(char *) * (*cap));
+	matches = xmalloc(sizeof(char *) * (*cap));
 	return (matches);
 }
 
@@ -104,4 +104,3 @@ char	**expand_wildcard(const char *pattern, const char *path,
 	closedir(dirp);
 	return (data.matches);
 }
-//このファイルbuiltinにもある。

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:28 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/15 18:37:31 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/15 21:59:46 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_itoa(int n)
 	sign = sign_of_int(n);
 	n = n * sign;
 	i = count_digit(n, sign);
-	res = malloc(i + 1);
+	res = xmalloc(i + 1);
 	if (!res)
 		return (NULL);
 	if (sign == -1)

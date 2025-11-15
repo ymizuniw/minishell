@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:17 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:38:18 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 22:06:13 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*join_path(char *dir, char *cmd)
 	size_t	len;
 
 	len = ft_strlen(dir) + ft_strlen(cmd) + 2;
-	path = malloc(len);
+	path = xmalloc(len);
 	if (!path)
 		return (NULL);
 	ft_strlcpy(path, dir, len);
@@ -36,8 +36,8 @@ void	free_split(char **split)
 	i = 0;
 	while (split[i])
 	{
-		free(split[i]);
+		xfree(split[i]);
 		i++;
 	}
-	free(split);
+	xfree(split);
 }
