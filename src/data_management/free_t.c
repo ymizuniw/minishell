@@ -53,34 +53,3 @@ void	free_env_list(t_env *env_list)
 	xfree(env_list->value);
 	xfree(env_list);
 }
-
-// Cleanup all shell data before execve()
-// This frees everything except what execve() needs (cmd_args and envp)
-void	cleanup_before_execve(t_shell *shell)
-{
-	if (!shell)
-		return ;
-	// Close backup file descriptors
-	if (shell->stdin_backup >= 0)
-		close(shell->stdin_backup);
-	if (shell->stdout_backup >= 0)
-		close(shell->stdout_backup);
-	// Free readline history
-	if (shell->hist)
-		free_hist_box(shell->hist->hist_box);
-	// Free environment list
-	free_env_list(shell->env_list);
-	shell->env_list = NULL;
-	// Free AST tree
-	free_ast_tree(shell->root);
-	shell->root = NULL;
-	// Free token list
-	free_token_list(shell->token_list);
-	shell->token_list = NULL;
-	// Free line pointer
-	xfree(shell->line_ptr);
-	shell->line_ptr = NULL;
-	// Free pwd
-	xfree(shell->pwd);
-	shell->pwd = NULL;
-}

@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 11:51:26 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 12:21:35 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,32 +92,4 @@ int	doller_literal_wrapper(t_gen_word *gw, char *value, size_t value_len,
 	else
 		handle_literal_text(gw, value, value_len, i);
 	return (1);
-}
-
-t_word	*loop_wrapper(char *value, size_t value_len, size_t *i)
-{
-	t_word		*word;
-	t_gen_word	gw;
-	int			init_gen_word_data(t_word **word, t_gen_word *gw,
-					char *value, size_t *i);
-	size_t		quote_close_place(char quote, char *value, size_t i);
-
-	if (init_gen_word_data(&word, &gw, value, i) < 0)
-		return (NULL);
-	gw.start = *i;
-	if (gw.quote != '\0')
-		gw.close_place = quote_close_place(gw.quote, value, ++(*i));
-	if (gw.quote != '\0' && gw.close_place > 0)
-	{
-		if (quote_wrapper(&gw, value, i) < 0)
-			return (xfree(word), NULL);
-	}
-	else
-	{
-		doller_literal_wrapper(&gw, value, value_len, i);
-		word->word = ext_unit(value, gw.start, *i);
-		if (!word->word)
-			return (xfree(word), NULL);
-	}
-	return (word);
 }

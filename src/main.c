@@ -1,25 +1,7 @@
 #include "../includes/minishell.h"
 
-int	parse_and_exec(t_token *token_list, t_shell *shell)
-{
-	t_token	*cur;
-	t_ast	*ast;
-
-	if (!token_list || !shell)
-		return (0);
-	if (!check_parenthesis_errors(token_list, shell))
-		return (0);
-	if (!check_syntax_errors(token_list, shell))
-		return (0);
-	cur = skip_to_command(token_list);
-	if (!cur)
-		return (1);
-	ast = parser(&cur);
-	if (!ast)
-		return (shell->last_exit_status = 2, 0);
-	exec_one_ast(ast, shell);
-	return (1);
-}
+void	init_shell(t_shell *shell, char **env);
+int	parse_and_exec(t_token *token_list, t_shell *shell);
 
 static void	process_line(char *line, t_shell *shell)
 {
@@ -100,25 +82,10 @@ int	shell_loop(t_shell *shell)
 int	main(int argc, char **argv, char **env)
 {
 	t_shell	shell;
-	char	*pwd;
 
 	(void)argc;
 	(void)argv;
-	ft_memset(&shell, 0, sizeof(t_shell));
-	shell.stdin_backup = -1;
-	shell.stdout_backup = -1;
-	if (isatty(STDIN_FILENO) == 1)
-		shell.interactive = true;
-	signal_initializer(shell.interactive);
-	init_env_from_envp(&shell, env);
-	pwd = getcwd(NULL, 0);
-	if (pwd)
-	{
-		shell.pwd = pwd;
-		set_variable(&shell, "PWD", pwd, 1);
-	}
-	shell.last_exit_status = 0;
-	set_variable(&shell, "_", "/usr/bin/minishell", 1);
+	init_shell(&shell, env);
 	shell_loop(&shell);
 	free_shell(&shell);
 	return (shell.last_exit_status);

@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 11:35:27 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/15 12:21:35 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,20 @@ bool	has_wildcard_to_expand(t_word *word_list)
 	return (false);
 }
 
-// Expand token with wildcard - returns array of expanded strings
+static char	**create_fallback_result(t_word *word_list, t_shell *shell)
+{
+	char	**result;
+
+	result = (char **)xcalloc(sizeof(char *) * 2);
+	if (!result)
+		return (NULL);
+	result[0] = expand_token_words(word_list, shell);
+	if (!result[0])
+		return (free_double_array(result), NULL);
+	result[1] = NULL;
+	return (result);
+}
+
 char	**expand_token_with_wildcard(t_word *word_list, t_shell *shell,
 		size_t *result_count)
 {
@@ -49,18 +62,8 @@ char	**expand_token_with_wildcard(t_word *word_list, t_shell *shell,
 	{
 		if (wildcard_results)
 			free_double_array(wildcard_results);
-		wildcard_results = (char **)xcalloc(sizeof(char *) * 2);
-		if (!wildcard_results)
-			return (NULL);
-		wildcard_results[0] = expand_token_words(word_list, shell);
-		if (!wildcard_results[0])
-		{
-			free_double_array(wildcard_results);
-			return (NULL);
-		}
-		wildcard_results[1] = NULL;
 		*result_count = 1;
-		return (wildcard_results);
+		return (create_fallback_result(word_list, shell));
 	}
 	*result_count = count;
 	return (wildcard_results);

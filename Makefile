@@ -35,6 +35,8 @@ READLINE_UTILS_DIR = $(FT_READLINE_DIR)/readline_utils
 
 # SOURCE FILES
 MAIN_SRC = $(SRC_DIR)/main.c \
+           $(SRC_DIR)/shell_init.c \
+           $(SRC_DIR)/parse_exec.c \
            $(SRC_DIR)/shell_loop_utils.c
 
 BUILTIN_SRC = $(BUILTIN_DIR)/exec_builtin.c \
@@ -55,6 +57,7 @@ BUILTIN_UTILS_SRC = $(BUILTIN_UTILS_DIR)/get_pwd.c \
 DATA_MANAGEMENT_SRC = $(DATA_MANAGEMENT_DIR)/alloc_t.c \
                       $(DATA_MANAGEMENT_DIR)/free_t.c \
                       $(DATA_MANAGEMENT_DIR)/free_ast.c \
+                      $(DATA_MANAGEMENT_DIR)/cleanup_execve.c \
                       $(DATA_MANAGEMENT_DIR)/xfree.c \
                       $(DATA_MANAGEMENT_DIR)/xmalloc.c \
                       $(DATA_MANAGEMENT_DIR)/list_utils_last.c \
@@ -102,7 +105,10 @@ LEXER_UTILS_SRC = $(LEXER_UTILS_DIR)/prepend_tokens.c \
                   $(LEXER_UTILS_DIR)/gen_word.c \
                   $(LEXER_UTILS_DIR)/gen_word_utils.c \
                   $(LEXER_UTILS_DIR)/gen_word_wrappers.c \
-                  $(LEXER_UTILS_DIR)/lexer_handlers.c
+                  $(LEXER_UTILS_DIR)/gen_word_loop.c \
+                  $(LEXER_UTILS_DIR)/lexer_handlers.c \
+                  $(LEXER_UTILS_DIR)/lexer_handlers_meta.c \
+                  $(LEXER_UTILS_DIR)/lexer_handlers_word.c
 
 WORD_EXPANSION_SRC = $(WORD_EXPANSION_DIR)/ft_expand_word.c \
                      $(WORD_EXPANSION_DIR)/expand_dollar.c \
