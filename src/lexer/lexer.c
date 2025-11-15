@@ -42,6 +42,9 @@ t_token	*lexer(const char *input)
 			return (NULL);
 	}
 	if (handle_eof(dummy_head) < 0)
+	{
+		printf("handle_eof entered\n");
 		return (NULL);
+	}
 	return (dummy_head);
 }

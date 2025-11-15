@@ -1,33 +1,24 @@
 #ifndef MINISHELL_TYPES_H
 # define MINISHELL_TYPES_H
 
-# ifndef _POSIX_C_SOURCE
-#  define _POSIX_C_SOURCE 200809L
-# endif
-# include <ctype.h> //isspace()->rem
-# include <dirent.h>
-# include <errno.h>
-# include <fcntl.h> //open()
-# include <limits.h>
-// # include <readline/history.h>
-// # include <readline/readline.h>
 # include "../libft/libft.h"
+# include <dirent.h>
+# include <fcntl.h>
+# include <limits.h>
 # include <signal.h>
 # include <stdbool.h>
-# include <stdio.h>   //printf()
-# include <stdlib.h>  //malloc()
-# include <string.h>  //strncpy()->rem
-# include <strings.h> //bzero()
-# include <sys/ioctl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <strings.h>
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <termios.h>
-# include <unistd.h> //write()
+# include <unistd.h>
 
 // heredoc pipe capacity from system default size.
 # define HERE_PIPE_SIZE 4096
-// HEREDOC TMPFILE'S TEMPLATE
 // # define HERE_TEMPLATE "/tmp/heredoc_tmp_XXXXX"
 # define HIST_MAX 1000
 
@@ -175,14 +166,6 @@ typedef struct s_cmd
 	t_redir				*redir;
 }						t_cmd;
 
-typedef struct s_fd
-{
-	int					stdin_backup;
-	int					stdout_backup;
-	int					pipe_write;
-	int					pipe_read;
-}						t_fd;
-
 typedef struct s_ast
 {
 	struct s_ast		*parent;
@@ -190,7 +173,6 @@ typedef struct s_ast
 	struct s_ast		*left;
 	t_node_type			type;
 	t_cmd				*cmd;
-	t_fd				open_fds;
 	struct s_ast		*right;
 }						t_ast;
 
