@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/15 18:38:32 by kemotoha          #+#    #+#             */
+/*   Updated: 2025/11/15 18:38:38 by kemotoha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strndup(const char *s, size_t n)
@@ -17,14 +29,3 @@ char	*ft_strndup(const char *s, size_t n)
 	str[i] = '\0';
 	return (str);
 }
-
-// int	main(void)
-// {
-// 	char	*str;
-// 	char	*res;
-
-// 	str = "hello";
-// 	res = ft_strndup(str, 3);
-// 	printf("%s\n", res);
-// 	return (0);
-// }
