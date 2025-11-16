@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:22 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:37:24 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/16 23:50:55 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ int	exec_subshell(t_ast *node, t_shell *shell)
 {
 	pid_t	pid;
 
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid < 0)
 	{
 		perror("fork");
 		shell->last_exit_status = 1;
-		return (1);
+		return (signal(SIGINT, signal_handler),1);
 	}
 	if (pid == 0)
 	{
@@ -36,5 +37,6 @@ int	exec_subshell(t_ast *node, t_shell *shell)
 		exit(shell->last_exit_status);
 	}
 	handle_child(&shell->last_exit_status, pid);
+	signal(SIGINT, signal_handler);
 	return (0);
 }

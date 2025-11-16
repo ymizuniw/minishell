@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:19 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/16 20:19:42 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/16 23:52:39 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,17 @@ int	exec_pipe(t_ast *node, t_shell *shell)
 
 	if (!node || !shell || pipe(pip) < 0)
 		return (perror("pipe"), 1);
+	signal(SIGINT, SIG_IGN);
 	right_pid = fork_pipe_right(pip, node, shell);
 	if (right_pid < 0)
-		return (-1);
+		return (signal(SIGINT, signal_handler), -1);
 	left_pid = fork_pipe_left(pip, node, shell, right_pid);
 	if (left_pid < 0)
-		return (-1);
+		return (signal(SIGINT, signal_handler), -1);
 	close(pip[0]);
 	close(pip[1]);
 	handle_child(&shell->last_exit_status, right_pid);
 	handle_child(&shell->last_exit_status, left_pid);
+	signal(SIGINT, signal_handler);
 	return (0);
 }
