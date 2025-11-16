@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:09 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/16 22:28:50 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/16 23:23:13 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,11 @@ void	search_in_path_and_exec(t_shell *shell, char **cmd_args)
 	if (pid == -1)
 		return (perror("fork"), xfree(cmd_path), free_envp(envp),
 			(void)(shell->last_exit_status = 1));
-	if (pid>0)
-	{
-		set_sig_ign();
-	}
+	signal(SIGINT, SIG_IGN);
 	if (pid == 0)
 		exec_in_fork_child(cmd_path, cmd_args, envp, shell);
 	xfree(cmd_path);
 	free_envp(envp);
 	handle_child(&shell->last_exit_status, pid);
-	signal_initializer(shell->interactive);
+	signal(SIGINT, signal_handler);
 }
-

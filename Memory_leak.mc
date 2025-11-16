@@ -36,4 +36,5 @@ Indirect leak of 2499 byte(s) in 67 object(s) allocated from:
     #15 0x5de4d53fdcee in main src/main.c:101
     #16 0x7c356a229d8f in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
 
-    
+おそらく、親プロセスのミニシェルのリードループが継続していて、出力バッファにプロンプトと改行が蓄積している。
+これを防ぐためには、子プロセスの実行中には、シグナルを受け付けないように設定する必要がある。
