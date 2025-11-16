@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:49 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:38:52 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/16 22:05:36 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ char	*ft_readline(t_shell *shell, const char *prompt, t_hist *hist)
 	size_t			len;
 	t_readline_ctx	ctx;
 
-	if (!isatty(STDIN_FILENO))
+	//get_env(MINI_DEPTH);
+	//if (MINIS_DEPTH>1)
+	//non-interactive;
+	if (!isatty(STDIN_FILENO) || !isatty(STDOUT_FILENO))
 		return (read_non_interactive());
 	buf = ft_calloc(1024, 1);
 	if (!buf)
@@ -81,9 +84,12 @@ char	*ft_readline(t_shell *shell, const char *prompt, t_hist *hist)
 	ctx = (t_readline_ctx){&len, hist, prompt};
 	if (shell)
 		enable_raw_mode(&shell->orig_term);
-	write(STDOUT_FILENO, prompt, ft_strlen(prompt));
+	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
+	{
+		write(STDOUT_FILENO, prompt, ft_strlen(prompt));
+	}
 	if (read_loop(buf, &len, &ctx) == -1)
-		return (disable_raw_mode(&shell->orig_term), free(buf), NULL);
+		return (disable_raw_mode(&shell->orig_term), xfree(buf), NULL);
 	write(STDOUT_FILENO, "\n", 1);
 	if (shell)
 		disable_raw_mode(&shell->orig_term);
@@ -91,3 +97,4 @@ char	*ft_readline(t_shell *shell, const char *prompt, t_hist *hist)
 		add_history(buf, hist);
 	return (buf);
 }
+//environment variable depth of the minishell.

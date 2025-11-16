@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:28 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:35:29 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/16 20:08:23 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,21 @@ static char	**init_matches_array(size_t *cap)
 	char	**matches;
 
 	*cap = 16;
-	matches = malloc(sizeof(char *) * (*cap));
+	matches = xmalloc(sizeof(char *) * (*cap));
 	return (matches);
 }
 
 static int	add_match(char ***matches, size_t *count, size_t *cap, char *name)
 {
-	char	**tmp;
 	size_t	old_size;
 
 	if (*count + 1 >= *cap)
 	{
 		old_size = sizeof(char *) * (*cap);
 		*cap *= 2;
-		tmp = ft_realloc(*matches, old_size, sizeof(char *) * (*cap));
-		if (!tmp)
+		*matches = ft_realloc(*matches, old_size, sizeof(char *) * (*cap));
+		if (!*matches)
 			return (-1);
-		*matches = tmp;
 	}
 	(*matches)[*count] = ft_strdup(name);
 	(*count)++;

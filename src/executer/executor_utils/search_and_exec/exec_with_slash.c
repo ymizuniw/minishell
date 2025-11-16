@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:43 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 20:13:59 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/16 22:14:37 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void	exec_in_child(char **cmd_args, char **env, t_shell *shell)
 {
 	set_sig_dfl();
 	cleanup_before_execve(shell);
+	//set_env(MINI_DEPTH);
 	execve(cmd_args[0], cmd_args, env);
 	perror("execve");
 	free_envp(env);
@@ -52,6 +53,7 @@ static void	exec_in_child(char **cmd_args, char **env, t_shell *shell)
 static void	exec_direct(char **cmd_args, char **env, t_shell *shell)
 {
 	cleanup_before_execve(shell);
+	//set_env(MINI_DEPTH);
 	execve(cmd_args[0], cmd_args, env);
 	perror("execve");
 	free_envp(env);

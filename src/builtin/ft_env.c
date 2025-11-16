@@ -6,11 +6,12 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:43 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 22:56:46 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/16 20:44:30 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
 // env コマンド実装
 // for each node:
 //     if (node->exported && node->value != NULL)

@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:09 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 21:42:02 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/16 22:28:50 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,17 @@ static void	exec_in_fork_child(char *cmd_path, char **cmd_args, char **envp,
 	exit(127);
 }
 
+		void set_sig_ign()
+		{
+			struct sigaction sact;
+			sigemptyset(&sact.sa_mask);
+			sact.sa_handler = SIG_IGN;
+			sact.sa_flags = 0;
+			sigaction(SIGTERM, &sact, NULL);
+			sigaction(SIGQUIT, &sact, NULL);
+			sigaction(SIGINT, &sact, NULL);
+		}
+
 void	search_in_path_and_exec(t_shell *shell, char **cmd_args)
 {
 	pid_t	pid;
@@ -55,9 +66,15 @@ void	search_in_path_and_exec(t_shell *shell, char **cmd_args)
 	if (pid == -1)
 		return (perror("fork"), xfree(cmd_path), free_envp(envp),
 			(void)(shell->last_exit_status = 1));
+	if (pid>0)
+	{
+		set_sig_ign();
+	}
 	if (pid == 0)
 		exec_in_fork_child(cmd_path, cmd_args, envp, shell);
 	xfree(cmd_path);
 	free_envp(envp);
 	handle_child(&shell->last_exit_status, pid);
+	signal_initializer(shell->interactive);
 }
+

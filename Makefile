@@ -6,13 +6,13 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/11/15 21:26:32 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/11/16 19:37:45 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -g  -fsanitize=address -Wall -Wextra -Werror -D_DEFAULT_SOURCE
+CFLAGS = -g  -Wall -Wextra -Werror -D_DEFAULT_SOURCE
 INC = -Iincludes
 # -fsanitize=address
 # -g
@@ -199,45 +199,4 @@ fclean: clean
 
 re: fclean all
 
-# Integration tests (non-interactive harness)
-.PHONY: all clean fclean re integration-tests
-# integration-tests: $(NAME)
-# 	@echo "Running integration tests (Bash harness)"
-# 	@bash tests/integration/integration_tests.sh || exit 1
-
-# # Testing targets - requires minishell_tester in parent directory
-# TESTER_DIR = ../minishell_tester
-
-# .PHONY: test test-integration test-stress
-
-# test: $(NAME)
-# 	@if [ ! -d "$(TESTER_DIR)" ]; then \
-# 		echo "Error: Tester not found at $(TESTER_DIR)"; \
-# 		exit 1; \
-# 	fi
-# 	@$(TESTER_DIR)/run_tests.sh $(PWD)/$(NAME)
-
-# test-integration: $(NAME)
-# 	@if [ ! -d "$(TESTER_DIR)" ]; then \
-# 		echo "Error: Tester not found at $(TESTER_DIR)"; \
-# 		exit 1; \
-# 	fi
-# 	@$(TESTER_DIR)/run_tests.sh $(PWD)/$(NAME) --integration
-
-# test-stress: $(NAME)
-# 	@if [ ! -d "$(TESTER_DIR)" ]; then \
-# 		echo "Error: Tester not found at $(TESTER_DIR)"; \
-
-# test-enhanced: $(NAME)
-# 	@if [ ! -d "$(TESTER_DIR)" ]; then \
-# 		echo "Error: Tester not found at $(TESTER_DIR)"; \
-# 		exit 1; \
-# 	fi
-# 	@$(TESTER_DIR)/run_tests.sh $(PWD)/$(NAME) --enhanced
-
-# test-all: $(NAME)
-# 	@if [ ! -d "$(TESTER_DIR)" ]; then \
-# 		echo "Error: Tester not found at $(TESTER_DIR)"; \
-# 		exit 1; \
-# 	fi
-# 	@$(TESTER_DIR)/run_tests.sh $(PWD)/$(NAME) --integration --stress --enhanced
+.PHONY: all clean fclean re

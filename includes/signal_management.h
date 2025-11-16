@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_management.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:47 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/15 18:35:49 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/16 19:53:26 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

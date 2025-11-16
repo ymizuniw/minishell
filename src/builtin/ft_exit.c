@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:47 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:36:05 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/16 20:45:26 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static void	exit_with_error(t_shell *shell, int code, bool print_num_err,
 	}
 	free_double_array(cmd);
 	free_shell(shell);
+	disable_raw_mode(&shell->orig_term);
 	exit(code);
 }
 
