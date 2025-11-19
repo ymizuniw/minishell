@@ -99,3 +99,45 @@ EOF
 )
 echo $TEST
 echo $?
+
+echo "=========================syntax error============================="
+echo "quotation not closed."
+
+echo 'aaa
+echo $?
+\"aaa
+echo $?
+aaa\'
+echo $?
+aaa\"
+echo $?
+# "aaa"'
+# echo $?
+# 'aaa'"
+# echo $?
+# "'aaa'""
+# echo $?
+# '"aaa"''
+# echo $?
+
+echo "parenthesis not closed, empty."
+echo $?
+(aaa
+echo $?
+aaa)
+echo $?
+()
+echo $?
+(())
+echo $?
+('('))
+echo $?
+
+echo "redirection not proper assignment."
+echo << && echo "redirection AND_IF"
+echo $?
+echo > || echo "redirection OR_IF"
+echo $?
+echo << (echo "subshell") && echo redirection SUBSHELL
+
+echo << * && echo "redirection wildcard"

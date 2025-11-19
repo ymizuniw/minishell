@@ -1,6 +1,5 @@
 includes
 make_with_valgrind.sh
-minishell
 test_integration.sh
 0
 ==========================multiple-pipe==========================
@@ -32,7 +31,7 @@ complex combination2:  string ymizuniw'string'
 test is working?
 0
 =======================wildcard===================================
-wildcard mono: in includes libft Makefile make.log make_with_valgrind.sh Memory_leak.mc minishell pattern0001 res_bash.log res_diff.log res_mish.log src test_integration.sh test.sh valg.log
+wildcard mono: in includes libft Makefile make.log make_with_valgrind.sh Memory_leak.mc pattern0001 res_bash.log res_diff.log res_mish.log src test_integration.sh test.sh valg.log
 0
 wildcard s-quoted: *
 0
@@ -52,7 +51,7 @@ wildcard pattern-matching: pattern0001
 0
 wildcard pattern-matching: pattern0001
 0
-wildcard pattern-matching: in includes libft Makefile make.log make_with_valgrind.sh Memory_leak.mc minishell pattern0001 res_bash.log res_diff.log res_mish.log src test_integration.sh test.sh valg.log
+wildcard pattern-matching: in includes libft Makefile make.log make_with_valgrind.sh Memory_leak.mc pattern0001 res_bash.log res_diff.log res_mish.log src test_integration.sh test.sh valg.log
 0
 ========================subshell==================================
 process AND_IF:
@@ -69,3 +68,16 @@ abc geh def abc 1 2 3 p q r
 quoted heredoc:
 ymizuniw $USER $USER $USER $USER
 0
+=========================syntax error=============================
+quotation not closed.
+aaa
+echo $?
+\"aaa
+echo $?
+aaa\
+0
+127
+parenthesis not closed, empty.
+0
+127
+127
