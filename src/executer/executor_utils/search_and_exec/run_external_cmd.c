@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:09 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/19 20:11:48 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/19 21:34:44 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,6 @@ static void	exec_in_fork_child(char *cmd_path, char **cmd_args, char **envp,
 	free_envp(envp);
 	exit(127);
 }
-
-		void set_sig_ign()
-		{
-			struct sigaction sact;
-			sigemptyset(&sact.sa_mask);
-			sact.sa_handler = SIG_IGN;
-			sact.sa_flags = 0;
-			sigaction(SIGTERM, &sact, NULL);
-			sigaction(SIGQUIT, &sact, NULL);
-			sigaction(SIGINT, &sact, NULL);
-		}
 
 void	search_in_path_and_exec(t_shell *shell, char **cmd_args)
 {

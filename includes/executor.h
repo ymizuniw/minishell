@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:15 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/19 19:31:21 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/19 21:37:37 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ int				get_document(t_redir *hd, char **document, size_t *document_len,
 					t_shell *shell);
 t_word			*loop_wrapper(char *value, size_t *i);
 
-//process heredoc
-int process_one_heredoc(t_shell *shell, t_redir *redir);
-int process_all_heredoc(t_shell *shell, t_ast *node);
+// process heredoc
+int				process_one_heredoc(t_shell *shell, t_redir *redir);
+int				process_all_heredoc(t_shell *shell, t_ast *node);
 
 #endif

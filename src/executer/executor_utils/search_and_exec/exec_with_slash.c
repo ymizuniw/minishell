@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:43 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/16 23:55:17 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/19 21:35:34 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	exec_in_child(char **cmd_args, char **env, t_shell *shell)
 {
 	set_sig_dfl();
 	cleanup_before_execve(shell);
-	//set_env(MINI_DEPTH);
 	execve(cmd_args[0], cmd_args, env);
 	perror("execve");
 	free_envp(env);
@@ -53,7 +52,6 @@ static void	exec_in_child(char **cmd_args, char **env, t_shell *shell)
 static void	exec_direct(char **cmd_args, char **env, t_shell *shell)
 {
 	cleanup_before_execve(shell);
-	//set_env(MINI_DEPTH);
 	execve(cmd_args[0], cmd_args, env);
 	perror("execve");
 	free_envp(env);
@@ -78,12 +76,12 @@ void	exec_with_slash(t_shell *shell, char **cmd_args, char **env)
 		perror("fork");
 		shell->last_exit_status = 1;
 		free_envp(env);
-		signal(SIGINT, signal_handler);
+		signal_initializer(shell->interactive);
 		return ;
 	}
 	if (pid == 0)
 		exec_in_child(cmd_args, env, shell);
 	handle_child(&shell->last_exit_status, pid);
-	signal(SIGINT, signal_handler);
+	signal_initializer(shell->interactive);
 	free_envp(env);
 }

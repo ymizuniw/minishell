@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_management.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:06 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/15 18:35:08 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/19 21:45:28 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 void		*xmalloc(size_t size);
 void		*xcalloc(size_t size);
 void		xfree(void *p);
+void		xclose(int fd);
 
 // alloc application
 t_token		*alloc_token(void);

@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:49 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/19 20:08:47 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/19 21:35:08 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	process_key(char c, char *buf, size_t *len, t_readline_ctx *ctx)
 		return (1);
 	if (c == '\n')
 		return (0);
-	if (c == ASC_EOT && *len == 0)//if heredoc mode, EOT returns 0. 
+	if (c == ASC_EOT && *len == 0)
 		return (-1);
 	if (c == ASC_DEL)
 		handle_backspace(buf, len);
@@ -66,6 +66,17 @@ static int	read_loop(char *buf, size_t *len, t_readline_ctx *ctx)
 	return (0);
 }
 
+static t_readline_ctx	init_readline_ctx(size_t *len, t_hist *hist,
+		char const *prompt)
+{
+	t_readline_ctx	new;
+
+	new.len = len;
+	new.hist = hist;
+	new.prompt = prompt;
+	return (new);
+}
+
 char	*ft_readline(t_shell *shell, const char *prompt, t_hist *hist)
 {
 	char			*buf;
@@ -78,7 +89,7 @@ char	*ft_readline(t_shell *shell, const char *prompt, t_hist *hist)
 	if (!buf)
 		return (NULL);
 	len = 0;
-	ctx = (t_readline_ctx){&len, hist, prompt};
+	ctx = init_readline_ctx(&len, hist, prompt);
 	if (shell)
 		enable_raw_mode(&shell->orig_term);
 	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
@@ -94,4 +105,3 @@ char	*ft_readline(t_shell *shell, const char *prompt, t_hist *hist)
 		add_history(buf, hist);
 	return (buf);
 }
-//environment variable depth of the minishell.

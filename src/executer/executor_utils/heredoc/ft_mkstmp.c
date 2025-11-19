@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:26 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/16 22:56:57 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/19 21:35:54 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ int	ft_mkstmpfd(char *template, char **filename)
 
 	(void)template;
 	(void)filename;
-	// fd = open("/tmp", O_EXCL | __O_TMPFILE, 0600);
-	fd = open("/tmp/TEMP_FILE", O_EXCL | O_RDWR, 0600);
+	fd = open("/tmp", O_EXCL | __O_TMPFILE, 0600);
 	if (fd >= 0)
 		return (fd);
 	return (-1);

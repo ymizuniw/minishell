@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/11/16 19:37:45 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/11/19 21:59:22 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,8 @@ DATA_MANAGEMENT_SRC = $(DATA_MANAGEMENT_DIR)/alloc_t.c \
                       $(DATA_MANAGEMENT_DIR)/xfree.c \
                       $(DATA_MANAGEMENT_DIR)/xmalloc.c \
                       $(DATA_MANAGEMENT_DIR)/list_utils_last.c \
-                      $(DATA_MANAGEMENT_DIR)/list_utils_add.c
+                      $(DATA_MANAGEMENT_DIR)/list_utils_add.c \
+                      $(DATA_MANAGEMENT_DIR)/xclose.c
 
 ENV_MANAGEMENT_SRC = $(ENV_MANAGEMENT_DIR)/ft_getenv.c \
                      $(ENV_MANAGEMENT_DIR)/getenv_utiles.c \

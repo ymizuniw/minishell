@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:36 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/19 20:42:24 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/19 21:37:09 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,34 +67,36 @@ int	make_heredoc(t_redir *hd, t_shell *shell)
 		return (make_file_heredoc(document));
 }
 
-//set redir->tmp_fd;
-int process_one_heredoc(t_shell *shell, t_redir *redir)
+// set redir->tmp_fd;
+int	process_one_heredoc(t_shell *shell, t_redir *redir)
 {
-	int tmp_fd = -1;
+	int	tmp_fd;
+
+	tmp_fd = -1;
 	tmp_fd = make_heredoc(redir, shell);
-	if (tmp_fd<0)
+	if (tmp_fd < 0)
 		return (-1);
 	redir->tmp_fd = tmp_fd;
 	return (1);
 }
 
-int process_all_heredoc(t_shell *shell, t_ast *node)
+int	process_all_heredoc(t_shell *shell, t_ast *node)
 {
-	if (node==NULL || shell==NULL)//this is invald.
+	if (node == NULL || shell == NULL)
 		return (0);
 	if (node->right)
 	{
-		if (process_all_heredoc(shell, node->right)<0)
+		if (process_all_heredoc(shell, node->right) < 0)
 			return (-1);
 	}
 	if (node->left)
 	{
-		if (process_all_heredoc(shell, node->left)<0)
+		if (process_all_heredoc(shell, node->left) < 0)
 			return (-1);
 	}
 	if (node && node->cmd && node->cmd->redir)
 	{
-		if (process_one_heredoc(shell, node->cmd->redir)<0)
+		if (process_one_heredoc(shell, node->cmd->redir) < 0)
 			return (-1);
 	}
 	return (1);
@@ -104,5 +106,5 @@ int process_all_heredoc(t_shell *shell, t_ast *node)
 	caller side:
 		if (process-all_heredoc(shell, node)<0)
 			//err path.
-		
+
 */

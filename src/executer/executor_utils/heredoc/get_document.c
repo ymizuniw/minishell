@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:30 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/19 20:42:43 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/19 21:36:15 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 // 	if ()
 // }
 
-static bool	read_heredoc_line(t_shell *shell, char **line, char **line_copy, int is_interactive)
+static bool	read_heredoc_line(t_shell *shell, char **line, char **line_copy,
+		int is_interactive)
 {
 	size_t	len;
 
@@ -76,16 +77,6 @@ static void	free_line_mode(char *line, char *line_copy, bool is_interactive)
 	else
 		free(line);
 }
-
-// static void end_heredoc(void)
-// {
-// 	ioctl(STDIN_FILENO, );
-// }
-
-// ISIG
-// INTR, QUIT, SUSP, DSUSP の文字を受信した時、対応するシグナルを 発生させる。
-
-
 
 int	get_document(t_redir *hd, char **document, size_t *document_len,
 		t_shell *shell)

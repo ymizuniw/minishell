@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_quote_flag.c                                   :+:      :+:    :+:   */
+/*   xclose.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/15 18:40:02 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/19 21:38:27 by ymizuniw         ###   ########.fr       */
+/*   Created: 2025/11/19 21:43:37 by ymizuniw          #+#    #+#             */
+/*   Updated: 2025/11/19 21:44:51 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-// Set either double or single quotation flag to token
-void	set_quote_flag(t_token *token, char *input, char const quote_open)
+void	xclose(int fd)
 {
-	(void)input;
-	if (!token)
+	if (fd <= 0)
 		return ;
-	if (quote_open == '\"')
-		token->in_dquote = true;
-	else if (quote_open == '\'')
-		token->in_squote = true;
+	close(fd);
 }
