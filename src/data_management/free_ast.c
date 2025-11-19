@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:36:19 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:36:35 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/19 19:25:51 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,20 @@ void	free_word_list(t_word *p)
 	xfree(argv);
 }
 
+int xclose(int fd)
+{
+	if (fd<0)
+		return (0);
+	close(fd);
+	return (0);	
+}
+
 void	free_redir_list(t_redir *p)
 {
 	if (p == NULL)
 		return ;
 	free_redir_list(p->next);
+	xclose(p->tmp_fd);
 	xfree(p->filename);
 	xfree(p);
 }

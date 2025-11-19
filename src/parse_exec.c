@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/16 21:16:23 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/19 19:22:41 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	parse_and_exec(t_token *token_list, t_shell *shell)
 	ast = parser(&cur);
 	if (!ast)
 		return (shell->last_exit_status = 2, 0);
+	if (process_all_heredoc(shell, ast)<0)
+		return (shell->last_exit_status = 1, 0);
 	exec_one_ast(ast, shell);
 	return (1);
 }

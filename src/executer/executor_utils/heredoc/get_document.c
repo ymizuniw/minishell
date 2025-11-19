@@ -6,20 +6,26 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:30 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:37:31 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/19 20:42:43 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/get_next_line.h"
 #include "../../../../includes/minishell.h"
+#include <sys/ioctl.h>
 
-static bool	read_heredoc_line(char **line, char **line_copy, int is_interactive)
+// static signal_handler_hd()
+// {
+// 	if ()
+// }
+
+static bool	read_heredoc_line(t_shell *shell, char **line, char **line_copy, int is_interactive)
 {
 	size_t	len;
 
 	if (is_interactive)
 	{
-		*line = ft_readline(NULL, ">", NULL);
+		*line = ft_readline(shell, ">", NULL);
 		if (!*line)
 			return (false);
 		*line_copy = *line;
@@ -71,6 +77,16 @@ static void	free_line_mode(char *line, char *line_copy, bool is_interactive)
 		free(line);
 }
 
+// static void end_heredoc(void)
+// {
+// 	ioctl(STDIN_FILENO, );
+// }
+
+// ISIG
+// INTR, QUIT, SUSP, DSUSP の文字を受信した時、対応するシグナルを 発生させる。
+
+
+
 int	get_document(t_redir *hd, char **document, size_t *document_len,
 		t_shell *shell)
 {
@@ -84,7 +100,7 @@ int	get_document(t_redir *hd, char **document, size_t *document_len,
 	is_interactive = isatty(STDIN_FILENO);
 	while (1)
 	{
-		if (!read_heredoc_line(&line, &line_copy, is_interactive))
+		if (!read_heredoc_line(shell, &line, &line_copy, is_interactive))
 			break ;
 		if (ft_strcmp(line_copy, params.delim) == 0)
 		{

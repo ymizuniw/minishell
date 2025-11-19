@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:31 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/15 23:17:14 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/19 19:21:10 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ typedef struct s_redir
 	t_redir_type		type;
 	char				*filename;
 	bool				delim_quoted;
+	int					tmp_fd;
 	struct s_redir		*next;
 }						t_redir;
 

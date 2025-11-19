@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:12 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:48:01 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/19 19:32:00 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,20 @@ static int	open_and_dup(const char *filename, int flags, mode_t perm,
 
 static int	do_redirect_heredoc(t_redir *hd, t_shell *shell)
 {
-	int	fd;
+	// int	fd;
 
-	fd = make_heredoc(hd, shell);
-	if (fd < 0)
-		return (-1);
-	if (dup2(fd, STDIN_FILENO) < 0)
-		return (close(fd), -1);
-	return (close(fd), 0);
+	// fd = make_heredoc(hd, shell);
+	// if (fd < 0)
+	// 	return (-1);
+	// if (dup2(fd, STDIN_FILENO) < 0)
+	// 	return (close(fd), -1);
+	// return (close(fd), 0);
+	(void)shell;
+	if (dup2(hd->tmp_fd, STDIN_FILENO)<0)
+		return(-1);
+	if (hd->tmp_fd<0)
+		close(hd->tmp_fd);
+	return (0);
 }
 
 static int	handle_redir_in(t_redir *cur)

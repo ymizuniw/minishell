@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:09 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/16 23:48:50 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/19 20:11:48 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,5 @@ void	search_in_path_and_exec(t_shell *shell, char **cmd_args)
 	xfree(cmd_path);
 	free_envp(envp);
 	handle_child(&shell->last_exit_status, pid);
-	signal(SIGINT, signal_handler);
+	signal_initializer(shell->interactive);
 }

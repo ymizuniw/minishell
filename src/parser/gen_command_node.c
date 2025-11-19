@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:39 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 22:08:18 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/19 19:27:57 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	parse_redirection(t_redir **redir_head, t_token_type token_type,
 	if (!new_redir)
 		return (-1);
 	ft_memset(new_redir, 0, sizeof(t_redir));
+	new_redir->tmp_fd = -1;
 	append_redir(redir_head, new_redir);
 	set_redir_type(new_redir, token_type);
 	new_redir->filename = ft_strdup(filename_token->value);

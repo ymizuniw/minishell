@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:49 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/16 22:05:36 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/19 20:08:47 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	process_key(char c, char *buf, size_t *len, t_readline_ctx *ctx)
 		return (1);
 	if (c == '\n')
 		return (0);
-	if (c == ASC_EOT && *len == 0)
+	if (c == ASC_EOT && *len == 0)//if heredoc mode, EOT returns 0. 
 		return (-1);
 	if (c == ASC_DEL)
 		handle_backspace(buf, len);
@@ -72,9 +72,6 @@ char	*ft_readline(t_shell *shell, const char *prompt, t_hist *hist)
 	size_t			len;
 	t_readline_ctx	ctx;
 
-	//get_env(MINI_DEPTH);
-	//if (MINIS_DEPTH>1)
-	//non-interactive;
 	if (!isatty(STDIN_FILENO) || !isatty(STDOUT_FILENO))
 		return (read_non_interactive());
 	buf = ft_calloc(1024, 1);
