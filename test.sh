@@ -61,3 +61,19 @@ EOF
 )
 
 echo $TEST
+
+echo "quoted heredoc:"
+TEST=$(cat <<EOF && cat <<E"O"F && cat <<"EOF" && cat <<'E'OF && cat <<'EOF'
+$USER
+EOF
+$USER
+EOF
+$USER
+EOF
+$USER
+EOF
+$USER
+EOF
+)
+
+echo $TEST

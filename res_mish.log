@@ -1,5 +1,4 @@
 includes
-minishell
 test_integration.sh
 ==========================multiple-pipe==========================
 infile
@@ -20,7 +19,7 @@ complex combination2:  string ymizuniw'string'
 test is working?
 0
 =======================wildcard===================================
-wildcard mono: in includes libft Makefile Memory_leak.mc minishell pattern0001 res_bash.log res_diff.log res_mish.log src test_integration.sh test.sh
+wildcard mono: in includes libft Makefile Memory_leak.mc pattern0001 res_bash.log res_diff.log res_mish.log src test_integration.sh test.sh
 wildcard s-quoted: *
 wildcard d-quoted: *
 pattern0001
@@ -30,7 +29,7 @@ wildcard d-quoted: pa*1
 wildcard pattern-matching: pattern0001
 wildcard pattern-matching: pattern0001
 wildcard pattern-matching: pattern0001
-wildcard pattern-matching: in includes libft Makefile Memory_leak.mc minishell pattern0001 res_bash.log res_diff.log res_mish.log src test_integration.sh test.sh
+wildcard pattern-matching: in includes libft Makefile Memory_leak.mc pattern0001 res_bash.log res_diff.log res_mish.log src test_integration.sh test.sh
 0
 ========================subshell==================================
 process AND_IF:
@@ -41,3 +40,5 @@ cat failed
 ========================heredoc===================================
 multiple heredoc:
 abc geh def abc 1 2 3 p q r
+quoted heredoc:
+ymizuniw $USER $USER $USER $USER
