@@ -38,3 +38,6 @@ infile
 cat success
 process OR_IF:
 cat failed
+========================heredoc===================================
+multiple heredoc:
+abc geh def abc 1 2 3 p q r

@@ -40,3 +40,24 @@ echo "process AND_IF:"
 (cat in && rm -f in) && echo "cat success"
 echo "process OR_IF:"
 (cat non && echo "cat success. test is wrong.") || echo "cat failed"
+
+echo "========================heredoc==================================="
+
+echo "multiple heredoc:"
+TEST=$(cat <<EOF && cat <<EOF && cat <<EOF | sort -u
+abc
+geh
+def
+abc
+EOF
+1
+2
+3
+EOF
+p
+q
+r
+EOF
+)
+
+echo $TEST
