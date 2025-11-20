@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:41 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/19 20:04:05 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/21 01:21:43 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	enable_raw_mode(struct termios *orig)
 	tcgetattr(STDIN_FILENO, orig);
 	raw = *orig;
 	raw.c_lflag &= ~(ICANON | ECHO);
-	raw.c_lflag |= ECHOCTL;
 	raw.c_cc[VMIN] = 1;
 	raw.c_cc[VTIME] = 0;
 	tcsetattr(STDIN_FILENO, TCSANOW, &raw);

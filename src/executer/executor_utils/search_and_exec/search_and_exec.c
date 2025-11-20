@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_and_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 17:44:05 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/20 19:05:42 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/21 01:16:14 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

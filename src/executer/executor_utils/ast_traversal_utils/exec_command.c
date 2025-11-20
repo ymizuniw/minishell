@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:15 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/19 20:09:06 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/21 01:18:37 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	restore_stdio(int stdin_keep, int stdout_keep)
 {
 	dup2(stdin_keep, STDIN_FILENO);
 	dup2(stdout_keep, STDOUT_FILENO);
-	close(stdin_keep);
-	close(stdout_keep);
+	xclose(stdin_keep);
+	xclose(stdout_keep);
 }
 
 static int	handle_redirection_error(t_ast *node, int stdin_k, int stdout_k,

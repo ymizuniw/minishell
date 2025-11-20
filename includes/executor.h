@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:15 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/20 16:33:43 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/21 01:33:45 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int				exec_subshell(t_ast *node, t_shell *shell);
 
 // heredoc utils
 unsigned int	ft_rand(unsigned int *seed);
-char			*ft_mkstmp(char *template);
-int				ft_mkstmpfd(char *template, char **filename);
+int				ft_mkstmpfd(void);
 int				make_heredoc(t_redir *hd, t_shell *shell);
 int				get_document(t_redir *hd, char **document, size_t *document_len,
 					t_shell *shell);
