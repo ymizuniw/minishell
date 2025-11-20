@@ -1,0 +1,14 @@
+==35130== FILE DESCRIPTORS: 7 open (3 std) at exit.
+==35130== Open file descriptor 24: /home/ymizuniw/.vscode-server/data/logs/20251121T001052/remoteagent.log
+==35130==    <inherited from parent>
+==35130== 
+==35130== Open file descriptor 23: /home/ymizuniw/.vscode-server/data/logs/20251121T001052/remoteTelemetry.log
+==35130==    <inherited from parent>
+==35130== 
+==35130== Open file descriptor 22: /home/ymizuniw/.vscode-server/data/logs/20251121T001052/ptyhost.log
+==35130==    <inherited from parent>
+==35130== 
+==35130== Open file descriptor 3: /home/ymizuniw/minishell/test/valg.log
+==35130==    <inherited from parent>
+==35130== 
+==35130== 

@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/11/20 16:19:28 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/11/21 01:39:48 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ INC = -Iincludes
 # -fsanitize=address
 # -g
 #for Mac Environment
-CPPFLAGS = -I/opt/homebrew/opt/readline/include/
-LDFLAGS = -L/opt/homebrew/opt/readline/lib
+# CPPFLAGS = -I/opt/homebrew/opt/readline/include/
+# LDFLAGS = -L/opt/homebrew/opt/readline/lib
 
 # DIRECTORIES
 SRC_DIR = src
