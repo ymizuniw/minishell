@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_types.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:31 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/20 16:33:53 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/20 19:06:45 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

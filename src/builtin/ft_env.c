@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:43 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/16 20:44:30 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/20 19:05:02 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-// env コマンド実装
-// for each node:
-//     if (node->exported && node->value != NULL)
-//         print("key=value");
-
-// export コマンド表示
-// for each node:
-//     if (node->exported)
-//         if (node->value != NULL)
-//             print("declare -x key=\"value\"");
-//         else
-//             print("declare -x key");
-// ここまで実装すれば bash 仕様に合う。
 
 int	ft_env(t_shell *shell, char **cmd)
 {
@@ -44,7 +30,7 @@ int	ft_env(t_shell *shell, char **cmd)
 	current = shell->env_list;
 	while (current)
 	{
-		if (current->exported)
+		if (current->exported && current->value[0] != '\0')
 			printf("%s=%s\n", current->key, current->value);
 		current = current->next;
 	}

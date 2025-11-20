@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   generate_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:06 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/16 20:22:12 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/20 19:05:48 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/minishell.h"
-
-// static size_t	count_exported_vars(t_env *env_list)
-// {
-// 	t_env	*current;
-// 	size_t	count;
-
-// 	current = env_list;
-// 	count = 0;
-// 	while (current)
-// 	{
-// 		if (current->exported)
-// 			count++;
-// 		current = current->next;
-// 	}
-// 	return (count);
-// }
 
 char	*create_env_string(const char *key, const char *value)
 {

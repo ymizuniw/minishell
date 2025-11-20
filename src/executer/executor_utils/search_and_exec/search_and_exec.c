@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   search_and_exec.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 17:44:05 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/16 23:53:06 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/20 19:05:42 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/minishell.h"
-
-// static void	free_envp(char **envp)
-// {
-// 	size_t	i;
-
-// 	if (!envp)
-// 		return ;
-// 	i = 0;
-// 	while (envp[i])
-// 	{
-// 		xfree(envp[i]);
-// 		i++;
-// 	}
-// 	xfree(envp);
-// }
 
 static void	set_last_arg(t_shell *shell, char **cmd_args)
 {

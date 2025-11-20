@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:52 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:41:55 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/20 19:06:21 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

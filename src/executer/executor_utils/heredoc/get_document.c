@@ -3,21 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_document.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:30 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/19 21:36:15 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/20 19:05:59 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/get_next_line.h"
 #include "../../../../includes/minishell.h"
-#include <sys/ioctl.h>
-
-// static signal_handler_hd()
-// {
-// 	if ()
-// }
 
 static bool	read_heredoc_line(t_shell *shell, char **line, char **line_copy,
 		int is_interactive)
