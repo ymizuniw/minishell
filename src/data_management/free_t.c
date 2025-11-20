@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:36:39 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:36:41 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:35:44 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@ void	free_double_array(char **p)
 		xfree(p[i]);
 		i++;
 	}
-	xfree(p);
-}
-
-void	free_result(t_result *p)
-{
 	xfree(p);
 }
 

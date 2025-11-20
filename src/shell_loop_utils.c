@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:42:53 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/20 16:18:02 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:33:23 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,26 +68,12 @@ int	check_parenthesis_errors(t_token *token_list, t_shell *shell)
 	return (1);
 }
 
-// void	exec_one_ast(t_ast *ast, t_shell *shell)
-// {
-// 	t_result	res;
-
-// 	if (!ast)
-// 		return ;
-// 	ft_memset(&res, 0, sizeof(t_result));
-// 	shell->root = ast;
-// 	res = executor(ast, shell);
-// 	shell->last_exit_status = res.exit_code;
-// 	free_ast_tree(ast);
-// 	shell->root = NULL;
-// }
-
 void	exec_one_ast(t_ast *ast, t_shell *shell)
 {
 	if (!ast)
 		return ;
 	shell->root = ast;
-	if (executor(ast, shell)<0)
+	if (executor(ast, shell) < 0)
 		return ;
 	free_ast_tree(ast);
 	shell->root = NULL;

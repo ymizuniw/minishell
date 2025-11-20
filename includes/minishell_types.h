@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:31 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/19 21:43:31 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:33:53 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,12 +202,6 @@ typedef struct s_ast
 	struct s_ast		*right;
 }						t_ast;
 
-typedef struct s_result
-{
-	t_ast				*root;
-	int					exit_code;
-}						t_result;
-
 typedef struct s_shell
 {
 	bool				interactive;
@@ -219,7 +213,6 @@ typedef struct s_shell
 	t_token				*token_list;
 	char				*line_ptr;
 	t_hist				*hist;
-	t_result			res;
 	int					stdin_backup;
 	int					stdout_backup;
 	struct termios		orig_term;

@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:36:14 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/19 19:27:06 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:34:15 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,4 @@ t_token	*alloc_token(void)
 t_redir	*alloc_redir(void)
 {
 	return ((t_redir *)xmalloc(sizeof(t_redir)));
-}
-
-t_result	*alloc_result(void)
-{
-	return ((t_result *)xmalloc(sizeof(t_result)));
 }

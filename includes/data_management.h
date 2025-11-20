@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:06 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/19 21:45:28 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:33:34 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_token		*alloc_token(void);
 t_cmd		*alloc_cmd(void);
 t_ast		*alloc_node(void);
 t_redir		*alloc_redir(void);
-t_result	*alloc_result(void);
 
 // free application
 void		free_ast_tree(t_ast *p);
@@ -37,7 +36,6 @@ void		free_double_array(char **p);
 void		free_redir_list(t_redir *p);
 void		free_word_list(t_word *p);
 void		free_cmd_structure(t_cmd *p);
-void		free_result(t_result *s);
 void		free_shell(t_shell *shell);
 void		cleanup_before_execve(t_shell *shell);
 
