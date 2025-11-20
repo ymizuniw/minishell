@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:40 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/16 20:19:21 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/20 16:18:32 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void		exec_one_ast(t_ast *ast, t_shell *shell);
 void		cleanup_after_line(t_shell *shell);
 
 t_token		*lexer(const char *input);
-t_result	executor(t_ast *ast, t_shell *shell);
+// t_result	executor(t_ast *ast, t_shell *shell);
+int	executor(t_ast *ast, t_shell *shell);
 
 // word_cat.c
 int			handle_quotation(t_word_cat *ctx, size_t word_len,
