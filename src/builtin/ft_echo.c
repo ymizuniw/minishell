@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:40 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/21 01:31:01 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/21 20:34:01 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,12 @@ int	ft_echo(char **cmd)
 	while (cmd[i])
 	{
 		ft_putstr_fd(cmd[i], STDOUT_FILENO);
-		// printf("%s", cmd[i]);
-		// if (cmd[i + 1])
-			// printf(" ");
-		if (cmd[i+1])
+		if (cmd[i + 1])
 			ft_putchar_fd(STDOUT_FILENO, '\n');
 		if (cmd[i + 1])
 			ft_putstr_fd(cmd[i], STDOUT_FILENO);
 		i++;
 	}
-	// if (newline)
-	// 	printf("\n");
 	if (newline)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	return (0);
