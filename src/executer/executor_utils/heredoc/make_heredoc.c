@@ -6,34 +6,43 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:36 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/21 21:37:30 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/21 22:41:54 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/get_next_line.h"
 #include "../../../../includes/minishell.h"
 
-// static int	make_file_heredoc(char *document, size_t document_len)
-// {
-// 	int		tmp_fd;
-// 	ssize_t	wb;
+static int	make_file_heredoc(char *document, size_t document_len)
+{
+	int		tmp_fd;
+	ssize_t	wb;
+	char filename[22];
 
-// 	tmp_fd = ft_mkstmpfd();
-// 	if (tmp_fd < 0)
-// 		return (-1);
-// 	if (document == NULL)
-// 	{
-// 		xfree(document);
-// 		return (tmp_fd);
-// 	}
-// 	wb = write(tmp_fd, document, document_len);
-// 	if (wb < 0)
-// 		return (xfree(document), xclose(tmp_fd), -1);
-// 	if ((size_t)wb != document_len)
-// 		return (xfree(document), xclose(tmp_fd), -1);
-// 	xfree(document);
-// 	return (tmp_fd);
-// }
+	ft_memset(filename,0, 22);
+	if (generate_random_template(filename)< 0)
+		return (-1);
+	tmp_fd = open(filename, O_RDWR|O_EXCL|O_CREAT, 0600);
+	if (tmp_fd < 0)
+		return (-1);
+	if (document == NULL)
+	{
+		xfree(document);
+		return (tmp_fd);
+	}
+	wb = write(tmp_fd, document, document_len);
+	if (wb < 0)
+		return (xfree(document), xclose(tmp_fd), -1);
+	if ((size_t)wb != document_len)
+		return (xfree(document), xclose(tmp_fd), -1);
+	xfree(document);
+	close(tmp_fd);
+	tmp_fd = open(filename, O_RDONLY, 0600);
+	unlink(filename);
+	if (tmp_fd<0)
+		return (-1);
+	return (tmp_fd);
+}
 
 int make_pipe_heredoc(char *document, size_t document_len)
 {
@@ -64,6 +73,8 @@ int	make_heredoc(t_redir *hd, t_shell *shell)
 		xfree(document);
 		return (fd);
 	}
+	if (document_len>HERE_PIPE_SIZE)
+		return (make_file_heredoc(document, document_len));
 	return (make_pipe_heredoc(document, document_len));
 }
 

@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:15 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/21 01:33:45 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/21 22:37:12 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ t_word			*loop_wrapper(char *value, size_t *i);
 // process heredoc
 int				process_one_heredoc(t_shell *shell, t_redir *redir);
 int				process_all_heredoc(t_shell *shell, t_ast *node);
+int				generate_random_template(char *filename);
 
 #endif
