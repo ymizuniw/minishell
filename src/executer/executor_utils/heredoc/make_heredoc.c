@@ -6,33 +6,45 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:36 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/21 20:35:22 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/21 21:37:30 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/get_next_line.h"
 #include "../../../../includes/minishell.h"
 
-static int	make_file_heredoc(char *document, size_t document_len)
-{
-	int		tmp_fd;
-	ssize_t	wb;
+// static int	make_file_heredoc(char *document, size_t document_len)
+// {
+// 	int		tmp_fd;
+// 	ssize_t	wb;
 
-	tmp_fd = ft_mkstmpfd();
-	if (tmp_fd < 0)
+// 	tmp_fd = ft_mkstmpfd();
+// 	if (tmp_fd < 0)
+// 		return (-1);
+// 	if (document == NULL)
+// 	{
+// 		xfree(document);
+// 		return (tmp_fd);
+// 	}
+// 	wb = write(tmp_fd, document, document_len);
+// 	if (wb < 0)
+// 		return (xfree(document), xclose(tmp_fd), -1);
+// 	if ((size_t)wb != document_len)
+// 		return (xfree(document), xclose(tmp_fd), -1);
+// 	xfree(document);
+// 	return (tmp_fd);
+// }
+
+int make_pipe_heredoc(char *document, size_t document_len)
+{
+	int pip[2];
+
+	if (pipe(pip)<0)
 		return (-1);
-	if (document == NULL)
-	{
-		xfree(document);
-		return (tmp_fd);
-	}
-	wb = write(tmp_fd, document, document_len);
-	if (wb < 0)
-		return (xfree(document), xclose(tmp_fd), -1);
-	if ((size_t)wb != document_len)
-		return (xfree(document), xclose(tmp_fd), -1);
+	write(pip[1], document, document_len);
 	xfree(document);
-	return (tmp_fd);
+	xclose(pip[1]);
+	return (pip[0]);
 }
 
 // maybe, just returning empty tmpfile descriptor is better.
@@ -52,7 +64,7 @@ int	make_heredoc(t_redir *hd, t_shell *shell)
 		xfree(document);
 		return (fd);
 	}
-	return (make_file_heredoc(document, document_len));
+	return (make_pipe_heredoc(document, document_len));
 }
 
 // set redir->tmp_fd;
