@@ -142,9 +142,30 @@ echo $?
 
 # echo << * && echo "redirection wildcard"
 
-
 echo "========================redirection============================"
 touch input_file && echo "input_file_line">input_file
 cat <input_file >output_file && cat output_file
 cat output_file >outfile2 >outfile3 && cat outfile3
 rm -f input_file output_file outfile2 outfile3
+
+
+echo "========================absolute_path_command=================="
+/bin/ls
+/bin/echo "absolute!"
+/bin/ls | /bin/grep mini
+
+echo "========================relative_path_command==================="
+mkdir test1 test2
+cd test1 && pwd && cd .. && pwd
+cd test2 && pwd && cd .. && pwd
+cd test1
+touch test1.sh && chmod +x test1.sh
+echo "#!bin/bash" > test1.sh
+echo "echo test1" >>test1.sh
+cd ..
+cd test2
+touch test2.sh && chmod +x test2.sh
+echo "#!bin/bash">test2.sh
+echo "echo test2" >>test2.sh
+cd ..
+
