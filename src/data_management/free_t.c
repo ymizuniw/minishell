@@ -6,16 +6,18 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:36:39 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/20 16:36:40 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/24 23:28:21 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+
 void	free_token_list(t_token *p)
 {
 	if (p == NULL)
 		return ;
+    fprintf(stderr, "[FREE TOKEN] %p\n", p);
 	free_token_list(p->next);
 	xfree(p->value);
 	xfree(p);
@@ -55,6 +57,7 @@ void	free_env_list(t_env *env_list)
 {
 	if (env_list == NULL)
 		return ;
+	fprintf(stderr, "[FREE ENV_LIST] %p\n", env_list);
 	free_env_list(env_list->next);
 	xfree(env_list->key);
 	xfree(env_list->value);

@@ -1,0 +1,176 @@
+#!/usr/bin/env bash
+# Minishell Tester - Main test runner
+# Usage: ./run_tests.sh <path_to_minishell_binary> [--integration|--stress|--all]
+
+set -uo pipefail
+
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+# Color output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+usage() {
+    echo "Usage: $0 <path_to_minishell_binary> [options]"
+    echo ""
+    echo "Options:"
+    echo "  --integration     Run integration tests only (102 tests)"
+    echo "  --stress          Run stress tests only (81 tests)"
+    echo "  --advanced        Run advanced stress tests"
+    echo "  --complex         Run complex expansion tests"
+    echo "  --comprehensive   Run comprehensive tests"
+    echo "  --destructive     Run destructive tests"
+    echo "  --all             Run all test suites (default)"
+    echo ""
+    echo "Examples:"
+    echo "  $0 ../minishell/minishell"
+    echo "  $0 ../minishell/minishell --integration"
+    echo "  $0 ../minishell/minishell --stress"
+    exit 2
+}
+
+# Check arguments
+if [ $# -lt 1 ]; then
+    usage
+fi
+
+MS_BIN=$1
+shift
+
+# Check if binary exists and is executable
+if [ ! -f "$MS_BIN" ]; then
+    echo -e "${RED}Error: Binary not found: $MS_BIN${NC}"
+    exit 2
+fi
+
+if [ ! -x "$MS_BIN" ]; then
+    echo -e "${RED}Error: Binary is not executable: $MS_BIN${NC}"
+    exit 2
+fi
+
+# Get absolute path
+MS_BIN=$(cd "$(dirname "$MS_BIN")" && pwd)/$(basename "$MS_BIN")
+export MS_BIN
+
+# Determine which tests to run
+RUN_INTEGRATION=0
+RUN_STRESS=0
+RUN_ADVANCED=0
+RUN_COMPLEX=0
+RUN_COMPREHENSIVE=0
+RUN_DESTRUCTIVE=0
+
+if [ $# -eq 0 ]; then
+    # Default: run integration and stress
+    RUN_INTEGRATION=1
+    RUN_STRESS=1
+else
+    while [ $# -gt 0 ]; do
+        case "$1" in
+            --integration)
+                RUN_INTEGRATION=1
+                ;;
+            --stress)
+                RUN_STRESS=1
+                ;;
+            --advanced)
+                RUN_ADVANCED=1
+                ;;
+            --complex)
+                RUN_COMPLEX=1
+                ;;
+            --comprehensive)
+                RUN_COMPREHENSIVE=1
+                ;;
+            --destructive)
+                RUN_DESTRUCTIVE=1
+                ;;
+            --all)
+                RUN_INTEGRATION=1
+                RUN_STRESS=1
+                RUN_ADVANCED=1
+                RUN_COMPLEX=1
+                RUN_COMPREHENSIVE=1
+                RUN_DESTRUCTIVE=1
+                ;;
+            *)
+                echo -e "${RED}Unknown option: $1${NC}"
+                usage
+                ;;
+        esac
+        shift
+    done
+fi
+
+echo -e "${BLUE}=========================================${NC}"
+echo -e "${BLUE}  Minishell Tester${NC}"
+echo -e "${BLUE}=========================================${NC}"
+echo -e "Testing binary: ${YELLOW}$MS_BIN${NC}"
+echo ""
+
+TOTAL_PASS=0
+TOTAL_FAIL=0
+OVERALL_RESULT=0
+
+run_suite() {
+    local suite_name=$1
+    local suite_script=$2
+    
+    if [ ! -f "$SCRIPT_DIR/$suite_script" ]; then
+        echo -e "${YELLOW}Warning: Test suite not found: $suite_script${NC}"
+        return
+    fi
+    
+    echo -e "${BLUE}Running: $suite_name${NC}"
+    echo ""
+    
+    # Run test from the binary's directory (not tester directory)
+    local binary_dir=$(dirname "$MS_BIN")
+    cd "$binary_dir"
+    if bash "$SCRIPT_DIR/$suite_script"; then
+        echo -e "${GREEN}✓ $suite_name passed${NC}"
+        echo ""
+    else
+        echo -e "${RED}✗ $suite_name failed${NC}"
+        echo ""
+        OVERALL_RESULT=1
+    fi
+}
+
+# Run selected test suites
+if [ $RUN_INTEGRATION -eq 1 ]; then
+    run_suite "Integration Tests (102 tests)" "integration_tests.sh"
+fi
+
+if [ $RUN_STRESS -eq 1 ]; then
+    run_suite "Stress Tests (81 tests)" "stress_test.sh"
+fi
+
+if [ $RUN_ADVANCED -eq 1 ]; then
+    run_suite "Advanced Stress Tests" "advanced_stress_test.sh"
+fi
+
+if [ $RUN_COMPLEX -eq 1 ]; then
+    run_suite "Complex Expansion Tests" "complex_expansion_test.sh"
+fi
+
+if [ $RUN_COMPREHENSIVE -eq 1 ]; then
+    run_suite "Comprehensive Tests" "comprehensive_test.sh"
+fi
+
+if [ $RUN_DESTRUCTIVE -eq 1 ]; then
+    run_suite "Destructive Tests" "destructive_test.sh"
+fi
+
+echo -e "${BLUE}=========================================${NC}"
+if [ $OVERALL_RESULT -eq 0 ]; then
+    echo -e "${GREEN}All test suites passed!${NC}"
+else
+    echo -e "${RED}Some test suites failed!${NC}"
+fi
+echo -e "${BLUE}=========================================${NC}"
+
+exit $OVERALL_RESULT

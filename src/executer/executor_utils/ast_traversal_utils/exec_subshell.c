@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:22 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/21 21:20:16 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/24 23:47:07 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	exec_subshell(t_ast *node, t_shell *shell)
 		}
 		if (node && node->subtree)
 			ast_traversal(node->subtree, shell);
+		free_shell(shell);
 		exit(shell->last_exit_status);
 	}
 	handle_child(&shell->last_exit_status, pid);

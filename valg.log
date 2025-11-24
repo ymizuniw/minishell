@@ -1,0 +1,171 @@
+==13231== 15 bytes in 1 blocks are still reachable in loss record 1 of 19
+==13231==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x494935E: strdup (strdup.c:42)
+==13231==    by 0x48702D0: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x4872F9D: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x4881A8A: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D2C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 15 bytes in 1 blocks are still reachable in loss record 2 of 19
+==13231==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x494935E: strdup (strdup.c:42)
+==13231==    by 0x487D328: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 27 bytes in 1 blocks are still reachable in loss record 3 of 19
+==13231==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x4872997: _nc_home_terminfo (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x4872F88: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x4881A8A: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D2C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 47 bytes in 1 blocks are still reachable in loss record 4 of 19
+==13231==    at 0x484DB80: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x48719DC: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x48804A8: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x48815C1: _nc_read_file_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x488194C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x4881AB0: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D2C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 47 bytes in 1 blocks are still reachable in loss record 5 of 19
+==13231==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x4871000: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D2F7: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 48 bytes in 1 blocks are still reachable in loss record 6 of 19
+==13231==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x4872B9B: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x4881A8A: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D2C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 78 bytes in 1 blocks are still reachable in loss record 7 of 19
+==13231==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x4871129: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D2F7: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 96 bytes in 1 blocks are still reachable in loss record 8 of 19
+==13231==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x4872AFF: _nc_first_db (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x4881A8A: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D2C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 156 bytes in 1 blocks are still reachable in loss record 9 of 19
+==13231==    at 0x484DB80: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x48719DC: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x48804C6: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x48815C1: _nc_read_file_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x488194C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x4881AB0: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D2C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 712 bytes in 1 blocks are still reachable in loss record 10 of 19
+==13231==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x4880783: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x48815C1: _nc_read_file_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x488194C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x4881AB0: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D2C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 712 bytes in 1 blocks are still reachable in loss record 11 of 19
+==13231==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x487127D: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D2F7: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 760 bytes in 1 blocks are still reachable in loss record 12 of 19
+==13231==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x487D26F: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 1,107 bytes in 1 blocks are still reachable in loss record 13 of 19
+==13231==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x488066A: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x48815C1: _nc_read_file_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x488194C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x4881AB0: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D2C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 1,108 bytes in 1 blocks are still reachable in loss record 14 of 19
+==13231==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x4871418: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D2F7: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 1,664 bytes in 1 blocks are still reachable in loss record 15 of 19
+==13231==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x487FCFD: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x48815C1: _nc_read_file_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x488194C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x4881AB0: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D2C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 2,337 bytes in 1 blocks are still reachable in loss record 16 of 19
+==13231==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x4871210: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D2F7: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 4,000 bytes in 1 blocks are still reachable in loss record 17 of 19
+==13231==    at 0x484DB80: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x48719DC: _nc_doalloc (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x48804E4: _nc_read_termtype (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x48815C1: _nc_read_file_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x488194C: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x4881AB0: _nc_read_entry2 (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D135: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D2C5: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 4,000 bytes in 1 blocks are still reachable in loss record 18 of 19
+==13231==    at 0x4846828: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x4871021: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487D2F7: _nc_setupterm (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x10934B: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 
+==13231== 7,952 bytes in 1 blocks are still reachable in loss record 19 of 19
+==13231==    at 0x484D953: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13231==    by 0x486FC77: ??? (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x487169D: _nc_find_type_entry (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x48749A4: tigetstr_sp (in /usr/lib/x86_64-linux-gnu/libtinfo.so.6.4)
+==13231==    by 0x1093F1: ??? (in /usr/bin/clear)
+==13231==    by 0x48BF1C9: (below main) (libc_start_call_main.h:58)
+==13231== 

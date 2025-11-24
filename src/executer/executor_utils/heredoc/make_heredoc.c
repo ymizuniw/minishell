@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:36 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/21 22:43:35 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/24 23:54:52 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,11 @@ int	process_all_heredoc(t_shell *shell, t_ast *node)
 	if (node->left)
 	{
 		if (process_all_heredoc(shell, node->left) < 0)
+			return (-1);
+	}
+	if (node->type==NODE_SUBSHELL)
+	{
+		if (process_all_heredoc(shell, node->subtree)<0)
 			return (-1);
 	}
 	if (process_redir_list(shell, node) < 0)
