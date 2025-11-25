@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_readline.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:49 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/25 15:39:28 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/26 02:22:51 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	process_key(char c, char *buf, size_t *len, t_readline_ctx *ctx)
 			return (1);
 		handle_escape_sequence(seq, ctx->hist, buf, ctx);
 	}
-	else if (ft_isprint((int)c))
+	else if (ft_isprint((int)c) || ft_isspace((int)c))
 		handle_printable(buf, len, c);
 	return (1);
 }
