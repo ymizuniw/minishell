@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:26 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/25 16:13:54 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/26 02:33:52 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	generate_random_template(char *filename)
 {
 	int					fd;
 	ssize_t				rb;
-	static const char	tmp_dir[5] = "/tmp/";
+	static const char	tmp_dir[6] = "/tmp/";
 	unsigned char		raw[16];
 	size_t				i;
 

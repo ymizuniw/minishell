@@ -6,19 +6,18 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/11/26 00:48:50 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/11/26 02:30:02 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE
+# CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE
+CFLAGS = -Wall -Wextra -Werror -Wunused -Wunused-function -Wunused-variable
 INC = -Iincludes
 # -fsanitize=address
-# -g
-#for Mac Environment
-# CPPFLAGS = -I/opt/homebrew/opt/readline/include/
-# LDFLAGS = -L/opt/homebrew/opt/readline/lib
+#   export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+#   export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
 # DIRECTORIES
 SRC_DIR = src
