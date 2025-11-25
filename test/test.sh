@@ -169,3 +169,8 @@ echo "#!bin/bash">test2.sh
 echo "echo test2" >>test2.sh
 cd ..
 
+echo "========================mix======================================"
+"ls | grep *c"
+cat < mix.log
+ls nonexistfile
+echo hi && echo bye" "false || echo recovered

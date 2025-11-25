@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_management.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:42:10 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/16 23:53:54 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:46:11 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	handle_child(int *last_exit_status, pid_t pid)
 		*last_exit_status = 128 + WTERMSIG(local_status);
 		if (WTERMSIG(local_status) == SIGQUIT)
 			write(STDERR_FILENO, "Quit (core dumped)\n", 19);
+		else if (WTERMSIG(local_status) == SIGINT)
+			write(1, "\n", 1);
 	}
 	else if (WIFEXITED(local_status))
 		*last_exit_status = WEXITSTATUS(local_status);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:15 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/21 21:20:29 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:40:26 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
