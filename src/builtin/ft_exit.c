@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:47 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/16 20:45:26 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/25 20:53:20 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	is_numeric(const char *str)
 		i++;
 	while (str[i])
 	{
-		if (str[i] < '0' || str[i] > '9')
+		if (ft_isdigit(str[i]))
 			return (false);
 		i++;
 	}
