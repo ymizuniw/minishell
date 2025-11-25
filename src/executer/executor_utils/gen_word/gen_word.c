@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:39:08 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/26 00:55:08 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/26 01:20:59 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,17 @@ t_word	*gen_word(char *value, size_t value_len, size_t *addition)
 	{
 		c = value[i];
 
-		if (is_quote(c))  // "'" or '"'
-		{
+		if (is_quote(c))
 			word = handle_quoted_word(value, &i, c);
-		}
 		else if (c == '$')
-		{
 			word = handle_doller_word(value, value_len, &i);
-		}
 		else
-		{
 			word = handle_unquoted_word(value, value_len, &i);
-		}
-
 		if (!word)
 		{
 			free_word_list(head);
 			return (NULL);
 		}
-
-		// append_node is safe: returns new head
 		head = append_node(head, word);
 	}
 

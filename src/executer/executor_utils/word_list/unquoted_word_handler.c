@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:18 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/25 23:06:43 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/26 01:26:52 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,26 @@ t_word	*handle_doller_word(const char *input, size_t input_len, size_t *idx)
 		return (NULL);
 	start = *idx + 1;
 	len = 0;
+	if (start >= input_len)
+	{
+		*idx = start;
+		return (create_word_node(ft_strdup("$"), WD_LITERAL, false, false));
+	}
 	if (input[start] == '?')
-		len = 1;
+	{
+		*idx = start + 1;
+		return (create_word_node(ft_strdup("?"), WD_DOLLER, true, false));
+	}
 	else
 	{
-		while (start + len < input_len && (ft_isalnum(input[start + len])
+		while (start + len < input_len && (ft_isalnum((int)input[start + len])
 				|| input[start + len] == '_'))
 			len++;
+	}
+	if (len == 0)
+	{
+		*idx = start;
+		return create_word_node(ft_strdup("$"), WD_LITERAL, false, false);
 	}
 	if (len == 0)
 		return (NULL);

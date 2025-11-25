@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/26 01:04:18 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/26 01:18:50 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char *get_word_string(t_word *word)
 		return (ft_strdup(""));
 	if (word->type!=WD_OTHER)
 		return (ft_strdup(word->word));
-	return (NULL);
+	return ("");
 }
 
 char *expand_plain_word(t_word *list, t_shell *shell)

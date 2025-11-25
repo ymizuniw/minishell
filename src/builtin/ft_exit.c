@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:47 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/25 20:53:20 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/26 01:16:31 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	is_numeric(const char *str)
 		i++;
 	while (str[i])
 	{
-		if (ft_isdigit(str[i]))
+		if (!ft_isdigit(str[i]))
 			return (false);
 		i++;
 	}
@@ -72,7 +72,7 @@ static void	exit_with_error(t_shell *shell, int code, bool print_num_err,
 void	ft_exit(char **cmd, int last_exit_status, t_shell *shell)
 {
 	long long	exit_code;
-	int			overflow;
+	int			overflow=0;
 
 	if (shell->interactive)
 		printf("exit\n");
@@ -87,10 +87,13 @@ void	ft_exit(char **cmd, int last_exit_status, t_shell *shell)
 			exit_with_error(shell, 2, true, cmd);
 		free_double_array(cmd);
 		free_shell(shell);
-		exit((unsigned char)exit_code);
+		exit_code %= 256;
+		if (exit_code<0)
+			exit_code += 256;
+		exit(exit_code);
 	}
 	free_double_array(cmd);
-	free_shell(shell);
 	disable_raw_mode(&shell->orig_term);
+	free_shell(shell);
 	exit(last_exit_status);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:05 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/15 18:37:07 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/26 01:09:59 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ long long	ft_atoll(const char *s, int *overflow)
 		}
 		s++;
 	}
-	return (res);
+	return (res*sign);
 }
