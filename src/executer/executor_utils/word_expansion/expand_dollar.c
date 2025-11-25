@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:30:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:40:51 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/26 00:42:50 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../../../includes/minishell.h"
 
 static char	*get_target_var(t_word *word)
 {

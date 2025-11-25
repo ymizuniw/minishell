@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_handlers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/20 19:06:10 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/25 22:57:51 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

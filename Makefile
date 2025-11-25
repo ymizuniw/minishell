@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/11/25 16:13:52 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/11/26 00:48:50 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,13 +28,14 @@ DATA_MANAGEMENT_DIR = $(SRC_DIR)/data_management
 ENV_MANAGEMENT_DIR = $(SRC_DIR)/env_management
 EXECUTER_DIR = $(SRC_DIR)/executer
 EXECUTER_UTILS_DIR = $(EXECUTER_DIR)/executor_utils
+WORD_EXPANSION_DIR = $(EXECUTER_UTILS_DIR)/word_expansion
 AST_TRAVERSAL_DIR = $(EXECUTER_UTILS_DIR)/ast_traversal_utils
 HEREDOC_DIR = $(EXECUTER_UTILS_DIR)/heredoc
+GEN_WORD_DIR = $(EXECUTER_UTILS_DIR)/gen_word
+WORD_LIST_DIR = $(EXECUTER_UTILS_DIR)/word_list
 SEARCH_EXEC_DIR = $(EXECUTER_UTILS_DIR)/search_and_exec
 LEXER_DIR = $(SRC_DIR)/lexer
 LEXER_UTILS_DIR = $(LEXER_DIR)/lexer_utils
-WORD_EXPANSION_DIR = $(LEXER_DIR)/word_expansion
-WORD_LIST_DIR = $(LEXER_DIR)/word_list
 PARSER_DIR = $(SRC_DIR)/parser
 SIGNAL_MANAGEMENT_DIR = $(SRC_DIR)/signal_management
 FT_READLINE_DIR = $(SRC_DIR)/ft_readline
@@ -83,6 +84,9 @@ AST_TRAVERSAL_SRC = $(AST_TRAVERSAL_DIR)/ast_traversal.c \
                     $(AST_TRAVERSAL_DIR)/exec_pipe.c \
                     $(AST_TRAVERSAL_DIR)/exec_subshell.c
 
+GEN_WORD_SRC =    $(GEN_WORD_DIR)/gen_word.c \
+                  $(GEN_WORD_DIR)/gen_word_utils.c \
+
 HEREDOC_SRC = $(HEREDOC_DIR)/ft_mkstmp.c \
               $(HEREDOC_DIR)/make_file_heredoc.c \
               $(HEREDOC_DIR)/make_pipe_heredoc.c \
@@ -111,10 +115,6 @@ LEXER_UTILS_SRC = $(LEXER_UTILS_DIR)/prepend_tokens.c \
                   $(LEXER_UTILS_DIR)/set_quote_flag.c \
                   $(LEXER_UTILS_DIR)/set_token_type.c \
                   $(LEXER_UTILS_DIR)/word_cat.c \
-                  $(LEXER_UTILS_DIR)/gen_word.c \
-                  $(LEXER_UTILS_DIR)/gen_word_utils.c \
-                  $(LEXER_UTILS_DIR)/gen_word_wrappers.c \
-                  $(LEXER_UTILS_DIR)/gen_word_loop.c \
                   $(LEXER_UTILS_DIR)/lexer_handlers.c \
                   $(LEXER_UTILS_DIR)/lexer_handlers_meta.c \
                   $(LEXER_UTILS_DIR)/lexer_handlers_word.c
@@ -166,6 +166,7 @@ SRCS = $(MAIN_SRC) \
        $(LEXER_SRC) \
        $(LEXER_UTILS_SRC) \
        $(WORD_EXPANSION_SRC) \
+       $(GEN_WORD_SRC) \
        $(WORD_LIST_SRC) \
        $(PARSER_SRC) \
        $(PARSER_UTILS_SRC) \

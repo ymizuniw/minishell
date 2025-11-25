@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:39:08 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 20:31:54 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/26 00:55:08 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../../../includes/minishell.h"
 
 t_word	*append_node(t_word *head, t_word *new);
 
@@ -19,21 +19,37 @@ t_word	*gen_word(char *value, size_t value_len, size_t *addition)
 	size_t	i;
 	t_word	*head;
 	t_word	*word;
-	t_word	*new_head;
+	char	c;
 
 	head = NULL;
-	word = NULL;
 	i = 0;
 	while (i < value_len)
 	{
-		word = loop_wrapper(value, &i);
-		if (word == NULL)
-			return (free_word_list(head), NULL);
-		new_head = append_node(head, word);
-		if (!new_head && head != NULL)
-			return (xfree(word), free_word_list(head), NULL);
-		head = new_head;
+		c = value[i];
+
+		if (is_quote(c))  // "'" or '"'
+		{
+			word = handle_quoted_word(value, &i, c);
+		}
+		else if (c == '$')
+		{
+			word = handle_doller_word(value, value_len, &i);
+		}
+		else
+		{
+			word = handle_unquoted_word(value, value_len, &i);
+		}
+
+		if (!word)
+		{
+			free_word_list(head);
+			return (NULL);
+		}
+
+		// append_node is safe: returns new head
+		head = append_node(head, word);
 	}
+
 	*addition = i;
 	return (head);
 }

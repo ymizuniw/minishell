@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:15 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:41:16 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/26 01:02:38 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../../../includes/minishell.h"
 
 // Forward declarations for internal functions
 t_word			*create_word_node(char *content, t_word_type type,

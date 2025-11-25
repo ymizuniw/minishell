@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:30:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 12:06:03 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/25 22:59:11 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../../../includes/minishell.h"
 
 static char	**resize_result(char **res, size_t old_count, size_t new_count)
 {

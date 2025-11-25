@@ -1,26 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   word_list_utils.c                                  :+:      :+:    :+:   */
+/*   ft_expand_word.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:30:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/12 10:27:17 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/26 00:00:36 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../../../includes/minishell.h"
 
-size_t	count_word_list(t_word *word)
-{
-	size_t	size;
-
-	size = 0;
-	while (word)
-	{
-		size++;
-		word = word->next;
-	}
-	return (size);
-}
