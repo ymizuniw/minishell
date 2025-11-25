@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/11/21 01:39:48 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/11/25 16:13:52 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,8 @@ AST_TRAVERSAL_SRC = $(AST_TRAVERSAL_DIR)/ast_traversal.c \
                     $(AST_TRAVERSAL_DIR)/exec_subshell.c
 
 HEREDOC_SRC = $(HEREDOC_DIR)/ft_mkstmp.c \
-              $(HEREDOC_DIR)/make_heredoc.c \
+              $(HEREDOC_DIR)/make_file_heredoc.c \
+              $(HEREDOC_DIR)/make_pipe_heredoc.c \
               $(HEREDOC_DIR)/get_document.c \
               $(HEREDOC_DIR)/heredoc_value_expansion.c
 

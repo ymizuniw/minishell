@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:22 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/24 23:47:07 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/25 16:07:39 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ int	exec_subshell(t_ast *node, t_shell *shell)
 	{
 		set_sig_dfl();
 		if (node->cmd && node->cmd->redir)
-		{
 			if (do_redirection(node, shell) < 0)
 				exit(shell->last_exit_status);
-		}
 		if (node && node->subtree)
 			ast_traversal(node->subtree, shell);
 		free_shell(shell);

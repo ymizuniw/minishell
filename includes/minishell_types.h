@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_types.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:31 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/20 19:06:45 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/25 16:14:09 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ unexpected EOF while looking for matching ')'\n"
 # define UNEXPECTED_RPAREN_MSG \
 	"minishell: syntax error\
  near unexpected token ')'\n"
+
+# define SAFE_CHARSET "ABCDEFGHIJKLMNOPQRSTUVWXYZ\
+	abcdefghijklmnopqrstuvwxyz0123456789-_"
 
 # define TOKEN_VALUE_PIPE "|"
 # define TOKEN_VALUE_AND_IF "&&"

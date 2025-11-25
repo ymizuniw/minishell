@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:26 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/24 23:14:19 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/25 16:13:54 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ int	generate_random_template(char *filename)
 	unsigned char		raw[16];
 	size_t				i;
 
-	static const char safe_charset[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-											"abcdefghijklmnopqrstuvwxyz"
-											"0123456789-_";
 	ft_memset(raw, 0, 16);
 	fd = open("/dev/urandom", O_RDONLY);
 	if (fd < 0)
@@ -35,7 +32,7 @@ int	generate_random_template(char *filename)
 	ft_memcpy(filename, tmp_dir, 5);
 	while (i < 16)
 	{
-		filename[5 + i] = safe_charset[raw[i] & 0x3F];
+		filename[5 + i] = SAFE_CHARSET[raw[i] & 0x3F];
 		i++;
 	}
 	return (1);
