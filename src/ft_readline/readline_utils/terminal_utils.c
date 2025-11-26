@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:41 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/21 01:21:43 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/27 02:38:37 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	enable_raw_mode(struct termios *orig)
 {
 	struct termios	raw;
 
-	if (orig == NULL)
-		printf("orig is null\n");
 	tcgetattr(STDIN_FILENO, orig);
 	raw = *orig;
 	raw.c_lflag &= ~(ICANON | ECHO);

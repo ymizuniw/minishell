@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generate_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:06 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/20 19:05:48 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/27 02:35:14 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char	*create_env_string(const char *key, const char *value)
 
 	key_len = 0;
 	value_len = 0;
-	len = 0;
 	if (key)
 		key_len = ft_strlen(key);
 	if (value)

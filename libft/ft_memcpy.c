@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:39:58 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/15 18:39:58 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/27 02:36:13 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	unsigned char		*p;
 	const unsigned char	*q;
 
-	if (!dest && !src)
+	if (!dest || !src)
 		return (NULL);
 	if (n == 0)
 		return (dest);

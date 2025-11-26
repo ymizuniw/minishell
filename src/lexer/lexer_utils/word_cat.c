@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:40:39 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 22:02:30 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/27 02:33:49 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	handle_plain(t_word_cat *wc, size_t *word_len)
 	size_t		add_len;
 	const char	*tmp_ptr;
 
-	add_len = 0;
 	tmp_ptr = &wc->input[*wc->idx];
 	while (*wc->idx < wc->input_len
 		&& !ft_isspace((unsigned char)wc->input[*wc->idx])

@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:24 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/24 23:38:36 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/27 03:07:50 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,19 @@ void	exec_builtin(t_shell *shell, char **cmd)
 	int	ret;
 
 	fd = 1;
-	ret = 0;
 	if (!cmd && shell)
+	{
 		ft_exit(cmd, shell->last_exit_status, shell);
+		return ;
+	}
 	else if (!shell)
 	{
 		write(2, "fatal shell variable is NULL\n", 29);
+		exit(EXIT_FAILURE);
+	}
+	else if (!cmd)
+	{
+		write(2, "cmd is NULL\n", 12);
 		exit(EXIT_FAILURE);
 	}
 	if (ft_strcmp(cmd[0], "exit") == 0)

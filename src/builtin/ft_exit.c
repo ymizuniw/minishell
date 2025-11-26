@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:47 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/26 01:16:31 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/27 02:58:38 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	print_err_num(char **cmd)
 	const char	*suffix = ": numeric argument required\n";
 	size_t		len;
 
-	len = 0;
 	write(2, prefix, ft_strlen(prefix));
 	if (cmd[1])
 	{
@@ -69,7 +68,7 @@ static void	exit_with_error(t_shell *shell, int code, bool print_num_err,
 	exit(code);
 }
 
-void	ft_exit(char **cmd, int last_exit_status, t_shell *shell)
+__attribute__((noreturn))void	ft_exit(char **cmd, int last_exit_status, t_shell *shell)
 {
 	long long	exit_code;
 	int			overflow=0;

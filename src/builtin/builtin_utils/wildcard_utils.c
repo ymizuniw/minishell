@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:10 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/26 02:36:09 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/27 02:34:14 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ bool	match_prefix(const char *name, const char *prefix, size_t *start)
 {
 	size_t	prefix_len;
 
-	prefix_len = 0;
 	if (!prefix || prefix[0] == '\0')
 		return (true);
 	prefix_len = ft_strlen(prefix);

@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:36 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/25 16:14:41 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/27 02:33:28 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	process_one_heredoc(t_shell *shell, t_redir *redir)
 {
 	int	tmp_fd;
 
-	tmp_fd = -1;
 	tmp_fd = make_heredoc(redir, shell);
 	if (tmp_fd < 0)
 		return (-1);

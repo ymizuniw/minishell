@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:28 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/16 20:28:43 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/27 02:37:24 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	add_history(char *line, t_hist *hist)
 {
-	if (!line || !*line)
+	if (!line || !*line || hist==NULL)
 		return ;
 	if (hist && hist->hist_box[hist->idx] != NULL)
 		xfree(hist->hist_box[hist->idx]);
