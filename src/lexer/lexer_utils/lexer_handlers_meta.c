@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/24 23:25:26 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/28 01:46:04 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,30 @@ int	handle_newline(size_t *idx)
 	return (1);
 }
 
+
+
 int	handle_meta_char(t_token *token_head, const char *input, size_t *idx)
 {
-	t_token	*new;
-	size_t	start_idx;
+	t_token *new;
+	size_t start_idx;
 
 	new = alloc_token();
 	if (!new)
 		return (-1);
 	ft_memset(new, 0, sizeof(t_token));
-	start_idx = *idx;
+	start_idx=*idx;
 	new->type = get_token_type((char *)input, idx);
-	new->value = ft_strndup(&input[start_idx], *idx - start_idx);
+	size_t len = *idx - start_idx;
+	if (len==0)
+	{
+		free(new);
+		return (1);
+	}
+	new->value = ft_strndup(&input[start_idx], len);
 	if (!new->value)
 	{
 		free(new);
-		return (-1);
+		return(-1);
 	}
 	prepend_tokens(token_head, new);
 	return (1);
