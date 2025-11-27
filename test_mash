@@ -1,0 +1,141 @@
+#!/bin/bash
+
+# 実行開始時のディレクトリをそのまま使う
+BASEDIR="$(pwd)"
+
+echo "============= test for review ===================="
+
+echo "============= simple command ====================="
+echo "========= Abs Path =========="
+/bin/ls
+/bin/echo "abs echo ok"
+/bin/touch in
+/bin/echo "infile" > in
+/bin/cat in
+/bin/rm -f in
+
+echo "========= Rel Path =========="
+ls
+echo
+touch in
+echo "infile" > in
+cat in
+rm -f in
+
+echo "========== cd abs / rel / ~ ==============="
+echo "ORIG: $(pwd)"
+cd .. && pwd
+cd "$BASEDIR" && pwd
+cd "$HOME" && pwd
+cd "$BASEDIR" && pwd
+cd ~ && pwd
+cd "$BASEDIR" && pwd
+
+echo "============= several arguments ====================="
+echo a a
+cat a a || echo "cat failed"
+ls a a || echo "ls failed"
+touch in && echo "infile" > in
+touch in2 && echo "infile2" > in2
+cat in in2
+ls "$BASEDIR/src" "$BASEDIR/includes" || echo "ls failed"
+rm -f in in2
+
+echo "============= pipe ====================="
+echo a a | cat
+cat a a | cat || echo "cat failed"
+ls a a | cat
+touch in && echo "infile" > in
+touch in2 && echo "infile2" > in2
+cat in in2 | cat
+rm -f in in2
+
+echo "============ Environment Variable ================"
+echo $USER $? $HOME
+echo "$USER" '$?' "$HOME"
+echo ${USER}${?}${HOME}
+echo "'$USER' $HOME"
+echo "\"$USER\" $HOME"
+
+echo "============ Unset Path ==============="
+INPUT=$(cat << 'EOF'
+unset PATH
+echo "PATH after unset: [$PATH]"
+exit
+EOF
+)
+if [ -x "$BASEDIR/minishell" ]; then
+    echo "$INPUT" | "$BASEDIR/minishell"
+else
+    echo "minishell not found at $BASEDIR/minishell"
+fi
+
+echo "============ Set Path ==============="
+cd "$BASEDIR"
+mkdir -p test1 test2
+
+cat << 'EOF' > test1/test1.sh
+#!/bin/bash
+echo "test1's test"
+EOF
+chmod +x test1/test1.sh
+
+cat << 'EOF' > test2/test2.sh
+#!/bin/bash
+echo "test2's test"
+EOF
+chmod +x test2/test2.sh
+
+export PATH="$BASEDIR/test1:$BASEDIR/test2:$PATH"
+test1.sh
+test2.sh
+
+echo "============ exit status chain ============="
+false; echo $?
+true; echo $?
+ls nonexistent >/dev/null 2>&1; echo $?
+echo test; echo $?
+
+echo "============ builtin in pipe ============="
+echo A=1 | export B=2; echo $?
+echo A=1 | unset A; echo $?
+
+echo "============ redirect + pipe + builtin ============="
+echo a > in1
+echo b > in2
+cat in1 in2 | wc -l
+echo a > out1
+grep a < in1 > out2
+cat out2
+rm -f in1 in2 out1 out2
+
+echo "============ long argument list ============="
+echo a b c d e f g h i j k l m n o p q r s t u v w x y z
+echo $?
+
+echo "============ long word test =========="
+L=$(printf 'a%.0s' {1..5000})
+echo "$L" | wc -c
+echo $?
+
+echo "============ consecutive redirection error ============="
+echo > > > out || echo "redirect error handled"
+echo $?
+rm -f out
+
+echo "============ empty commands ============="
+echo "" | cat
+echo $?
+echo | cat
+echo $?
+
+echo "============ wildcard + redirect ============="
+touch a1 a2 a3
+ls
+cat a* > all
+cat all
+rm -f a1 a2 a3 all
+
+echo "============ nested subshell ============="
+( echo a ; ( echo b ; ( echo c ) ) )
+echo $?
