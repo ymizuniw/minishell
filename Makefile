@@ -13,7 +13,7 @@
 NAME = minishell
 CC = cc
 # CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE
-CFLAGS = -Wall -Wextra -Werror -Wunused -Wunused-function -Wunused-variable
+CFLAGS = -Wall -Wextra -Werror -Wunused -Wunused-function -Wunused-variable -g3 -O0
 INC = -Iincludes
 # -fsanitize=address
 #   export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"

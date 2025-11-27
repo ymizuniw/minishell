@@ -14,7 +14,7 @@
 
 char *expand_plain_word(t_word *list, t_shell *shell);
 
-static void	restore_stdio(int stdin_keep, int stdout_keep)
+static void restore_stdio(int stdin_keep, int stdout_keep)
 {
 	dup2(stdin_keep, STDIN_FILENO);
 	dup2(stdout_keep, STDOUT_FILENO);
@@ -22,8 +22,8 @@ static void	restore_stdio(int stdin_keep, int stdout_keep)
 	xclose(stdout_keep);
 }
 
-static int	handle_redirection_error(t_ast *node, int stdin_k, int stdout_k,
-		t_shell *shell)
+static int handle_redirection_error(t_ast *node, int stdin_k, int stdout_k,
+									t_shell *shell)
 {
 	if (node->cmd->redir && node->cmd->redir->filename)
 		perror(node->cmd->redir->filename);
@@ -51,10 +51,10 @@ static int	handle_redirection_error(t_ast *node, int stdin_k, int stdout_k,
 
 static char **append_argv(char **argv, size_t *argc, char *str)
 {
-	char **new_argv = xmalloc(sizeof(char*)*(*argc+2));
+	char **new_argv = xmalloc(sizeof(char *) * (*argc + 2));
 	size_t i = 0;
 
-	while (i< *argc)
+	while (i < *argc)
 	{
 		new_argv[i] = argv[i];
 		i++;
@@ -83,7 +83,7 @@ char **expand_token(t_token *token, t_shell *shell)
 	if (has_wildcard_to_expand(word_list))
 	{
 		size_t count = 0;
-		res  = expand_token_with_wildcard(word_list, shell, &count);
+		res = expand_token_with_wildcard(word_list, shell, &count);
 		free_word_list(word_list);
 		return (res);
 	}
@@ -104,12 +104,12 @@ char **expand_tokens(t_token **tokens, size_t count, t_shell *shell)
 	char **argv = NULL;
 	size_t argc = 0;
 
-	for (size_t i = 0; i< count; i++)
+	for (size_t i = 0; i < count; i++)
 	{
-		char **expanded  = expand_token(tokens[i], shell);
+		char **expanded = expand_token(tokens[i], shell);
 		if (!expanded)
 			return (free_double_array(argv), NULL);
-		for (size_t j=0;expanded[j]; j++)
+		for (size_t j = 0; expanded[j]; j++)
 		{
 			argv = append_argv(argv, &argc, expanded[j]);
 		}
@@ -123,12 +123,12 @@ static int process_command(t_ast *node, t_shell *shell)
 	char **argv = NULL;
 	size_t argc = 0;
 
-	for (size_t i = 0;i<node->cmd->token_count; i++)
+	for (size_t i = 0; i < node->cmd->token_count; i++)
 	{
 		char **expanded = expand_token(node->cmd->tokens[i], shell);
-		if (expanded==NULL)//free array.?
+		if (expanded == NULL) // free array.?
 			return (free_double_array(argv), 0);
-		for (size_t j = 0;expanded[j]; j++)
+		for (size_t j = 0; expanded[j]; j++)
 		{
 			argv = append_argv(argv, &argc, expanded[j]);
 		}
@@ -144,21 +144,21 @@ static int process_command(t_ast *node, t_shell *shell)
 	return (1);
 }
 
-int	exec_command(t_ast *node, t_shell *shell)
+int exec_command(t_ast *node, t_shell *shell)
 {
-	int	redir_ret;
-	int	fds[2];
+	int redir_ret;
+	int fds[2];
 
 	fds[0] = dup(STDIN_FILENO);
 	fds[1] = dup(STDOUT_FILENO);
-	if (fds[0]<0 || fds[1]<0)
+	if (fds[0] < 0 || fds[1] < 0)
 	{
-		if (fds[0]>=0)
+		if (fds[0] >= 0)
 			xclose(fds[0]);
-		if (fds[1]>=0)
+		if (fds[1] >= 0)
 			xclose(fds[1]);
-			perror("dup");
-		shell->last_exit_status=1;
+		perror("dup");
+		shell->last_exit_status = 1;
 		ft_exit(NULL, shell->last_exit_status, shell);
 		return (-1);
 	}
