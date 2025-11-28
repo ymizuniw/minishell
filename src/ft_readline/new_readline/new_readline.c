@@ -2,6 +2,24 @@
 #include <sys/ioctl.h>
 #include "../../../includes/minishell.h"
 
+typedef struct s_new_readline
+{
+    const char *prompt;
+    size_t      prompt_len;
+
+    char        buf[1024];//please init.
+    size_t      buf_len;
+    size_t      cursor_buf_pos;
+
+    t_hist      *hist;
+
+    size_t      cursor_x;
+    size_t      cursor_y;
+    size_t      terminal_width;
+    size_t      terminal_height;
+    struct termios raw_mode;
+    struct termios original;
+}t_new_readline;
 
 //window resize signal_handler()
 //to SIGWINCH
@@ -17,10 +35,10 @@ int ft_putchar(int c)
 
 #define CLEAR_LINE "\r\x1b[K"
 #define CLEAR_LINE_LEN 4
-#define ANSI_UP "\x1b[1A"
-#define ANSI_DOWN "\x1b[1B"
-#define ANSI_RIGHT "\x1b[1C"
-#define ANSI_LEFT "\x1b[1D"
+#define ANSI_UP "\x1b[A"
+#define ANSI_DOWN "\x1b[B"
+#define ANSI_RIGHT "\x1b[C"
+#define ANSI_LEFT "\x1b[D"
 
 //if explicit term_buffer is provided.
 // char *buffer = (char *)malloc(ft_strlen(term_buffer));
@@ -41,6 +59,18 @@ int ft_putchar(int c)
 int redraw_line(t_new_readline *nr)
 {
     write(STDOUT_FILENO, CLEAR_LINE, (size_t)CLEAR_LINE_LEN);
+    write(STDOUT_FILENO,nr->prompt, nr->prompt_len);
+    write(STDOUT_FILENO, nr->buf, nr->buf_len);
+
+    size_t offset = nr->prompt_len + nr->cursor_buf_pos;
+    size_t current = nr->prompt_len + nr->buf_len;
+    while (current > offset)
+    {
+        write(STDOUT_FILENO, ANSI_LEFT, sizeof(ANSI_LEFT)-1);
+        current--;
+    }
+    //cursor_x = prompt_len + 1;?
+    return(1);
 }
 
 bool read_char(char *one_char)
@@ -63,125 +93,153 @@ bool is_signal(char one_char)
     return (false);
 }
 
-int process_signal(one_char)
+int process_signal(char one_char)
 {
     if (one_char==ASC_ETX) 
         return (1);//interrupt.
     else if (one_char==ASC_EOT) 
         return (0);//end of input. if EOT && input_len==0, then exit, else do not anything.
+    return(-1);
 }
 
 bool is_del(char one_char)
 {
-    if (one_char=='\b')
+    if (one_char=='\b' || one_char == 0x7f)
         return (true);
     return (false);
 }
 
 int process_del(t_new_readline *nr, char one_char)
 {
-    char del_obj = nr->buf[nr->buf_len-1];
-    size_t del_size = sizeof(del_obj);
-    size_t count = 0;
-
-    while (count<del_size)
-    {
-        tputs("\b", 1, ft_putchar);
-        tputs(" ", 1, ft_putchar);
-        tputs("\b", 1, ft_putchar);
-        count++;
-    }
+    if (nr->buf_len==0 || nr->cursor_buf_pos==0)
+        return(0);
+    size_t pos = nr->cursor_buf_pos - 1;
+    ft_memmove(&nr->buf[pos], &nr->buf[pos + 1], nr->buf_len - pos -1);
+    nr->buf_len--;
+    nr->buf[nr->buf_len]='\0';
+    nr->cursor_buf_pos--;
     redraw_line(nr);
     return (1);
 }
 
 bool is_esc(char one_char)
 {
-    if (one_char=='\\')
+    if (one_char==0x1b)
         return (true);
     return (false);
 }
 
+#define CSI_UP   "[A"
+#define CSI_DOWN "[B"
+#define CSI_RIGHT "[C"
+#define CSI_LEFT "[D"
+
 int process_esc(t_new_readline *nr, char one_char)
 {
-    char esq_buf[2]={0};
+    char esq_buf[3]={0};
     read_char(&esq_buf[0]);
     //read fail handling. [
     read_char(&esq_buf[1]);
     //read fail handling. A, B.
-    if (ft_strcmp(esq_buf, ANSI_UP)==0)
-        process_up(&nr);//hist up.
-    else if (ft_strcmp(esq_buf, ANSI_DOWN==0))
-        process_down(&nr);//hist down.
-    else if (ft_strcmp(esq_buf, ANSI_RIGHT)==0)
-        process_right(&nr);
-    else if (ft_strcmp(esq_buf, ANSI_LEFT)==0)
-        process_left(&nr);
+    if (ft_strcmp(esq_buf, CSI_UP)==0)
+        process_up(nr);//hist up.
+    else if (ft_strcmp(esq_buf, CSI_DOWN)==0)
+        process_down(nr);//hist down.
+    else if (ft_strcmp(esq_buf, CSI_RIGHT)==0)
+        process_right(nr);
+    else if (ft_strcmp(esq_buf, CSI_LEFT)==0)
+        process_left(nr);
+    return (1);
 }
 
 int process_up(t_new_readline *nr)
 {
-    if (nr->hist->size==0)
+    if (!nr->hist || nr->hist->size==0)
         return (0);
     if (nr->hist->cur == -1)
         nr->hist->cur = (nr->hist->idx + HIST_MAX - 1) % HIST_MAX;
     else
         nr->hist->cur = (nr->hist->cur + HIST_MAX - 1) % HIST_MAX;
     if (nr->hist->hist_box[nr->hist->cur]==NULL)
-        return ;
-    copy_hist_to_buf(nr);
+        return (0);
+    copy_history_to_buffer(nr);
     redraw_line(nr);
+    return (1);
 }
 
 int process_down(t_new_readline *nr)
 {
-    //
+    if (!nr->hist || nr->hist->size == 0 || nr->hist->cur == -1)
+        return 0;
+    nr->hist->cur = (nr->hist->cur + 1) % HIST_MAX;
+    if (nr->hist->cur == nr->hist->idx)
+    {
+        nr->buf[0] = '\0';
+        nr->buf_len = 0;
+        nr->cursor_buf_pos = 0;
+        nr->hist->cur = -1;
+    }
+    else
+    {
+        copy_history_to_buffer(nr);
+    }
+    redraw_line(nr);
+    return 1;
 }
 
 int process_right(t_new_readline *nr)
 {
-    if (nr->cursor_buf_pos + 1 < nr->buf_len)
+    if (nr->cursor_buf_pos < nr->buf_len)
     {
         nr->cursor_buf_pos++;
         nr->cursor_x++;
+        write(1, ANSI_RIGHT, sizeof(ANSI_RIGHT) - 1);
     }
-    write(1, ANSI_RIGHT, 1);
     return (1);
 }
 
 int process_left(t_new_readline *nr)
 {
-    if (nr->cursor_buf_pos > 1)
+    if (nr->cursor_buf_pos > 0)
     {
         nr->cursor_buf_pos--;
         nr->cursor_x--;
+        write(1, ANSI_LEFT, sizeof(ANSI_LEFT)-1);
     }
-    write(1, ANSI_LEFT, 1);
     return (1);
 }
 
 bool is_inserting(t_new_readline *nr)
 {
-    if (nr->cursor_buf_pos + 1 < nr->buf_len)
+    if (nr->cursor_buf_pos < nr->buf_len)
         return (true);
     return (false);
 }
 
 int insertion(t_new_readline *nr, char one_char)
 {
+    size_t second_len;
     if (nr->buf_len==1023)//termination place kept?
         return (0);
-    ft_memmove(nr->buf[nr->cursor_buf_pos + 1],nr->buf[nr->cursor_buf_pos], 1);
+    second_len = nr->buf_len - nr->cursor_buf_pos;
+    ft_memmove(&nr->buf[nr->cursor_buf_pos + 1], &nr->buf[nr->cursor_buf_pos], second_len);
     nr->buf[nr->cursor_buf_pos] = one_char;
+    nr->buf_len++;
+    nr->buf[nr->buf_len] = '\0';
+    nr->cursor_buf_pos++;
+    nr->cursor_x++;
     return (1);
 }
 
 int write_to_buffer(t_new_readline *nr, char one_char)
 {
-    if (nr->buf_len>1023+1)
+    if (nr->buf_len>=1023)
         return (0);
-    else
-        nr->buf[nr->cursor_buf_pos] = one_char;
+    nr->buf[nr->buf_len] = one_char;
+    nr->buf_len++;
+    nr->cursor_buf_pos = nr->buf_len;
+    nr->buf[nr->buf_len] = '\0';
+    nr->cursor_x++;
     return (1);
 }
 
@@ -194,6 +252,7 @@ int process_printable(t_new_readline *nr, char one_char)
         ret = insertion(nr, one_char);
     else
         ret = write_to_buffer(nr, one_char);
+    redraw_line(nr);
     return (ret);
 }
 
@@ -214,61 +273,68 @@ int resize_window(t_new_readline *nr)
     return (1);
 }
 
-typedef struct s_new_readline
-{
-    const char *prompt;
-    size_t      prompt_len;
-
-    char        buf[1024];//please init.
-    size_t      buf_len;
-    size_t      cursor_buf_pos;
-
-    t_hist      *hist;
-
-    size_t      cursor_x;
-    size_t      cursor_y;
-    size_t      terminal_width;
-    size_t      terminal_height;
-    struct termios raw_mode;
-    struct termios original;
-}t_new_readline;
-
 char *new_readline(t_shell *shell)
 {
     t_new_readline nr;
-    ft_memset(&nr, 0, sizeof(t_new_readline));
-    ft_memset(&nr.buf, 0, 1024);
-    //keep tcgetattr() of current terminal.
     char one_char = 0;
-    char *line=NULL;
-    size_t line_len = 0;
+    char *line = NULL;
     bool read_char_res = false;
 
-    read_char_res = read_char(one_char);
-    if (read_char_res==false)
+    ft_memset(&nr, 0, sizeof(t_new_readline));
+    ft_memset(&nr.buf, 0, sizeof(nr.buf));
+    nr.hist = shell->hist;
+
+    enable_raw_mode(&nr.original);
+
+    nr.prompt = "minishell$";
+    nr.prompt_len = ft_strlen(nr.prompt);
+    write(STDOUT_FILENO, nr.prompt, nr.prompt_len);
+
+    while (1)
     {
-        printf("read_char failed.\n");
-        return (NULL);
-    }
-    if (one_char == '\n')
-        ;
-    else if (is_signal(one_char))
-    {
-        if (process_signal(&nr,one_char)==0 && line_len==0)//EOT exit();
+        read_char_res = read_char(&one_char);
+        if (!read_char_res)
+            break;
+        if (one_char == '\n')
         {
-            free_rsc();
-            return (NULL);
+            write(STDOUT_FILENO, "\n", 1);
+            line = ft_strdup(nr.buf);
+            break;
         }
+        else if (is_signal(one_char))
+        {
+            int sig_res = process_signal(one_char);
+            if (sig_res == 0)
+            {
+                if (nr.buf_len == 0)
+                {
+                    free_rsc();
+                    line = NULL;
+                }
+                else
+                {
+                    line = ft_strdup(nr.buf);
+                    write(STDOUT_FILENO, "\n", 1);
+                }
+                break;
+            }
+            else if (sig_res == 1)
+            {
+                nr.buf_len = 0;
+                nr.buf[0] = '\0';
+                write(STDOUT_FILENO, "\n", 1);
+                line = ft_strdup("");
+                break;
+            }
+        }
+        else if (is_del(one_char))
+            process_del(&nr, one_char);
+        else if (is_esc(one_char))
+            process_esc(&nr, one_char);
+        else if (ft_isprint(one_char) || ft_isspace(one_char))
+            process_printable(&nr, one_char);
     }
-    else if (is_del(one_char))
-    {
-        process_del(&nr,one_char);
-    }
-    else if (is_esc(one_char))
-    {
-        process_esc(&nr, one_char);
-    }
-    else if (ft_isprint(one_char) || ft_isspace(one_char))
-        process_printable(&nr, one_char);
-    return (line);
+    disable_raw_mode(&nr.original);
+    return line;
 }
+

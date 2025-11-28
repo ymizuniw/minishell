@@ -16,7 +16,7 @@ int ft_putchar(int c)
     write(STDOUT_FILENO, &c, 1);
 }
 char *tgoto(const char *cap, int col, int row);
-//cap: pointer to function string parameter got by tgetstr(...);
+//cap: pointer to string parameter got by tgetstr(...);
 //col: destination colum.
 //row: destination line.
 
@@ -97,7 +97,6 @@ int main(void)
     return (0);
 }
 
-
 //window-size reallocating shall be captured by signal.
 int main(void)
 {
@@ -114,7 +113,6 @@ int main(void)
     }
     return (0);
 }
-
 
 int main(void)
 {

@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:37 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/28 19:22:40 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/29 01:06:40 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,61 +70,4 @@ void	handle_printable(t_readline_ctx *ctx, char c)
 //     le = tgetstr("le", NULL);
 //     nd = tgetstr("nd", NULL);
 //     ce = tgetstr("ce", NULL);
-// }
-
-// void redraw_line(t_readline_ctx *ctx)
-// {
-//     // 行頭へ移動
-//     tputs(tgoto(cm, 0, ctx->origin_row), 1, putch);
-//     // 行末クリア
-//     tputs(ce, 1, putch);
-
-//     write(1, ctx->prompt, strlen(ctx->prompt));
-//     write(1, ctx->buf, *ctx->len);
-
-//     // カーソルを正しい位置に移動
-//     tputs(tgoto(cm,
-//                 strlen(ctx->prompt) + ctx->cursor,
-//                 ctx->origin_row), 1, putch);
-// }
-
-// void handle_backspace(t_readline_ctx *ctx)
-// {
-//     if (ctx->cursor == 0 || *ctx->len == 0)
-//         return;
-
-//     // バッファから削る
-//     (*ctx->len)--;
-//     ctx->buf[*ctx->len] = '\0';
-
-//     // カーソルも 1 左に（左キーを使う）
-//     tputs(le, 1, putch);
-
-//     // 行 redraw
-//     redraw_line(ctx);
-//     ctx->cursor--;
-// }
-
-// void handle_printable(t_readline_ctx *ctx, char c)
-// {
-//     if (*ctx->len >= 4095)
-//         return;
-
-//     ctx->buf[*ctx->len] = c;
-//     ctx->buf[++(*ctx->len)] = '\0';
-
-//     redraw_line(ctx);
-//     ctx->cursor++;
-// }
-
-// void handle_arrow_left(t_readline_ctx *ctx)
-// {
-//     if (ctx->cursor > 0)
-//         ctx->cursor--, redraw_line(ctx);
-// }
-
-// void handle_arrow_right(t_readline_ctx *ctx)
-// {
-//     if (ctx->cursor < *ctx->len)
-//         ctx->cursor++, redraw_line(ctx);
 // }
