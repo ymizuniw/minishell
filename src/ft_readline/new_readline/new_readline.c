@@ -56,6 +56,41 @@ int ft_putchar(int c)
 // BC = tgetstr("le", BUFFADDR);
 // UP = tgetstr("up", BUFFADDR);
 
+// int redraw_line(t_new_readline *nr)
+// {
+//     size_t total = nr->prompt_len + nr->buf_len;
+//     size_t rows = total / nr->terminal_width + 1;
+
+//     // (1) 行頭
+//     write(STDOUT_FILENO, "\r", 1);
+
+//     // (2) 既存行を全消去
+//     for (size_t r = 0; r < rows; r++)
+//     {
+//         write(STDOUT_FILENO, CLEAR_LINE, CLEAR_LINE_LEN);
+//         write(STDOUT_FILENO, "\n", 1);
+//     }
+
+//     // (3) 最終行の行頭に戻る
+//     write(STDOUT_FILENO, "\r", 1);
+
+//     // (4) 再描画
+//     write(STDOUT_FILENO, nr->prompt, nr->prompt_len);
+//     write(STDOUT_FILENO, nr->buf, nr->buf_len);
+
+//     // (5) カーソル位置へ移動
+//     size_t pos = nr->prompt_len + nr->cursor_buf_pos;
+//     size_t row = pos / nr->terminal_width;
+//     size_t col = pos % nr->terminal_width;
+
+//     char *cm = tgetstr("cm", NULL);
+//     char *goto_str = tgoto(cm, col, row);
+//     tputs(goto_str, 1, ft_putchar);
+
+//     return 1;
+// }
+
+
 int redraw_line(t_new_readline *nr)
 {
     write(STDOUT_FILENO, CLEAR_LINE, (size_t)CLEAR_LINE_LEN);
@@ -93,13 +128,20 @@ bool is_signal(char one_char)
     return (false);
 }
 
-int process_signal(char one_char)
+int process_signal(t_new_readline *nr, char c)
 {
-    if (one_char==ASC_ETX) 
-        return (1);//interrupt.
-    else if (one_char==ASC_EOT) 
-        return (0);//end of input. if EOT && input_len==0, then exit, else do not anything.
-    return(-1);
+    if (c == ASC_ETX)
+    {
+        nr->buf_len = 0;
+        nr->buf[0] = '\0';
+        nr->cursor_buf_pos = 0;
+        write(STDOUT_FILENO, "^C\n", 3);
+        write(STDOUT_FILENO, nr->prompt, nr->prompt_len);
+        return (2);
+    }
+    if (c == ASC_EOT)
+        return (0);
+    return -1;
 }
 
 bool is_del(char one_char)
@@ -292,6 +334,12 @@ char *new_readline(t_shell *shell)
 
     while (1)
     {
+        if (g_signum == SIGWINCH)
+        {
+            resize_window(&nr);
+            redraw_line(&nr);
+            g_signum = 0;
+        }
         read_char_res = read_char(&one_char);
         if (!read_char_res)
             break;
@@ -303,7 +351,7 @@ char *new_readline(t_shell *shell)
         }
         else if (is_signal(one_char))
         {
-            int sig_res = process_signal(one_char);
+            int sig_res = process_signal(&nr, one_char);
             if (sig_res == 0)
             {
                 if (nr.buf_len == 0)
@@ -311,6 +359,8 @@ char *new_readline(t_shell *shell)
                     free_rsc();
                     line = NULL;
                 }
+                else if (sig_res == 2)
+                    continue ;
                 else
                 {
                     line = ft_strdup(nr.buf);
@@ -337,4 +387,3 @@ char *new_readline(t_shell *shell)
     disable_raw_mode(&nr.original);
     return line;
 }
-
