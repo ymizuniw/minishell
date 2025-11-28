@@ -6,14 +6,14 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:49 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/26 02:24:12 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/28 03:55:20 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/get_next_line.h"
 #include "../../includes/minishell.h"
 
-static int	process_key(char c, char *buf, size_t *len, t_readline_ctx *ctx)
+static int	process_key(char c, t_readline_ctx *ctx)
 {
 	char	seq[2];
 
@@ -21,18 +21,18 @@ static int	process_key(char c, char *buf, size_t *len, t_readline_ctx *ctx)
 		return (1);
 	if (c == '\n')
 		return (0);
-	if (c == ASC_EOT && *len == 0)
+	if (c == ASC_EOT && *ctx->len == 0)
 		return (-1);
 	if (c == ASC_DEL)
-		handle_backspace(buf, len);
+		handle_backspace(ctx);//pass ctx.
 	else if (c == ASC_ESC)
 	{
 		if (read_key(&seq[0]) <= 0 || read_key(&seq[1]) <= 0)
 			return (1);
-		handle_escape_sequence(seq, ctx->hist, buf, ctx);
+		handle_escape_sequence(seq, ctx->hist, ctx->buf, ctx);
 	}
 	else if (ft_isprint((int)c) || ft_isspace((int)c))
-		handle_printable(buf, len, c);
+		handle_printable(ctx, c);
 	return (1);
 }
 
@@ -49,15 +49,23 @@ static char	*read_non_interactive(void)
 		buf[len - 1] = '\0';
 	return (buf);
 }
-
-static int	read_loop(char *buf, size_t *len, t_readline_ctx *ctx)
+ 
+static int	read_loop(t_readline_ctx *ctx)
 {
 	char	c;
 	int		result;
 
 	while (read_key(&c) > 0)
 	{
-		result = process_key(c, buf, len, ctx);
+		//if len is within 4096, process it.
+		//if not, if backspace comes process else do noting and continue.
+		if (*ctx->len>1023
+			&& c !=ASC_DEL
+			&& c!='\n'
+			&& c!=ASC_ETX
+			&& !(c==ASC_EOT && *ctx->len==0))
+			continue ;
+		result = process_key(c, ctx);
 		if (result == 0)
 			return (0);
 		else if (result == -1)
@@ -66,12 +74,13 @@ static int	read_loop(char *buf, size_t *len, t_readline_ctx *ctx)
 	return (0);
 }
 
-static t_readline_ctx	init_readline_ctx(size_t *len, t_hist *hist,
+static t_readline_ctx	init_readline_ctx(t_hist *hist,
 		char const *prompt)
 {
 	t_readline_ctx	new;
 
-	new.len = len;
+	ft_memset(new.buf, 0, 4096);
+	new.cursor = 0;
 	new.hist = hist;
 	new.prompt = prompt;
 	return (new);
@@ -79,29 +88,23 @@ static t_readline_ctx	init_readline_ctx(size_t *len, t_hist *hist,
 
 char	*ft_readline(t_shell *shell, const char *prompt, t_hist *hist)
 {
-	char			*buf;
-	size_t			len;
 	t_readline_ctx	ctx;
+	char *line;
 
 	if (!isatty(STDIN_FILENO) || !isatty(STDOUT_FILENO))
 		return (read_non_interactive());
-	buf = ft_calloc(1024, 1);
-	if (!buf)
-		return (NULL);
-	len = 0;
-	ctx = init_readline_ctx(&len, hist, prompt);
+	ctx = init_readline_ctx(hist, prompt);
 	if (shell)
 		enable_raw_mode(&shell->orig_term);
 	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
-	{
 		write(STDOUT_FILENO, prompt, ft_strlen(prompt));
-	}
-	if (read_loop(buf, &len, &ctx) == -1)
-		return (disable_raw_mode(&shell->orig_term), xfree(buf), NULL);
+	if (read_loop(&ctx) == -1)
+		return (disable_raw_mode(&shell->orig_term), NULL);
 	write(STDOUT_FILENO, "\n", 1);
 	if (shell)
 		disable_raw_mode(&shell->orig_term);
-	if (hist != NULL && len > 0)
-		add_history(buf, hist);
-	return (buf);
+	if (hist != NULL && ctx.len > 0)
+		add_history(ctx.buf, hist);
+	line = ft_strdup(ctx.buf);
+	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:31 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/25 23:25:17 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/28 19:11:08 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ unexpected EOF while looking for matching ')'\n"
 # define ASC_EOT 4
 # define ASC_DEL 127
 # define ASC_ESC 27
+//
 
 typedef struct s_shell	t_shell;
 
@@ -80,9 +81,11 @@ typedef struct s_hist
 // prompt shall be macro def.
 typedef struct s_readline_ctx
 {
+	char 				buf[4096];
 	size_t				*len;
 	t_hist				*hist;
 	const char			*prompt;
+	size_t				cursor;
 }						t_readline_ctx;
 
 // naming is bad. this is variable?

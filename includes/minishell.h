@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:40 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/20 16:33:59 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/28 03:53:45 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	enable_raw_mode(struct termios *orig);
 void	disable_raw_mode(const struct termios *orig);
 ssize_t	read_key(char *c);
 void	redraw_line(const char *prompt, const char *buf);
-void	handle_backspace(char *buf, size_t *len);
-void	handle_printable(char *buf, size_t *len, char c);
+void	handle_backspace(t_readline_ctx *ctx);
+void	handle_printable(t_readline_ctx *ctx, char c);
 void	handle_arrow_up(t_hist *hist, char *buf, size_t *len,
 			const char *prompt);
 void	handle_arrow_down(t_hist *hist, char *buf, size_t *len,
