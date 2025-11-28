@@ -22,6 +22,22 @@ int ft_putchar(int c)
 #define ANSI_RIGHT "\x1b[1C"
 #define ANSI_LEFT "\x1b[1D"
 
+//if explicit term_buffer is provided.
+// char *buffer = (char *)malloc(ft_strlen(term_buffer));
+// #define BUFFADDR &buffer
+
+// cl_string = tgetstr("cl", BUFFADDR);
+// cm_string = tgetstr("cm", BUFFADDR);
+// auto_wrap = tgetstr("am");
+// height = tgetnum("li");
+// width = tgetnum("co");
+
+//padding char for waiting tputs();
+// temp = tgetstr("pc", BUFFADDR);
+// PC = temp ? *temp : 0;
+// BC = tgetstr("le", BUFFADDR);
+// UP = tgetstr("up", BUFFADDR);
+
 int redraw_line(t_new_readline *nr)
 {
     write(STDOUT_FILENO, CLEAR_LINE, (size_t)CLEAR_LINE_LEN);
@@ -114,7 +130,7 @@ int process_up(t_new_readline *nr)
     if (nr->hist->hist_box[nr->hist->cur]==NULL)
         return ;
     copy_hist_to_buf(nr);
-    redraw_prompt(nr);
+    redraw_line(nr);
 }
 
 int process_down(t_new_readline *nr)
@@ -124,12 +140,22 @@ int process_down(t_new_readline *nr)
 
 int process_right(t_new_readline *nr)
 {
+    if (nr->cursor_buf_pos + 1 < nr->buf_len)
+    {
+        nr->cursor_buf_pos++;
+        nr->cursor_x++;
+    }
     write(1, ANSI_RIGHT, 1);
     return (1);
 }
 
 int process_left(t_new_readline *nr)
 {
+    if (nr->cursor_buf_pos > 1)
+    {
+        nr->cursor_buf_pos--;
+        nr->cursor_x--;
+    }
     write(1, ANSI_LEFT, 1);
     return (1);
 }
@@ -143,26 +169,38 @@ bool is_inserting(t_new_readline *nr)
 
 int insertion(t_new_readline *nr, char one_char)
 {
-    if (nr->buf_len==1024)//termination place kept?
+    if (nr->buf_len==1023)//termination place kept?
         return (0);
     ft_memmove(nr->buf[nr->cursor_buf_pos + 1],nr->buf[nr->cursor_buf_pos], 1);
     nr->buf[nr->cursor_buf_pos] = one_char;
     return (1);
 }
 
-int handle_printable(t_new_readline *nr)
+int write_to_buffer(t_new_readline *nr, char one_char)
 {
-    //
+    if (nr->buf_len>1023+1)
+        return (0);
+    else
+        nr->buf[nr->cursor_buf_pos] = one_char;
+    return (1);
 }
 
-    // size_t      cursor_x;
-    // size_t      cursor_y;
-    // size_t      terminal_width;
-    // size_t      terminal_height;
+int process_printable(t_new_readline *nr, char one_char)
+{
+    //nr->cursor_x
+    //nr->cursor_y
+    int ret;
+    if (is_inserting(nr))
+        ret = insertion(nr, one_char);
+    else
+        ret = write_to_buffer(nr, one_char);
+    return (ret);
+}
 
 int resize_window(t_new_readline *nr)
 {
     struct winsize w;
+
     if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w)>=0)
     {
         nr->terminal_width = w.ws_col;
@@ -175,7 +213,6 @@ int resize_window(t_new_readline *nr)
     }
     return (1);
 }
-
 
 typedef struct s_new_readline
 {
@@ -218,7 +255,10 @@ char *new_readline(t_shell *shell)
     else if (is_signal(one_char))
     {
         if (process_signal(&nr,one_char)==0 && line_len==0)//EOT exit();
-            exit_with_eot();
+        {
+            free_rsc();
+            return (NULL);
+        }
     }
     else if (is_del(one_char))
     {
@@ -229,6 +269,6 @@ char *new_readline(t_shell *shell)
         process_esc(&nr, one_char);
     }
     else if (ft_isprint(one_char) || ft_isspace(one_char))
-        process_printable(one_char, &nr, shell);
+        process_printable(&nr, one_char);
     return (line);
 }
