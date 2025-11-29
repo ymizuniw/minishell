@@ -24,7 +24,7 @@ static int	process_key(char c, t_readline_ctx *ctx)
 	if (c == ASC_EOT && *ctx->len == 0)
 		return (-1);
 	if (c == ASC_DEL)
-		handle_backspace(ctx);//pass ctx.
+		handle_backspace(ctx);
 	else if (c == ASC_ESC)
 	{
 		if (read_key(&seq[0]) <= 0 || read_key(&seq[1]) <= 0)

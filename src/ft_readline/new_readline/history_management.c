@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:28 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/29 00:58:55 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/30 04:51:42 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	add_history(char *line, t_hist *hist)
 	hist->cur = -1;
 }
 
+//this can be called from out of new_readline() scope.
 void	free_hist_box(char *hist_box[HIST_MAX])
 {
 	size_t	i;

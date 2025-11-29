@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:31 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/28 19:11:08 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/30 04:50:42 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,26 @@ typedef struct s_hist
 	int					cur;
 	char				*hist_box[HIST_MAX];
 }						t_hist;
+
+char	*new_readline(t_shell *shell);
+typedef struct s_new_readline
+{
+	const char		*prompt;
+	size_t			prompt_len;
+
+	char			buf[1024]; // please init
+	size_t			buf_len;
+	size_t			cursor_buf_pos;
+
+	t_hist			*hist;
+
+	size_t			cursor_x;
+	size_t			cursor_y;
+	size_t			terminal_width;
+	size_t			terminal_height;
+	struct termios	raw_mode;
+	struct termios	original;
+}	t_new_readline;
 
 // prompt shall be macro def.
 typedef struct s_readline_ctx

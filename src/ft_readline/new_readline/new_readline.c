@@ -2,25 +2,151 @@
 #include <sys/ioctl.h>
 #include "../../../includes/minishell.h"
 
-typedef struct s_new_readline
+#include <termcap.h>
+
+void init_termcap(void)
 {
-	const char		*prompt;
-	size_t			prompt_len;
+    char *term = getenv("TERM");
+    static char term_buffer[2048];
 
-	char			buf[1024]; // please init
-	size_t			buf_len;
-	size_t			cursor_buf_pos;
+    if (!term)
+        term = "xterm-256color";
+    if (tgetent(term_buffer, term) < 0)
+    {
+        perror("tgetent");
+        exit(1);
+    }
+}
 
-	t_hist			*hist;
+/**
+ * @brief termcap を使った折り返し対応 redraw（完全版）
+ *
+ * - cm (cursor motion)
+ * - ce (clear to end of line)
+ * - cd (clear to end of screen)
+ *
+ * を利用し、プロンプト＋入力全体を再描画する。
+ *
+ * カーソル位置は cm で正確に指定。
+ *
+ * @param nr new_readline 構造体
+ * @return 1
+ */
+static int redraw_line(t_new_readline *nr)
+{
+    char *cm;       /* cursor movement capability */
+    char *ce;       /* clear to end of line */
+    char *cd;       /* clear to end of screen */
 
-	size_t			cursor_x;
-	size_t			cursor_y;
-	size_t			terminal_width;
-	size_t			terminal_height;
-	struct termios	raw_mode;
-	struct termios	original;
-}	t_new_readline;
+    size_t total;       /* prompt + buffer 全体の文字数 */
+    size_t cursor_pos;  /* cursor absolute logical position */
+    size_t row, col;
+    size_t total_rows;
+    size_t i;
+    /* termcap capability を取得 */
+    cm = tgetstr("cm", NULL);
+    ce = tgetstr("ce", NULL);
+    cd = tgetstr("cd", NULL);
+    if (!cm || !ce || !cd)
+        return (1);
+    if (nr->terminal_width == 0)
+        nr->terminal_width = 80; /* fallback */
+    /* ---------- 計算 ---------- */
+    total = nr->prompt_len + nr->buf_len;
+    cursor_pos = nr->prompt_len + nr->cursor_buf_pos;
+    total_rows = total / nr->terminal_width + 1;
+    row = cursor_pos / nr->terminal_width;
+    col = cursor_pos % nr->terminal_width;
+    /* ---------- (1) 一旦カーソルを一番上（このプロンプト行の先頭）へ ---------- */
+    {
+        char *goto_top = tgoto(cm, 0, 0);
+        tputs(goto_top, 1, ft_putchar);
+    }
+    /* ---------- (2) 必要行数分をクリア ---------- */
+    for (i = 0; i < total_rows; i++)
+    {
+        tputs(ce, 1, ft_putchar);   /* 行末クリア */
+        if (i + 1 < total_rows)
+            write(STDOUT_FILENO, "\n", 1); /* 下へ進む */
+    }
+    /* 最終行の先頭に戻す */
+    {
+        char *goto_top = tgoto(cm, 0, 0);
+        tputs(goto_top, 1, ft_putchar);
+    }
+    /* ---------- (3) prompt + 入力文字列をメモリ通り書く ---------- */
+    {
+        write(STDOUT_FILENO, nr->prompt, nr->prompt_len);
 
+        /* 折り返し考慮して連続出力 */
+        write(STDOUT_FILENO, nr->buf, nr->buf_len);
+    }
+    /* ---------- (4) カーソル位置復元 ---------- */
+    {
+        char *goto_cursor = tgoto(cm, col, row);
+        tputs(goto_cursor, 1, ft_putchar);
+    }
+    return (1);
+}
+
+/**
+ * @brief 折り返し対応: カーソルを左へ1文字分動かす (termcap使用)
+ *
+ * @param nr new_readline 構造体
+ * @return int always 1
+ */
+static int process_left(t_new_readline *nr)
+{
+    char *cm;
+
+    if (nr->cursor_buf_pos == 0)
+        return (1); /* これ以上左に行けない */
+
+    nr->cursor_buf_pos--;
+
+    /* termcap でカーソル移動 */
+    cm = tgetstr("cm", NULL);
+    if (!cm)
+        return (1);
+
+    size_t pos = nr->prompt_len + nr->cursor_buf_pos;
+    size_t row = pos / nr->terminal_width;
+    size_t col = pos % nr->terminal_width;
+
+    char *goto_xy = tgoto(cm, col, row);
+    tputs(goto_xy, 1, ft_putchar);
+
+    return (1);
+}
+
+/**
+ * @brief 折り返し対応: カーソルを右へ1文字分動かす (termcap使用)
+ *
+ * @param nr new_readline 構造体
+ * @return int always 1
+ */
+static int process_right(t_new_readline *nr)
+{
+    char *cm;
+
+    if (nr->cursor_buf_pos >= nr->buf_len)
+        return (1);
+
+    nr->cursor_buf_pos++;
+
+    cm = tgetstr("cm", NULL);
+    if (!cm)
+        return (1);
+
+    size_t pos = nr->prompt_len + nr->cursor_buf_pos;
+    size_t row = pos / nr->terminal_width;
+    size_t col = pos % nr->terminal_width;
+
+    char *goto_xy = tgoto(cm, col, row);
+    tputs(goto_xy, 1, ft_putchar);
+
+    return (1);
+}
 
 void	add_history(char *line, t_hist *hist)
 {
@@ -47,7 +173,6 @@ void	free_hist_box(char *hist_box[HIST_MAX])
 		i++;
 	}
 }
-
 
 void	enable_raw_mode(struct termios *orig)
 {

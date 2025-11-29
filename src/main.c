@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:01:51 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/25 15:39:54 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/30 04:51:07 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,15 @@ static int	handle_signal_or_empty(char *line, t_shell *shell)
 int	shell_loop(t_shell *shell)
 {
 	char			*line;
-	char const		*prompt;
 	static t_hist	hist;
 
 	shell->hist = &hist;
 	hist.cur = -1;
-	prompt = "minishell$ ";
 	while (1)
 	{
 		g_signum = 0;
-		line = ft_readline(shell, prompt, &hist);
+		// line = ft_readline(shell, prompt, &hist);
+		line = new_readline(shell);
 		if (handle_signal_or_empty(line, shell))
 		{
 			if (!line && !g_signum)
