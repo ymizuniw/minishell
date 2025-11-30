@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:37 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 00:04:51 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 01:21:06 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	ft_cd(char **cmd, t_shell *shell)
 	char	*target_dir;
 	bool	allocated;
 	char	*joined;
-	t_env	*home;
 	t_env	*home;
 
 	allocated = false;
