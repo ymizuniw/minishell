@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:15 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/30 22:17:55 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/30 23:55:52 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,14 @@ int				get_document(t_redir *hd, char **document, size_t *document_len,
 					t_shell *shell);
 char			*heredoc_value_expansion(const char *line, bool in_quote,
 					size_t len, t_shell *shell);
-t_word  *handle_quoted_word(const char *input, size_t *idx, char quote);
-t_word  *handle_unclosed_quote(const char *input, size_t input_len, size_t *idx);
-t_word  *handle_doller_word(const char *input, size_t input_len, size_t *idx);
-t_word  *handle_unquoted_word(const char *input, size_t input_len, size_t *idx);
-t_word  *append_node(t_word *head, t_word *new);
+t_word			*handle_quoted_word(const char *input, size_t *idx, char quote);
+t_word			*handle_unclosed_quote(const char *input, size_t input_len,
+					size_t *idx);
+t_word			*handle_doller_word(const char *input, size_t input_len,
+					size_t *idx);
+t_word			*handle_unquoted_word(const char *input, size_t input_len,
+					size_t *idx);
+t_word			*append_node(t_word *head, t_word *new);
 
 // search and exec
 void			search_and_exec(t_shell *shell, char **cmd_args);
@@ -55,7 +58,7 @@ char			*create_env_string(const char *key, const char *value);
 char			**generate_envp(t_env *env_list);
 
 // Variable expansion (at execution time)
-char *expand_plain_word(t_word *list, t_shell *shell);
+char			*expand_plain_word(t_word *list, t_shell *shell);
 // char			*expand_word(char *word, t_shell *shell);
 char			*ft_itoa(int n);
 
@@ -74,11 +77,11 @@ int				process_one_heredoc(t_shell *shell, t_redir *redir);
 int				process_all_heredoc(t_shell *shell, t_ast *node);
 int				generate_random_template(char *filename);
 
-//gen_word
-char	*expand_token_words(t_word *word_list, t_shell *shell);
-char	**expand_token_with_wildcard(t_word *word_list, t_shell *shell,
-			size_t *result_count);
-bool	has_wildcard_to_expand(t_word *word_list);
-t_word	*gen_word(char *value, size_t value_len, size_t *addition);
+// gen_word
+char			*expand_token_words(t_word *word_list, t_shell *shell);
+char			**expand_token_with_wildcard(t_word *word_list, t_shell *shell,
+					size_t *result_count);
+bool			has_wildcard_to_expand(t_word *word_list);
+t_word			*gen_word(char *value, size_t value_len, size_t *addition);
 
 #endif

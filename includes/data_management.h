@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:06 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/24 23:31:29 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 00:01:22 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,35 @@
 # include "minishell_types.h"
 
 // wrapper for malloc and free
-void		*xmalloc(size_t size);
-void		*xcalloc(size_t size);
-void		xfree(void *p);
-void		xclose(int fd);
+void	*xmalloc(size_t size);
+void	*xcalloc(size_t size);
+void	xfree(void *p);
+void	xclose(int fd);
 
 // alloc application
-t_token		*alloc_token(void);
-t_cmd		*alloc_cmd(void);
-t_ast		*alloc_node(void);
-t_redir		*alloc_redir(void);
+t_token	*alloc_token(void);
+t_cmd	*alloc_cmd(void);
+t_ast	*alloc_node(void);
+t_redir	*alloc_redir(void);
 
 // free application
-void		free_ast_tree(t_ast *p);
-void		free_subshell_tree(t_ast *p);
-void		free_token_list(t_token *p);
-void		free_double_array_contents(char **p, char *p_content);
-void		free_double_array(char **p);
-void		free_redir_list(t_redir *p);
-void		free_word_list(t_word *p);
-void		free_cmd_structure(t_cmd *p);
-void		free_shell(t_shell *shell);
-void		cleanup_before_execve(t_shell *shell);
+void	free_ast_tree(t_ast *p);
+void	free_subshell_tree(t_ast *p);
+void	free_token_list(t_token *p);
+void	free_double_array_contents(char **p, char *p_content);
+void	free_double_array(char **p);
+void	free_redir_list(t_redir *p);
+void	free_word_list(t_word *p);
+void	free_cmd_structure(t_cmd *p);
+void	free_shell(t_shell *shell);
+void	cleanup_before_execve(t_shell *shell);
 
 // list utilities
-t_token		*token_last(t_token *head);
-t_redir		*redir_last(t_redir *head);
-t_word		*word_last(t_word *head);
-void		redir_add_back(t_redir **head, t_redir *new);
-void		word_add_back(t_word **head, t_word *new);
-void		token_add_back(t_token **head, t_token *new);
+t_token	*token_last(t_token *head);
+t_redir	*redir_last(t_redir *head);
+t_word	*word_last(t_word *head);
+void	redir_add_back(t_redir **head, t_redir *new);
+void	word_add_back(t_word **head, t_word *new);
+void	token_add_back(t_token **head, t_token *new);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:47 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/30 21:42:35 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 00:04:38 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,16 @@ static void	exit_with_error(t_shell *shell, int code, bool print_num_err,
 	}
 	free_double_array(cmd);
 	free_shell(shell);
-	// disable_raw_mode(&shell->orig_term);
 	exit(code);
 }
 
-__attribute__((noreturn))void	ft_exit(char **cmd, int last_exit_status, t_shell *shell)
+__attribute__((noreturn)) void ft_exit(char **cmd, int last_exit_status,
+	t_shell *shell)
 {
 	long long	exit_code;
-	int			overflow=0;
+	int			overflow;
 
+	overflow = 0;
 	if (shell->interactive)
 		printf("exit\n");
 	if (cmd && cmd[1] && cmd[1][0] != '\0')
@@ -87,12 +88,11 @@ __attribute__((noreturn))void	ft_exit(char **cmd, int last_exit_status, t_shell 
 		free_double_array(cmd);
 		free_shell(shell);
 		exit_code %= 256;
-		if (exit_code<0)
+		if (exit_code < 0)
 			exit_code += 256;
 		exit(exit_code);
 	}
 	free_double_array(cmd);
-	// disable_raw_mode(&shell->orig_term);
 	free_shell(shell);
 	exit(last_exit_status);
 }

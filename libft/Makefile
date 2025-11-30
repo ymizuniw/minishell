@@ -1,3 +1,4 @@
+NAME = libft.a
 CC = cc
 CFLAGS = -g -Wall -Wextra -Werror
 AR = ar rcs
@@ -49,9 +50,6 @@ SRCS = \
     get_next_line/get_next_line.c
 
 OBJS = $(SRCS:.c=.o)
-NAME = libft.a
-
-.PHONY: all clean fclean re
 
 all: $(NAME)
 
@@ -68,3 +66,4 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+.PHONY: all clean fclean re

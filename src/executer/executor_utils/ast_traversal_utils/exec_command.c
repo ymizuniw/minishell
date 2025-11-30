@@ -6,13 +6,13 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:15 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/30 21:32:35 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 00:07:46 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/minishell.h"
 
-char *expand_plain_word(t_word *list, t_shell *shell);
+char		*expand_plain_word(t_word *list, t_shell *shell);
 
 static void	restore_stdio(int stdin_keep, int stdout_keep)
 {
@@ -49,12 +49,14 @@ static int	handle_redirection_error(t_ast *node, int stdin_k, int stdout_k,
 // 	xfree(expanded_argv);
 // }
 
-static char **append_argv(char **argv, size_t *argc, char *str)
+static char	**append_argv(char **argv, size_t *argc, char *str)
 {
-	char **new_argv = xmalloc(sizeof(char*)*(*argc+2));
-	size_t i = 0;
+	char	**new_argv;
+	size_t	i;
 
-	while (i< *argc)
+	new_argv = xmalloc(sizeof(char *) * (*argc + 2));
+	i = 0;
+	while (i < *argc)
 	{
 		new_argv[i] = argv[i];
 		i++;
@@ -66,12 +68,13 @@ static char **append_argv(char **argv, size_t *argc, char *str)
 	return (new_argv);
 }
 
-char **expand_token(t_token *token, t_shell *shell)
+char	**expand_token(t_token *token, t_shell *shell)
 {
-	size_t value_len;
-	size_t additional;
-	t_word *word_list;
-	char **res;
+	size_t	value_len;
+	size_t	additional;
+	t_word	*word_list;
+	char	**res;
+	size_t	count;
 
 	if (!token || !token->value)
 		return (NULL);
@@ -82,8 +85,8 @@ char **expand_token(t_token *token, t_shell *shell)
 		return (NULL);
 	if (has_wildcard_to_expand(word_list))
 	{
-		size_t count = 0;
-		res  = expand_token_with_wildcard(word_list, shell, &count);
+		count = 0;
+		res = expand_token_with_wildcard(word_list, shell, &count);
 		free_word_list(word_list);
 		return (res);
 	}
@@ -99,17 +102,20 @@ char **expand_token(t_token *token, t_shell *shell)
 	return (res);
 }
 
-char **expand_tokens(t_token **tokens, size_t count, t_shell *shell)
+char	**expand_tokens(t_token **tokens, size_t count, t_shell *shell)
 {
-	char **argv = NULL;
-	size_t argc = 0;
+	char	**argv;
+	size_t	argc;
+	char	**expanded;
 
-	for (size_t i = 0; i< count; i++)
+	argv = NULL;
+	argc = 0;
+	for (size_t i = 0; i < count; i++)
 	{
-		char **expanded  = expand_token(tokens[i], shell);
+		expanded = expand_token(tokens[i], shell);
 		if (!expanded)
 			return (free_double_array(argv), NULL);
-		for (size_t j=0;expanded[j]; j++)
+		for (size_t j = 0; expanded[j]; j++)
 		{
 			argv = append_argv(argv, &argc, expanded[j]);
 		}
@@ -118,17 +124,20 @@ char **expand_tokens(t_token **tokens, size_t count, t_shell *shell)
 	return (argv);
 }
 
-static int process_command(t_ast *node, t_shell *shell)
+static int	process_command(t_ast *node, t_shell *shell)
 {
-	char **argv = NULL;
-	size_t argc = 0;
+	char	**argv;
+	size_t	argc;
+	char	**expanded;
 
-	for (size_t i = 0;i<node->cmd->token_count; i++)
+	argv = NULL;
+	argc = 0;
+	for (size_t i = 0; i < node->cmd->token_count; i++)
 	{
-		char **expanded = expand_token(node->cmd->tokens[i], shell);
-		if (expanded==NULL)
+		expanded = expand_token(node->cmd->tokens[i], shell);
+		if (expanded == NULL)
 			return (free_double_array(argv), 0);
-		for (size_t j = 0;expanded[j]; j++)
+		for (size_t j = 0; expanded[j]; j++)
 		{
 			argv = append_argv(argv, &argc, expanded[j]);
 		}
@@ -151,16 +160,16 @@ int	exec_command(t_ast *node, t_shell *shell)
 
 	fds[0] = dup(STDIN_FILENO);
 	fds[1] = dup(STDOUT_FILENO);
-	if (fds[0]<0 || fds[1]<0)
+	if (fds[0] < 0 || fds[1] < 0)
 	{
-		if (fds[0]>=0)
+		if (fds[0] >= 0)
 			xclose(fds[0]);
-		if (fds[1]>=0)
+		if (fds[1] >= 0)
 		{
 			xclose(fds[1]);
 		}
 		perror("dup");
-		shell->last_exit_status=1;
+		shell->last_exit_status = 1;
 		ft_exit(NULL, shell->last_exit_status, shell);
 		return (-1);
 	}

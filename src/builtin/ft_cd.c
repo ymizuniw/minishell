@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:37 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/26 02:22:28 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 00:04:51 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,13 @@ static void	update_pwd(t_shell *shell)
 int	ft_cd(char **cmd, t_shell *shell)
 {
 	char	*target_dir;
-	bool 	allocated=false;
-	char *joined=NULL;
-	
+	bool	allocated;
+	char	*joined;
+	t_env	*home;
+	t_env	*home;
+
+	allocated = false;
+	joined = NULL;
 	if (count_token(cmd) > 2)
 	{
 		write(STDERR_FILENO, "cd: too many arguments\n", 23);
@@ -55,11 +59,11 @@ int	ft_cd(char **cmd, t_shell *shell)
 	target_dir = get_target_dir(cmd, shell);
 	if (!target_dir)
 		return (1);
-	if (target_dir[0]=='\0')
-		target_dir=".";
-	else if (ft_strcmp(target_dir, "~")==0)
+	if (target_dir[0] == '\0')
+		target_dir = ".";
+	else if (ft_strcmp(target_dir, "~") == 0)
 	{
-		t_env *home = find_env(shell->env_list, "HOME");
+		home = find_env(shell->env_list, "HOME");
 		if (!home)
 		{
 			write(STDERR_FILENO, "cd: HOME not set\n", 17);
@@ -67,18 +71,18 @@ int	ft_cd(char **cmd, t_shell *shell)
 		}
 		target_dir = home->value;
 	}
-	else if (target_dir[0]=='~' && target_dir[1]=='/')
+	else if (target_dir[0] == '~' && target_dir[1] == '/')
 	{
-		t_env *home = find_env(shell->env_list, "HOME");
+		home = find_env(shell->env_list, "HOME");
 		if (!home)
 		{
 			write(STDERR_FILENO, "cd: HOME not set\n", 17);
 			return (1);
 		}
-		joined = ft_strjoin(home->value, target_dir+1);
-		if (joined==NULL)
+		joined = ft_strjoin(home->value, target_dir + 1);
+		if (joined == NULL)
 			return (1);
-		allocated=true;
+		allocated = true;
 		target_dir = joined;
 	}
 	if (chdir(target_dir) == -1)

@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/11/30 20:59:06 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/11/30 23:54:44 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ CC = cc
 # CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE
 CFLAGS = -Wall -Wextra -Werror -Wunused -Wunused-function -Wunused-variable
 INC = -Iincludes -Inew_readline
+LDFLAGS=-L$(LIBFT_DIR) -L$(NEW_RL_DIR)
+LIBS = $(NEW_RL_LIB) -l:libft.a -ltermcap
 # -fsanitize=address
 #   export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 #   export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
@@ -182,7 +184,7 @@ $(NEW_RL_LIB):
 	$(MAKE) -C $(NEW_RL_DIR)
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(NEW_RL_LIB) -ltermcap -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LIBS) -ltermcap -o $(NAME)
 
 clean:
 	rm -f $(OBJS)

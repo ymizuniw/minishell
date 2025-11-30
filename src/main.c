@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:01:51 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/30 22:23:34 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 00:06:26 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,30 +66,30 @@ static int	handle_signal_or_empty(char *line, t_shell *shell)
 	return (0);
 }
 
-int shell_loop(t_shell *shell)
+int	shell_loop(t_shell *shell)
 {
-    char            *line;
-    static t_hist   hist;
+	char			*line;
+	static	t_hist	hist;
 
-    shell->hist = &hist;
-    hist.cur = -1;
-    while (1)
-    {
-        g_signum = 0;
-        line = new_readline(shell->hist, false, "minishel$");
-        if (handle_signal_or_empty(line, shell))
-        {
-            if (!line && !g_signum)
-                break;
-            continue;
-        }
-	    if (*line)
-            add_history(line, &hist);
-        process_line(line, shell);
-        xfree(line);
-        shell->line_ptr = NULL;
-    }
-    return 0;
+	shell->hist = &hist;
+	hist.cur = -1;
+	while (1)
+	{
+		g_signum = 0;
+		line = new_readline(shell->hist, false, "minishel$");
+		if (handle_signal_or_empty(line, shell))
+		{
+			if (!line && !g_signum)
+				break ;
+			continue ;
+		}
+		if (*line)
+			add_history(line, &hist);
+		process_line(line, shell);
+		xfree(line);
+		shell->line_ptr = NULL;
+	}
+	return (0);
 }
 
 int	main(int argc, char **argv, char **env)

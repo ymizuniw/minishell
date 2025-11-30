@@ -1,0 +1,1118 @@
+Notice: GLOBAL_VAR_DETECTED  (line:  18, col:   1):	Global variable present in file. Make sure it is a reasonable choice.
+includes/executor.h: Error!
+Error: CONSECUTIVE_SPC      (line:  35, col:   7):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  35, col:   7):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  36, col:   7):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  36, col:   7):	Found space when expecting tab
+Error: LINE_TOO_LONG        (line:  36, col:  82):	line too long
+Error: CONSECUTIVE_SPC      (line:  37, col:   7):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  37, col:   7):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  38, col:   7):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  38, col:   7):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  39, col:   7):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  39, col:   7):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  58, col:   5):	Found space when expecting tab
+Error: MISALIGNED_FUNC_DECL (line:  78, col:  10):	Misaligned function declaration
+Error: MISALIGNED_FUNC_DECL (line:  79, col:  11):	Misaligned function declaration
+Error: TOO_FEW_TAB          (line:  80, col:   1):	Missing tabs for indent level
+Error: MISALIGNED_FUNC_DECL (line:  81, col:   9):	Misaligned function declaration
+Error: MISALIGNED_FUNC_DECL (line:  82, col:  10):	Misaligned function declaration
+includes/new_readline.h: Error!
+Error: INVALID_HEADER       (line:   1, col:   1):	Missing or invalid 42 header
+Error: PREPROC_BAD_INDENT   (line:   2, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:   4, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:   5, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:   6, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:   7, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:   8, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:   9, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:  10, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:  11, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:  12, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:  14, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:  15, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:  16, col:   1):	Bad preprocessor indentation
+Error: TOO_FEW_TAB          (line:  20, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  20, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  20, col:   9):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  20, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  21, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  21, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  21, col:   8):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  21, col:   8):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  22, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  22, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  22, col:   8):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  22, col:   8):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  23, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  23, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  23, col:   8):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  23, col:   8):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  24, col:   2):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  24, col:   4):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  28, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  28, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  28, col:  15):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  28, col:  15):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  29, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  29, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  29, col:  11):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  29, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  29, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  31, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  31, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  31, col:   9):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  31, col:   9):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  31, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  32, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  32, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  32, col:  11):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  32, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  32, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  33, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  33, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  33, col:  11):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  33, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  33, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  35, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  35, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  35, col:  11):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  35, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  35, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  36, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  36, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  36, col:  11):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  36, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  36, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  38, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  38, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  38, col:  11):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  38, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  38, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  39, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  39, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  39, col:  11):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  39, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  39, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  41, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  41, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  41, col:  19):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  41, col:  19):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  41, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  42, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  42, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  42, col:  11):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  42, col:  11):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  43, col:   2):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  43, col:   4):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  45, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  47, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  47, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  48, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  48, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  49, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  49, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  52, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  52, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  55, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  55, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  56, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  56, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  59, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  59, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  62, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  62, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  63, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  63, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  64, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  64, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  66, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  66, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  67, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  67, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  69, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  69, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  70, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  70, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  72, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  72, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  73, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  73, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  74, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  74, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  75, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  75, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  77, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  77, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  78, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  78, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  79, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  79, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  81, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  81, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  84, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  84, col:   4):	Found space when expecting tab
+libft/ft_atoll.c: Error!
+Error: SPACE_AFTER_KW       (line:  53, col:  13):	Missing space after keyword
+Error: SPC_AFTER_OPERATOR   (line:  53, col:  16):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  53, col:  16):	missing space before operator
+src/main.c: Error!
+Error: SPACE_BEFORE_FUNC    (line:  69, col:   4):	space before function name
+Error: TOO_FEW_TAB          (line:  71, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  71, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  71, col:   9):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  71, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  72, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  72, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  72, col:  18):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  72, col:  18):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  74, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  74, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  75, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  75, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  76, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  76, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  77, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  77, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  78, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  78, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  79, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  79, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  80, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  80, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  81, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  81, col:   9):	Space on empty line
+Error: TOO_FEW_TAB          (line:  82, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  82, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  83, col:   1):	Missing tabs for indent level
+Error: SPACE_AFTER_KW       (line:  83, col:  17):	Missing space after keyword
+Error: SPACE_REPLACE_TAB    (line:  83, col:  17):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  84, col:   1):	Missing tabs for indent level
+Error: SPACE_AFTER_KW       (line:  84, col:  13):	Missing space after keyword
+Error: SPACE_REPLACE_TAB    (line:  84, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  85, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  85, col:   9):	Space on empty line
+Error: MIXED_SPACE_TAB      (line:  86, col:   1):	Mixed spaces and tabs
+Error: TOO_FEW_TAB          (line:  86, col:   1):	Missing tabs for indent level
+Error: CONSECUTIVE_SPC      (line:  86, col:   5):	Two or more consecutives spaces
+Error: TOO_FEW_TAB          (line:  87, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  87, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  88, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  88, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  89, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  89, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  90, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  90, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  91, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  91, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  92, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  92, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  92, col:  12):	Return value must be in parenthesis
+src/builtin/ft_cd.c: Error!
+Error: MIXED_SPACE_TAB      (line:  47, col:   9):	Mixed spaces and tabs
+Error: SPACE_REPLACE_TAB    (line:  47, col:   9):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  47, col:  22):	Declaration and assignation on a single line
+Error: SPC_AFTER_OPERATOR   (line:  47, col:  22):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  47, col:  22):	missing space before operator
+Error: SPACE_REPLACE_TAB    (line:  48, col:   9):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  48, col:  10):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  48, col:  17):	Declaration and assignation on a single line
+Error: SPC_AFTER_OPERATOR   (line:  48, col:  17):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  48, col:  17):	missing space before operator
+Error: SPACE_EMPTY_LINE     (line:  49, col:   1):	Space on empty line
+Error: SPC_AFTER_PAR        (line:  58, col:  21):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  58, col:  22):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  58, col:  22):	missing space before operator
+Error: SPC_AFTER_OPERATOR   (line:  59, col:  19):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  59, col:  19):	missing space before operator
+Error: SPC_AFTER_PAR        (line:  60, col:  39):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  60, col:  40):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  60, col:  40):	missing space before operator
+Error: WRONG_SCOPE_VAR      (line:  62, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line:  62, col:  14):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  62, col:  21):	Declaration and assignation on a single line
+Error: SPC_AFTER_PAR        (line:  70, col:  26):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  70, col:  27):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  70, col:  27):	missing space before operator
+Error: SPC_AFTER_PAR        (line:  70, col:  48):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  70, col:  49):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  70, col:  49):	missing space before operator
+Error: WRONG_SCOPE_VAR      (line:  72, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line:  72, col:  14):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  72, col:  21):	Declaration and assignation on a single line
+Error: SPC_BFR_OPERATOR     (line:  78, col:  52):	missing space before operator
+Error: SPC_AFTER_OPERATOR   (line:  79, col:  19):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  79, col:  19):	missing space before operator
+Error: SPC_AFTER_OPERATOR   (line:  81, col:  18):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  81, col:  18):	missing space before operator
+Error: TOO_MANY_LINES       (line:  95, col:   1):	Function has more than 25 lines
+src/builtin/ft_exit.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  67, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  71, col:  82):	line too long
+Error: DECL_ASSIGN_LINE     (line:  74, col:  25):	Declaration and assignation on a single line
+Error: SPC_AFTER_OPERATOR   (line:  74, col:  25):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  74, col:  25):	missing space before operator
+Error: SPC_AFTER_OPERATOR   (line:  90, col:  22):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  90, col:  22):	missing space before operator
+Error: WRONG_SCOPE_COMMENT  (line:  95, col:   5):	Comment is invalid in this scope
+src/executer/executor_utils/ast_traversal_utils/exec_command.c: Error!
+Error: SPACE_REPLACE_TAB    (line:  15, col:   5):	Found space when expecting tab
+Error: SPACE_BEFORE_FUNC    (line:  52, col:  12):	space before function name
+Error: SPACE_REPLACE_TAB    (line:  54, col:   9):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  54, col:  21):	Declaration and assignation on a single line
+Error: SPC_BFR_OPERATOR     (line:  54, col:  44):	missing space before operator
+Error: SPC_BFR_OPERATOR     (line:  54, col:  51):	missing space before operator
+Error: SPACE_REPLACE_TAB    (line:  55, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  55, col:  12):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  55, col:  14):	Declaration and assignation on a single line
+Error: SPC_BFR_OPERATOR     (line:  57, col:  13):	missing space before operator
+Error: SPACE_BEFORE_FUNC    (line:  69, col:   5):	space before function name
+Error: SPACE_REPLACE_TAB    (line:  71, col:  11):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  72, col:  11):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  73, col:  11):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  74, col:   9):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  74, col:  10):	Misaligned variable declaration
+Error: WRONG_SCOPE_VAR      (line:  85, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line:  85, col:  15):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  85, col:  22):	Declaration and assignation on a single line
+Error: CONSECUTIVE_SPC      (line:  86, col:  12):	Two or more consecutives spaces
+Error: TOO_MANY_LINES       (line: 100, col:   1):	Function has more than 25 lines
+Error: SPACE_BEFORE_FUNC    (line: 102, col:   5):	space before function name
+Error: SPACE_REPLACE_TAB    (line: 104, col:   9):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line: 104, col:  17):	Declaration and assignation on a single line
+Error: SPACE_REPLACE_TAB    (line: 105, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 105, col:  12):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 105, col:  17):	Declaration and assignation on a single line
+Error: FORBIDDEN_CS         (line: 107, col:   5):	Forbidden control structure
+Error: SPC_BFR_OPERATOR     (line: 107, col:  25):	missing space before operator
+Error: WRONG_SCOPE_VAR      (line: 109, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 109, col:  13):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line: 109, col:  24):	Two or more consecutives spaces
+Error: DECL_ASSIGN_LINE     (line: 109, col:  26):	Declaration and assignation on a single line
+Error: FORBIDDEN_CS         (line: 112, col:   9):	Forbidden control structure
+Error: SPC_AFTER_OPERATOR   (line: 112, col:  22):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line: 112, col:  22):	missing space before operator
+Error: SPC_AFTER_OPERATOR   (line: 112, col:  24):	missing space after operator
+Error: TOO_MANY_FUNCS       (line: 121, col:   1):	Too many functions in file
+Error: SPACE_BEFORE_FUNC    (line: 121, col:  11):	space before function name
+Error: SPACE_REPLACE_TAB    (line: 123, col:   9):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line: 123, col:  17):	Declaration and assignation on a single line
+Error: SPACE_REPLACE_TAB    (line: 124, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 124, col:  12):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 124, col:  17):	Declaration and assignation on a single line
+Error: FORBIDDEN_CS         (line: 126, col:   5):	Forbidden control structure
+Error: SPC_AFTER_OPERATOR   (line: 126, col:  22):	missing space after operator
+Error: SPC_AFTER_OPERATOR   (line: 126, col:  24):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line: 126, col:  24):	missing space before operator
+Error: WRONG_SCOPE_VAR      (line: 128, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 128, col:  13):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line: 128, col:  25):	Declaration and assignation on a single line
+Error: SPC_AFTER_OPERATOR   (line: 129, col:  21):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line: 129, col:  21):	missing space before operator
+Error: FORBIDDEN_CS         (line: 131, col:   9):	Forbidden control structure
+Error: SPC_AFTER_OPERATOR   (line: 131, col:  26):	missing space after operator
+Error: TOO_MANY_FUNCS       (line: 147, col:   1):	Too many functions in file
+Error: SPC_AFTER_PAR        (line: 154, col:  14):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line: 154, col:  15):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line: 154, col:  15):	missing space before operator
+Error: SPC_AFTER_PAR        (line: 154, col:  26):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line: 154, col:  27):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line: 154, col:  27):	missing space before operator
+Error: SPC_AFTER_PAR        (line: 156, col:  18):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line: 156, col:  19):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line: 156, col:  19):	missing space before operator
+Error: SPC_AFTER_PAR        (line: 158, col:  18):	Missing space after parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line: 158, col:  19):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line: 158, col:  19):	missing space before operator
+Error: SPC_AFTER_OPERATOR   (line: 163, col:  32):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line: 163, col:  32):	missing space before operator
+Error: TOO_MANY_LINES       (line: 184, col:   1):	Function has more than 25 lines
+src/executer/executor_utils/heredoc/heredoc_value_expansion.c: Error!
+Error: SPACE_BEFORE_FUNC    (line:  15, col:   5):	space before function name
+Error: SPC_AFTER_OPERATOR   (line:  17, col:  38):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  17, col:  38):	missing space before operator
+Error: SPACE_BEFORE_FUNC    (line:  20, col:   4):	space before function name
+Error: SPACE_REPLACE_TAB    (line:  22, col:   9):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  22, col:  15):	Declaration and assignation on a single line
+Error: SPC_BFR_OPERATOR     (line:  22, col:  37):	missing space before operator
+Error: NL_AFTER_VAR_DECL    (line:  23, col:   1):	Variable declarations must be followed by a newline
+Error: SPC_AFTER_OPERATOR   (line:  23, col:  12):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  23, col:  12):	missing space before operator
+Error: TOO_MANY_TAB         (line:  24, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_FUNCS       (line:  93, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 108, col:   1):	Too many functions in file
+src/executer/executor_utils/heredoc/get_document.c: Error!
+Error: DECL_ASSIGN_LINE     (line:  40, col:  21):	Declaration and assignation on a single line
+Error: SPC_AFTER_OPERATOR   (line:  40, col:  21):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  40, col:  21):	missing space before operator
+src/executer/executor_utils/search_and_exec/exec_with_slash.c: Error!
+Error: TOO_MANY_LINES       (line:  90, col:   1):	Function has more than 25 lines
+src/executer/executor_utils/gen_word/gen_word.c: Error!
+Error: EMPTY_LINE_FUNCTION  (line:  29, col:   1):	Empty line in function
+Error: EMPTY_LINE_FUNCTION  (line:  43, col:   1):	Empty line in function
+Error: TOO_MANY_LINES       (line:  46, col:   1):	Function has more than 25 lines
+src/executer/executor_utils/word_expansion/expand_word_wildcard.c: Error!
+Error: CONSECUTIVE_SPC      (line:  15, col:   5):	Two or more consecutives spaces
+Error: SPACE_BEFORE_FUNC    (line:  15, col:   8):	space before function name
+Error: TOO_FEW_TAB          (line:  17, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  17, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  17, col:   9):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  17, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  19, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  19, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  20, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  20, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  21, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  21, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  22, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  22, col:   9):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  22, col:  16):	Return value must be in parenthesis
+Error: TOO_FEW_TAB          (line:  23, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  23, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  24, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  24, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  25, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  25, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  26, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  26, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  26, col:  12):	Return value must be in parenthesis
+Error: SPACE_BEFORE_FUNC    (line:  58, col:   5):	space before function name
+Error: SPC_AFTER_OPERATOR   (line:  62, col:  19):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  62, col:  19):	missing space before operator
+Error: SPACE_BEFORE_FUNC    (line:  67, col:   5):	space before function name
+Error: SPACE_REPLACE_TAB    (line:  69, col:   9):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  70, col:   9):	Found space when expecting tab
+Error: SPACE_AFTER_KW       (line:  77, col:   5):	Missing space after keyword
+Error: SPC_BFR_PAR          (line:  77, col:  10):	Missing space before parenthesis (brace/bracket)
+Error: SPC_AFTER_OPERATOR   (line:  79, col:  23):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  79, col:  23):	missing space before operator
+Error: WRONG_SCOPE_VAR      (line:  81, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line:  81, col:  17):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  81, col:  28):	Declaration and assignation on a single line
+Error: WRONG_SCOPE_VAR      (line:  91, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line:  91, col:  17):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  91, col:  27):	Declaration and assignation on a single line
+Error: TAB_INSTEAD_SPC      (line:  97, col:  26):	Found tab when expecting space
+Error: TOO_MANY_LINES       (line: 102, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_FUNCS       (line: 104, col:   1):	Too many functions in file
+src/executer/executor_utils/word_expansion/ft_expand_word.c: Error!
+Error: EMPTY_LINE_EOF       (line:  14, col:   1):	Empty line at end of file
+src/executer/executor_utils/word_list/unquoted_word_handler.c: Error!
+Error: RETURN_PARENTHESIS   (line: 114, col:  16):	Return value must be in parenthesis
+Error: TOO_MANY_LINES       (line: 123, col:   1):	Function has more than 25 lines
+src/lexer/lexer_utils/lexer_handlers_meta.c: Error!
+Error: CONSECUTIVE_NEWLINES (line:  24, col:   1):	Consecutive newlines
+Error: CONSECUTIVE_NEWLINES (line:  25, col:   1):	Consecutive newlines
+Error: SPACE_REPLACE_TAB    (line:  28, col:  12):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  29, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  29, col:  12):	Misaligned variable declaration
+Error: SPC_AFTER_OPERATOR   (line:  35, col:  14):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  35, col:  14):	missing space before operator
+Error: VAR_DECL_START_FUNC  (line:  37, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line:  37, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  37, col:  12):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  37, col:  16):	Declaration and assignation on a single line
+Error: SPC_AFTER_OPERATOR   (line:  38, col:  12):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  38, col:  12):	missing space before operator
+Error: SPACE_AFTER_KW       (line:  47, col:   9):	Missing space after keyword
+Error: SPC_BFR_PAR          (line:  47, col:  15):	Missing space before parenthesis (brace/bracket)
+Notice: GLOBAL_VAR_DETECTED  (line:  15, col:   1):	Global variable present in file. Make sure it is a reasonable choice.
+new_readline/history_management.c: Error!
+Error: SPC_AFTER_OPERATOR   (line:  17, col:  32):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  17, col:  32):	missing space before operator
+new_readline/history_navigation.c: Error!
+Error: SPC_AFTER_OPERATOR   (line:  20, col:  35):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  20, col:  35):	missing space before operator
+Error: SPC_AFTER_OPERATOR   (line:  25, col:  35):	missing space after operator
+Error: SPC_BFR_OPERATOR     (line:  25, col:  35):	missing space before operator
+Error: SPC_AFTER_OPERATOR   (line:  26, col:  36):	missing space after operator
+new_readline/main.c: Error!
+Error: INVALID_HEADER       (line:   1, col:   1):	Missing or invalid 42 header
+Error: SPACE_BEFORE_FUNC    (line:   6, col:   4):	space before function name
+Error: TOO_FEW_TAB          (line:   8, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:   8, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:   8, col:  11):	Found space when expecting tab
+Error: NL_AFTER_VAR_DECL    (line:   9, col:   1):	Variable declarations must be followed by a newline
+Error: TOO_FEW_TAB          (line:   9, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:   9, col:   5):	Found space when expecting tab
+Error: EMPTY_LINE_FUNCTION  (line:  10, col:   1):	Empty line in function
+Error: TOO_FEW_TAB          (line:  11, col:   1):	Missing tabs for indent level
+Error: VAR_DECL_START_FUNC  (line:  11, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line:  11, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  11, col:   9):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  11, col:  10):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  11, col:  16):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line:  12, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  12, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  13, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  13, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  14, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  14, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  15, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  15, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  16, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  16, col:   9):	Space on empty line
+Error: TOO_FEW_TAB          (line:  17, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  17, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  18, col:   1):	Missing tabs for indent level
+Error: SPACE_AFTER_KW       (line:  18, col:  13):	Missing space after keyword
+Error: SPACE_REPLACE_TAB    (line:  18, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  19, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  19, col:   9):	Space on empty line
+Error: TOO_FEW_TAB          (line:  20, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  20, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  21, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  21, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  22, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  22, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  23, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  23, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  24, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  24, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  24, col:  12):	Return value must be in parenthesis
+new_readline/new_readline.c: Error!
+Error: INVALID_HEADER       (line:   1, col:   1):	Missing or invalid 42 header
+Error: CONSECUTIVE_NEWLINES (line:   8, col:   1):	Consecutive newlines
+Error: SPACE_BEFORE_FUNC    (line:  16, col:   4):	space before function name
+Error: TOO_FEW_TAB          (line:  18, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  18, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  18, col:  17):	Return value must be in parenthesis
+Error: SPACE_BEFORE_FUNC    (line:  28, col:   4):	space before function name
+Error: TOO_FEW_TAB          (line:  30, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  30, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  31, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  31, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  32, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  32, col:   5):	Found space when expecting tab
+Error: EMPTY_LINE_FUNCTION  (line:  33, col:   1):	Empty line in function
+Error: TOO_FEW_TAB          (line:  34, col:   1):	Missing tabs for indent level
+Error: VAR_DECL_START_FUNC  (line:  34, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line:  34, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  34, col:  11):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  34, col:  18):	Two or more consecutives spaces
+Error: DECL_ASSIGN_LINE     (line:  34, col:  20):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line:  35, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  35, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  35, col:  11):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  35, col:  20):	Declaration and assignation on a single line
+Error: NL_AFTER_VAR_DECL    (line:  36, col:   1):	Variable declarations must be followed by a newline
+Error: TOO_FEW_TAB          (line:  36, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  36, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  37, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  37, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  38, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  38, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  39, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  39, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  40, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  40, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  41, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  41, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  41, col:  12):	Return value must be in parenthesis
+Error: SPACE_BEFORE_FUNC    (line:  44, col:   5):	space before function name
+Error: TOO_FEW_TAB          (line:  46, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  46, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  46, col:  12):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  46, col:  16):	Declaration and assignation on a single line
+Error: NL_AFTER_VAR_DECL    (line:  47, col:   1):	Variable declarations must be followed by a newline
+Error: TOO_FEW_TAB          (line:  47, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  47, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  48, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  48, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  49, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  49, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  50, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  50, col:   9):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  50, col:  16):	Return value must be in parenthesis
+Error: TOO_FEW_TAB          (line:  51, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  51, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  52, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  52, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  52, col:  12):	Return value must be in parenthesis
+Error: SPACE_BEFORE_FUNC    (line:  55, col:   5):	space before function name
+Error: TOO_FEW_TAB          (line:  57, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  57, col:   5):	Found space when expecting tab
+Error: SPACE_BEFORE_FUNC    (line:  60, col:   4):	space before function name
+Error: TOO_FEW_TAB          (line:  62, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  62, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  63, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  63, col:   9):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  63, col:  16):	Return value must be in parenthesis
+Error: CONSECUTIVE_SPC      (line:  63, col:  18):	Two or more consecutives spaces
+Error: WRONG_SCOPE_COMMENT  (line:  63, col:  20):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  63, col:  20):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line:  64, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  64, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  65, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  65, col:   9):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  65, col:  16):	Return value must be in parenthesis
+Error: CONSECUTIVE_SPC      (line:  65, col:  18):	Two or more consecutives spaces
+Error: WRONG_SCOPE_COMMENT  (line:  65, col:  20):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  65, col:  20):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line:  66, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  66, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  66, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_FUNCS       (line:  69, col:   1):	Too many functions in file
+Error: SPACE_BEFORE_FUNC    (line:  69, col:   5):	space before function name
+Error: TOO_FEW_TAB          (line:  71, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  71, col:   5):	Found space when expecting tab
+Error: TOO_MANY_FUNCS       (line:  74, col:   1):	Too many functions in file
+Error: SPACE_BEFORE_FUNC    (line:  74, col:   4):	space before function name
+Error: TOO_FEW_TAB          (line:  76, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  76, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  77, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  77, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  78, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  78, col:   9):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  78, col:  16):	Return value must be in parenthesis
+Error: TOO_FEW_TAB          (line:  79, col:   1):	Missing tabs for indent level
+Error: VAR_DECL_START_FUNC  (line:  79, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line:  79, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  79, col:  11):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  79, col:  16):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line:  80, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  80, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  81, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  81, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  82, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  82, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  83, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  83, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  84, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  84, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  85, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  85, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  85, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_FUNCS       (line:  88, col:   1):	Too many functions in file
+Error: SPACE_BEFORE_FUNC    (line:  88, col:   5):	space before function name
+Error: TOO_FEW_TAB          (line:  90, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  90, col:   5):	Found space when expecting tab
+Error: TOO_MANY_FUNCS       (line:  98, col:   1):	Too many functions in file
+Error: SPACE_BEFORE_FUNC    (line:  98, col:   4):	space before function name
+Error: TOO_FEW_TAB          (line: 100, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 100, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 101, col:   1):	Missing tabs for indent level
+Error: VAR_DECL_START_FUNC  (line: 101, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line: 101, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 101, col:   9):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line: 101, col:  21):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line: 103, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 103, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 104, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 104, col:   9):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 104, col:  16):	Return value must be in parenthesis
+Error: TOO_FEW_TAB          (line: 105, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 105, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 106, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 106, col:   9):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 106, col:  16):	Return value must be in parenthesis
+Error: EMPTY_LINE_FUNCTION  (line: 107, col:   1):	Empty line in function
+Error: TOO_FEW_TAB          (line: 108, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 108, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 109, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 109, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 110, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 110, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 111, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 111, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 112, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 112, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 113, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 113, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 114, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 114, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 115, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 115, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 116, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 116, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 116, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_FUNCS       (line: 119, col:   1):	Too many functions in file
+Error: SPACE_BEFORE_FUNC    (line: 119, col:   4):	space before function name
+Error: TOO_FEW_TAB          (line: 121, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 121, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 122, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 122, col:   9):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 122, col:  16):	Return value must be in parenthesis
+Error: TOO_FEW_TAB          (line: 123, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 123, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 124, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 124, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 125, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 125, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 126, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 126, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 127, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 127, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 128, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 128, col:   9):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 128, col:  16):	Return value must be in parenthesis
+Error: TOO_FEW_TAB          (line: 129, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 129, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 130, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 130, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 131, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 131, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 131, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_FUNCS       (line: 134, col:   1):	Too many functions in file
+Error: SPACE_BEFORE_FUNC    (line: 134, col:   4):	space before function name
+Error: TOO_FEW_TAB          (line: 136, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 136, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 137, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 137, col:   9):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 137, col:  16):	Return value must be in parenthesis
+Error: TOO_FEW_TAB          (line: 138, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 138, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 139, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 139, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 140, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 140, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 141, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 141, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 142, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 142, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 143, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 143, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 144, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 144, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 145, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 145, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 146, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 146, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 147, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 147, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 148, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 148, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 149, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 149, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 149, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_FUNCS       (line: 152, col:   1):	Too many functions in file
+Error: SPACE_BEFORE_FUNC    (line: 152, col:   4):	space before function name
+Error: TOO_FEW_TAB          (line: 154, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 154, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 155, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 155, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 156, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 156, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 157, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 157, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 158, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 158, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 159, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 159, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 160, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 160, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 160, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_FUNCS       (line: 163, col:   1):	Too many functions in file
+Error: SPACE_BEFORE_FUNC    (line: 163, col:   4):	space before function name
+Error: TOO_FEW_TAB          (line: 165, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 165, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 166, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 166, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 167, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 167, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 168, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 168, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 169, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 169, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 170, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 170, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 171, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 171, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 171, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_FUNCS       (line: 174, col:   1):	Too many functions in file
+Error: SPACE_BEFORE_FUNC    (line: 174, col:   5):	space before function name
+Error: TOO_FEW_TAB          (line: 176, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 176, col:   5):	Found space when expecting tab
+Error: TOO_MANY_FUNCS       (line: 179, col:   1):	Too many functions in file
+Error: SPACE_BEFORE_FUNC    (line: 179, col:   4):	space before function name
+Error: TOO_FEW_TAB          (line: 181, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 181, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 182, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 182, col:   9):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 182, col:  16):	Return value must be in parenthesis
+Error: TOO_FEW_TAB          (line: 183, col:   1):	Missing tabs for indent level
+Error: VAR_DECL_START_FUNC  (line: 183, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line: 183, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 183, col:  11):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line: 183, col:  23):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line: 184, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 184, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 185, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 185, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 186, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 186, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 187, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 187, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 188, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 188, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 189, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 189, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 190, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 190, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 191, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 191, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 192, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 192, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 192, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_FUNCS       (line: 195, col:   1):	Too many functions in file
+Error: SPACE_BEFORE_FUNC    (line: 195, col:   4):	space before function name
+Error: TOO_FEW_TAB          (line: 197, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 197, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 198, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 198, col:   9):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 198, col:  16):	Return value must be in parenthesis
+Error: TOO_FEW_TAB          (line: 199, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 199, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 200, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 200, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 201, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 201, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 202, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 202, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 203, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 203, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 204, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 204, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 204, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_FUNCS       (line: 207, col:   1):	Too many functions in file
+Error: SPACE_BEFORE_FUNC    (line: 207, col:   4):	space before function name
+Error: TOO_FEW_TAB          (line: 209, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 209, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 209, col:   8):	Found space when expecting tab
+Error: NL_AFTER_VAR_DECL    (line: 210, col:   1):	Variable declarations must be followed by a newline
+Error: TOO_FEW_TAB          (line: 210, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 210, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 211, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 211, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 212, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 212, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 213, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 213, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 214, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 214, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 215, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 215, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 215, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_FUNCS       (line: 218, col:   1):	Too many functions in file
+Error: SPACE_BEFORE_FUNC    (line: 218, col:   4):	space before function name
+Error: TOO_FEW_TAB          (line: 220, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 220, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 220, col:  19):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 222, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 222, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 223, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 223, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 224, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 224, col:   9):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line: 224, col:  27):	Two or more consecutives spaces
+Error: TOO_FEW_TAB          (line: 225, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 225, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 226, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 226, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 227, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 227, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 228, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 228, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 229, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 229, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 230, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 230, col:   9):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 230, col:  16):	Return value must be in parenthesis
+Error: TOO_FEW_TAB          (line: 231, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 231, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 232, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 232, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 232, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_FUNCS       (line: 235, col:   1):	Too many functions in file
+Error: SPACE_BEFORE_FUNC    (line: 235, col:   5):	space before function name
+Error: TOO_FEW_TAB          (line: 237, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 237, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 237, col:  19):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 238, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 238, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 238, col:   9):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 238, col:  10):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 238, col:  19):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line: 239, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 239, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 239, col:   9):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 239, col:  10):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 239, col:  16):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line: 240, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 240, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 240, col:   9):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 240, col:  10):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 240, col:  24):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line: 242, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 242, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 243, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 243, col:   5):	Found space when expecting tab
+Error: EMPTY_LINE_FUNCTION  (line: 244, col:   1):	Empty line in function
+Error: TOO_FEW_TAB          (line: 245, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 245, col:   5):	Found space when expecting tab
+Error: TERNARY_FBIDDEN      (line: 245, col:  26):	Ternaries are forbidden
+Error: EMPTY_LINE_FUNCTION  (line: 246, col:   1):	Empty line in function
+Error: TOO_FEW_TAB          (line: 247, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 247, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 248, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 248, col:   9):	Found space when expecting tab
+Error: TERNARY_FBIDDEN      (line: 248, col:  31):	Ternaries are forbidden
+Error: TOO_FEW_TAB          (line: 249, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 249, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 250, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 250, col:   9):	Found space when expecting tab
+Error: EMPTY_LINE_FUNCTION  (line: 251, col:   1):	Empty line in function
+Error: TOO_FEW_TAB          (line: 252, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 252, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 253, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 253, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 254, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 254, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 255, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 255, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 256, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 256, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 257, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 257, col:   5):	Found space when expecting tab
+Error: EMPTY_LINE_FUNCTION  (line: 258, col:   1):	Empty line in function
+Error: TOO_FEW_TAB          (line: 259, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 259, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 260, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 260, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 261, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 261, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 262, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 262, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 263, col:   1):	Missing tabs for indent level
+Error: SPACE_AFTER_KW       (line: 263, col:  13):	Missing space after keyword
+Error: SPACE_REPLACE_TAB    (line: 263, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 264, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 264, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 265, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 265, col:   9):	Space on empty line
+Error: TOO_FEW_TAB          (line: 266, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 266, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 267, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 267, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 268, col:   1):	Missing tabs for indent level
+Error: SPACE_AFTER_KW       (line: 268, col:  13):	Missing space after keyword
+Error: SPACE_REPLACE_TAB    (line: 268, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 269, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 269, col:   9):	Space on empty line
+Error: TOO_FEW_TAB          (line: 270, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 270, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 271, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 271, col:   9):	Space on empty line
+Error: TOO_FEW_TAB          (line: 272, col:   1):	Missing tabs for indent level
+Error: WRONG_SCOPE_VAR      (line: 272, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 272, col:  13):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 272, col:  16):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line: 272, col:  25):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line: 274, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 274, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 275, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 275, col:  13):	Space on empty line
+Error: TOO_FEW_TAB          (line: 276, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 276, col:  17):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 277, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 277, col:  21):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 278, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 278, col:  17):	Space on empty line
+Error: TOO_FEW_TAB          (line: 279, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 279, col:  17):	Space on empty line
+Error: TOO_FEW_TAB          (line: 280, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 280, col:  21):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 281, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 281, col:  21):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 282, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 282, col:  17):	Space on empty line
+Error: TOO_FEW_TAB          (line: 283, col:   1):	Missing tabs for indent level
+Error: SPACE_AFTER_KW       (line: 283, col:  17):	Missing space after keyword
+Error: SPACE_REPLACE_TAB    (line: 283, col:  17):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 284, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 284, col:  13):	Space on empty line
+Error: TOO_FEW_TAB          (line: 285, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 285, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 286, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 286, col:  13):	Space on empty line
+Error: TOO_FEW_TAB          (line: 287, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 287, col:  17):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 288, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 288, col:  17):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 289, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 289, col:  17):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 290, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 290, col:  17):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 291, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 291, col:  21):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line: 291, col:  33):	Two or more consecutives spaces
+Error: WRONG_SCOPE_COMMENT  (line: 291, col:  35):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 291, col:  35):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line: 292, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 292, col:  17):	Space on empty line
+Error: TOO_FEW_TAB          (line: 293, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 293, col:  21):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 294, col:   1):	Missing tabs for indent level
+Error: SPACE_AFTER_KW       (line: 294, col:  17):	Missing space after keyword
+Error: SPACE_REPLACE_TAB    (line: 294, col:  17):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 295, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 295, col:  13):	Space on empty line
+Error: TOO_FEW_TAB          (line: 296, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 296, col:   9):	Space on empty line
+Error: TOO_FEW_TAB          (line: 297, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 297, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 298, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 298, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 299, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 299, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 300, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 300, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 301, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 301, col:   9):	Found space when expecting tab
+Error: LINE_TOO_LONG        (line: 301, col:  85):	line too long
+Error: TOO_FEW_TAB          (line: 302, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 302, col:  13):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 303, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 303, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line: 304, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 304, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 305, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 305, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 305, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_LINES       (line: 306, col:   1):	Function has more than 25 lines
+new_readline/new_readline.h: Error!
+Error: INVALID_HEADER       (line:   1, col:   1):	Missing or invalid 42 header
+Error: PREPROC_BAD_INDENT   (line:   2, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:   4, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:   5, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:   6, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:   7, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:   8, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:   9, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:  10, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:  11, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:  12, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:  13, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:  15, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:  16, col:   1):	Bad preprocessor indentation
+Error: PREPROC_BAD_INDENT   (line:  17, col:   1):	Bad preprocessor indentation
+Error: TOO_FEW_TAB          (line:  21, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  21, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  21, col:   9):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  21, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  22, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  22, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  22, col:   8):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  22, col:   8):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  23, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  23, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  23, col:   8):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  23, col:   8):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  24, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  24, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  24, col:   8):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  24, col:   8):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  25, col:   2):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  25, col:   4):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  29, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  29, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  29, col:  15):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  29, col:  15):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  30, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  30, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  30, col:  11):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  30, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  30, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  32, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  32, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  32, col:   9):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  32, col:   9):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  32, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  33, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  33, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  33, col:  11):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  33, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  33, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  34, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  34, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  34, col:  11):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  34, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  34, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  36, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  36, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  36, col:  11):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  36, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  36, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  37, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  37, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  37, col:  11):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  37, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  37, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  39, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  39, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  39, col:  11):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  39, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  39, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  40, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  40, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  40, col:  11):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  40, col:  11):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  40, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  42, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  42, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  42, col:  19):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  42, col:  19):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  42, col:  22):	Misaligned variable declaration
+Error: TOO_FEW_TAB          (line:  43, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  43, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  43, col:  11):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  43, col:  11):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  44, col:   2):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  44, col:   4):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  46, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  48, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  48, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  49, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  49, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  50, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  50, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  53, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  53, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  56, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  56, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  57, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  57, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  60, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  60, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  63, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  63, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  64, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  64, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  65, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  65, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  67, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  67, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  68, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  68, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  70, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  70, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  71, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  71, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  73, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  73, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  74, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  74, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  75, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  75, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  76, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  76, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  78, col:   5):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  78, col:   5):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  79, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  79, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  80, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  80, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  82, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  82, col:   4):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  85, col:   4):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  85, col:   4):	Found space when expecting tab

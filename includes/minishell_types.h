@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:31 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/30 21:05:13 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/30 23:56:26 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ unexpected EOF while looking for matching ')'\n"
 	"minishell: syntax error\
  near unexpected token ')'\n"
 
-# define SAFE_CHARSET "ABCDEFGHIJKLMNOPQRSTUVWXYZ\
+# define SAFE_CHARSET \
+	"ABCDEFGHIJKLMNOPQRSTUVWXYZ\
 	abcdefghijklmnopqrstuvwxyz0123456789-_"
 
 # define TOKEN_VALUE_PIPE "|"
