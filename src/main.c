@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:01:51 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/30 21:50:22 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/30 22:23:34 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,6 @@ static int	handle_signal_or_empty(char *line, t_shell *shell)
 	return (0);
 }
 
-void restore_terminal_state(void)
-{
-    struct termios t;
-
-    tcgetattr(STDIN_FILENO, &t);
-    t.c_lflag |= (ICANON | ECHO | ISIG);
-    t.c_iflag |= (ICRNL | IXON);
-    t.c_oflag |= (OPOST | ONLCR);
-    tcsetattr(STDIN_FILENO, TCSANOW, &t);
-
-    write(1, "\033[0m", 4);
-}
-
 int shell_loop(t_shell *shell)
 {
     char            *line;
@@ -89,7 +76,6 @@ int shell_loop(t_shell *shell)
     while (1)
     {
         g_signum = 0;
-
         line = new_readline(shell->hist, false, "minishel$");
         if (handle_signal_or_empty(line, shell))
         {
@@ -97,6 +83,8 @@ int shell_loop(t_shell *shell)
                 break;
             continue;
         }
+	    if (*line)
+            add_history(line, &hist);
         process_line(line, shell);
         xfree(line);
         shell->line_ptr = NULL;
