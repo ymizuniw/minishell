@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:30 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 00:04:06 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 02:41:18 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static bool	read_heredoc_line(t_shell *shell, char **line, int is_interactive)
 	size_t	len;
 
 	if (is_interactive)
-		*line = new_readline(shell->hist, true, ">");
+		*line = new_readline(shell->hist, true);
 	else
 		*line = get_next_line(STDIN_FILENO);
 	if (!*line)

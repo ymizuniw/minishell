@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:01:51 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 00:06:26 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 02:40:37 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	shell_loop(t_shell *shell)
 	while (1)
 	{
 		g_signum = 0;
-		line = new_readline(shell->hist, false, "minishel$");
+		line = new_readline(shell->hist, false);
 		if (handle_signal_or_empty(line, shell))
 		{
 			if (!line && !g_signum)
