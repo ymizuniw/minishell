@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:31 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/25 23:25:17 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:05:13 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_TYPES_H
 
 # include "../libft/libft.h"
+# include "new_readline.h"
 # include <dirent.h>
 # include <fcntl.h>
 # include <limits.h>
@@ -32,7 +33,6 @@
 // heredoc pipe capacity from system default size.
 # define HERE_PIPE_SIZE 4096
 // # define HERE_TEMPLATE "/tmp/heredoc_tmp_XXXXX"
-# define HIST_MAX 1000
 
 // ECHOCTL value is depending on executing evironment.
 # ifndef ECHOCTL
@@ -67,23 +67,6 @@ unexpected EOF while looking for matching ')'\n"
 # define ASC_ESC 27
 
 typedef struct s_shell	t_shell;
-
-// change cur to cur_idx
-typedef struct s_hist
-{
-	size_t				idx;
-	size_t				size;
-	int					cur;
-	char				*hist_box[HIST_MAX];
-}						t_hist;
-
-// prompt shall be macro def.
-typedef struct s_readline_ctx
-{
-	size_t				*len;
-	t_hist				*hist;
-	const char			*prompt;
-}						t_readline_ctx;
 
 // naming is bad. this is variable?
 typedef struct s_expand_ctx

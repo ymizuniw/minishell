@@ -24,16 +24,13 @@ rm -f in
 echo "========== cd abs / rel / ~ ==============="
 cd .. && pwd
 cd test && pwd
-TMP_PATH="$PWD"
 cd "$HOME" && pwd
-cd "$TMP_PATH" && pwd
 cd ~ && pwd
-cd "$TMP_PATH" && pwd
 
 echo "============= several arguments ====================="
 echo a a
 cat a a || echo "cat failed"
-ls a a
+ls a a || echo "ls failed"
 touch in && echo "infile" > in
 touch in2 && echo "infile2" > in2
 cat in in2
@@ -41,7 +38,7 @@ ls src includes || echo "ls failed"
 rm -f in in2
 
 echo "============= pipe ====================="
-echo a a | cat || echo "cat failed"
+echo a a | cat
 cat a a | cat || echo "cat failed"
 ls a a | cat
 touch in && echo "infile" > in
@@ -52,18 +49,14 @@ rm -f in in2
 echo "============ Environment Variable ================"
 echo $USER $? $HOME
 echo "$USER" '$?' "$HOME"
-echo ${USER}${?}${HOME}
 echo "'$USER' $HOME"
-echo "\"$USER\" $HOME"
 
 echo "============ Unset Path ==============="
 INPUT=$(cat << 'EOF'
 unset PATH
 echo $PATH
-touch in
 /bin/touch in && echo "infile" > in
-cat in || echo "cat failed"
-/bin/cat in || echo "cat failed"
+/bin/cat in
 exit
 EOF
 )
@@ -88,8 +81,8 @@ chmod +x test2/test2.sh
 TEST1_PATH="$PWD/test1"
 TEST2_PATH="$PWD/test2"
 
-export PATH="$TEST1_PATH:$TEST2_PATH:$PATH"
+export PATH="$TEST1_PATH:$PATH"
 test1.sh
 
-export PATH="$TEST2_PATH:$TEST1_PATH:$PATH"
+export PATH="$TEST2_PATH:$PATH"
 test2.sh

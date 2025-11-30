@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/11/26 02:30:02 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/11/30 20:59:06 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 CC = cc
 # CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE
 CFLAGS = -Wall -Wextra -Werror -Wunused -Wunused-function -Wunused-variable
-INC = -Iincludes
+INC = -Iincludes -Inew_readline
 # -fsanitize=address
 #   export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 #   export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
@@ -37,8 +37,8 @@ LEXER_DIR = $(SRC_DIR)/lexer
 LEXER_UTILS_DIR = $(LEXER_DIR)/lexer_utils
 PARSER_DIR = $(SRC_DIR)/parser
 SIGNAL_MANAGEMENT_DIR = $(SRC_DIR)/signal_management
-FT_READLINE_DIR = $(SRC_DIR)/ft_readline
-READLINE_UTILS_DIR = $(FT_READLINE_DIR)/readline_utils
+NEW_RL_DIR = new_readline
+NEW_RL_LIB = $(NEW_RL_DIR)/new_readline.a
 
 # SOURCE FILES
 MAIN_SRC = $(SRC_DIR)/main.c \
@@ -143,13 +143,6 @@ PARSER_SRC = $(PARSER_DIR)/fucking_gen_tree.c \
              $(PARSER_DIR)/syntax_checker.c \
              $(PARSER_DIR)/syntax_error.c
 
-FT_READLINE_SRC = $(FT_READLINE_DIR)/ft_readline.c
-
-READLINE_UTILS_SRC = $(READLINE_UTILS_DIR)/terminal_utils.c \
-                     $(READLINE_UTILS_DIR)/input_handlers.c \
-                     $(READLINE_UTILS_DIR)/history_navigation.c \
-                     $(READLINE_UTILS_DIR)/history_management.c
-
 SIGNAL_MANAGEMENT_SRC = $(SIGNAL_MANAGEMENT_DIR)/signal_management.c
 
 # ALL SOURCE FILES
@@ -169,9 +162,7 @@ SRCS = $(MAIN_SRC) \
        $(WORD_LIST_SRC) \
        $(PARSER_SRC) \
        $(PARSER_UTILS_SRC) \
-       $(SIGNAL_MANAGEMENT_SRC) \
-       $(FT_READLINE_SRC) \
-       $(READLINE_UTILS_SRC)
+       $(SIGNAL_MANAGEMENT_SRC)
 
 OBJS = $(SRCS:.c=.o)
 
@@ -180,24 +171,28 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # COMPILATION RULES
-all: $(NAME)
+all: $(NEW_RL_LIB) $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
+$(NEW_RL_LIB):
+	$(MAKE) -C $(NEW_RL_DIR)
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LDFLAGS) $(CPPFLAGS) -lreadline -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(NEW_RL_LIB) -ltermcap -o $(NAME)
 
 clean:
 	rm -f $(OBJS)
 	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(NEW_RL_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(NEW_RL_DIR) fclean
 
 re: fclean all
 

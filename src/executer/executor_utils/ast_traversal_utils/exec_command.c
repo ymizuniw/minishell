@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:15 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/27 03:08:37 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:32:35 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ static int process_command(t_ast *node, t_shell *shell)
 	for (size_t i = 0;i<node->cmd->token_count; i++)
 	{
 		char **expanded = expand_token(node->cmd->tokens[i], shell);
-		if (expanded==NULL)//free array.?
+		if (expanded==NULL)
 			return (free_double_array(argv), 0);
 		for (size_t j = 0;expanded[j]; j++)
 		{
@@ -156,8 +156,10 @@ int	exec_command(t_ast *node, t_shell *shell)
 		if (fds[0]>=0)
 			xclose(fds[0]);
 		if (fds[1]>=0)
+		{
 			xclose(fds[1]);
-			perror("dup");
+		}
+		perror("dup");
 		shell->last_exit_status=1;
 		ft_exit(NULL, shell->last_exit_status, shell);
 		return (-1);

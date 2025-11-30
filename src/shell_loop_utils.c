@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_loop_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:42:53 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/25 15:40:06 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:41:55 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

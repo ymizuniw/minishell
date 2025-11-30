@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_external_cmd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:09 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/25 15:44:04 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/30 22:02:07 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

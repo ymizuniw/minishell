@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:42:48 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/19 19:25:39 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:22:40 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_shell(t_shell *shell, char **env)
 	ft_memset(shell, 0, sizeof(t_shell));
 	shell->stdin_backup = -1;
 	shell->stdout_backup = -1;
-	if (isatty(STDIN_FILENO) == 1 && isatty(STDOUT_FILENO))
+	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
 		shell->interactive = true;
 	signal_initializer(shell->interactive);
 	init_shell_env(shell, env);

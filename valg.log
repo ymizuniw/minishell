@@ -1,0 +1,40 @@
+==103270== FILE DESCRIPTORS: 9 open (3 std) at exit.
+==103270== Open file descriptor 26: /dev/ptmx
+==103270==    <inherited from parent>
+==103270== 
+==103270== Open file descriptor 25: /dev/ptmx
+==103270==    <inherited from parent>
+==103270== 
+==103270== Open file descriptor 24: /home/ymizuniw/.vscode-server/data/logs/20251130T185726/remoteagent.log
+==103270==    <inherited from parent>
+==103270== 
+==103270== Open file descriptor 23: /home/ymizuniw/.vscode-server/data/logs/20251130T185726/remoteTelemetry.log
+==103270==    <inherited from parent>
+==103270== 
+==103270== Open file descriptor 22: /home/ymizuniw/.vscode-server/data/logs/20251130T185726/ptyhost.log
+==103270==    <inherited from parent>
+==103270== 
+==103270== Open file descriptor 3: /home/ymizuniw/minishell/valg.log
+==103270==    <inherited from parent>
+==103270== 
+==103270== 
+==103189== FILE DESCRIPTORS: 9 open (3 std) at exit.
+==103189== Open file descriptor 26: /dev/ptmx
+==103189==    <inherited from parent>
+==103189== 
+==103189== Open file descriptor 25: /dev/ptmx
+==103189==    <inherited from parent>
+==103189== 
+==103189== Open file descriptor 24: /home/ymizuniw/.vscode-server/data/logs/20251130T185726/remoteagent.log
+==103189==    <inherited from parent>
+==103189== 
+==103189== Open file descriptor 23: /home/ymizuniw/.vscode-server/data/logs/20251130T185726/remoteTelemetry.log
+==103189==    <inherited from parent>
+==103189== 
+==103189== Open file descriptor 22: /home/ymizuniw/.vscode-server/data/logs/20251130T185726/ptyhost.log
+==103189==    <inherited from parent>
+==103189== 
+==103189== Open file descriptor 3: /home/ymizuniw/minishell/valg.log
+==103189==    <inherited from parent>
+==103189== 
+==103189== 

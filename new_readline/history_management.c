@@ -6,19 +6,19 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:28 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/27 02:37:24 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/30 20:43:36 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "new_readline.h"
 
 void	add_history(char *line, t_hist *hist)
 {
 	if (!line || !*line || hist==NULL)
 		return ;
 	if (hist && hist->hist_box[hist->idx] != NULL)
-		xfree(hist->hist_box[hist->idx]);
-	hist->hist_box[hist->idx] = ft_strdup(line);
+		free(hist->hist_box[hist->idx]);
+	hist->hist_box[hist->idx] = strdup(line);
 	hist->idx = (hist->idx + 1) % HIST_MAX;
 	if (hist->size < HIST_MAX)
 		hist->size++;
@@ -32,7 +32,7 @@ void	free_hist_box(char *hist_box[HIST_MAX])
 	i = 0;
 	while (i < HIST_MAX)
 	{
-		xfree(hist_box[i]);
+		free(hist_box[i]);
 		hist_box[i] = NULL;
 		i++;
 	}

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:01:51 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/25 15:39:54 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:50:22 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include "new_readline.h"
 
 void		init_shell(t_shell *shell, char **env);
 int			parse_and_exec(t_token *token_list, t_shell *shell);
@@ -65,30 +66,42 @@ static int	handle_signal_or_empty(char *line, t_shell *shell)
 	return (0);
 }
 
-int	shell_loop(t_shell *shell)
+void restore_terminal_state(void)
 {
-	char			*line;
-	char const		*prompt;
-	static t_hist	hist;
+    struct termios t;
 
-	shell->hist = &hist;
-	hist.cur = -1;
-	prompt = "minishell$ ";
-	while (1)
-	{
-		g_signum = 0;
-		line = ft_readline(shell, prompt, &hist);
-		if (handle_signal_or_empty(line, shell))
-		{
-			if (!line && !g_signum)
-				break ;
-			continue ;
-		}
-		process_line(line, shell);
-		xfree(line);
-		shell->line_ptr = NULL;
-	}
-	return (0);
+    tcgetattr(STDIN_FILENO, &t);
+    t.c_lflag |= (ICANON | ECHO | ISIG);
+    t.c_iflag |= (ICRNL | IXON);
+    t.c_oflag |= (OPOST | ONLCR);
+    tcsetattr(STDIN_FILENO, TCSANOW, &t);
+
+    write(1, "\033[0m", 4);
+}
+
+int shell_loop(t_shell *shell)
+{
+    char            *line;
+    static t_hist   hist;
+
+    shell->hist = &hist;
+    hist.cur = -1;
+    while (1)
+    {
+        g_signum = 0;
+
+        line = new_readline(shell->hist, false, "minishel$");
+        if (handle_signal_or_empty(line, shell))
+        {
+            if (!line && !g_signum)
+                break;
+            continue;
+        }
+        process_line(line, shell);
+        xfree(line);
+        shell->line_ptr = NULL;
+    }
+    return 0;
 }
 
 int	main(int argc, char **argv, char **env)

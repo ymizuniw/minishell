@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:47 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/27 02:58:38 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:42:35 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	exit_with_error(t_shell *shell, int code, bool print_num_err,
 	}
 	free_double_array(cmd);
 	free_shell(shell);
-	disable_raw_mode(&shell->orig_term);
+	// disable_raw_mode(&shell->orig_term);
 	exit(code);
 }
 
@@ -92,7 +92,7 @@ __attribute__((noreturn))void	ft_exit(char **cmd, int last_exit_status, t_shell 
 		exit(exit_code);
 	}
 	free_double_array(cmd);
-	disable_raw_mode(&shell->orig_term);
+	// disable_raw_mode(&shell->orig_term);
 	free_shell(shell);
 	exit(last_exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:15 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/26 00:55:45 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/11/30 22:07:04 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_word  *handle_unclosed_quote(const char *input, size_t input_len, size_t *idx)
 t_word  *handle_doller_word(const char *input, size_t input_len, size_t *idx);
 t_word  *handle_unquoted_word(const char *input, size_t input_len, size_t *idx);
 t_word  *append_node(t_word *head, t_word *new);
-
 
 // search and exec
 void			search_and_exec(t_shell *shell, char **cmd_args);
