@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:01:15 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 01:25:21 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 03:02:31 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(void)
 	line = NULL;
 	while (1)
 	{
-		line = new_readline(&hist, false, "shell$");
+		line = new_readline(&hist, false);
 		if (!line)
 		{
 			printf("exit\n");
