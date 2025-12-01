@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:33 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 22:30:55 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 02:58:56 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	join_value(char **d, const char *s, size_t dlen, size_t slen)
 	new = malloc(sizeof(char) * (slen + dlen + 1));
 	if (new == NULL)
 		return (0);
-	memset(new, 0, sizeof(char) * (slen + dlen + 1));
+	ft_memset(new, 0, sizeof(char) * (slen + dlen + 1));
 	if (*d)
-		memcpy(new, *d, dlen);
-	memcpy(new + dlen, s, slen);
+		ft_memcpy(new, *d, dlen);
+	ft_memcpy(new + dlen, s, slen);
 	if (*d)
 		free(*d);
 	*d = new;
