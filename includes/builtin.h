@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 02:05:22 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/30 21:04:50 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 18:34:41 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	exec_builtin(t_shell *shell, char **cmd);
 void	run_builtin(t_shell *shell, char **cmd);
 int		ft_echo(char **cmd);
 int		ft_cd(char **cmd, t_shell *shell);
+char	*expand_home(char *target_dir, t_shell *shell, bool *allocated);
 int		ft_pwd(t_shell *shell, int fd);
 int		ft_export(t_shell *shell, char **cmd, int fd);
 void	print_exported_vars(t_env *env_list, int fd);

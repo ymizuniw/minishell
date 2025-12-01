@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/01 01:24:38 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/01 18:33:05 by kemotoha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ MAIN_SRC = $(SRC_DIR)/main.c \
            $(SRC_DIR)/shell_loop_utils.c
 
 BUILTIN_SRC = $(BUILTIN_DIR)/exec_builtin.c \
-              $(BUILTIN_DIR)/ft_cd.c \
+              $(BUILTIN_DIR)/ft_cd/ft_cd.c \
+              $(BUILTIN_DIR)/ft_cd/expand_home.c \
               $(BUILTIN_DIR)/ft_echo.c \
               $(BUILTIN_DIR)/ft_env.c \
               $(BUILTIN_DIR)/ft_exit.c \

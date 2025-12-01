@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:47 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 00:04:38 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:30:06 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ static void	exit_with_error(t_shell *shell, int code, bool print_num_err,
 	exit(code);
 }
 
-__attribute__((noreturn)) void ft_exit(char **cmd, int last_exit_status,
-	t_shell *shell)
+void	ft_exit(char **cmd, int last_exit_status, t_shell *shell)
 {
 	long long	exit_code;
 	int			overflow;
