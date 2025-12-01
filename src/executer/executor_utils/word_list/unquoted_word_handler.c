@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:18 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 17:22:55 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 19:27:32 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,14 @@ t_word	*handle_unclosed_quote(const char *input, size_t input_len, size_t *idx)
 	return (create_word_node(content, WD_LITERAL, false, false));
 }
 
+void	get_var_len(char const *input, size_t input_len, size_t start,
+		size_t *len)
+{
+	while (start + *len < input_len && (ft_isalnum((int)input[start + *len])
+			|| input[start + *len] == '_'))
+		(*len)++;
+}
+
 t_word	*handle_doller_word(const char *input, size_t input_len, size_t *idx)
 {
 	size_t	start;
@@ -90,28 +98,15 @@ t_word	*handle_doller_word(const char *input, size_t input_len, size_t *idx)
 	if (input[*idx] != '$')
 		return (NULL);
 	start = *idx + 1;
+	*idx = start;
 	len = 0;
 	if (start >= input_len)
-	{
-		*idx = start;
 		return (create_word_node(ft_strdup("$"), WD_LITERAL, false, false));
-	}
-	if (input[start] == '?')
-	{
-		*idx = start + 1;
+	if (input[start] == '?' && ++(*idx))
 		return (create_word_node(ft_strdup("?"), WD_DOLLER, true, false));
-	}
-	else
-	{
-		while (start + len < input_len && (ft_isalnum((int)input[start + len])
-				|| input[start + len] == '_'))
-			len++;
-	}
+	get_var_len(input, input_len, start, &len);
 	if (len == 0)
-	{
-		*idx = start;
 		return (create_word_node(ft_strdup("$"), WD_LITERAL, false, false));
-	}
 	if (len == 0)
 		return (NULL);
 	content = ft_strndup(&input[start], len);

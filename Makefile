@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/01 19:36:03 by kemotoha         ###   ########.fr        #
+#    Updated: 2025/12/01 23:29:13 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

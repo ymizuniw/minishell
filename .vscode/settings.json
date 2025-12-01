@@ -9,6 +9,7 @@
         "tuple": "c",
         "type_traits": "c",
         "utility": "c",
-        "tmp": "c"
+        "tmp": "c",
+        "algorithm": "c"
     }
 }

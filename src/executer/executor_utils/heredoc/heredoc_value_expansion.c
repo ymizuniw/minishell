@@ -3,11 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_value_expansion.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/15 18:37:33 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 19:48:56 by kemotoha         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/12/01 23:31:03 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
+
 /* ************************************************************************** */
 
 #include "../../../../includes/minishell.h"

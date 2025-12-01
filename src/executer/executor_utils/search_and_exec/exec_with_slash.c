@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:43 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 00:04:09 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 19:42:47 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,7 @@ void	exec_with_slash(t_shell *shell, char **cmd_args, char **env)
 		return ;
 	}
 	if (shell->in_pipe_child)
-	{
 		exec_direct(cmd_args, env, shell);
-		return ;
-	}
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == -1)
