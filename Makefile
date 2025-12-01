@@ -6,11 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-<<<<<<<<< Temporary merge branch 1
-#    Updated: 2025/12/01 19:36:03 by kemotoha         ###   ########.fr        #
-=========
-#    Updated: 2025/12/01 19:48:24 by ymizuniw         ###   ########.fr        #
->>>>>>>>> Temporary merge branch 2
+#    Updated: 2025/12/02 02:22:49 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +16,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -Wunused -Wunused-function -Wunused-variable
 INC = -Iincludes -Inew_readline
 LDFLAGS=-L$(LIBFT_DIR) -L$(NEW_RL_DIR)
-LIBS = $(NEW_RL_LIB) -l:libft.a -ltermcap
+LIBS = $(LIBFT) -ltermcap $(NEW_RL_LIB)
 # -fsanitize=address
 #   export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 #   export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
@@ -185,7 +181,7 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # COMPILATION RULES
-all: $(NEW_RL_LIB) $(NAME)
+all: $(LIBFT) $(NEW_RL_LIB) $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
@@ -195,8 +191,8 @@ $(LIBFT):
 $(NEW_RL_LIB):
 	$(MAKE) -C $(NEW_RL_DIR)
 
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LIBS) -ltermcap -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LIBS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)

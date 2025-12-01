@@ -6,11 +6,12 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:26 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/25 22:38:27 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 02:16:36 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+// #include "../../includes/minishell.h"
+#include "minishell.h"
 
 int				handle_eof(t_token *token_head);
 int				handle_internal_separator(t_token *token_head,
