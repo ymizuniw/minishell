@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:15 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/30 23:55:52 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 18:03:14 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ int				do_redirection(t_ast *node, t_shell *shell);
 int				exec_command(t_ast *node, t_shell *shell);
 int				exec_pipe(t_ast *node, t_shell *shell);
 int				exec_subshell(t_ast *node, t_shell *shell);
+
+// ast_traversal_utils
+char			**append_argv(char **argv, size_t *argc, char *str);
+int				handle_redirection_error(t_ast *node, int stdin_k, int stdout_k,
+					t_shell *shell);
+int				process_command(t_ast *node, t_shell *shell);
+void			restore_stdio(int stdin_keep, int stdout_keep);
+char			**expand_tokens(t_token **tokens, size_t count, t_shell *shell);
+char			**expand_token(t_token *token, t_shell *shell);
 
 // heredoc utils
 unsigned int	ft_rand(unsigned int *seed);

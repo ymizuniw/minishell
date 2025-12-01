@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_traversal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:09 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/25 15:40:10 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:39:40 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
