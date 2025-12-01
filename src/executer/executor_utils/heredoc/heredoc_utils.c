@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 19:34:06 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/01 22:56:53 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 19:34:24 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_value_expansion.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:33 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 22:30:55 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 19:48:56 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/minishell.h"
-
-char	*ext_unit(char *s, size_t start, size_t end)
-{
-	return (ft_strndup(&s[start], end - start));
-}
-
-int	join_value(char **d, const char *s, size_t dlen, size_t slen)
-{
-	char	*new;
-
-	new = malloc(sizeof(char) * (slen + dlen + 1));
-	if (new == NULL)
-		return (0);
-	memset(new, 0, sizeof(char) * (slen + dlen + 1));
-	if (*d)
-		memcpy(new, *d, dlen);
-	memcpy(new + dlen, s, slen);
-	if (*d)
-		free(*d);
-	*d = new;
-	return (1);
-}
 
 static char	*expand_exit_status(char **res, t_shell *shell, size_t *i)
 {
@@ -106,7 +84,7 @@ static bool	append_res(char **res, char c)
 	tmp[1] = '\0';
 	res_len = 0;
 	if (*res)
-		res_len = strlen(*res);
+		res_len = ft_strlen(*res);
 	if (!join_value(res, tmp, res_len, 1))
 		return (false);
 	return (true);

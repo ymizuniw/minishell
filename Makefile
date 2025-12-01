@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/02 02:31:53 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/01 19:36:03 by kemotoha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ EXECUTER_DIR = $(SRC_DIR)/executer
 EXECUTER_UTILS_DIR = $(EXECUTER_DIR)/executor_utils
 WORD_EXPANSION_DIR = $(EXECUTER_UTILS_DIR)/word_expansion
 AST_TRAVERSAL_DIR = $(EXECUTER_UTILS_DIR)/ast_traversal_utils
+TOKEN_EXPANSION_DIR = $(EXECUTER_UTILS_DIR)/token_expansion
 HEREDOC_DIR = $(EXECUTER_UTILS_DIR)/heredoc
 GEN_WORD_DIR = $(EXECUTER_UTILS_DIR)/gen_word
 WORD_LIST_DIR = $(EXECUTER_UTILS_DIR)/word_list
@@ -49,8 +50,7 @@ MAIN_SRC = $(SRC_DIR)/main.c \
            $(SRC_DIR)/shell_loop_utils.c
 
 BUILTIN_SRC = $(BUILTIN_DIR)/exec_builtin.c \
-              $(BUILTIN_DIR)/ft_cd/ft_cd.c \
-              $(BUILTIN_DIR)/ft_cd/expand_home.c \
+              $(BUILTIN_DIR)/ft_cd.c \
               $(BUILTIN_DIR)/ft_echo.c \
               $(BUILTIN_DIR)/ft_env.c \
               $(BUILTIN_DIR)/ft_exit.c \
@@ -84,7 +84,13 @@ AST_TRAVERSAL_SRC = $(AST_TRAVERSAL_DIR)/ast_traversal.c \
                     $(AST_TRAVERSAL_DIR)/do_redirection.c \
                     $(AST_TRAVERSAL_DIR)/exec_command.c \
                     $(AST_TRAVERSAL_DIR)/exec_pipe.c \
-                    $(AST_TRAVERSAL_DIR)/exec_subshell.c
+                    $(AST_TRAVERSAL_DIR)/exec_subshell.c\
+                    $(AST_TRAVERSAL_DIR)/append_argv.c\
+                    $(AST_TRAVERSAL_DIR)/handle_redirection_error.c\
+                    $(AST_TRAVERSAL_DIR)/process_command.c\
+                    $(AST_TRAVERSAL_DIR)/restore_stdio.c
+TOKEN_EXPANSION_SRC = $(TOKEN_EXPANSION_DIR)/expand_tokens.c
+
 
 GEN_WORD_SRC =    $(GEN_WORD_DIR)/gen_word.c \
                   $(GEN_WORD_DIR)/gen_word_utils.c \
@@ -93,7 +99,8 @@ HEREDOC_SRC = $(HEREDOC_DIR)/ft_mkstmp.c \
               $(HEREDOC_DIR)/make_file_heredoc.c \
               $(HEREDOC_DIR)/make_pipe_heredoc.c \
               $(HEREDOC_DIR)/get_document.c \
-              $(HEREDOC_DIR)/heredoc_value_expansion.c
+              $(HEREDOC_DIR)/heredoc_value_expansion.c \
+              $(HEREDOC_DIR)/heredoc_utils.c
 
 SEARCH_EXEC_SRC = $(SEARCH_EXEC_DIR)/search_and_exec.c \
                   $(SEARCH_EXEC_DIR)/run_external_cmd.c \
@@ -155,6 +162,7 @@ SRCS = $(MAIN_SRC) \
        $(ENV_MANAGEMENT_SRC) \
        $(EXECUTER_SRC) \
        $(AST_TRAVERSAL_SRC) \
+	   $(TOKEN_EXPANSION_SRC) \
        $(HEREDOC_SRC) \
        $(SEARCH_EXEC_SRC) \
        $(LEXER_SRC) \
