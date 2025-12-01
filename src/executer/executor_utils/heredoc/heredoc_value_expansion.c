@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/12/01 23:31:03 by ymizuniw         ###   ########.fr       */
+/*   Created: 2025/11/15 18:37:33 by ymizuniw          #+#    #+#             */
+/*   Updated: 2025/12/01 23:43:53 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ static bool	append_res(char **res, char c)
 	tmp[1] = '\0';
 	res_len = 0;
 	if (*res)
+		res_len = ft_strlen(*res);
 		res_len = ft_strlen(*res);
 	if (!join_value(res, tmp, res_len, 1))
 		return (false);
