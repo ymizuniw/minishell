@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/01 18:01:01 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/01 19:36:03 by kemotoha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,8 @@ HEREDOC_SRC = $(HEREDOC_DIR)/ft_mkstmp.c \
               $(HEREDOC_DIR)/make_file_heredoc.c \
               $(HEREDOC_DIR)/make_pipe_heredoc.c \
               $(HEREDOC_DIR)/get_document.c \
-              $(HEREDOC_DIR)/heredoc_value_expansion.c
+              $(HEREDOC_DIR)/heredoc_value_expansion.c \
+              $(HEREDOC_DIR)/heredoc_utils.c
 
 SEARCH_EXEC_SRC = $(SEARCH_EXEC_DIR)/search_and_exec.c \
                   $(SEARCH_EXEC_DIR)/run_external_cmd.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:15 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/01 18:03:14 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 19:37:06 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ t_word			*handle_doller_word(const char *input, size_t input_len,
 t_word			*handle_unquoted_word(const char *input, size_t input_len,
 					size_t *idx);
 t_word			*append_node(t_word *head, t_word *new);
+char			*ext_unit(char *s, size_t start, size_t end);
+int				join_value(char **d, const char *s, size_t slen, size_t dlen);
 
 // search and exec
 void			search_and_exec(t_shell *shell, char **cmd_args);

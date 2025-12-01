@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_readline.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:01:28 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 17:19:39 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 21:01:39 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,9 @@ int					insertion(t_new_readline *nr, char one_char);
 int					write_to_buffer(t_new_readline *nr, char one_char);
 
 int					process_printable(t_new_readline *nr, char one_char);
+int					process_break_line(t_new_readline *nr, char **line);
+int					process_signal_branch(t_new_readline *nr, char **line,
+						char one_char, bool is_heredoc);
 
 /* window */
 int					resize_window(t_new_readline *nr);
