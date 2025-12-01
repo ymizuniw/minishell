@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 19:34:06 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/01 19:34:24 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/12/02 02:51:02 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ext_unit(char *s, size_t start, size_t end)
 	return (ft_strndup(&s[start], end - start));
 }
 
-int	join_value(char **d, const char *s, size_t slen, size_t dlen)
+int	join_value(char **d, const char *s, size_t dlen, size_t slen)
 {
 	char	*new;
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/01 19:36:03 by kemotoha         ###   ########.fr        #
+#    Updated: 2025/12/02 02:50:01 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -Wunused -Wunused-function -Wunused-variable
 INC = -Iincludes -Inew_readline
 LDFLAGS=-L$(LIBFT_DIR) -L$(NEW_RL_DIR)
-LIBS = $(NEW_RL_LIB) -l:libft.a -ltermcap
+LIBS = $(LIBFT) $(NEW_RL_LIB) -ltermcap
 # -fsanitize=address
 #   export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 #   export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
@@ -50,7 +50,8 @@ MAIN_SRC = $(SRC_DIR)/main.c \
            $(SRC_DIR)/shell_loop_utils.c
 
 BUILTIN_SRC = $(BUILTIN_DIR)/exec_builtin.c \
-              $(BUILTIN_DIR)/ft_cd.c \
+              $(BUILTIN_DIR)/ft_cd/ft_cd.c \
+              $(BUILTIN_DIR)/ft_cd/expand_home.c \
               $(BUILTIN_DIR)/ft_echo.c \
               $(BUILTIN_DIR)/ft_env.c \
               $(BUILTIN_DIR)/ft_exit.c \
@@ -181,7 +182,7 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # COMPILATION RULES
-all: $(NEW_RL_LIB) $(NAME)
+all: $(LIBFT) $(NEW_RL_LIB) $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
@@ -191,8 +192,8 @@ $(LIBFT):
 $(NEW_RL_LIB):
 	$(MAKE) -C $(NEW_RL_DIR)
 
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LIBS) -ltermcap -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LIBS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)
