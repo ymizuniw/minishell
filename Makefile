@@ -6,18 +6,14 @@
 #    By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-<<<<<<< HEAD
 #    Updated: 2025/12/01 19:36:03 by kemotoha         ###   ########.fr        #
-=======
-#    Updated: 2025/12/01 19:48:24 by ymizuniw         ###   ########.fr        #
->>>>>>> func_devision
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
 # CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE
-CFLAGS = -Wall -Wextra -Werror -g -Wunused -Wunused-function -Wunused-variable
+CFLAGS = -Wall -Wextra -Werror -Wunused -Wunused-function -Wunused-variable
 INC = -Iincludes -Inew_readline
 LDFLAGS=-L$(LIBFT_DIR) -L$(NEW_RL_DIR)
 LIBS = $(NEW_RL_LIB) -l:libft.a -ltermcap
