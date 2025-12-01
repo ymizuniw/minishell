@@ -6,11 +6,28 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:33 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 22:42:54 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 22:43:44 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/minishell.h"
+
+char	*ext_unit(char *s, size_t start, size_t end)
+{
+	return (ft_strndup(&s[start], end - start));
+}
+
+int	join_value(char **d, const char *s, size_t slen, size_t dlen)
+{
+	char	*new;
+
+	new = xcalloc(sizeof(char) * (slen + dlen + 1));
+	if (new == NULL)
+		return (0);
+	ft_memcpy(new, *d, dlen);
+	ft_memcpy(new + dlen, s, slen);
+	return (1);
+}
 
 static char	*expand_exit_status(char **res, t_shell *shell, size_t *i)
 {
@@ -84,7 +101,7 @@ static bool	append_res(char **res, char c)
 	tmp[1] = '\0';
 	res_len = 0;
 	if (*res)
-		res_len = ft_strlen(*res);
+		res_len = strlen(*res);
 	if (!join_value(res, tmp, res_len, 1))
 		return (false);
 	return (true);
