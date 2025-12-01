@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:01:04 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 02:39:55 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:22:19 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <signal.h>
 #include <term.h>
 
-void init_new_readline(t_new_readline *nr, bool is_heredoc, t_hist *hist)
+void	init_new_readline(t_new_readline *nr, bool is_heredoc, t_hist *hist)
 {
 	ft_memset(nr, 0, sizeof(t_new_readline));
 	ft_memset(nr->buf, 0, sizeof(nr->buf));
@@ -35,21 +35,21 @@ void init_new_readline(t_new_readline *nr, bool is_heredoc, t_hist *hist)
 	enable_raw_mode(&nr->original);
 }
 
-int process_eot(t_new_readline *nr, char **line)
+int	process_eot(t_new_readline *nr, char **line)
 {
 	if (nr->buf_len == 0)
 		*line = NULL;
 	else
 	{
 		*line = ft_strdup(nr->buf);
-		if (*line==NULL)
+		if (*line == NULL)
 			return (-1);
 		write(STDOUT_FILENO, "\n", 1);
 	}
 	return (2);
 }
 
-int process_etx(t_new_readline *nr, char **line, bool is_heredoc)
+int	process_etx(t_new_readline *nr, char **line, bool is_heredoc)
 {
 	nr->buf_len = 0;
 	nr->buf[0] = '\0';
@@ -59,16 +59,17 @@ int process_etx(t_new_readline *nr, char **line, bool is_heredoc)
 	else
 	{
 		*line = ft_strdup("");
-		if (*line==NULL)
+		if (*line == NULL)
 			return (-1);
 	}
 	return (2);
 }
 
-int process_signal_branch(t_new_readline *nr, char **line, char one_char, bool is_heredoc)
+int	process_signal_branch(t_new_readline *nr, char **line, char one_char,
+		bool is_heredoc)
 {
-	int sig_res;
-	
+	int	sig_res;
+
 	sig_res = process_signal(one_char);
 	if (sig_res == 0)
 		return (process_eot(nr, line));
@@ -77,18 +78,17 @@ int process_signal_branch(t_new_readline *nr, char **line, char one_char, bool i
 	return (0);
 }
 
-int process_break_line(t_new_readline *nr, char **line)
+int	process_break_line(t_new_readline *nr, char **line)
 {
 	write(STDOUT_FILENO, "\n", 1);
 	*line = ft_strdup(nr->buf);
-	if (*line==NULL)
+	if (*line == NULL)
 		return (-1);
 	return (2);
 }
 
-//if (line==NULL) return err.
-//if ret == -1;?
-int process_one_char(t_new_readline *nr, char **line, char one_char, bool is_heredoc)
+int	process_one_char(t_new_readline *nr, char **line, char one_char,
+		bool is_heredoc)
 {
 	if (one_char == '\n')
 		return (process_break_line(nr, line));
@@ -100,15 +100,16 @@ int process_one_char(t_new_readline *nr, char **line, char one_char, bool is_her
 		return (process_esc(nr, one_char));
 	else if (ft_isprint((unsigned char)one_char)
 		|| ft_isspace((unsigned char)one_char))
-			return (process_printable(nr, one_char));
+		return (process_printable(nr, one_char));
 	return (0);
 }
 
-char *read_line_loop(t_new_readline *nr, bool is_heredoc)
+char	*read_line_loop(t_new_readline *nr, bool is_heredoc)
 {
-	char			one_char;
-	char			*line;
-	bool			read_char_res;
+	char	one_char;
+	char	*line;
+	bool	read_char_res;
+	int		process_char_ret;
 
 	one_char = 0;
 	line = NULL;
@@ -118,15 +119,15 @@ char *read_line_loop(t_new_readline *nr, bool is_heredoc)
 		read_char_res = read_char(&one_char);
 		if (!read_char_res)
 			break ;
-		int process_char_ret = process_one_char(nr, &line, one_char, is_heredoc);
-		if (process_char_ret==-1)
+		process_char_ret = process_one_char(nr, &line, one_char, is_heredoc);
+		if (process_char_ret == -1)
 		{
 			xfree(line);
-			line=NULL;
-			break;
+			line = NULL;
+			break ;
 		}
-		if (process_char_ret==2)
-			break;
+		if (process_char_ret == 2)
+			break ;
 	}
 	return (line);
 }
@@ -134,8 +135,9 @@ char *read_line_loop(t_new_readline *nr, bool is_heredoc)
 char	*new_readline(t_hist *hist, bool is_heredoc)
 {
 	t_new_readline	nr;
-	char *line = NULL;
+	char			*line;
 
+	line = NULL;
 	init_new_readline(&nr, is_heredoc, hist);
 	write(STDOUT_FILENO, nr.prompt, nr.prompt_len);
 	line = read_line_loop(&nr, is_heredoc);

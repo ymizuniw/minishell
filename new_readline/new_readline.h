@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:01:28 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 02:40:07 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:19:39 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@
 # define ASC_ETX 3 // Ctrl-C
 # define ASC_EOT 4 // Ctrl-D
 
-#define CLEAR_LINE "\r\x1b[K"
-#define CLEAR_LINE_LEN 4
-#define ANSI_UP "\x1b[A"
-#define ANSI_DOWN "\x1b[B"
-#define ANSI_RIGHT "\x1b[C"
-#define ANSI_LEFT "\x1b[D"
+# define CLEAR_LINE "\r\x1b[K"
+# define CLEAR_LINE_LEN 4
+# define ANSI_UP "\x1b[A"
+# define ANSI_DOWN "\x1b[B"
+# define ANSI_RIGHT "\x1b[C"
+# define ANSI_LEFT "\x1b[D"
 
-#define CSI_UP "[A"
-#define CSI_DOWN "[B"
-#define CSI_RIGHT "[C"
-#define CSI_LEFT "[D"
+# define CSI_UP "[A"
+# define CSI_DOWN "[B"
+# define CSI_RIGHT "[C"
+# define CSI_LEFT "[D"
 
 typedef struct s_hist
 {

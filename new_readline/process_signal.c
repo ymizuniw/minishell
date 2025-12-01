@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process_signal.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/01 17:20:13 by ymizuniw          #+#    #+#             */
+/*   Updated: 2025/12/01 17:20:17 by ymizuniw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "new_readline.h"
 
 int	process_signal(char one_char)
@@ -8,4 +20,3 @@ int	process_signal(char one_char)
 		return (0);
 	return (-1);
 }
-

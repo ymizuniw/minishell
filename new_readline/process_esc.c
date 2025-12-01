@@ -1,10 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process_esc.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/01 17:19:52 by ymizuniw          #+#    #+#             */
+/*   Updated: 2025/12/01 17:22:50 by ymizuniw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "new_readline.h"
 
 int	process_esc(t_new_readline *nr, char one_char)
 {
-	char	esq_buf[3] = {0};
+	char	esq_buf[3];
 
 	(void)one_char;
+	ft_memset(esq_buf, 0, sizeof(esq_buf));
 	if (!read_char(&esq_buf[0]))
 		return (0);
 	if (!read_char(&esq_buf[1]))

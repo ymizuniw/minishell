@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:05 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/26 01:09:59 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:23:49 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ long long	ft_atoll(const char *s, int *overflow)
 		}
 		s++;
 	}
-	return (res*sign);
+	return (res * sign);
 }

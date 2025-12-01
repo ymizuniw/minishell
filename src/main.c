@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:01:51 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 02:40:37 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:23:40 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	handle_signal_or_empty(char *line, t_shell *shell)
 int	shell_loop(t_shell *shell)
 {
 	char			*line;
-	static	t_hist	hist;
+	static t_hist	hist;
 
 	shell->hist = &hist;
 	hist.cur = -1;

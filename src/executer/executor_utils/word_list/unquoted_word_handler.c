@@ -6,13 +6,12 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:18 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/26 01:52:50 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:22:55 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/minishell.h"
 
-// Forward declarations for internal functions
 t_word		*create_word_node(char *content, t_word_type type,
 				bool expand_doller, bool expand_wildcard);
 
@@ -111,7 +110,7 @@ t_word	*handle_doller_word(const char *input, size_t input_len, size_t *idx)
 	if (len == 0)
 	{
 		*idx = start;
-		return create_word_node(ft_strdup("$"), WD_LITERAL, false, false);
+		return (create_word_node(ft_strdup("$"), WD_LITERAL, false, false));
 	}
 	if (len == 0)
 		return (NULL);
