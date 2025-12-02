@@ -172,7 +172,7 @@ typedef struct s_word
 	t_word_type			type;
 	bool				to_expand_doller;
 	bool				to_expand_wildcard;
-	//bool quoted;
+	bool 				quoted;
 	struct s_word		*next;
 }						t_word;
 

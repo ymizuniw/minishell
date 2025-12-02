@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 17:29:08 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/03 05:23:49 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/03 05:57:21 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,20 @@ int	expand_literal_branch(char **result, t_word *list)
 	return (1);
 }
 
-char	*expand_plain_word(t_word *list, t_shell *shell)
+char	*expand_plain_word(t_word *list, t_shell *shell, bool *quoted)
 {
 	char	*result;
 
 	if (!list)
 		return (ft_strdup(""));
+	*quoted = false;
 	result = ft_strdup("");
 	if (!result)
 		return (NULL);
 	while (list)
 	{
+		if (list->quoted==true)
+			*quoted = true;
 		if (list->type == WD_DOLLER)
 		{
 			if (expand_word_branch(&result, list, shell) < 0)
