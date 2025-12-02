@@ -1,0 +1,397 @@
+c1r5s2% valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./minishell  
+==363188== Memcheck, a memory error detector
+==363188== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==363188== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==363188== Command: ./minishell
+==363188== 
+minishell$ a
+a: command not found
+minishell$ cat | cat | ls | cat
+includes
+libft
+Makefile
+minishell
+new_readline
+src
+valg.log
+^C==363236== 
+==363236== Process terminating with default action of signal 13 (SIGPIPE)
+==363236==    at 0x49858F7: write (write.c:26)
+==363236==    by 0x40B8E1: handle_child (signal_management.c:73)
+==363236==    by 0x404F48: exec_pipe (exec_pipe.c:94)
+==363236==    by 0x40488C: ast_traversal (ast_traversal.c:38)
+==363236==    by 0x405124: exec_pipe_right_child (exec_pipe.c:23)
+==363236==    by 0x404FF2: fork_pipe_right (exec_pipe.c:54)
+==363236==    by 0x404EC2: exec_pipe (exec_pipe.c:86)
+==363236==    by 0x40488C: ast_traversal (ast_traversal.c:38)
+==363236==    by 0x405124: exec_pipe_right_child (exec_pipe.c:23)
+==363236==    by 0x404FF2: fork_pipe_right (exec_pipe.c:54)
+==363236==    by 0x404EC2: exec_pipe (exec_pipe.c:86)
+==363236==    by 0x40488C: ast_traversal (ast_traversal.c:38)
+==363236== 
+==363236== FILE DESCRIPTORS: 5 open (3 std) at exit.
+==363236== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==363236==    <inherited from parent>
+==363236== 
+==363236== Open file descriptor 41: /home/ymizuniw/.config/Code/logs/20251203T000207/ptyhost.log
+==363236==    <inherited from parent>
+==363236== 
+==363236== 
+==363236== HEAP SUMMARY:
+==363236==     in use at exit: 6,058 bytes in 258 blocks
+==363236==   total heap usage: 454 allocs, 196 frees, 13,721 bytes allocated
+==363236== 
+==363236== 1 bytes in 1 blocks are still reachable in loss record 1 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x40D715: ft_strdup (ft_strdup.c:21)
+==363236==    by 0x4089E5: handle_eof (lexer_handlers_meta.c:74)
+==363236==    by 0x407AEA: lexer (lexer.c:62)
+==363236==    by 0x4014A8: process_line (main.c:23)
+==363236==    by 0x4013DE: shell_loop (main.c:88)
+==363236==    by 0x401578: main (main.c:102)
+==363236== 
+==363236== 2 bytes in 1 blocks are still reachable in loss record 2 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x40D715: ft_strdup (ft_strdup.c:21)
+==363236==    by 0x40436B: update_existing_var (ft_getenv.c:19)
+==363236==    by 0x4042E4: set_variable (ft_getenv.c:63)
+==363236==    by 0x4069E6: set_last_arg (search_and_exec.c:27)
+==363236==    by 0x4068AA: search_and_exec (search_and_exec.c:37)
+==363236==    by 0x4056E3: process_command (process_command.c:74)
+==363236==    by 0x404E14: exec_command (exec_command.c:52)
+==363236==    by 0x4048BE: ast_traversal (ast_traversal.c:42)
+==363236==    by 0x4047E3: executor (executor.c:19)
+==363236==    by 0x401A88: exec_one_ast (shell_loop_utils.c:76)
+==363236== 
+==363236== 6 bytes in 3 blocks are still reachable in loss record 3 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x40DB34: ft_strndup (ft_strndup.c:21)
+==363236==    by 0x408874: handle_meta_char (lexer_handlers_meta.c:42)
+==363236==    by 0x408CB9: handle_operators_and_words (lexer_handlers_word.c:90)
+==363236==    by 0x407AC6: lexer (lexer.c:59)
+==363236==    by 0x4014A8: process_line (main.c:23)
+==363236==    by 0x4013DE: shell_loop (main.c:88)
+==363236==    by 0x401578: main (main.c:102)
+==363236== 
+==363236== 8 bytes in 1 blocks are still reachable in loss record 4 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x40A3A6: parse_simple_command (gen_command_node.c:55)
+==363236==    by 0x40A936: process_token (gen_command_utils.c:61)
+==363236==    by 0x40A51F: parse_command_list (gen_command_node.c:84)
+==363236==    by 0x40A5ED: gen_command_node (gen_command_node.c:126)
+==363236==    by 0x40A0E9: build_tree (fucking_gen_tree.c:33)
+==363236==    by 0x40A1B0: parser (fucking_gen_tree.c:55)
+==363236==    by 0x4017F2: parse_and_exec (parse_exec.c:29)
+==363236==    by 0x401501: process_line (main.c:33)
+==363236==    by 0x4013DE: shell_loop (main.c:88)
+==363236==    by 0x401578: main (main.c:102)
+==363236== 
+==363236== 8 bytes in 1 blocks are still reachable in loss record 5 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x40A3A6: parse_simple_command (gen_command_node.c:55)
+==363236==    by 0x40A936: process_token (gen_command_utils.c:61)
+==363236==    by 0x40A51F: parse_command_list (gen_command_node.c:84)
+==363236==    by 0x40A5ED: gen_command_node (gen_command_node.c:126)
+==363236==    by 0x40A0E9: build_tree (fucking_gen_tree.c:33)
+==363236==    by 0x40A200: handle_operator (gen_tree_utils.c:25)
+==363236==    by 0x40A081: build_tree (fucking_gen_tree.c:27)
+==363236==    by 0x40A11F: build_tree (fucking_gen_tree.c:37)
+==363236==    by 0x40A1B0: parser (fucking_gen_tree.c:55)
+==363236==    by 0x4017F2: parse_and_exec (parse_exec.c:29)
+==363236== 
+==363236== 15 bytes in 4 blocks are still reachable in loss record 6 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x40D1F8: ft_realloc (ft_realloc.c:26)
+==363236==    by 0x408713: word_cat (word_cat.c:91)
+==363236==    by 0x408B5C: handle_word (lexer_handlers_word.c:53)
+==363236==    by 0x408C40: handle_word_and_doller (lexer_handlers_word.c:76)
+==363236==    by 0x408CE8: handle_operators_and_words (lexer_handlers_word.c:95)
+==363236==    by 0x407AC6: lexer (lexer.c:59)
+==363236==    by 0x4014A8: process_line (main.c:23)
+==363236==    by 0x4013DE: shell_loop (main.c:88)
+==363236==    by 0x401578: main (main.c:102)
+==363236== 
+==363236== 16 bytes in 2 blocks are still reachable in loss record 7 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x40A3A6: parse_simple_command (gen_command_node.c:55)
+==363236==    by 0x40A936: process_token (gen_command_utils.c:61)
+==363236==    by 0x40A51F: parse_command_list (gen_command_node.c:84)
+==363236==    by 0x40A5ED: gen_command_node (gen_command_node.c:126)
+==363236==    by 0x40A0E9: build_tree (fucking_gen_tree.c:33)
+==363236==    by 0x40A200: handle_operator (gen_tree_utils.c:25)
+==363236==    by 0x40A081: build_tree (fucking_gen_tree.c:27)
+==363236==    by 0x40A11F: build_tree (fucking_gen_tree.c:37)
+==363236==    by 0x40A200: handle_operator (gen_tree_utils.c:25)
+==363236==    by 0x40A081: build_tree (fucking_gen_tree.c:27)
+==363236== 
+==363236== 21 bytes in 1 blocks are still reachable in loss record 8 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x40D715: ft_strdup (ft_strdup.c:21)
+==363236==    by 0x40C2B5: process_break_line (in /home/ymizuniw/Desktop/minishell/minishell)
+==363236==    by 0x40BBB5: process_one_char (in /home/ymizuniw/Desktop/minishell/minishell)
+==363236==    by 0x40BD0B: read_line_loop (in /home/ymizuniw/Desktop/minishell/minishell)
+==363236==    by 0x40BDC5: new_readline (in /home/ymizuniw/Desktop/minishell/minishell)
+==363236==    by 0x401372: shell_loop (main.c:79)
+==363236==    by 0x401578: main (main.c:102)
+==363236== 
+==363236== 23 bytes in 2 blocks are still reachable in loss record 9 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x40D715: ft_strdup (ft_strdup.c:21)
+==363236==    by 0x40B9BD: add_history (in /home/ymizuniw/Desktop/minishell/minishell)
+==363236==    by 0x4013D1: shell_loop (main.c:87)
+==363236==    by 0x401578: main (main.c:102)
+==363236== 
+==363236== 32 bytes in 1 blocks are still reachable in loss record 10 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x403B31: alloc_cmd (alloc_t.c:27)
+==363236==    by 0x40A687: init_command_node (gen_command_node.c:105)
+==363236==    by 0x40A5C0: gen_command_node (gen_command_node.c:123)
+==363236==    by 0x40A0E9: build_tree (fucking_gen_tree.c:33)
+==363236==    by 0x40A1B0: parser (fucking_gen_tree.c:55)
+==363236==    by 0x4017F2: parse_and_exec (parse_exec.c:29)
+==363236==    by 0x401501: process_line (main.c:33)
+==363236==    by 0x4013DE: shell_loop (main.c:88)
+==363236==    by 0x401578: main (main.c:102)
+==363236== 
+==363236== 32 bytes in 1 blocks are still reachable in loss record 11 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x403B31: alloc_cmd (alloc_t.c:27)
+==363236==    by 0x40A687: init_command_node (gen_command_node.c:105)
+==363236==    by 0x40A5C0: gen_command_node (gen_command_node.c:123)
+==363236==    by 0x40A0E9: build_tree (fucking_gen_tree.c:33)
+==363236==    by 0x40A200: handle_operator (gen_tree_utils.c:25)
+==363236==    by 0x40A081: build_tree (fucking_gen_tree.c:27)
+==363236==    by 0x40A11F: build_tree (fucking_gen_tree.c:37)
+==363236==    by 0x40A1B0: parser (fucking_gen_tree.c:55)
+==363236==    by 0x4017F2: parse_and_exec (parse_exec.c:29)
+==363236==    by 0x401501: process_line (main.c:33)
+==363236== 
+==363236== 33 bytes in 1 blocks are still reachable in loss record 12 of 27
+==363236==    at 0x484DCD3: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x498682C: getcwd (getcwd.c:86)
+==363236==    by 0x4016D8: init_shell_env (shell_init.c:20)
+==363236==    by 0x40169C: init_shell (shell_init.c:38)
+==363236==    by 0x40156C: main (main.c:101)
+==363236== 
+==363236== 33 bytes in 1 blocks are still reachable in loss record 13 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x40D715: ft_strdup (ft_strdup.c:21)
+==363236==    by 0x40436B: update_existing_var (ft_getenv.c:19)
+==363236==    by 0x4042E4: set_variable (ft_getenv.c:63)
+==363236==    by 0x40170F: init_shell_env (shell_init.c:24)
+==363236==    by 0x40169C: init_shell (shell_init.c:38)
+==363236==    by 0x40156C: main (main.c:101)
+==363236== 
+==363236== 48 bytes in 1 blocks are still reachable in loss record 14 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x403B51: alloc_token (alloc_t.c:35)
+==363236==    by 0x407990: init_token (lexer.c:23)
+==363236==    by 0x407A04: lexer (lexer.c:47)
+==363236==    by 0x4014A8: process_line (main.c:23)
+==363236==    by 0x4013DE: shell_loop (main.c:88)
+==363236==    by 0x401578: main (main.c:102)
+==363236== 
+==363236== 48 bytes in 1 blocks are still reachable in loss record 15 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x403B51: alloc_token (alloc_t.c:35)
+==363236==    by 0x4089B0: handle_eof (lexer_handlers_meta.c:70)
+==363236==    by 0x407AEA: lexer (lexer.c:62)
+==363236==    by 0x4014A8: process_line (main.c:23)
+==363236==    by 0x4013DE: shell_loop (main.c:88)
+==363236==    by 0x401578: main (main.c:102)
+==363236== 
+==363236== 48 bytes in 1 blocks are still reachable in loss record 16 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x403B11: alloc_node (alloc_t.c:19)
+==363236==    by 0x40A640: init_command_node (gen_command_node.c:99)
+==363236==    by 0x40A5C0: gen_command_node (gen_command_node.c:123)
+==363236==    by 0x40A0E9: build_tree (fucking_gen_tree.c:33)
+==363236==    by 0x40A1B0: parser (fucking_gen_tree.c:55)
+==363236==    by 0x4017F2: parse_and_exec (parse_exec.c:29)
+==363236==    by 0x401501: process_line (main.c:33)
+==363236==    by 0x4013DE: shell_loop (main.c:88)
+==363236==    by 0x401578: main (main.c:102)
+==363236== 
+==363236== 48 bytes in 1 blocks are still reachable in loss record 17 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x403B11: alloc_node (alloc_t.c:19)
+==363236==    by 0x40A995: swap_with_parent (gen_op_sep_sub_node.c:31)
+==363236==    by 0x40A1DC: handle_operator (gen_tree_utils.c:22)
+==363236==    by 0x40A081: build_tree (fucking_gen_tree.c:27)
+==363236==    by 0x40A11F: build_tree (fucking_gen_tree.c:37)
+==363236==    by 0x40A1B0: parser (fucking_gen_tree.c:55)
+==363236==    by 0x4017F2: parse_and_exec (parse_exec.c:29)
+==363236==    by 0x401501: process_line (main.c:33)
+==363236==    by 0x4013DE: shell_loop (main.c:88)
+==363236==    by 0x401578: main (main.c:102)
+==363236== 
+==363236== 48 bytes in 1 blocks are still reachable in loss record 18 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x403B11: alloc_node (alloc_t.c:19)
+==363236==    by 0x40A640: init_command_node (gen_command_node.c:99)
+==363236==    by 0x40A5C0: gen_command_node (gen_command_node.c:123)
+==363236==    by 0x40A0E9: build_tree (fucking_gen_tree.c:33)
+==363236==    by 0x40A200: handle_operator (gen_tree_utils.c:25)
+==363236==    by 0x40A081: build_tree (fucking_gen_tree.c:27)
+==363236==    by 0x40A11F: build_tree (fucking_gen_tree.c:37)
+==363236==    by 0x40A1B0: parser (fucking_gen_tree.c:55)
+==363236==    by 0x4017F2: parse_and_exec (parse_exec.c:29)
+==363236==    by 0x401501: process_line (main.c:33)
+==363236== 
+==363236== 48 bytes in 1 blocks are still reachable in loss record 19 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x403B11: alloc_node (alloc_t.c:19)
+==363236==    by 0x40A995: swap_with_parent (gen_op_sep_sub_node.c:31)
+==363236==    by 0x40A1DC: handle_operator (gen_tree_utils.c:22)
+==363236==    by 0x40A081: build_tree (fucking_gen_tree.c:27)
+==363236==    by 0x40A11F: build_tree (fucking_gen_tree.c:37)
+==363236==    by 0x40A200: handle_operator (gen_tree_utils.c:25)
+==363236==    by 0x40A081: build_tree (fucking_gen_tree.c:27)
+==363236==    by 0x40A11F: build_tree (fucking_gen_tree.c:37)
+==363236==    by 0x40A1B0: parser (fucking_gen_tree.c:55)
+==363236==    by 0x4017F2: parse_and_exec (parse_exec.c:29)
+==363236== 
+==363236== 48 bytes in 1 blocks are still reachable in loss record 20 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x403B11: alloc_node (alloc_t.c:19)
+==363236==    by 0x40A995: swap_with_parent (gen_op_sep_sub_node.c:31)
+==363236==    by 0x40A1DC: handle_operator (gen_tree_utils.c:22)
+==363236==    by 0x40A081: build_tree (fucking_gen_tree.c:27)
+==363236==    by 0x40A11F: build_tree (fucking_gen_tree.c:37)
+==363236==    by 0x40A200: handle_operator (gen_tree_utils.c:25)
+==363236==    by 0x40A081: build_tree (fucking_gen_tree.c:27)
+==363236==    by 0x40A11F: build_tree (fucking_gen_tree.c:37)
+==363236==    by 0x40A200: handle_operator (gen_tree_utils.c:25)
+==363236==    by 0x40A081: build_tree (fucking_gen_tree.c:27)
+==363236== 
+==363236== 64 bytes in 2 blocks are still reachable in loss record 21 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x403B31: alloc_cmd (alloc_t.c:27)
+==363236==    by 0x40A687: init_command_node (gen_command_node.c:105)
+==363236==    by 0x40A5C0: gen_command_node (gen_command_node.c:123)
+==363236==    by 0x40A0E9: build_tree (fucking_gen_tree.c:33)
+==363236==    by 0x40A200: handle_operator (gen_tree_utils.c:25)
+==363236==    by 0x40A081: build_tree (fucking_gen_tree.c:27)
+==363236==    by 0x40A11F: build_tree (fucking_gen_tree.c:37)
+==363236==    by 0x40A200: handle_operator (gen_tree_utils.c:25)
+==363236==    by 0x40A081: build_tree (fucking_gen_tree.c:27)
+==363236==    by 0x40A11F: build_tree (fucking_gen_tree.c:37)
+==363236== 
+==363236== 96 bytes in 2 blocks are still reachable in loss record 22 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x403B11: alloc_node (alloc_t.c:19)
+==363236==    by 0x40A640: init_command_node (gen_command_node.c:99)
+==363236==    by 0x40A5C0: gen_command_node (gen_command_node.c:123)
+==363236==    by 0x40A0E9: build_tree (fucking_gen_tree.c:33)
+==363236==    by 0x40A200: handle_operator (gen_tree_utils.c:25)
+==363236==    by 0x40A081: build_tree (fucking_gen_tree.c:27)
+==363236==    by 0x40A11F: build_tree (fucking_gen_tree.c:37)
+==363236==    by 0x40A200: handle_operator (gen_tree_utils.c:25)
+==363236==    by 0x40A081: build_tree (fucking_gen_tree.c:27)
+==363236==    by 0x40A11F: build_tree (fucking_gen_tree.c:37)
+==363236== 
+==363236== 144 bytes in 3 blocks are still reachable in loss record 23 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x403B51: alloc_token (alloc_t.c:35)
+==363236==    by 0x4087E8: handle_meta_char (lexer_handlers_meta.c:30)
+==363236==    by 0x408CB9: handle_operators_and_words (lexer_handlers_word.c:90)
+==363236==    by 0x407AC6: lexer (lexer.c:59)
+==363236==    by 0x4014A8: process_line (main.c:23)
+==363236==    by 0x4013DE: shell_loop (main.c:88)
+==363236==    by 0x401578: main (main.c:102)
+==363236== 
+==363236== 192 bytes in 4 blocks are still reachable in loss record 24 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x403B51: alloc_token (alloc_t.c:35)
+==363236==    by 0x408AEC: handle_word (lexer_handlers_word.c:43)
+==363236==    by 0x408C40: handle_word_and_doller (lexer_handlers_word.c:76)
+==363236==    by 0x408CE8: handle_operators_and_words (lexer_handlers_word.c:95)
+==363236==    by 0x407AC6: lexer (lexer.c:59)
+==363236==    by 0x4014A8: process_line (main.c:23)
+==363236==    by 0x4013DE: shell_loop (main.c:88)
+==363236==    by 0x401578: main (main.c:102)
+==363236== 
+==363236== 1,048 bytes in 74 blocks are still reachable in loss record 25 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x40D715: ft_strdup (ft_strdup.c:21)
+==363236==    by 0x404411: create_new_env (ft_getenv.c:36)
+==363236==    by 0x40430A: set_variable (ft_getenv.c:68)
+==363236==    by 0x404789: process_env_entry (init_env.c:30)
+==363236==    by 0x4046CF: init_env_from_envp (init_env.c:43)
+==363236==    by 0x4016CC: init_shell_env (shell_init.c:19)
+==363236==    by 0x40169C: init_shell (shell_init.c:38)
+==363236==    by 0x40156C: main (main.c:101)
+==363236== 
+==363236== 1,580 bytes in 72 blocks are still reachable in loss record 26 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x40D715: ft_strdup (ft_strdup.c:21)
+==363236==    by 0x404448: create_new_env (ft_getenv.c:39)
+==363236==    by 0x40430A: set_variable (ft_getenv.c:68)
+==363236==    by 0x404789: process_env_entry (init_env.c:30)
+==363236==    by 0x4046CF: init_env_from_envp (init_env.c:43)
+==363236==    by 0x4016CC: init_shell_env (shell_init.c:19)
+==363236==    by 0x40169C: init_shell (shell_init.c:38)
+==363236==    by 0x40156C: main (main.c:101)
+==363236== 
+==363236== 2,368 bytes in 74 blocks are still reachable in loss record 27 of 27
+==363236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==363236==    by 0x404064: xmalloc (xmalloc.c:19)
+==363236==    by 0x4043EC: create_new_env (ft_getenv.c:33)
+==363236==    by 0x40430A: set_variable (ft_getenv.c:68)
+==363236==    by 0x404789: process_env_entry (init_env.c:30)
+==363236==    by 0x4046CF: init_env_from_envp (init_env.c:43)
+==363236==    by 0x4016CC: init_shell_env (shell_init.c:19)
+==363236==    by 0x40169C: init_shell (shell_init.c:38)
+==363236==    by 0x40156C: main (main.c:101)
+==363236== 
+==363236== LEAK SUMMARY:
+==363236==    definitely lost: 0 bytes in 0 blocks
+==363236==    indirectly lost: 0 bytes in 0 blocks
+==363236==      possibly lost: 0 bytes in 0 blocks
+==363236==    still reachable: 6,058 bytes in 258 blocks
+==363236==         suppressed: 0 bytes in 0 blocks
+==363236== 
+==363236== For lists of detected and suppressed errors, rerun with: -s
+==363236== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==363234== 
+==363234== FILE DESCRIPTORS: 5 open (3 std) at exit.
+==363234== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==363234==    <inherited from parent>
+==363234== 
+==363234== Open file descriptor 41: /home/ymizuniw/.config/Code/logs/20251203T000207/ptyhost.log
+==363234==    <inherited from parent>
+==363234== 
+==363234== 
+==363234== HEAP SUMMARY:
+==363234==     in use at exit: 0 bytes in 0 blocks
+==363234==   total heap usage: 454 allocs, 454 frees, 13,721 bytes allocated
+==363234== 
+==363234== All heap blocks were freed -- no leaks are possible
+==363234== 
+==363234== For lists of detected and suppressed errors, rerun with: -s
+==363234== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
