@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:01:51 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:35 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/03 03:52:48 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,13 @@ static void	process_line(char *line, t_shell *shell)
 	{
 		shell->last_exit_status = 1;
 		shell->line_ptr = line;
+		shell->token_list = token_list;
 		cleanup_after_line(shell);
 		return ;
 	}
 	shell->line_ptr = line;
 	shell->token_list = token_list;
 	parse_and_exec(token_list, shell);
-	if (g_signum == SIGINT)
-		write(1, "\n", 1);
 	cleanup_after_line(shell);
 }
 

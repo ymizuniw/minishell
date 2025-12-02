@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:42:10 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:26 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/03 04:08:15 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ int	signal_initializer(bool interactive)
 		sact.sa_flags = 0;
 		sigaction(SIGTERM, &sact, NULL);
 		sigaction(SIGQUIT, &sact, NULL);
-		sact.sa_flags = 0;
+		sigaction(SIGPIPE, &sact, NULL);
 		sact.sa_handler = signal_handler;
+		sact.sa_flags = 0;
 		sigaction(SIGINT, &sact, NULL);
 		return (0);
 	}

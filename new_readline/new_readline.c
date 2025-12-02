@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:01:04 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 23:59:39 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/03 04:02:28 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	process_one_char(t_new_readline *nr, char **line, char one_char,
 		return (process_signal_branch(nr, line, one_char, is_heredoc));
 	else if (is_del(one_char))
 		return (process_del(nr, one_char));
+	else if (is_cntrl(one_char))
+		return (process_cntrl(nr, one_char));
 	else if (is_esc(one_char))
 		return (process_esc(nr, one_char));
 	else if (ft_isprint((unsigned char)one_char)
@@ -70,7 +72,7 @@ char	*read_line_loop(t_new_readline *nr, bool is_heredoc)
 		process_char_ret = process_one_char(nr, &line, one_char, is_heredoc);
 		if (process_char_ret == 5)
 			continue ;
-		if (process_char_ret == -1)
+		else if (process_char_ret == -1)
 		{
 			xfree(line);
 			line = NULL;

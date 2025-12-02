@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/01 00:01:20 by ymizuniw          #+#    #+#              #
-#    Updated: 2025/12/02 17:03:09 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/03 03:37:35 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS = \
 	is_esc.c\
 	is_inserting.c\
 	is_signal.c\
+	is_cntrl.c\
 	new_readline.c\
 	process_del.c\
 	process_down.c\
@@ -40,6 +41,7 @@ SRCS = \
 	process_up.c\
 	process_break_line.c\
 	process_signal_branch.c\
+	process_cntrl.c\
 	put_char.c\
 	read_char.c\
 	redraw_line.c\

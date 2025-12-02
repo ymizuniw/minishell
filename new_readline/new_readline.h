@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:01:28 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 20:54:06 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/03 03:42:44 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <unistd.h>
 
 # define HIST_MAX 100
-# define ASC_ETX 3 // Ctrl-C
-# define ASC_EOT 4 // Ctrl-D
+# define ASC_ETX 3 // cntrl-C
+# define ASC_EOT 4 // cntrl-D
 
 # define CLEAR_LINE "\r\x1b[K"
 # define CLEAR_LINE_LEN 4
@@ -93,6 +93,9 @@ int					process_del(t_new_readline *nr, char one_char);
 
 bool				is_esc(char one_char);
 int					process_esc(t_new_readline *nr, char one_char);
+
+bool 				is_cntrl(char c);
+int 				process_cntrl(t_new_readline *nr, char one_char);
 
 int					process_up(t_new_readline *nr);
 int					process_down(t_new_readline *nr);

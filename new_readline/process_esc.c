@@ -6,12 +6,13 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:19:52 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/03 00:06:10 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/03 03:37:39 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "new_readline.h"
 
+//return 2 if not registered key pressed.
 int	process_esc(t_new_readline *nr, char one_char)
 {
 	char	esq_buf[3];
