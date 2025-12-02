@@ -6,33 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:33 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:47 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:57:23 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-char	*ext_unit(char *s, size_t start, size_t end)
-{
-	return (ft_strndup(&s[start], end - start));
-}
-
-int	join_value(char **d, const char *s, size_t dlen, size_t slen)
-{
-	char	*new;
-
-	new = malloc(sizeof(char) * (slen + dlen + 1));
-	if (new == NULL)
-		return (0);
-	ft_memset(new, 0, sizeof(char) * (slen + dlen + 1));
-	if (*d)
-		ft_memcpy(new, *d, dlen);
-	ft_memcpy(new + dlen, s, slen);
-	if (*d)
-		free(*d);
-	*d = new;
-	return (1);
-}
 
 static char	*expand_exit_status(char **res, t_shell *shell, size_t *i)
 {

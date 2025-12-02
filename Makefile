@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/02 17:14:54 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/02 17:55:05 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,9 +94,12 @@ TOKEN_EXPANSION_SRC = $(TOKEN_EXPANSION_DIR)/expand_tokens.c
 
 
 GEN_WORD_SRC =    $(GEN_WORD_DIR)/gen_word.c \
-                  $(GEN_WORD_DIR)/gen_word_utils.c \
+                  $(GEN_WORD_DIR)/gen_word_utils.c
 
-HEREDOC_SRC = $(HEREDOC_DIR)/ft_mkstmp.c \
+HEREDOC_SRC = \
+              $(HEREDOC_DIR)/ext_unit.c \
+              $(HEREDOC_DIR)/join_value.c \
+              $(HEREDOC_DIR)/ft_mkstmp.c \
               $(HEREDOC_DIR)/make_file_heredoc.c \
               $(HEREDOC_DIR)/make_pipe_heredoc.c \
               $(HEREDOC_DIR)/get_document.c \
@@ -128,13 +131,20 @@ LEXER_UTILS_SRC = $(LEXER_UTILS_DIR)/prepend_tokens.c \
                   $(LEXER_UTILS_DIR)/lexer_handlers_meta.c \
                   $(LEXER_UTILS_DIR)/lexer_handlers_word.c
 
+EXPAND_WILDCARD_DIR = $(WORD_EXPANSION_DIR)/expand_wildcard
+EXPAND_WILDCARD_SRC = \
+       $(EXPAND_WILDCARD_DIR)/expand_doller_word.c\
+       $(EXPAND_WILDCARD_DIR)/expand_plain_word.c\
+       $(EXPAND_WILDCARD_DIR)/expand_token_with_wildcard.c\
+       $(EXPAND_WILDCARD_DIR)/get_word_string.c\
+       $(EXPAND_WILDCARD_DIR)/has_wildcard_to_expand.c
+
 WORD_EXPANSION_SRC = \
                      $(WORD_EXPANSION_DIR)/expand_dollar.c \
-                     $(WORD_EXPANSION_DIR)/expand_wildcard_word.c \
                      $(WORD_EXPANSION_DIR)/word_list_utils.c \
-                     $(WORD_EXPANSION_DIR)/expand_word_string.c \
-                     $(WORD_EXPANSION_DIR)/expand_word_wildcard.c \
-                     $(WORD_EXPANSION_DIR)/expand_word_utils.c
+                     $(EXPAND_WILDCARD_SRC)
+
+# executer/executor_utils/word_expansion/expand_wildcard
 
 WORD_LIST_SRC = $(WORD_LIST_DIR)/gen_word_list.c \
                 $(WORD_LIST_DIR)/word_node_utils.c \

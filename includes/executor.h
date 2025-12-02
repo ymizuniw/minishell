@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:15 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/01 19:37:06 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:58:36 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_word			*handle_unquoted_word(const char *input, size_t input_len,
 					size_t *idx);
 t_word			*append_node(t_word *head, t_word *new);
 char			*ext_unit(char *s, size_t start, size_t end);
-int				join_value(char **d, const char *s, size_t slen, size_t dlen);
+int				join_value(char **d, const char *s, size_t dlen, size_t slen);
 
 // search and exec
 void			search_and_exec(t_shell *shell, char **cmd_args);
@@ -76,17 +76,27 @@ char			*ft_itoa(int n);
 // Word expansion utilities
 size_t			count_word_list(t_word *word);
 char			*expand_doller(t_word *word, t_shell *shell);
-int				expand_wildcard_to_result(t_word *word, char ***res, size_t *i,
-					size_t *total_count);
 int				get_document(t_redir *hd, char **document, size_t *document_len,
 					t_shell *shell);
 t_word			*loop_wrapper(char *value, size_t *i);
+
+// expand_willdcard
+char			*expand_doller_word(const char *var, t_shell *shell);
+char			*expand_plain_word(t_word *list, t_shell *shell);
+char			**expand_token_with_wildcard(t_word *word_list, t_shell *shell,
+					size_t *result_count);
+char			*get_word_string(t_word *word);
+bool			has_wildcard_to_expand(t_word *word_list);
 
 // process heredoc
 int				make_pipe_heredoc(char *document, size_t document_len);
 int				process_one_heredoc(t_shell *shell, t_redir *redir);
 int				process_all_heredoc(t_shell *shell, t_ast *node);
 int				generate_random_template(char *filename);
+
+// heredoc utils
+int				join_value(char **d, const char *s, size_t dlen, size_t slen);
+char			*ext_unit(char *s, size_t start, size_t end);
 
 // gen_word
 char			*expand_token_words(t_word *word_list, t_shell *shell);
