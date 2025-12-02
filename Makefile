@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/02 19:23:49 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/02 20:38:10 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -160,7 +160,8 @@ PARSER_SRC = $(PARSER_DIR)/fucking_gen_tree.c \
              $(PARSER_DIR)/check_parenthesis.c \
              $(PARSER_DIR)/check_parenthesis_utils.c \
              $(PARSER_DIR)/syntax_checker.c \
-             $(PARSER_DIR)/syntax_error.c
+             $(PARSER_DIR)/syntax_error.c \
+             $(PARSER_DIR)/strip_quote.c
 
 SIGNAL_MANAGEMENT_SRC = $(SIGNAL_MANAGEMENT_DIR)/signal_management.c
 

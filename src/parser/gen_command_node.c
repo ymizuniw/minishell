@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:39 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 20:29:34 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 20:35:42 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,43 +15,6 @@
 t_token			*find_end_token(t_token *cur_token);
 int				handle_redirection_parse(t_cmd *cmd, t_token *tmp);
 int				process_token(t_cmd *cmd, t_token *tmp);
-
-
-
-
-// for heredoc.
-char	*strip_quote(char *str, bool *quoted)
-{
-	size_t	len;
-	char	*res;
-	size_t	i;
-	size_t	j;
-
-	len = 0;
-	res = NULL;
-	len = ft_strlen(str);
-	res = malloc(sizeof(char) * (len + 1));
-	if (res == NULL)
-		return (NULL);
-	ft_bzero(res, sizeof(char) * (len + 1));
-	i = 0;
-	j = 0;
-	while (i < len)
-	{
-		if (str[i] == '\'' || str[i] == '\"')
-		{
-			if (*quoted == false)
-				*quoted = true;
-			i++;
-			continue ;
-		}
-		res[j] = str[i];
-		i++;
-		j++;
-	}
-	res[j] = '\0';
-	return (res);
-}
 
 int	parse_redirection(t_redir **redir_head, t_token_type token_type,
 		t_token *filename_token)

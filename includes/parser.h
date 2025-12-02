@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:43 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/30 23:56:29 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 20:36:44 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ int		parse_command_list(t_cmd *cmd, t_token **token);
 // other utils
 void	append_redir(t_redir **redir_head, t_redir *new_redir);
 void	set_redir_type(t_redir *new_redir, t_token_type token_type);
+char	*strip_quote(char *str, bool *quoted);
 
 #endif
