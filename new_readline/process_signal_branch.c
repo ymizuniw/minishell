@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 21:00:55 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/03 03:42:59 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/03 04:47:25 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	process_signal_branch(t_new_readline *nr, char **line, char one_char,
 		bool is_heredoc)
 {
 	int	sig_res;
-
 	sig_res = process_signal(one_char);
 	if (sig_res == 0)
 		return (process_eot(nr, line));
