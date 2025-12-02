@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 21:35:23 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 16:51:26 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 20:34:53 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,3 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	}
 	return (NULL);
 }
-// find little in big within len. if \0 comes, serch ends.
-// if !little, return big. if little not found, return NULL.
-// otherwise return the first ptr of little.

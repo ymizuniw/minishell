@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:35 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 20:40:31 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,15 @@ int	parse_and_exec(t_token *token_list, t_shell *shell)
 		return (1);
 	ast = parser(&cur);
 	if (!ast)
-		return (shell->last_exit_status = 2, 0);
+	{
+		shell->last_exit_status = 2;
+		return (0);
+	}
 	if (process_all_heredoc(shell, ast) < 0)
-		return (shell->last_exit_status = 1, 0);
+	{
+		shell->last_exit_status = 1;
+		return (0);
+	}
 	exec_one_ast(ast, shell);
 	return (1);
 }
