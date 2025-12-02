@@ -6,7 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:31 by kemotoha          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2025/12/03 05:35:01 by ymizuniw         ###   ########.fr       */
+=======
+/*   Updated: 2025/12/03 05:33:01 by ymizuniw         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 

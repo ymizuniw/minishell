@@ -6,7 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:29:36 by ymizuniw          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2025/12/03 05:34:37 by ymizuniw         ###   ########.fr       */
+=======
+/*   Updated: 2025/12/03 05:34:17 by ymizuniw         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +44,12 @@ char	**expand_token(t_token *token, t_shell *shell)
 		return (NULL);
 	if (has_wildcard_to_expand(word_list))
 		return (expand_wildcard_branch(word_list, shell));
-	res = (char **)xcalloc(sizeof(char *) * 2);
-	if (!res)
-	{
-		free_word_list(word_list);
-		return (NULL);
-	}
-	res[0] = expand_plain_word(word_list, shell);
-	res[1] = NULL;
+	char *expanded = expand_plain_word(word_list, shell);
 	free_word_list(word_list);
+	if (!expanded)
+		return (NULL);
+	res = split_by_ifs(expanded);
+	free(expanded);
 	return (res);
 }
 
