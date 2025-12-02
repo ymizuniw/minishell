@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/02 20:38:10 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/02 20:43:00 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -143,8 +143,6 @@ WORD_EXPANSION_SRC = \
                      $(WORD_EXPANSION_DIR)/expand_dollar.c \
                      $(WORD_EXPANSION_DIR)/word_list_utils.c \
                      $(EXPAND_WILDCARD_SRC)
-
-# executer/executor_utils/word_expansion/expand_wildcard
 
 WORD_LIST_SRC = $(WORD_LIST_DIR)/gen_word_list.c \
                 $(WORD_LIST_DIR)/word_node_utils.c \
