@@ -6,12 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:26 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 20:54:39 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <stddef.h>
 
 // Get the last token in the list
 t_token	*token_last(t_token *head)

@@ -6,13 +6,12 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:39:59 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:03 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 20:56:00 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-// Prepend new token at head (LIFO)
 void	prepend_tokens(t_token *head, t_token *new)
 {
 	t_token	*cur_first;

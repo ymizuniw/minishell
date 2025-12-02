@@ -6,12 +6,10 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:02 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:03 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 20:53:45 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Minimal get_pwd implementation returning current working directory
-// #include <minishell.h>
 #include <minishell.h>
 
 char	*get_pwd(void)

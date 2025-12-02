@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/02 20:43:00 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/02 20:56:38 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = cc
 # CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE
 CFLAGS = -Wall -Wextra -g -Werror -Wunused -Wunused-function -Wunused-variable
 INC = -Iincludes -Inew_readline
-LDFLAGS=-L$(NEW_RL_DIR) -L$(LIBFT_DIR) 
+LDFLAGS=-L$(NEW_RL_DIR) -L$(LIBFT_DIR)
 # LIBS = $(LIBFT) -ltermcap $(NEW_RL_LIB)
 # -fsanitize=address
 #   export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
@@ -127,7 +127,6 @@ LEXER_UTILS_SRC = $(LEXER_UTILS_DIR)/prepend_tokens.c \
                   $(LEXER_UTILS_DIR)/set_quote_flag.c \
                   $(LEXER_UTILS_DIR)/set_token_type.c \
                   $(LEXER_UTILS_DIR)/word_cat.c \
-                  $(LEXER_UTILS_DIR)/lexer_handlers.c \
                   $(LEXER_UTILS_DIR)/lexer_handlers_meta.c \
                   $(LEXER_UTILS_DIR)/lexer_handlers_word.c
 

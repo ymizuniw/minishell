@@ -6,12 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:36:42 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:26 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 20:54:36 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <stddef.h>
 
 // Add redirection to the end of the list
 void	redir_add_back(t_redir **head, t_redir *new)
