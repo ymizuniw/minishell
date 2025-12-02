@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 21:00:55 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/02 23:58:42 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/03 00:06:05 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,7 @@ static int	process_eot(t_new_readline *nr, char **line)
 	if (nr->buf_len == 0)
 		*line = NULL;
 	else
-	{
 		return (5);
-		// *line = ft_strdup(nr->buf);
-		// if (*line == NULL)
-		// 	return (-1);
-		// write(STDOUT_FILENO, "\n", 1);
-	}
 	return (2);
 }
 
