@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:39 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:26 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 20:29:34 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,43 @@
 t_token			*find_end_token(t_token *cur_token);
 int				handle_redirection_parse(t_cmd *cmd, t_token *tmp);
 int				process_token(t_cmd *cmd, t_token *tmp);
+
+
+
+
+// for heredoc.
+char	*strip_quote(char *str, bool *quoted)
+{
+	size_t	len;
+	char	*res;
+	size_t	i;
+	size_t	j;
+
+	len = 0;
+	res = NULL;
+	len = ft_strlen(str);
+	res = malloc(sizeof(char) * (len + 1));
+	if (res == NULL)
+		return (NULL);
+	ft_bzero(res, sizeof(char) * (len + 1));
+	i = 0;
+	j = 0;
+	while (i < len)
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			if (*quoted == false)
+				*quoted = true;
+			i++;
+			continue ;
+		}
+		res[j] = str[i];
+		i++;
+		j++;
+	}
+	res[j] = '\0';
+	return (res);
+}
 
 int	parse_redirection(t_redir **redir_head, t_token_type token_type,
 		t_token *filename_token)
@@ -30,8 +67,12 @@ int	parse_redirection(t_redir **redir_head, t_token_type token_type,
 	new_redir->tmp_fd = -1;
 	append_redir(redir_head, new_redir);
 	set_redir_type(new_redir, token_type);
-	new_redir->filename = ft_strdup(filename_token->value);
-	if (!new_redir->filename)
+	if (new_redir->type == REDIR_HEREDOC)
+		new_redir->filename = strip_quote(filename_token->value,
+				&new_redir->delim_quoted);
+	else
+		new_redir->filename = ft_strdup(filename_token->value);
+	if (new_redir->filename == NULL)
 		return (-1);
 	if (new_redir->type == REDIR_HEREDOC)
 	{
@@ -79,7 +120,7 @@ int	parse_command_list(t_cmd *cmd, t_token **cur_token)
 	{
 		parse_success = process_token(cmd, tmp);
 		if (parse_success <= 0)
-			return (printf("parse %s failed\n", tmp->value), -1);
+			return (-1);
 		if (token_is_redirection(tmp->type))
 			tmp = tmp->prev;
 		tmp = tmp->prev;
@@ -100,7 +141,11 @@ static t_ast	*init_command_node(t_ast *parent)
 	node->type = NODE_CMD;
 	node->cmd = alloc_cmd();
 	if (!node->cmd)
-		return (xfree(node), NULL);
+	{
+		xfree(node);
+		node = NULL;
+		return (NULL);
+	}
 	ft_memset(node->cmd, 0, sizeof(t_cmd));
 	return (node);
 }
@@ -117,6 +162,10 @@ t_ast	*gen_command_node(t_ast *parent, t_token **cur_token)
 		return (NULL);
 	result = parse_command_list(node->cmd, cur_token);
 	if (result == -1)
-		return (xfree(node->cmd), xfree(node), NULL);
+	{
+		xfree(node->cmd);
+		xfree(node);
+		return (NULL);
+	}
 	return (node);
 }

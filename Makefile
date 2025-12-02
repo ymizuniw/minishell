@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/02 19:15:27 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/02 19:23:49 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -201,7 +201,7 @@ $(LIBFT):
 $(NEW_RL_LIB):
 	$(MAKE) -C $(NEW_RL_DIR)
 
-$(NAME): $(OBJS) $(NEW_RL_LIB) $(LIBFT) 
+$(NAME): $(OBJS) $(NEW_RL_LIB) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(NEW_RL_LIB) $(LIBFT) -o $@
 
 clean:

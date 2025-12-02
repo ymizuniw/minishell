@@ -61,7 +61,7 @@ exit
 EOF
 )
 
-cd ..
+cd .. && pwd
 echo "$INPUT" | ./minishell
 cd test
 
