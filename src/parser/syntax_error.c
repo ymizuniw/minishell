@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:57 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:43:14 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:26 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include <minishell.h>
 
 void	syntax_error(t_token_type type)
 {

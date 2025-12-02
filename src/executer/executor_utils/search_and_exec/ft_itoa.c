@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:02 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/20 19:06:07 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:47 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/minishell.h"
+#include <minishell.h>
 
 static size_t	count_digits(int n)
 {

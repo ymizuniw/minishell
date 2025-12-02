@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:40:35 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/15 18:40:35 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:03 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include <minishell.h>
 
 /*
 ** Set token's type by calling get_token_type

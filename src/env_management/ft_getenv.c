@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:36:58 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/20 18:58:01 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:26 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include <minishell.h>
 
 static int	update_existing_var(t_env *current, char *value, int exported)
 {

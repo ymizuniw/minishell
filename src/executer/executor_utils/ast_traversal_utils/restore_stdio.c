@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:37:58 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 17:51:44 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:47 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/minishell.h"
+#include <minishell.h>
 
 void	restore_stdio(int stdin_keep, int stdout_keep)
 {

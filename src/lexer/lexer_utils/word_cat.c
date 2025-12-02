@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:40:39 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/27 02:33:49 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:03 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include <minishell.h>
 
 int	handle_quotation(t_word_cat *wc, size_t word_len, size_t *consumed_len,
 		char quote_open)

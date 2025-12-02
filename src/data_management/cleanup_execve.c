@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:36:16 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/30 22:23:47 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:26 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include <minishell.h>
 
 // void	free_env_list(t_env *env_list);
 // void	free_ast_tree(t_ast *node);

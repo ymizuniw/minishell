@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:42:53 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/30 21:41:55 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:35 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include <minishell.h>
 
 t_token	*skip_to_command(t_token *token_list)
 {

@@ -6,12 +6,12 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:30 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 02:51:05 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:47 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/get_next_line.h"
-#include "../../../../includes/minishell.h"
+#include <minishell.h>
 
 static bool	read_heredoc_line(t_shell *shell, char **line, int is_interactive)
 {

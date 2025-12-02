@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_checker.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:52 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/20 19:06:21 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:26 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include <minishell.h>
 
 // when this will be checked, the order is not reversed.
 static int	check_redirection(t_token *token)

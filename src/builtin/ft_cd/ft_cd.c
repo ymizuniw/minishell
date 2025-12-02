@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:37 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 18:30:44 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:03 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include <minishell.h>
 
 static char	*get_target_dir(char **cmd, t_shell *shell)
 {

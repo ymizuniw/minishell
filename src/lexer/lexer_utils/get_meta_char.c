@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:39:11 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/19 21:40:16 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:03 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include <minishell.h>
 
 // Check if character is a metacharacter and return its type
 t_metachar	is_meta_char(int c)

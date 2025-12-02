@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:19 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 17:37:03 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:47 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/minishell.h"
+#include <minishell.h>
 
 static void	exec_pipe_right_child(int *pip, t_ast *node, t_shell *shell)
 {

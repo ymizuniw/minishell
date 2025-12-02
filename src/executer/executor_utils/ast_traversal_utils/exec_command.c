@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:15 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 19:30:42 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:47 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../includes/minishell.h"
+#include <minishell.h>
 
 void	close_fds(int fds[2])
 {

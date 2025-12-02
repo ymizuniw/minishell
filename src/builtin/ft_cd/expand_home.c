@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand_home.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 18:31:20 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/01 18:36:21 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:03 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include <minishell.h>
 
 static t_env	*find_home(t_shell *shell)
 {

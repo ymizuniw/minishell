@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/02 02:59:18 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/02 17:14:54 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ CC = cc
 # CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE
 CFLAGS = -Wall -Wextra -Werror -Wunused -Wunused-function -Wunused-variable
 INC = -Iincludes -Inew_readline
-LDFLAGS=-L$(LIBFT_DIR) -L$(NEW_RL_DIR)
-LIBS = $(LIBFT) $(NEW_RL_LIB) -ltermcap
+LDFLAGS=-L$(NEW_RL_DIR) -L$(LIBFT_DIR) 
+# LIBS = $(LIBFT) -ltermcap $(NEW_RL_LIB)
 # -fsanitize=address
 #   export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 #   export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
@@ -162,7 +162,7 @@ SRCS = $(MAIN_SRC) \
        $(ENV_MANAGEMENT_SRC) \
        $(EXECUTER_SRC) \
        $(AST_TRAVERSAL_SRC) \
-	   $(TOKEN_EXPANSION_SRC) \
+	$(TOKEN_EXPANSION_SRC) \
        $(HEREDOC_SRC) \
        $(SEARCH_EXEC_SRC) \
        $(LEXER_SRC) \
@@ -181,7 +181,7 @@ LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # COMPILATION RULES
-all: $(LIBFT) $(NEW_RL_LIB) $(NAME)
+all: $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
@@ -191,8 +191,8 @@ $(LIBFT):
 $(NEW_RL_LIB):
 	$(MAKE) -C $(NEW_RL_DIR)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(LIBS) -o $(NAME)
+$(NAME): $(OBJS) $(NEW_RL_LIB) $(LIBFT) 
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(NEW_RL_LIB) $(LIBFT) -o $@
 
 clean:
 	rm -f $(OBJS)

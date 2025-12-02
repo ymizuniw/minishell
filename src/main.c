@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:01:51 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 17:23:40 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:35 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include <minishell.h>
 #include "new_readline.h"
 
 void		init_shell(t_shell *shell, char **env);

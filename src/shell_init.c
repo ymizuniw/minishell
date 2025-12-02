@@ -6,11 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:42:48 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/11/30 21:22:40 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:16:35 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include <minishell.h>
 
 static void	init_shell_env(t_shell *shell, char **env)
 {

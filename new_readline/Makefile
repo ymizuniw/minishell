@@ -3,16 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/01 00:01:20 by ymizuniw          #+#    #+#              #
-#    Updated: 2025/12/01 21:01:57 by kemotoha         ###   ########.fr        #
+#    Updated: 2025/12/02 17:03:09 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = new_readline.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+
+LIBFT_DIR=../libft
+LIBFT = $(LIBFT_DIR)/libft.a
+INC = -I. -I$(LIBFT_DIR)
 
 SRCS = \
 	history_management.c\
@@ -46,13 +50,16 @@ SRCS = \
 
 OBJS = $(SRCS:.c=.o)
 
-all: $(NAME)
+all: $(LIBFT) $(NAME)
+
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	ar rcs $@ $^
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
@@ -62,4 +69,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libft
