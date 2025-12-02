@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 17:29:33 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:50:30 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:36:36 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ static char	**create_fallback_result(t_word *word_list, t_shell *shell)
 		return (NULL);
 	result[0] = expand_plain_word(word_list, shell);
 	if (!result[0])
-		return (free_double_array(result), NULL);
+	{
+		free_double_array(result);
+		return (NULL);
+	}
 	result[1] = NULL;
 	return (result);
 }

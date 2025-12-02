@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:39:01 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:47 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:58:50 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ char	**append_argv(char **argv, size_t *argc, char *str)
 	char	**new_argv;
 	size_t	i;
 
+	if (str == NULL)
+		return (NULL);
 	new_argv = xmalloc(sizeof(char *) * (*argc + 2));
+	if (new_argv == NULL)
+		return (NULL);
 	i = 0;
 	while (i < *argc)
 	{
@@ -25,6 +29,11 @@ char	**append_argv(char **argv, size_t *argc, char *str)
 		i++;
 	}
 	new_argv[*argc] = ft_strdup(str);
+	if (new_argv[*argc] == NULL)
+	{
+		xfree(argv);
+		return (NULL);
+	}
 	new_argv[*argc + 1] = NULL;
 	xfree(argv);
 	(*argc)++;

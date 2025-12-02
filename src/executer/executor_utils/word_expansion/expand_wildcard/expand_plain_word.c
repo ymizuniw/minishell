@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 17:29:08 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:39:33 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:47:37 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ int	expand_word_branch(char **result, t_word *list, t_shell *shell)
 
 	expanded = expand_doller_word(list->word, shell);
 	if (!expanded)
-		return (xfree(*result), -1);
+	{
+		xfree(*result);
+		*result = NULL;
+		return (-1);
+	}
 	tmp = ft_strjoin(*result, expanded);
 	xfree(expanded);
 	xfree(*result);
@@ -36,7 +40,11 @@ int	expand_literal_branch(char **result, t_word *list)
 
 	literal = get_word_string(list);
 	if (!literal)
-		return (xfree(*result), -1);
+	{
+		xfree(*result);
+		*result = NULL;
+		return (-1);
+	}
 	tmp = ft_strjoin(*result, literal);
 	xfree(literal);
 	xfree(*result);
