@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:01:04 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 19:38:52 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 23:59:39 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ char	*read_line_loop(t_new_readline *nr, bool is_heredoc)
 		if (!read_char_res)
 			break ;
 		process_char_ret = process_one_char(nr, &line, one_char, is_heredoc);
+		if (process_char_ret == 5)
+			continue ;
 		if (process_char_ret == -1)
 		{
 			xfree(line);

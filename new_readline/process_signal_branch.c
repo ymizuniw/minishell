@@ -3,25 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   process_signal_branch.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 21:00:55 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/01 21:05:04 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/12/02 23:58:42 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "new_readline.h"
 
+//buf_len==0;line==NULL;exit();
+//buf_len>=1;do nothing.
 static int	process_eot(t_new_readline *nr, char **line)
 {
 	if (nr->buf_len == 0)
 		*line = NULL;
 	else
 	{
-		*line = ft_strdup(nr->buf);
-		if (*line == NULL)
-			return (-1);
-		write(STDOUT_FILENO, "\n", 1);
+		return (5);
+		// *line = ft_strdup(nr->buf);
+		// if (*line == NULL)
+		// 	return (-1);
+		// write(STDOUT_FILENO, "\n", 1);
 	}
 	return (2);
 }

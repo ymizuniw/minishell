@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:28 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/01 23:33:34 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/02 23:38:41 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	add_history(char *line, t_hist *hist)
 		return ;
 	if (hist && hist->hist_box[hist->idx] != NULL)
 		free(hist->hist_box[hist->idx]);
-	hist->hist_box[hist->idx] = strdup(line);
+	hist->hist_box[hist->idx] = ft_strdup(line);
 	hist->idx = (hist->idx + 1) % HIST_MAX;
 	if (hist->size < HIST_MAX)
 		hist->size++;
