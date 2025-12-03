@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 17:29:08 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/03 05:57:21 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/04 03:52:27 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,18 @@ char	*expand_plain_word(t_word *list, t_shell *shell, bool *quoted)
 		if (list->type == WD_DOLLER)
 		{
 			if (expand_word_branch(&result, list, shell) < 0)
+			{
+				xfree(result);
 				return (NULL);
+			}
 		}
 		else
 		{
 			if (expand_literal_branch(&result, list) < 0)
+			{
+				xfree(result);
 				return (NULL);
+			}
 		}
 		list = list->next;
 	}
