@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:29:36 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/04 03:54:36 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/04 04:29:08 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ char	**expand_wildcard_branch(t_word *word_list, t_shell *shell)
 	return (res);
 }
 
-// char **split_by_ifs()
 char	**expand_token(t_token *token, t_shell *shell)
 {
 	size_t	value_len;
