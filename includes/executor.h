@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:15 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/02 17:58:36 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/03 05:56:07 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ char			*create_env_string(const char *key, const char *value);
 char			**generate_envp(t_env *env_list);
 
 // Variable expansion (at execution time)
-char			*expand_plain_word(t_word *list, t_shell *shell);
-// char			*expand_word(char *word, t_shell *shell);
 char			*ft_itoa(int n);
 
 // Word expansion utilities
@@ -82,7 +80,7 @@ t_word			*loop_wrapper(char *value, size_t *i);
 
 // expand_willdcard
 char			*expand_doller_word(const char *var, t_shell *shell);
-char			*expand_plain_word(t_word *list, t_shell *shell);
+char			*expand_plain_word(t_word *list, t_shell *shell, bool *quoted);
 char			**expand_token_with_wildcard(t_word *word_list, t_shell *shell,
 					size_t *result_count);
 char			*get_word_string(t_word *word);
