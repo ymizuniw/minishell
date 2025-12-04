@@ -6,12 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:32:51 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/05 00:33:59 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 00:56:08 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
 
 int	append_argv_loop(char ***argv, size_t *argc, char ***expanded)
 {
@@ -69,9 +68,11 @@ int	process_command(t_ast *node, t_shell *shell)
 	char	**argv;
 
 	argv = NULL;
-	expand_token_loop(node, shell, &argv);
-	if (!argv || !argv[0])
+	int ret = 0;
+	ret = expand_token_loop(node, shell, &argv);
+	if (!ret || !argv || !argv[0])
 	{
+		printf("expand_token_loop failed\n");
 		free_double_array(argv);
 		return (0);
 	}

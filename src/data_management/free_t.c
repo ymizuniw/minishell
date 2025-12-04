@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:36:39 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/03 01:26:28 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 00:57:22 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_double_array(char **p)
 {
 	size_t	i;
 
-	if (p == NULL || (p && p[0] == NULL))
+	if (p == NULL)
 		return ;
 	i = 0;
 	while (p[i] != NULL)
