@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/02 20:56:38 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/04 23:57:42 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,12 +58,10 @@ BUILTIN_SRC = $(BUILTIN_DIR)/exec_builtin.c \
               $(BUILTIN_DIR)/ft_export/ft_export.c \
               $(BUILTIN_DIR)/ft_export/export_print.c \
               $(BUILTIN_DIR)/ft_pwd.c \
-              $(BUILTIN_DIR)/ft_unset.c \
-              $(BUILTIN_DIR)/expand_wildcard.c
+              $(BUILTIN_DIR)/ft_unset.c
 
 BUILTIN_UTILS_SRC = $(BUILTIN_UTILS_DIR)/get_pwd.c \
-                    $(BUILTIN_UTILS_DIR)/is_builtin.c \
-                    $(BUILTIN_UTILS_DIR)/wildcard_utils.c
+                    $(BUILTIN_UTILS_DIR)/is_builtin.c
 
 DATA_MANAGEMENT_SRC = $(DATA_MANAGEMENT_DIR)/alloc_t.c \
                       $(DATA_MANAGEMENT_DIR)/free_t.c \
@@ -130,18 +128,16 @@ LEXER_UTILS_SRC = $(LEXER_UTILS_DIR)/prepend_tokens.c \
                   $(LEXER_UTILS_DIR)/lexer_handlers_meta.c \
                   $(LEXER_UTILS_DIR)/lexer_handlers_word.c
 
-EXPAND_WILDCARD_DIR = $(WORD_EXPANSION_DIR)/expand_wildcard
-EXPAND_WILDCARD_SRC = \
-       $(EXPAND_WILDCARD_DIR)/expand_doller_word.c\
-       $(EXPAND_WILDCARD_DIR)/expand_plain_word.c\
-       $(EXPAND_WILDCARD_DIR)/expand_token_with_wildcard.c\
-       $(EXPAND_WILDCARD_DIR)/get_word_string.c\
-       $(EXPAND_WILDCARD_DIR)/has_wildcard_to_expand.c
+EXPAND_BRANCH_DIR = $(WORD_EXPANSION_DIR)/expand_branch
+EXPAND_BRANCH_SRC = \
+       $(EXPAND_BRANCH_DIR)/expand_doller_word.c\
+       $(EXPAND_BRANCH_DIR)/expand_plain_word.c\
+       $(EXPAND_BRANCH_DIR)/get_word_string.c
 
 WORD_EXPANSION_SRC = \
                      $(WORD_EXPANSION_DIR)/expand_dollar.c \
                      $(WORD_EXPANSION_DIR)/word_list_utils.c \
-                     $(EXPAND_WILDCARD_SRC)
+                     $(EXPAND_BRANCH_SRC)
 
 WORD_LIST_SRC = $(WORD_LIST_DIR)/gen_word_list.c \
                 $(WORD_LIST_DIR)/word_node_utils.c \

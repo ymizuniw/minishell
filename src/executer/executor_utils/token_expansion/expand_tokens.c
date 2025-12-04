@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:29:36 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/04 04:29:08 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/04 23:56:06 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,18 +85,6 @@ char **split_by_ifs(char *str)
 	return (result);
 }
 
-char	**expand_wildcard_branch(t_word *word_list, t_shell *shell)
-{
-	size_t	count;
-	char	**res;
-
-	count = 0;
-	res = NULL;
-	res = expand_token_with_wildcard(word_list, shell, &count);
-	free_word_list(word_list);
-	return (res);
-}
-
 char	**expand_token(t_token *token, t_shell *shell)
 {
 	size_t	value_len;
@@ -112,8 +100,6 @@ char	**expand_token(t_token *token, t_shell *shell)
 	word_list = gen_word(token->value, value_len, &additional);
 	if (!word_list)
 		return (NULL);
-	if (has_wildcard_to_expand(word_list))
-		return (expand_wildcard_branch(word_list, shell));
 	char *expanded = expand_plain_word(word_list, shell, &quoted);
 	free_word_list(word_list);
 	if (!expanded)

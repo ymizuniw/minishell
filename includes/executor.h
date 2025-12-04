@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:15 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/03 05:56:07 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/04 23:57:23 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ char			**generate_envp(t_env *env_list);
 // Variable expansion (at execution time)
 char			*ft_itoa(int n);
 
+char	*expand_doller_word(const char *var, t_shell *shell);
+char	*expand_plain_word(t_word *list, t_shell *shell, bool *quoted);
+char	*get_word_string(t_word *word);
 // Word expansion utilities
 size_t			count_word_list(t_word *word);
 char			*expand_doller(t_word *word, t_shell *shell);
@@ -78,13 +81,7 @@ int				get_document(t_redir *hd, char **document, size_t *document_len,
 					t_shell *shell);
 t_word			*loop_wrapper(char *value, size_t *i);
 
-// expand_willdcard
-char			*expand_doller_word(const char *var, t_shell *shell);
-char			*expand_plain_word(t_word *list, t_shell *shell, bool *quoted);
-char			**expand_token_with_wildcard(t_word *word_list, t_shell *shell,
-					size_t *result_count);
-char			*get_word_string(t_word *word);
-bool			has_wildcard_to_expand(t_word *word_list);
+
 
 // process heredoc
 int				make_pipe_heredoc(char *document, size_t document_len);
@@ -98,9 +95,6 @@ char			*ext_unit(char *s, size_t start, size_t end);
 
 // gen_word
 char			*expand_token_words(t_word *word_list, t_shell *shell);
-char			**expand_token_with_wildcard(t_word *word_list, t_shell *shell,
-					size_t *result_count);
-bool			has_wildcard_to_expand(t_word *word_list);
 t_word			*gen_word(char *value, size_t value_len, size_t *addition);
 
 #endif
