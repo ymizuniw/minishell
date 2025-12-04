@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:39:08 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/04 03:25:15 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 00:09:45 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_word	*gen_word(char *value, size_t value_len, size_t *addition)
 	while (i < value_len)
 	{
 		c = value[i];
-		if (is_quote(c))//set t_word: quoted flag.
+		if (is_quote(c))
 		{
 			word->quoted=true;
 			word = handle_quoted_word(value, &i, c);
