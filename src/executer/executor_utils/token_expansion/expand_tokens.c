@@ -6,12 +6,11 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:29:36 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/04 23:56:06 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 00:34:19 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/minishell.h"
-
 
 static int ft_isifs(char s)
 {
@@ -114,33 +113,4 @@ char	**expand_token(t_token *token, t_shell *shell)
 	res = split_by_ifs(expanded);
 	free(expanded);
 	return (res);
-}
-
-char	**expand_tokens(t_token **tokens, size_t count, t_shell *shell)
-{
-	char	**argv;
-	size_t	argc;
-	char	**expanded;
-	size_t	i;
-	size_t	j;
-
-	argv = NULL;
-	argc = 0;
-	i = 0;
-	j = 0;
-	while (i < count)
-	{
-		expanded = expand_token(tokens[i], shell);
-		if (!expanded)
-			return (free_double_array(argv), NULL);
-		j = 0;
-		while (expanded[j])
-		{
-			argv = append_argv(argv, &argc, expanded[j]);
-			j++;
-		}
-		free_double_array(expanded);
-		i++;
-	}
-	return (argv);
 }

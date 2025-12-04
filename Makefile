@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/04 23:57:42 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/05 00:20:56 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,6 @@ AST_TRAVERSAL_SRC = $(AST_TRAVERSAL_DIR)/ast_traversal.c \
                     $(AST_TRAVERSAL_DIR)/process_command.c\
                     $(AST_TRAVERSAL_DIR)/restore_stdio.c
 TOKEN_EXPANSION_SRC = $(TOKEN_EXPANSION_DIR)/expand_tokens.c
-
 
 GEN_WORD_SRC =    $(GEN_WORD_DIR)/gen_word.c \
                   $(GEN_WORD_DIR)/gen_word_utils.c

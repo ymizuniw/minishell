@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:15 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/04 23:57:23 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 00:23:17 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int				handle_redirection_error(t_ast *node, int stdin_k, int stdout_k,
 					t_shell *shell);
 int				process_command(t_ast *node, t_shell *shell);
 void			restore_stdio(int stdin_keep, int stdout_keep);
-char			**expand_tokens(t_token **tokens, size_t count, t_shell *shell);
+// char			**expand_tokens(t_token **tokens, size_t count, t_shell *shell);
 char			**expand_token(t_token *token, t_shell *shell);
 
 // heredoc utils
