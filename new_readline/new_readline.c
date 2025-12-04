@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:01:04 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/03 04:58:36 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 06:00:14 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ int	process_one_char(t_new_readline *nr, char **line, char one_char,
 		return (process_break_line(nr, line));
 	if (one_char == 0x0c)
 		return  (5);
+	else if (one_char == '\t')
+	{
+		write(STDOUT_FILENO, "\a", 1);
+		return (5);
+	}
 	else if (ft_isprint((unsigned char)one_char)
 		|| ft_isspace((unsigned char)one_char))
 		return (process_printable(nr, one_char));
@@ -71,7 +76,6 @@ char	*read_line_loop(t_new_readline *nr, bool is_heredoc)
 		read_char_res = read_char(&one_char);
 		if (!read_char_res)
 			break ;
-		// printf("%x\n",one_char);
 		process_char_ret = process_one_char(nr, &line, one_char, is_heredoc);
 		if (process_char_ret == 5)
 			continue ;
