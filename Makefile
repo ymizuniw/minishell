@@ -6,18 +6,22 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/05 18:20:25 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/05 18:55:18 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-# CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE
-CFLAGS = -Wall -Wextra -g -Werror -Wunused -Wunused-function -Wunused-variable
+CFLAGS = -Wall -Wextra -Werror
 INC = -Iincludes -Inew_readline
 LDFLAGS=-L$(NEW_RL_DIR) -L$(LIBFT_DIR)
-# LIBS = $(LIBFT) -ltermcap $(NEW_RL_LIB)
+
+# options
 # -fsanitize=address
+# -g
+
+#mac book
+# CFLAGS = -g -Wall -Wextra -Werror -D_DEFAULT_SOURCE
 #   export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 #   export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 
