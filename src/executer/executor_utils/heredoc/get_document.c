@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:30 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 20:01:18 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 17:52:55 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,19 @@ static int	process_heredoc_line(char **document, size_t *document_len,
 	if (value)
 		value_len = ft_strlen(value);
 	if (!join_value(document, value, *document_len, value_len))
-		return (free(value), -1);
+	{
+		free(value);
+		return (-1);
+	}
 	*document_len += value_len;
 	if (!join_value(document, "\n", *document_len, 1))
-		return (free(value), -1);
+	{
+		free(value);
+		return (-1);
+	}
 	*document_len += 1;
-	return (free(value), 1);
+	free(value);
+	return (1);
 }
 
 int	get_document(t_redir *hd, char **document, size_t *document_len,

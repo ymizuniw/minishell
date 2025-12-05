@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:15 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/05 00:23:17 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 18:17:19 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ char			*ext_unit(char *s, size_t start, size_t end);
 // gen_word
 char			*expand_token_words(t_word *word_list, t_shell *shell);
 t_word			*gen_word(char *value, size_t value_len, size_t *addition);
+t_word			*create_word_node(char *content, t_word_type type, bool expand_doller);
 
 #endif

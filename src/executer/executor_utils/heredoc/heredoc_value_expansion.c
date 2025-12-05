@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:33 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 19:45:48 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 17:54:44 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ static char	*expand_exit_status(char **res, t_shell *shell, size_t *i)
 
 	s = ft_itoa(shell->last_exit_status);
 	if (!s)
-		return (xfree(*res), NULL);
+	{
+		xfree(*res);
+		return (NULL);
+	}
 	res_len = 0;
 	s_len = 0;
 	if (*res)
@@ -28,7 +31,11 @@ static char	*expand_exit_status(char **res, t_shell *shell, size_t *i)
 	if (s)
 		s_len = ft_strlen(s);
 	if (!join_value(res, s, res_len, s_len))
-		return (xfree(s), xfree(*res), NULL);
+	{
+		xfree(s);
+		xfree(*res);
+		return (NULL);
+	}
 	xfree(s);
 	*i += 2;
 	return (*res);
@@ -64,15 +71,23 @@ static char	*expand_variable(char **res, const char *line, size_t len,
 		ctx->i++;
 	varname = ext_unit((char *)line, start, ctx->i);
 	if (!varname)
-		return (xfree(*res), NULL);
+	{
+		xfree(*res);
+		return (NULL);
+	}
 	env_entry = find_env(ctx->shell->env_list, varname);
 	if (env_entry && env_entry->value)
 		val = env_entry->value;
 	else
 		val = "";
 	if (!cat_env_value(res, val))
-		return (xfree(varname), xfree(*res), NULL);
-	return (xfree(varname), *res);
+	{
+		xfree(varname);
+		xfree(*res);
+		return (NULL);
+	}
+	xfree(varname);
+	return (*res);
 }
 
 static bool	append_res(char **res, char c)
@@ -114,7 +129,10 @@ char	*heredoc_value_expansion(const char *line, bool in_quote, size_t len,
 				return (NULL);
 		}
 		else if (!append_res(&res, line[ctx.i++]))
-			return (xfree(res), NULL);
+		{
+			xfree(res);
+			return (NULL);
+		}
 	}
 	return (res);
 }

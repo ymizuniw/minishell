@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:22 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:47 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 17:51:40 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	exec_subshell(t_ast *node, t_shell *shell)
 	{
 		perror("fork");
 		shell->last_exit_status = 1;
-		return (signal_initializer(shell->interactive), 1);
+		signal_initializer(shell->interactive);
+		return (1);
 	}
 	if (pid == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:04 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:26 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 17:49:58 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static int	process_env_entry(t_shell *shell, char *envp_entry)
 	{
 		value = ft_strdup("");
 		if (!value)
-			return (xfree(key), 0);
+		{
+			xfree(key);
+			return (0);
+		}
 	}
 	set_variable(shell, key, value, 1);
 	xfree(key);

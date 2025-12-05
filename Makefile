@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/05 00:20:56 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/05 18:20:25 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,6 @@ AST_TRAVERSAL_SRC = $(AST_TRAVERSAL_DIR)/ast_traversal.c \
 TOKEN_EXPANSION_SRC = $(TOKEN_EXPANSION_DIR)/expand_tokens.c
 
 GEN_WORD_SRC =    $(GEN_WORD_DIR)/gen_word.c \
-                  $(GEN_WORD_DIR)/gen_word_utils.c
 
 HEREDOC_SRC = \
               $(HEREDOC_DIR)/ext_unit.c \
@@ -135,13 +134,12 @@ EXPAND_BRANCH_SRC = \
 
 WORD_EXPANSION_SRC = \
                      $(WORD_EXPANSION_DIR)/expand_dollar.c \
-                     $(WORD_EXPANSION_DIR)/word_list_utils.c \
                      $(EXPAND_BRANCH_SRC)
 
 WORD_LIST_SRC = $(WORD_LIST_DIR)/gen_word_list.c \
-                $(WORD_LIST_DIR)/word_node_utils.c \
                 $(WORD_LIST_DIR)/quoted_word_handler.c \
-                $(WORD_LIST_DIR)/unquoted_word_handler.c
+                $(WORD_LIST_DIR)/unquoted_word_handler.c\
+                $(WORD_LIST_DIR)/word_node_utils.c
 
 PARSER_SRC = $(PARSER_DIR)/fucking_gen_tree.c \
              $(PARSER_DIR)/gen_tree_utils.c \

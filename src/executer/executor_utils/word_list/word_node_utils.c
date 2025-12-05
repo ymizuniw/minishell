@@ -6,15 +6,13 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:22 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/03 05:12:24 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 18:17:26 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <stddef.h>
 
-t_word	*create_word_node(char *content, t_word_type type, bool expand_doller,
-		bool expand_wildcard)
+t_word	*create_word_node(char *content, t_word_type type, bool expand_doller)
 {
 	t_word	*word;
 
@@ -24,7 +22,6 @@ t_word	*create_word_node(char *content, t_word_type type, bool expand_doller,
 	word->word = content;
 	word->type = type;
 	word->to_expand_doller = expand_doller;
-	word->to_expand_wildcard = expand_wildcard;
 	word->next = NULL;
 	return (word);
 }

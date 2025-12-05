@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:40 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/30 23:56:23 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 18:07:35 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include "minishell_types.h"
 # include "parser.h"
 # include "signal_management.h"
-# include "wildcard.h"
 
 // shell_loop_utils.c
 t_token	*skip_to_command(t_token *token_list);

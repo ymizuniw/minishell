@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:06 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:47 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 17:57:40 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ static int	add_env_to_array(char **envp, t_env *env_list)
 	{
 		envp[i] = create_env_string(current->key, current->value);
 		if (!envp[i])
-			return (free_envp(envp), 0);
+		{
+			free_envp(envp);
+			return (0);
+		}
 		i++;
 		current = current->next;
 	}

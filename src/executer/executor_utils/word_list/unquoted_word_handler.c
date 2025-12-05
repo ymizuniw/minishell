@@ -6,14 +6,14 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:18 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:47 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 18:09:40 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 t_word		*create_word_node(char *content, t_word_type type,
-				bool expand_doller, bool expand_wildcard);
+				bool expand_doller);
 
 static int	not_word(const char *input, size_t start, size_t len)
 {
@@ -31,17 +31,13 @@ t_word	*handle_unquoted_word(const char *input, size_t input_len, size_t *idx)
 	size_t	start;
 	size_t	len;
 	char	*content;
-	bool	has_wildcard;
 
 	start = *idx;
 	len = 0;
-	has_wildcard = false;
 	while (start + len < input_len)
 	{
 		if (not_word(input, start, len))
 			break ;
-		if (input[start + len] == '*')
-			has_wildcard = true;
 		if (input[start + len] == '$')
 			break ;
 		len++;
@@ -52,7 +48,7 @@ t_word	*handle_unquoted_word(const char *input, size_t input_len, size_t *idx)
 	if (!content)
 		return (NULL);
 	*idx = start + len;
-	return (create_word_node(content, WD_LITERAL, false, has_wildcard));
+	return (create_word_node(content, WD_LITERAL, false));
 }
 
 t_word	*handle_unclosed_quote(const char *input, size_t input_len, size_t *idx)
@@ -78,7 +74,7 @@ t_word	*handle_unclosed_quote(const char *input, size_t input_len, size_t *idx)
 	if (!content)
 		return (NULL);
 	*idx = start + len;
-	return (create_word_node(content, WD_LITERAL, false, false));
+	return (create_word_node(content, WD_LITERAL, false));
 }
 
 void	get_var_len(char const *input, size_t input_len, size_t start,
@@ -101,17 +97,17 @@ t_word	*handle_doller_word(const char *input, size_t input_len, size_t *idx)
 	*idx = start;
 	len = 0;
 	if (start >= input_len)
-		return (create_word_node(ft_strdup("$"), WD_LITERAL, false, false));
+		return (create_word_node(ft_strdup("$"), WD_LITERAL, false));
 	if (input[start] == '?' && ++(*idx))
-		return (create_word_node(ft_strdup("?"), WD_DOLLER, true, false));
+		return (create_word_node(ft_strdup("?"), WD_DOLLER, true));
 	get_var_len(input, input_len, start, &len);
 	if (len == 0)
-		return (create_word_node(ft_strdup("$"), WD_LITERAL, false, false));
+		return (create_word_node(ft_strdup("$"), WD_LITERAL, false));
 	if (len == 0)
 		return (NULL);
 	content = ft_strndup(&input[start], len);
 	if (!content)
 		return (NULL);
 	*idx = start + len;
-	return (create_word_node(content, WD_DOLLER, true, false));
+	return (create_word_node(content, WD_DOLLER, true));
 }

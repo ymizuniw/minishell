@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:36:58 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:26 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 17:49:36 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,17 @@ static t_env	*create_new_env(char *key, char *value, int exported)
 		return (NULL);
 	new->key = ft_strdup(key);
 	if (!new->key)
-		return (xfree(new), NULL);
+	{
+		xfree(new);
+		return (NULL);
+	}
 	new->value = ft_strdup(value);
 	if (!new->value)
-		return (xfree(new->key), xfree(new), NULL);
+	{
+		xfree(new->key);
+		xfree(new);
+		return (NULL);
+	}
 	new->exported = exported;
 	new->next = NULL;
 	return (new);

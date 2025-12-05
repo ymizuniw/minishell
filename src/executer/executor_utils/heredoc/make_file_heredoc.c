@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:36 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 20:01:28 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 17:56:27 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,23 @@ static int	make_file_heredoc(char *document, size_t document_len)
 	if (tmp_fd < 0)
 		return (-1);
 	if (document == NULL)
-		return (xfree(document), tmp_fd);
+	{
+		xfree(document);
+		return ( tmp_fd);
+	}
 	wb = write(tmp_fd, document, document_len);
 	if (wb < 0)
-		return (xfree(document), xclose(tmp_fd), -1);
+	{
+		xfree(document);
+		xclose(tmp_fd);
+		return ( -1);
+	}
 	if ((size_t)wb != document_len)
-		return (xfree(document), xclose(tmp_fd), -1);
+	{
+		xfree(document);
+		xclose(tmp_fd);
+		return (-1);
+	}
 	xfree(document);
 	close(tmp_fd);
 	tmp_fd = open(filename, O_RDONLY, 0600);
@@ -50,7 +61,10 @@ int	make_heredoc(t_redir *hd, t_shell *shell)
 	document = NULL;
 	document_len = 0;
 	if (get_document(hd, &document, &document_len, shell) < 0)
-		return (xfree(document), -1);
+	{
+		xfree(document);
+		return (-1);
+	}
 	if (document_len == 0)
 	{
 		fd = open("/dev/null", O_RDONLY);

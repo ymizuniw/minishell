@@ -6,15 +6,14 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:15 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/03 05:32:33 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 18:09:18 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-// Forward declarations for internal functions
 t_word			*create_word_node(char *content, t_word_type type,
-					bool expand_doller, bool expand_wildcard);
+					bool expand_doller);
 t_word			*append_node(t_word *head, t_word *new);
 
 static t_word	*process_dollar_in_quote(const char *content, size_t *i,
@@ -37,7 +36,7 @@ static t_word	*process_dollar_in_quote(const char *content, size_t *i,
 		str = ft_strndup(&content[start], *i - start);
 		if (!str)
 			return (NULL);
-		return (create_word_node(str, WD_DOLLER, true, false));
+		return (create_word_node(str, WD_DOLLER, true));
 	}
 	return (NULL);
 }
@@ -56,7 +55,7 @@ static t_word	*process_literal_in_quote(const char *content, size_t *i,
 		str = ft_strndup(&content[start], *i - start);
 		if (!str)
 			return (NULL);
-		return (create_word_node(str, WD_LITERAL, false, false));
+		return (create_word_node(str, WD_LITERAL, false));
 	}
 	return (NULL);
 }
@@ -83,14 +82,20 @@ t_word	*process_quoted_content(const char *content, size_t len,
 	{
 		word = process_content_segment(content, &i, len, is_double_quote);
 		if (!word)
-			return (free_word_list(head), NULL);
+		{
+			free_word_list(head);
+			return (NULL);
+		}
 		head = append_node(head, word);
 	}
 	if (!head)
 	{
-		head = create_word_node(ft_strdup(""), WD_LITERAL, false, false);
+		head = create_word_node(ft_strdup(""), WD_LITERAL, false);
 		if (!head || !head->word)
-			return (free_word_list(head), NULL);
+		{
+			free_word_list(head);
+			return (NULL);
+		}
 	}
 	return (head);
 }

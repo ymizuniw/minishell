@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:38:09 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/03 01:33:35 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 17:58:48 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,21 @@ void	search_in_path_and_exec(t_shell *shell, char **cmd_args)
 		return ;
 	envp = generate_envp(shell->env_list);
 	if (!envp)
-		return (xfree(cmd_path), (void)0);
+	{
+		xfree(cmd_path);
+		return ;
+	}
 	if (shell->in_pipe_child)
 		return (exec_in_pipe_child(cmd_path, cmd_args, envp, shell));
 	pid = fork();
 	if (pid == -1)
-		return (perror("fork"), xfree(cmd_path), free_envp(envp),
-			(void)(shell->last_exit_status = 1));
+	{
+		perror("fork");
+		xfree(cmd_path);
+		free_envp(envp);
+		shell->last_exit_status = 1;
+		return ;
+	}
 	signal(SIGINT, SIG_IGN);
 	if (pid == 0)
 		exec_in_fork_child(cmd_path, cmd_args, envp, shell);

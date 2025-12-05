@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:21 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:03 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 17:48:41 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ static int	handle_export_arg(t_shell *shell, char *arg)
 	if (!is_valid_varname(key))
 	{
 		output_messeges(arg);
-		return (xfree(key), 1);
+		xfree(key);
+		return (1);
 	}
 	value = extract_value(arg);
 	if (value)

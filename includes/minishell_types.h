@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:31 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/04 03:03:25 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/05 18:07:30 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,6 @@ typedef struct s_word
 	char				*word;
 	t_word_type			type;
 	bool				to_expand_doller;
-	bool				to_expand_wildcard;
 	bool 				quoted;
 	struct s_word		*next;
 }						t_word;
@@ -218,15 +217,6 @@ typedef struct s_heredoc_params
 	bool				delim_quoted;
 	t_shell				*shell;
 }						t_heredoc_params;
-
-typedef struct s_match_data
-{
-	char				**matches;
-	size_t				count;
-	size_t				cap;
-	char				**keys;
-	int					only_wild;
-}						t_match_data;
 
 typedef struct s_token_result
 {
