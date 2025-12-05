@@ -11,4 +11,6 @@ git commit -m "$CMSG"
 read -p "push?(y/n)" PUSH
 if [[ "$PUSH" == "y" ]]
 then    git push
+else
+    exit 1
 fi
