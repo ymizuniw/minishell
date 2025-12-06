@@ -6,11 +6,44 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:43 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/06 17:25:37 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 18:19:47 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	process_access_err(char const *path, int *last_exit_status,
+		void (*print_err)(const char *), int status)
+{
+	print_err(path);
+	*last_exit_status = status;
+	return (0);
+}
+
+void	print_no_such_file_or_dir_err(char const *path)
+{
+	write(2, "minishell: ", 6);
+	write(2, path, ft_strlen(path));
+	write(2, ": No such file or directory\n", 28);
+}
+
+void	print_permission_denied_err(const char *path)
+{
+	write(2, "minishell: ", 6);
+	write(2, path, ft_strlen(path));
+	write(2, ": Permission denied\n", 20);
+}
+
+void	print_is_dir_err(const char *path)
+{
+	perror(path);
+}
+
+void	print_stat_err(const char *path)
+{
+	(void)path;
+	perror("stat: ");
+}
 
 static int	check_file_access(char *path, t_shell *shell)
 {
@@ -18,31 +51,23 @@ static int	check_file_access(char *path, t_shell *shell)
 
 	if (access(path, F_OK) != 0)
 	{
-		write(2, "minishell: ", 6);
-		write(2, path, ft_strlen(path));
-		write(2, ": No such file or directory\n", 28);
-		shell->last_exit_status = 127;
-		return (0);
+		return (process_access_err(path, &shell->last_exit_status,
+				print_no_such_file_or_dir_err, 127));
 	}
 	if (stat(path, &st) == 0 && S_ISDIR(st.st_mode))
 	{
-		perror(path);
-		shell->last_exit_status = 126;
-		return (0);
+		return (process_access_err(path, &shell->last_exit_status,
+				print_is_dir_err, 126));
 	}
 	if (stat(path, &st) != 0)
 	{
-		perror("stat: ");
-		shell->last_exit_status = 126;
-		return (0);
+		return (process_access_err(path, &shell->last_exit_status,
+				print_stat_err, 126));
 	}
 	if (access(path, X_OK) != 0)
 	{
-		write(2, "minishell: ", 6);
-		write(2, path, ft_strlen(path));
-		write(2, ": Permission denied\n", 20);
-		shell->last_exit_status = 126;
-		return (0);
+		return (process_access_err(path, &shell->last_exit_status,
+				print_permission_denied_err, 126));
 	}
 	return (1);
 }
