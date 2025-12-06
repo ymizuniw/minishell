@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:43 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/05 17:57:21 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 17:25:37 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	check_file_access(char *path, t_shell *shell)
 	{
 		perror("stat: ");
 		shell->last_exit_status = 126;
-		return (0);		
+		return (0);
 	}
 	if (access(path, X_OK) != 0)
 	{

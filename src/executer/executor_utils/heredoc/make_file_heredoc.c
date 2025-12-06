@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:36 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/05 17:56:27 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 17:25:33 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static int	make_file_heredoc(char *document, size_t document_len)
 	if (document == NULL)
 	{
 		xfree(document);
-		return ( tmp_fd);
+		return (tmp_fd);
 	}
 	wb = write(tmp_fd, document, document_len);
 	if (wb < 0)
 	{
 		xfree(document);
 		xclose(tmp_fd);
-		return ( -1);
+		return (-1);
 	}
 	if ((size_t)wb != document_len)
 	{

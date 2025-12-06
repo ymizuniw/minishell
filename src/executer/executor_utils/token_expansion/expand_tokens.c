@@ -6,21 +6,21 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:29:36 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/05 00:53:59 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 17:27:15 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/minishell.h"
 
-static int ft_isifs(char s)
+static int	ft_isifs(char s)
 {
 	return (s == ' ' || s == '\t' || s == '\n');
 }
 
-static size_t count_word(char *str)
+static size_t	count_word(char *str)
 {
-	size_t i;
-	size_t j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	j = 0;
@@ -29,7 +29,7 @@ static size_t count_word(char *str)
 		while (str[i] && ft_isifs(str[i]))
 			i++;
 		if (!str[i])
-			break;
+			break ;
 		while (str[i] && !ft_isifs(str[i]))
 			i++;
 		j++;
@@ -37,9 +37,9 @@ static size_t count_word(char *str)
 	return (j);
 }
 
-static int extract_word(char **result, size_t *idx, char *str, size_t *i)
+static int	extract_word(char **result, size_t *idx, char *str, size_t *i)
 {
-	size_t start;
+	size_t	start;
 
 	start = *i;
 	while (str[*i] && !ft_isifs(str[*i]))
@@ -59,24 +59,25 @@ static int extract_word(char **result, size_t *idx, char *str, size_t *i)
 	return (1);
 }
 
-char **split_by_ifs(char *str)
+char	**split_by_ifs(char *str)
 {
-	size_t i;
-	size_t word;
-	char **result;
+	size_t	i;
+	size_t	word;
+	char	**result;
+	size_t	idx;
 
 	i = 0;
 	word = count_word(str);
 	result = xmalloc(sizeof(char *) * (word + 1));
 	if (!result)
 		return (NULL);
-	size_t idx = 0;
+	idx = 0;
 	while (str[i])
 	{
 		while (str[i] && ft_isifs(str[i]))
 			i++;
 		if (!str[i])
-			break;
+			break ;
 		if (!extract_word(result, &idx, str, &i))
 			return (NULL);
 	}
@@ -90,8 +91,10 @@ char	**expand_token(t_token *token, t_shell *shell)
 	size_t	additional;
 	t_word	*word_list;
 	char	**res;
-	bool quoted = false;
+	bool	quoted;
+	char	*expanded;
 
+	quoted = false;
 	if (!token || !token->value)
 		return (NULL);
 	value_len = ft_strlen(token->value);
@@ -99,16 +102,16 @@ char	**expand_token(t_token *token, t_shell *shell)
 	word_list = gen_word(token->value, value_len, &additional);
 	if (!word_list)
 		return (NULL);
-	char *expanded = expand_plain_word(word_list, shell, &quoted);
+	expanded = expand_plain_word(word_list, shell, &quoted);
 	free_word_list(word_list);
 	if (!expanded)
 		return (NULL);
 	if (quoted)
 	{
 		res = xcalloc(sizeof(char *) * 2);
-        res[0] = expanded;
-        res[1] = NULL;
-        return (res);
+		res[0] = expanded;
+		res[1] = NULL;
+		return (res);
 	}
 	res = split_by_ifs(expanded);
 	free(expanded);

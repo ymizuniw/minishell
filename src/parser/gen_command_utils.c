@@ -6,12 +6,13 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/05 18:04:47 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 17:27:59 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-#define SYNTAX_REDIR_TARGET_NOT_FOUND "minishell: syntax error: missing redirection target\n"
+#define SYNTAX_REDIR_TARGET_NOT_FOUND "minishell: \
+syntax error: missing redirection target\n"
 #define SYNTAX_REDIR_TARGET_NOT_FOUND_LEN 53
 
 void	set_redir_type(t_redir *new_redir, t_token_type token_type)
@@ -53,7 +54,8 @@ int	handle_redirection_parse(t_cmd *cmd, t_token *tmp)
 		return (-1);
 	if (!tmp->prev)
 	{
-		write(2, SYNTAX_REDIR_TARGET_NOT_FOUND, SYNTAX_REDIR_TARGET_NOT_FOUND_LEN);
+		write(2, SYNTAX_REDIR_TARGET_NOT_FOUND,
+			SYNTAX_REDIR_TARGET_NOT_FOUND_LEN);
 		return (-1);
 	}
 	return (parse_redirection(&cmd->redir, tmp->type, tmp->prev));

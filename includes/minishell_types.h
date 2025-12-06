@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:31 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/05 18:07:30 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 17:26:52 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ typedef struct s_word
 	char				*word;
 	t_word_type			type;
 	bool				to_expand_doller;
-	bool 				quoted;
+	bool				quoted;
 	struct s_word		*next;
 }						t_word;
 

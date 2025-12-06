@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 17:29:08 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/04 23:40:33 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 17:28:39 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*expand_plain_word(t_word *list, t_shell *shell, bool *quoted)
 		return (NULL);
 	while (list)
 	{
-		if (list->quoted==true)
+		if (list->quoted == true)
 			*quoted = true;
 		if (list->type == WD_DOLLER)
 		{
