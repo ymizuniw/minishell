@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:32:51 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/06 16:29:26 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/12/06 20:31:35 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	process_command(t_ast *node, t_shell *shell)
 	ret = expand_token_loop(node, shell, &argv);
 	if (!ret || !argv || !argv[0])
 	{
-		printf("expand_token_loop failed\n");
 		free_double_array(argv);
 		return (0);
 	}

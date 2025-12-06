@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:23 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/11/15 18:35:25 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/12/06 20:28:53 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,22 @@ void			set_quote_flag(t_token *token, char *input,
 t_metachar		is_meta_char(int c);
 bool			is_doller_token(const char *value);
 void			prepend_tokens(t_token *head, t_token *new);
+int				handle_eof(t_token *token_head);
+int				handle_internal_separator(t_token *token_head,
+					char const *input, size_t *idx);
+int				handle_operators_and_words(t_token *token_head,
+					char const *input, size_t input_len, size_t *idx);
+t_token			*init_lexer_state(size_t *idx, size_t *input_len,
+					const char *input);
+int				run_lexer_loop(t_token *head, const char *input,
+					size_t input_len);
+int				finish_lexer(t_token *head);
+int				init_token(t_token **token_head);
+size_t			get_input_len(char const *input);
+int				process_whitespace(t_token *head, const char *input,
+					size_t *idx);
+int				process_operator_or_word(t_token *head, const char *input,
+					size_t len, size_t *idx);
+int				finalize_lexer(t_token *head);
 
 #endif

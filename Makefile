@@ -6,7 +6,7 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/06 19:28:54 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/06 20:29:48 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -138,7 +138,9 @@ LEXER_UTILS_SRC = $(LEXER_UTILS_DIR)/prepend_tokens.c \
                   $(LEXER_UTILS_DIR)/set_token_type.c \
                   $(LEXER_UTILS_DIR)/word_cat.c \
                   $(LEXER_UTILS_DIR)/lexer_handlers_meta.c \
-                  $(LEXER_UTILS_DIR)/lexer_handlers_word.c
+                  $(LEXER_UTILS_DIR)/lexer_handlers_word.c \
+                  $(LEXER_UTILS_DIR)/lexer_util1.c\
+                  $(LEXER_UTILS_DIR)/lexer_util2.c    
 
 EXPAND_BRANCH_DIR = $(WORD_EXPANSION_DIR)/expand_branch
 EXPAND_BRANCH_SRC = \
