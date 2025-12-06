@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_document.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:30 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/06 17:21:12 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/12/07 01:31:48 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ int	get_document(t_redir *hd, char **document, size_t *document_len,
 		}
 		free(line);
 	}
+	xfree(line);
 	return (-1);
 }

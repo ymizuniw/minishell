@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:01:51 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/06 19:43:35 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/07 01:46:41 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	process_line(char *line, t_shell *shell)
 		shell->line_ptr = line;
 		shell->token_list = token_list;
 		cleanup_after_line(shell);
+		free_ast_tree(shell->root);
 		return ;
 	}
 	shell->line_ptr = line;
