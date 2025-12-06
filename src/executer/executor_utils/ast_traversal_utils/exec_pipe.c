@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:19 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/05 17:51:25 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 16:26:16 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,33 @@ static int	fork_pipe_left(int *pip, t_ast *node, t_shell *shell, pid_t rpid)
 	return (left_pid);
 }
 
+static pid_t	fork_right_process(int pip[2], t_ast *node, t_shell *shell)
+{
+	pid_t	right_pid;
+
+	right_pid = fork_pipe_right(pip, node, shell);
+	if (right_pid < 0)
+	{
+		signal_initializer(shell->interactive);
+		return (-1);
+	}
+	return (right_pid);
+}
+
+static pid_t	fork_left_process(int pip[2], t_ast *node, t_shell *shell,
+		pid_t right_pid)
+{
+	pid_t	left_pid;
+
+	left_pid = fork_pipe_left(pip, node, shell, right_pid);
+	if (left_pid < 0)
+	{
+		signal_initializer(shell->interactive);
+		return (-1);
+	}
+	return (left_pid);
+}
+
 int	exec_pipe(t_ast *node, t_shell *shell)
 {
 	int		pip[2];
@@ -87,18 +114,12 @@ int	exec_pipe(t_ast *node, t_shell *shell)
 	}
 	signal(SIGINT, SIG_IGN);
 	signal(SIGPIPE, SIG_IGN);
-	right_pid = fork_pipe_right(pip, node, shell);
+	right_pid = fork_right_process(pip, node, shell);
 	if (right_pid < 0)
-	{
-		signal_initializer(shell->interactive);
-		return ( -1);
-	}
-	left_pid = fork_pipe_left(pip, node, shell, right_pid);
-	if (left_pid < 0)
-	{
-		signal_initializer(shell->interactive);
 		return (-1);
-	}
+	left_pid = fork_left_process(pip, node, shell, right_pid);
+	if (left_pid < 0)
+		return (-1);
 	close(pip[0]);
 	close(pip[1]);
 	handle_child(&shell->last_exit_status, right_pid);

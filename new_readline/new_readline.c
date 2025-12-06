@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_readline.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:01:04 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/05 06:00:14 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 16:00:33 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	process_one_char(t_new_readline *nr, char **line, char one_char,
 	if (one_char == '\n')
 		return (process_break_line(nr, line));
 	if (one_char == 0x0c)
-		return  (5);
+		return (5);
 	else if (one_char == '\t')
 	{
 		write(STDOUT_FILENO, "\a", 1);
@@ -61,31 +61,36 @@ int	process_one_char(t_new_readline *nr, char **line, char one_char,
 	return (0);
 }
 
-char	*read_line_loop(t_new_readline *nr, bool is_heredoc)
+static int	read_and_process_one(t_new_readline *nr, char **line,
+		bool is_heredoc)
 {
 	char	one_char;
-	char	*line;
-	bool	read_char_res;
-	int		process_char_ret;
 
-	one_char = 0;
+	if (!read_char(&one_char))
+		return (0);
+	return (process_one_char(nr, line, one_char, is_heredoc));
+}
+
+char	*read_line_loop(t_new_readline *nr, bool is_heredoc)
+{
+	char	*line;
+	int		ret;
+
 	line = NULL;
-	read_char_res = false;
 	while (1)
 	{
-		read_char_res = read_char(&one_char);
-		if (!read_char_res)
+		ret = read_and_process_one(nr, &line, is_heredoc);
+		if (ret == 0)
 			break ;
-		process_char_ret = process_one_char(nr, &line, one_char, is_heredoc);
-		if (process_char_ret == 5)
+		if (ret == 5)
 			continue ;
-		else if (process_char_ret == -1)
+		if (ret == -1)
 		{
 			xfree(line);
 			line = NULL;
 			break ;
 		}
-		if (process_char_ret == 2)
+		if (ret == 2)
 			break ;
 	}
 	return (line);

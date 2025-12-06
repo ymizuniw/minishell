@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   is_cntrl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 03:32:19 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/03 04:44:45 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 15:44:37 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "new_readline.h"
 
-bool is_cntrl(char c)
+bool	is_cntrl(char c)
 {
-    return (c >= 0x01 && c <= 0x1F);  
+	return (c >= 0x01 && c <= 0x1F);
 }

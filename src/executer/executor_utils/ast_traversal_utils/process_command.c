@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:32:51 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/05 00:56:08 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 16:29:26 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 int	append_argv_loop(char ***argv, size_t *argc, char ***expanded)
 {
 	size_t	j;
+	char	**new_argv;
 
 	j = 0;
 	if (expanded == NULL || *expanded == NULL)
 		return (1);
 	while ((*expanded)[j])
 	{
-		char **new_argv = append_argv(*argv, argc, (*expanded)[j]);
+		new_argv = append_argv(*argv, argc, (*expanded)[j]);
 		if (new_argv == NULL)
 		{
 			free_double_array(*expanded);
@@ -66,9 +67,10 @@ int	expand_token_loop(t_ast *node, t_shell *shell, char ***argv)
 int	process_command(t_ast *node, t_shell *shell)
 {
 	char	**argv;
+	int		ret;
 
 	argv = NULL;
-	int ret = 0;
+	ret = 0;
 	ret = expand_token_loop(node, shell, &argv);
 	if (!ret || !argv || !argv[0])
 	{

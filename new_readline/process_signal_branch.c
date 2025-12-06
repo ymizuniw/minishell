@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   process_signal_branch.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 21:00:55 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/03 04:47:25 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 16:07:45 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "new_readline.h"
 
-//buf_len==0;line==NULL;exit();
-//buf_len>=1;do nothing.
+// buf_len==0;line==NULL;exit();
+// buf_len>=1;do nothing.
 static int	process_eot(t_new_readline *nr, char **line)
 {
 	if (nr->buf_len == 0)
@@ -43,6 +43,7 @@ int	process_signal_branch(t_new_readline *nr, char **line, char one_char,
 		bool is_heredoc)
 {
 	int	sig_res;
+
 	sig_res = process_signal(one_char);
 	if (sig_res == 0)
 		return (process_eot(nr, line));
