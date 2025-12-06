@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:26 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 20:54:55 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:49:29 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,17 @@ t_token	*lexer(const char *input)
 	{
 		if (input[idx] && ft_isspace((unsigned char)input[idx])
 			&& handle_internal_separator(dummy_head, input, &idx) < 0)
-			return (NULL);
+			{
+				free(dummy_head);
+				return (NULL);
+			}
 		if (idx >= input_len)
 			break ;
 		if (handle_operators_and_words(dummy_head, input, input_len, &idx) < 0)
+		{
+			free(dummy_head);
 			return (NULL);
+		}
 	}
 	if (handle_eof(dummy_head) < 0)
 		return (NULL);

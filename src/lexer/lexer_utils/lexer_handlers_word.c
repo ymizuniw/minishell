@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:03 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:46:29 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,13 @@ int	handle_doller(t_token *token_head, size_t *idx)
 		return (-1);
 	ft_memset(new, 0, sizeof(t_token));
 	new->type = TK_DOLLER;
-	new->value = ft_strdup("$");
+	// new->value = ft_strdup("$");
+	new->value =NULL;
 	if (!new->value)
+	{
+		free(new);
 		return (-1);
+	}
 	prepend_tokens(token_head, new);
 	(*idx)++;
 	return (1);
