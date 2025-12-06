@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:15 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/06 17:25:25 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 17:40:47 by kemotoha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,10 @@ char			*expand_token_words(t_word *word_list, t_shell *shell);
 t_word			*gen_word(char *value, size_t value_len, size_t *addition);
 t_word			*create_word_node(char *content, t_word_type type,
 					bool expand_doller);
+
+// pipe
+pid_t			fork_right_process(int pip[2], t_ast *node, t_shell *shell);
+pid_t			fork_left_process(int pip[2], t_ast *node, t_shell *shell,
+					pid_t right_pid);
 
 #endif

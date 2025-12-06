@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/05 18:55:54 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/06 17:44:46 by kemotoha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,12 +86,14 @@ EXECUTER_SRC = $(EXECUTER_DIR)/executor.c
 AST_TRAVERSAL_SRC = $(AST_TRAVERSAL_DIR)/ast_traversal.c \
                     $(AST_TRAVERSAL_DIR)/do_redirection.c \
                     $(AST_TRAVERSAL_DIR)/exec_command.c \
-                    $(AST_TRAVERSAL_DIR)/exec_pipe.c \
                     $(AST_TRAVERSAL_DIR)/exec_subshell.c\
                     $(AST_TRAVERSAL_DIR)/append_argv.c\
                     $(AST_TRAVERSAL_DIR)/handle_redirection_error.c\
                     $(AST_TRAVERSAL_DIR)/process_command.c\
-                    $(AST_TRAVERSAL_DIR)/restore_stdio.c
+                    $(AST_TRAVERSAL_DIR)/restore_stdio.c\
+                    $(AST_TRAVERSAL_DIR)/exec_pipe/exec_pipe.c\
+                    $(AST_TRAVERSAL_DIR)/exec_pipe/left_process.c\
+                    $(AST_TRAVERSAL_DIR)/exec_pipe/right_process.c
 TOKEN_EXPANSION_SRC = $(TOKEN_EXPANSION_DIR)/expand_tokens.c
 
 GEN_WORD_SRC =    $(GEN_WORD_DIR)/gen_word.c \
