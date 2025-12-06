@@ -6,109 +6,41 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:29:36 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/06 17:27:15 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 18:53:34 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../../includes/minishell.h"
 
-static int	ft_isifs(char s)
+static bool	validate_token(t_token *token)
 {
-	return (s == ' ' || s == '\t' || s == '\n');
+	return (token && token->value);
 }
 
-static size_t	count_word(char *str)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		while (str[i] && ft_isifs(str[i]))
-			i++;
-		if (!str[i])
-			break ;
-		while (str[i] && !ft_isifs(str[i]))
-			i++;
-		j++;
-	}
-	return (j);
-}
-
-static int	extract_word(char **result, size_t *idx, char *str, size_t *i)
-{
-	size_t	start;
-
-	start = *i;
-	while (str[*i] && !ft_isifs(str[*i]))
-		(*i)++;
-	result[*idx] = ft_substr(str, start, *i - start);
-	if (!result[*idx])
-	{
-		while (*idx > 0)
-		{
-			(*idx)--;
-			free(result[*idx]);
-		}
-		free(result);
-		return (0);
-	}
-	(*idx)++;
-	return (1);
-}
-
-char	**split_by_ifs(char *str)
-{
-	size_t	i;
-	size_t	word;
-	char	**result;
-	size_t	idx;
-
-	i = 0;
-	word = count_word(str);
-	result = xmalloc(sizeof(char *) * (word + 1));
-	if (!result)
-		return (NULL);
-	idx = 0;
-	while (str[i])
-	{
-		while (str[i] && ft_isifs(str[i]))
-			i++;
-		if (!str[i])
-			break ;
-		if (!extract_word(result, &idx, str, &i))
-			return (NULL);
-	}
-	result[idx] = NULL;
-	return (result);
-}
-
-char	**expand_token(t_token *token, t_shell *shell)
+static t_word	*make_word_list(t_token *token)
 {
 	size_t	value_len;
 	size_t	additional;
-	t_word	*word_list;
-	char	**res;
-	bool	quoted;
-	char	*expanded;
 
-	quoted = false;
-	if (!token || !token->value)
-		return (NULL);
 	value_len = ft_strlen(token->value);
 	additional = 0;
-	word_list = gen_word(token->value, value_len, &additional);
-	if (!word_list)
-		return (NULL);
-	expanded = expand_plain_word(word_list, shell, &quoted);
-	free_word_list(word_list);
-	if (!expanded)
-		return (NULL);
+	return (gen_word(token->value, value_len, &additional));
+}
+
+static char	*expand_word_list(t_word *word_list, t_shell *shell, bool *quoted)
+{
+	return (expand_plain_word(word_list, shell, quoted));
+}
+
+static char	**finalize_expansion(char *expanded, bool quoted)
+{
+	char	**res;
+
 	if (quoted)
 	{
 		res = xcalloc(sizeof(char *) * 2);
+		if (!res)
+			return (NULL);
 		res[0] = expanded;
 		res[1] = NULL;
 		return (res);
@@ -116,4 +48,23 @@ char	**expand_token(t_token *token, t_shell *shell)
 	res = split_by_ifs(expanded);
 	free(expanded);
 	return (res);
+}
+
+char	**expand_token(t_token *token, t_shell *shell)
+{
+	bool	quoted;
+	t_word	*word_list;
+	char	*expanded;
+
+	quoted = false;
+	if (!validate_token(token))
+		return (NULL);
+	word_list = make_word_list(token);
+	if (!word_list)
+		return (NULL);
+	expanded = expand_word_list(word_list, shell, &quoted);
+	free_word_list(word_list);
+	if (!expanded)
+		return (NULL);
+	return (finalize_expansion(expanded, quoted));
 }

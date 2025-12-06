@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:36 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/06 18:04:53 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:31:37 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	create_read_only_file(char filename[22])
 	return (tmp_fd);
 }
 
-static int	make_file_heredoc(char *document, size_t document_len)
+int	make_file_heredoc(char *document, size_t document_len)
 {
 	int		tmp_fd;
 	char	filename[22];
@@ -97,57 +97,4 @@ int	make_heredoc(t_redir *hd, t_shell *shell)
 	if (document_len > HERE_PIPE_SIZE)
 		return (make_file_heredoc(document, document_len));
 	return (make_pipe_heredoc(document, document_len));
-}
-
-int	process_one_heredoc(t_shell *shell, t_redir *redir)
-{
-	int	tmp_fd;
-
-	tmp_fd = make_heredoc(redir, shell);
-	if (tmp_fd < 0)
-		return (-1);
-	redir->tmp_fd = tmp_fd;
-	return (1);
-}
-
-int	process_redir_list(t_shell *shell, t_ast *node)
-{
-	t_redir	*cur_redir;
-
-	if (node && node->cmd && node->cmd->redir)
-	{
-		cur_redir = node->cmd->redir;
-		while (cur_redir)
-		{
-			if (cur_redir->type == REDIR_HEREDOC)
-				if (process_one_heredoc(shell, cur_redir) < 0)
-					return (-1);
-			cur_redir = cur_redir->next;
-		}
-	}
-	return (1);
-}
-
-int	process_all_heredoc(t_shell *shell, t_ast *node)
-{
-	if (node == NULL || shell == NULL)
-		return (0);
-	if (node->right)
-	{
-		if (process_all_heredoc(shell, node->right) < 0)
-			return (-1);
-	}
-	if (node->left)
-	{
-		if (process_all_heredoc(shell, node->left) < 0)
-			return (-1);
-	}
-	if (node->type == NODE_SUBSHELL)
-	{
-		if (process_all_heredoc(shell, node->subtree) < 0)
-			return (-1);
-	}
-	if (process_redir_list(shell, node) < 0)
-		return (-1);
-	return (1);
 }

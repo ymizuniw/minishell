@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 10:30:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/05 18:15:30 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:20:44 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*get_target_var(t_word *word)
 	return (word->word);
 }
 
-static char	*expand_exit_status(t_shell *shell)
+static char	*expand_exit_status_doller(t_shell *shell)
 {
 	char	*stat_str;
 
@@ -36,7 +36,7 @@ char	*expand_doller(t_word *word, t_shell *shell)
 
 	target = get_target_var(word);
 	if (ft_strcmp(target, "?") == 0)
-		return (expand_exit_status(shell));
+		return (expand_exit_status_doller(shell));
 	env_value = get_env_value(shell->env_list, target);
 	if (!env_value)
 		return (ft_strdup(""));

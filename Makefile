@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/06 17:44:46 by kemotoha         ###   ########.fr        #
+#    Updated: 2025/12/06 19:28:54 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,7 +94,8 @@ AST_TRAVERSAL_SRC = $(AST_TRAVERSAL_DIR)/ast_traversal.c \
                     $(AST_TRAVERSAL_DIR)/exec_pipe/exec_pipe.c\
                     $(AST_TRAVERSAL_DIR)/exec_pipe/left_process.c\
                     $(AST_TRAVERSAL_DIR)/exec_pipe/right_process.c
-TOKEN_EXPANSION_SRC = $(TOKEN_EXPANSION_DIR)/expand_tokens.c
+TOKEN_EXPANSION_SRC = $(TOKEN_EXPANSION_DIR)/expand_tokens.c\
+                     $(TOKEN_EXPANSION_DIR)/split_by_ifs.c
 
 GEN_WORD_SRC =    $(GEN_WORD_DIR)/gen_word.c \
 
@@ -105,10 +106,12 @@ HEREDOC_SRC = \
               $(HEREDOC_DIR)/make_file_heredoc.c \
               $(HEREDOC_DIR)/make_pipe_heredoc.c \
               $(HEREDOC_DIR)/get_document.c \
-              $(HEREDOC_DIR)/heredoc_value_expansion.c \
+              $(HEREDOC_DIR)/heredoc_value_expansion.c\
+              $(HEREDOC_DIR)/expand_variable.c\
+              $(HEREDOC_DIR)/expand_exit_status.c\
+              $(HEREDOC_DIR)/process_all_heredoc.c
 
 SEARCH_EXEC_SRC = $(SEARCH_EXEC_DIR)/search_and_exec.c \
-                  $(SEARCH_EXEC_DIR)/run_external_cmd.c \
                   $(SEARCH_EXEC_DIR)/find_command_path.c \
                   $(SEARCH_EXEC_DIR)/expand_value.c \
                   $(SEARCH_EXEC_DIR)/ft_itoa.c \
@@ -116,7 +119,12 @@ SEARCH_EXEC_SRC = $(SEARCH_EXEC_DIR)/search_and_exec.c \
                   $(SEARCH_EXEC_DIR)/string_utiles.c \
                   $(SEARCH_EXEC_DIR)/env_utiles.c \
                   $(SEARCH_EXEC_DIR)/generate_env.c \
-                  $(SEARCH_EXEC_DIR)/expand_dollar.c
+                  $(SEARCH_EXEC_DIR)/expand_dollar.c\
+                  $(SEARCH_EXEC_DIR)/exec_in.c\
+                  $(SEARCH_EXEC_DIR)/search_in_path_and_exec_utils.c\
+                  $(SEARCH_EXEC_DIR)/search_in_path_and_exec.c\
+                  $(SEARCH_EXEC_DIR)/print_access_err.c
+
 
 LEXER_SRC = $(LEXER_DIR)/lexer.c
 
@@ -136,7 +144,9 @@ EXPAND_BRANCH_DIR = $(WORD_EXPANSION_DIR)/expand_branch
 EXPAND_BRANCH_SRC = \
        $(EXPAND_BRANCH_DIR)/expand_doller_word.c\
        $(EXPAND_BRANCH_DIR)/expand_plain_word.c\
-       $(EXPAND_BRANCH_DIR)/get_word_string.c
+       $(EXPAND_BRANCH_DIR)/get_word_string.c\
+       $(EXPAND_BRANCH_DIR)/expand_word_branch.c\
+       $(EXPAND_BRANCH_DIR)/expand_literal_branch.c
 
 WORD_EXPANSION_SRC = \
                      $(WORD_EXPANSION_DIR)/expand_dollar.c \
@@ -145,6 +155,8 @@ WORD_EXPANSION_SRC = \
 WORD_LIST_SRC = $(WORD_LIST_DIR)/gen_word_list.c \
                 $(WORD_LIST_DIR)/quoted_word_handler.c \
                 $(WORD_LIST_DIR)/unquoted_word_handler.c\
+                $(WORD_LIST_DIR)/process_quoted_content.c\
+                $(WORD_LIST_DIR)/process_quoted_utils.c\
                 $(WORD_LIST_DIR)/word_node_utils.c
 
 PARSER_SRC = $(PARSER_DIR)/fucking_gen_tree.c \

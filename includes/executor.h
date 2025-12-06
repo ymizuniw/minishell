@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:35:15 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/06 17:40:47 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:31:54 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ int				get_document(t_redir *hd, char **document, size_t *document_len,
 char			*heredoc_value_expansion(const char *line, bool in_quote,
 					size_t len, t_shell *shell);
 t_word			*handle_quoted_word(const char *input, size_t *idx, char quote);
+t_word			*process_quoted_content(const char *content, size_t len,
+					bool is_double_quote);
+t_word			*process_dollar_in_quote(const char *content, size_t *i,
+					size_t len);
+t_word			*process_literal_in_quote(const char *content, size_t *i,
+					size_t len, bool is_double_quote);
+t_word			*process_content_segment(const char *content, size_t *i,
+					size_t len, bool is_double_quote);
 t_word			*handle_unclosed_quote(const char *input, size_t input_len,
 					size_t *idx);
 t_word			*handle_doller_word(const char *input, size_t input_len,
@@ -55,6 +63,17 @@ int				join_value(char **d, const char *s, size_t dlen, size_t slen);
 // search and exec
 void			search_and_exec(t_shell *shell, char **cmd_args);
 void			search_in_path_and_exec(t_shell *shell, char **cmd_args);
+void			exec_in_fork_child(char *cmd_path, char **cmd_args, char **envp,
+					t_shell *shell);
+void			exec_in_pipe_child(char *cmd_path, char **cmd_args, char **envp,
+					t_shell *shell);
+bool			validate_args(char **cmd_args);
+char			*resolve_path(t_shell *shell, char **cmd_args);
+char			**prepare_envp(t_shell *shell, char *cmd_path);
+int				spawn_child(t_shell *shell, char *cmd_path, char **cmd_args,
+					char **envp);
+void			run_in_pipe_child(char *cmd, char **args, char **envp,
+					t_shell *sh);
 char			*find_command_path(t_shell *shell, char *cmd);
 char			**generate_envp(t_env *env_list);
 void			exec_with_slash(t_shell *shell, char **cmd_args, char **env);
@@ -68,11 +87,22 @@ char			**generate_envp(t_env *env_list);
 char			*create_env_string(const char *key, const char *value);
 char			**generate_envp(t_env *env_list);
 
+// PRINT ERR
+
+void			print_stat_err(const char *path);
+void			print_is_dir_err(const char *path);
+void			print_permission_denied_err(const char *path);
+void			print_no_such_file_or_dir_err(char const *path);
+int				process_access_err(char const *path, int *last_exit_status,
+					void (*print_err)(const char *), int status);
+
 // Variable expansion (at execution time)
 char			*ft_itoa(int n);
 
 char			*expand_doller_word(const char *var, t_shell *shell);
 char			*expand_plain_word(t_word *list, t_shell *shell, bool *quoted);
+int				expand_literal_branch(char **result, t_word *list);
+int				expand_word_branch(char **result, t_word *list, t_shell *shell);
 char			*get_word_string(t_word *word);
 // Word expansion utilities
 size_t			count_word_list(t_word *word);
@@ -80,6 +110,10 @@ char			*expand_doller(t_word *word, t_shell *shell);
 int				get_document(t_redir *hd, char **document, size_t *document_len,
 					t_shell *shell);
 t_word			*loop_wrapper(char *value, size_t *i);
+
+bool			expand_exit_status(char **res, t_shell *shell, size_t *i);
+bool			expand_variable(char **res, const char *line, size_t len,
+					t_heredoc_ctx *ctx);
 
 // process heredoc
 int				make_pipe_heredoc(char *document, size_t document_len);
@@ -93,6 +127,7 @@ char			*ext_unit(char *s, size_t start, size_t end);
 
 // gen_word
 char			*expand_token_words(t_word *word_list, t_shell *shell);
+char			**split_by_ifs(char *str);
 t_word			*gen_word(char *value, size_t value_len, size_t *addition);
 t_word			*create_word_node(char *content, t_word_type type,
 					bool expand_doller);
