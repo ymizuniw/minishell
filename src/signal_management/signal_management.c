@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:42:10 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/05 00:10:18 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 20:06:08 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	set_sig_dfl(void)
 	sigemptyset(&sact.sa_mask);
 	sact.sa_flags = 0;
 	sact.sa_handler = SIG_DFL;
+	sigaction(SIGPIPE, &sact, NULL);
 	sigaction(SIGTERM, &sact, NULL);
 	sigaction(SIGQUIT, &sact, NULL);
 	sigaction(SIGINT, &sact, NULL);

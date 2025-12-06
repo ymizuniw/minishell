@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:41:26 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/06 19:49:29 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 20:03:27 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ t_token	*lexer(const char *input)
 		}
 	}
 	if (handle_eof(dummy_head) < 0)
+	{
+		free(dummy_head);
 		return (NULL);
+	}
 	return (dummy_head);
 }

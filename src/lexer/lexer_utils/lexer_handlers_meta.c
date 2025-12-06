@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 00:00:00 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/02 17:16:03 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:58:14 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ int	handle_eof(t_token *token_head)
 		return (-1);
 	new->type = TK_EOF;
 	new->value = ft_strdup("");
+	if (!new->value)
+	{
+		free(new);
+		return (-1);
+	}
 	new->next = NULL;
 	token_add_back(&token_head, new);
 	return (1);
