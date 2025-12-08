@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 00:01:04 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/08 13:23:45 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/08 13:54:02 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	init_new_readline(t_new_readline *nr, bool is_heredoc, t_hist *hist)
 	ft_memset(nr->buf, 0, sizeof(nr->buf));
 	if (is_heredoc)
 	{
-		nr->hist = NULL;
+		// nr->hist = NULL;
+		nr->hist = hist;
 		nr->prompt = ">";
 	}
 	else

@@ -6,12 +6,12 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 19:01:51 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/07 01:46:41 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/08 14:02:07 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include "new_readline.h"
+#include <new_readline.h>
 
 void		init_shell(t_shell *shell, char **env);
 int			parse_and_exec(t_token *token_list, t_shell *shell);

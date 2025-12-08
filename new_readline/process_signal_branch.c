@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_signal_branch.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 21:00:55 by kemotoha          #+#    #+#             */
-/*   Updated: 2025/12/06 16:07:45 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/12/08 13:59:53 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 // buf_len==0;line==NULL;exit();
 // buf_len>=1;do nothing.
-static int	process_eot(t_new_readline *nr, char **line)
+static int	process_eot(t_new_readline *nr, char **line, bool is_heredoc)
 {
+	if (is_heredoc)
+		ft_putstr_fd("heredoc ended by EOF.\n", STDERR_FILENO);
 	if (nr->buf_len == 0)
 		*line = NULL;
 	else
@@ -29,7 +31,10 @@ static int	process_etx(t_new_readline *nr, char **line, bool is_heredoc)
 	nr->buf[0] = '\0';
 	write(STDOUT_FILENO, "\n", 1);
 	if (is_heredoc)
+	{
 		*line = NULL;
+		return (-1);
+	}
 	else
 	{
 		*line = ft_strdup("");
@@ -46,7 +51,7 @@ int	process_signal_branch(t_new_readline *nr, char **line, char one_char,
 
 	sig_res = process_signal(one_char);
 	if (sig_res == 0)
-		return (process_eot(nr, line));
+		return (process_eot(nr, line, is_heredoc));
 	else if (sig_res == 1)
 		return (process_etx(nr, line, is_heredoc));
 	return (0);

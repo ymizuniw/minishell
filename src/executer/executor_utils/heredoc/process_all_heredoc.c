@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 19:29:13 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/08 13:42:35 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/08 14:02:13 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	process_all_heredoc(t_shell *shell, t_ast *node)
 	}
 	if (process_redir_list(shell, node) < 0)
 	{
-		fprintf(stderr, "heredoc failed or EOF sent.\n");
+		ft_putstr_fd("heredoc failed or EOF sent.\n", STDERR_FILENO);
 	}
 	return (1);
 }
