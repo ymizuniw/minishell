@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:36 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/07 01:49:34 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/08 13:48:42 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,12 @@ int	make_heredoc(t_redir *hd, t_shell *shell)
 
 	document = NULL;
 	document_len = 0;
-	if (get_document(hd, &document, &document_len, shell) < 0)
-	{
-		xfree(document);
-		return (-1);
-	}
+	get_document(hd, &document, &document_len, shell);
+	// if (get_document(hd, &document, &document_len, shell) < 0)
+	// {
+	// 	xfree(document);
+	// 	return (-1);
+	// }
 	if (document_len == 0)
 	{
 		fd = open("/dev/null", O_RDONLY);

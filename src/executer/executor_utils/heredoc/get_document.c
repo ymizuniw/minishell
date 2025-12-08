@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:30 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/07 01:31:48 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/08 13:50:32 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,11 @@ int	get_document(t_redir *hd, char **document, size_t *document_len,
 {
 	char				*line;
 	t_heredoc_params	params;
-	int					is_interactive;
+	// int					is_interactive;
 
 	params = (t_heredoc_params){hd->filename, hd->delim_quoted, shell};
 	line = NULL;
-	is_interactive = isatty(STDIN_FILENO);
-	while (read_heredoc_line(shell, &line, is_interactive))
+	while (read_heredoc_line(shell, &line, shell->interactive))
 	{
 		if (ft_strcmp(line, params.delim) == 0)
 		{

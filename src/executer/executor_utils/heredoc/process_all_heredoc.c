@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 19:29:13 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/07 02:05:04 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/08 13:42:35 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,26 @@ int	process_all_heredoc(t_shell *shell, t_ast *node)
 		return (0);
 	if (node->right)
 	{
-		if (process_all_heredoc(shell, node->right) < 0)
-			return (-1);
+
+		process_all_heredoc(shell, node->right);
+		// if (process_all_heredoc(shell, node->right) < 0)
+		// 	return (-1);
 	}
 	if (node->left)
 	{
-		if (process_all_heredoc(shell, node->left) < 0)
-			return (-1);
+		process_all_heredoc(shell, node->left);
+		// if (process_all_heredoc(shell, node->left) < 0)
+		// 	return (-1);
 	}
 	if (node->type == NODE_SUBSHELL)
 	{
-		if (process_all_heredoc(shell, node->subtree) < 0)
-			return (-1);
+		process_all_heredoc(shell, node->subtree);
+		// if (process_all_heredoc(shell, node->subtree) < 0)
+		// 	return (-1);
 	}
 	if (process_redir_list(shell, node) < 0)
-		return (-1);
+	{
+		fprintf(stderr, "heredoc failed or EOF sent.\n");
+	}
 	return (1);
 }

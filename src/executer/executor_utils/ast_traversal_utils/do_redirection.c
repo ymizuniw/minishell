@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:12 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/05 17:50:28 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/08 13:43:05 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static int	open_and_dup(const char *filename, int flags, mode_t perm,
 
 static int	do_redirect_heredoc(t_redir *hd)
 {
+	if (hd->tmp_fd==-1)
+		return (0);
 	if (dup2(hd->tmp_fd, STDIN_FILENO) < 0)
 		return (-1);
 	xclose(hd->tmp_fd);

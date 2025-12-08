@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_esc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemotoha <kemotoha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:19:52 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/06 16:06:58 by kemotoha         ###   ########.fr       */
+/*   Updated: 2025/12/08 13:29:13 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,15 @@ int	process_esc(t_new_readline *nr, char one_char)
 		return (0);
 	if (process_arrow_keys(nr, esq_buf))
 		return (1);
-	while (read(STDIN_FILENO, &c, 1) == 1)
+	ssize_t rb;
+	while (1)
 	{
+		rb = read(STDIN_FILENO, &c, 1);
+		if (rb<0)
+		{
+			perror ("read: ");
+			return (-1);
+		}
 		if (c >= 'A' && c <= 'Z')
 			break ;
 		if (c == '~')

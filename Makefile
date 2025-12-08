@@ -6,13 +6,13 @@
 #    By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/15 18:41:23 by kemotoha          #+#    #+#              #
-#    Updated: 2025/12/06 20:29:48 by ymizuniw         ###   ########.fr        #
+#    Updated: 2025/12/08 13:22:43 by ymizuniw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 INC = -Iincludes -Inew_readline
 LDFLAGS=-L$(NEW_RL_DIR) -L$(LIBFT_DIR)
 
