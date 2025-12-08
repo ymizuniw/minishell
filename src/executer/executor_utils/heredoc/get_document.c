@@ -6,7 +6,7 @@
 /*   By: ymizuniw <ymizuniw@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/15 18:37:30 by ymizuniw          #+#    #+#             */
-/*   Updated: 2025/12/08 14:08:29 by ymizuniw         ###   ########.fr       */
+/*   Updated: 2025/12/08 14:10:50 by ymizuniw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	get_document(t_redir *hd, char **document, size_t *document_len,
 {
 	char				*line;
 	t_heredoc_params	params;
-	// int					is_interactive;
 
 	params = (t_heredoc_params){hd->filename, hd->delim_quoted, shell};
 	line = NULL;

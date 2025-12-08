@@ -9,7 +9,7 @@ git add .
 read -p "enter commit message: " CMSG
 git commit -m "$CMSG"
 read -p "push?(y/n)" PUSH
-if [[ "$PUSH" == "y" ]]
+if [[ "$PUSH" == "y" || "$PUSH" == "Y"]]
 then    git push
 else
     exit 1
